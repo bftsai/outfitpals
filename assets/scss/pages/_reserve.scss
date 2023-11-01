@@ -7,22 +7,20 @@
     }
     .btn-group{
         .active{
-            background-color: #fff;
-            color: $black18 !important;
+            border-color: $primary !important;
+            background-color: $primary;
+            color: $white !important;
         }
-        .btn:hover{
-            background-color: #fff;
-            color: $black18 !important;
+        .btn:active{
+            border-color: $primary !important;
+            background-color: $primary;
+            color: $white !important;
         }
     }
     .reserve-content{
         img{
-            width: 80px;
-            height: 80px;
-        }
-        li:hover{
-            cursor: pointer;
-            background-color: $greyD4 !important;
+            width: 60px;
+            height: 60px;
         }
         li.active{
             background-color: $greyE9;
@@ -30,15 +28,52 @@
     }
     .reserve-dicuss{
         img{
-            width: 100px;
-            height: 100px;
-        }
-        input,label:hover{
-            cursor: pointer;
+            width: 80px;
+            height: 80px;
         }
         textarea{
             resize: none;
             vertical-align: middle;
+        }
+    }
+}
+@include md{
+    .reserve{
+        .reserve-content{
+            img{
+                width: 80px;
+                height: 80px;
+            }
+        }
+    }
+}
+@include lg{
+    .reserve{
+        .btn-group{
+            .btn:hover{
+                border-color: $primary !important;
+                background-color: $primary;
+                color: $white !important;
+            }
+        }
+        .reserve-content{
+            img{
+                width: 80px;
+                height: 80px;
+            }
+            li:hover{
+                cursor: pointer;
+                background-color: $greyD4 !important;
+            }
+        }
+        .reserve-dicuss{
+            img{
+                width: 100px;
+                height: 100px;
+            }
+            input,label:hover{
+                cursor: pointer;
+            }
         }
     }
 }
