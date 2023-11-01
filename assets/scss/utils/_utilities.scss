@@ -504,11 +504,13 @@ $utilities: map-merge(
       class: font,
       values: (
         monospace: var(--#{$prefix}font-monospace),
-        Inter: 'Inter',
-        Oswald:'Oswald',
+        noto: 'Noto Sans',
+        inter: 'Inter',
+        oswald:'Oswald',
         )
     ),
     "font-size": (
+      responsive: true,
       rfs: true,
       property: font-size,
       class: fs,
@@ -537,6 +539,8 @@ $utilities: map-merge(
       class: lh,
       values: (
         1: 1,
+        18: $line-height-18,
+        12: $line-height-12,
         sm: $line-height-sm,
         base: $line-height-base,
         lg: $line-height-lg,

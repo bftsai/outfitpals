@@ -9,12 +9,12 @@
 @import "../scss/utils/mixin"; //customer
 
 // Layout & components
-@import "../node_modules/bootstrap/scss/root";
-@import "../node_modules/bootstrap/scss/reboot";
+@import "../scss/base/root";
+@import "../scss/base/reboot";
 @import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/images";
 @import "../node_modules/bootstrap/scss/containers";
-//@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/grid";
 //@import "../node_modules/bootstrap/scss/tables";
 @import "../node_modules/bootstrap/scss/forms";
 @import "../node_modules/bootstrap/scss/buttons";
@@ -27,7 +27,7 @@
 //@import "../node_modules/bootstrap/scss/accordion";
 //@import "../node_modules/bootstrap/scss/breadcrumb";
 @import "../node_modules/bootstrap/scss/pagination";
-//@import "../node_modules/bootstrap/scss/badge";
+@import "../node_modules/bootstrap/scss/badge";
 //@import "../node_modules/bootstrap/scss/alert";
 //@import "../node_modules/bootstrap/scss/progress";
 @import "../node_modules/bootstrap/scss/list-group";
@@ -52,10 +52,20 @@
 //google fonts Inter Oswald
 //@import "https://fonts.googleapis.com";
 //@import "https://fonts.gstatic.com";
-@import "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&display=swap";
+
+
+
+
+
+
+//customer components
+@import "../scss/components/pagination.scss";
+
 
 @import './layout/header.scss';
 @import './layout/footer.scss';
 
 
 @import './pages/index.scss';
+@import './pages/reserve.scss';
