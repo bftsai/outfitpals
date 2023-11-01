@@ -264,7 +264,9 @@ a:not([href]):not([class]) {
     text-decoration: none;
   }
 }
-
+a{
+  text-decoration: none;
+}
 
 // Code
 
