@@ -726,6 +726,7 @@ $utilities: map-merge(
     // scss-docs-end utils-interaction
     // scss-docs-start utils-border-radius
     "rounded": (
+      responsive: true,
       property: border-radius,
       class: rounded,
       values: (
