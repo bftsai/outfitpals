@@ -1,0 +1,31 @@
+.reserve{
+    .btn-group{
+        .active{
+            background-color: #fff;
+            color: $black18 !important;
+        }
+        .btn:hover{
+            background-color: #fff;
+            color: $black18 !important;
+        }
+    }
+    .reserve-content{
+        img{
+            width: 80px;
+            height: 80px;
+        }
+        li:hover{
+            cursor: pointer;
+            background-color: $greyD4 !important;
+        }
+        li.active{
+            background-color: $greyE9;
+        }
+    }
+    .multiline-ellipsis { 
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+}
