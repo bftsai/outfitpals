@@ -1,4 +1,10 @@
 .reserve{
+    .multiline-ellipsis { 
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
     .btn-group{
         .active{
             background-color: #fff;
@@ -22,10 +28,17 @@
             background-color: $greyE9;
         }
     }
-    .multiline-ellipsis { 
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
+    .reserve-dicuss{
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        input,label:hover{
+            cursor: pointer;
+        }
+        textarea{
+            resize: none;
+            vertical-align: middle;
+        }
     }
 }

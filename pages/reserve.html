@@ -10,7 +10,7 @@
     <%- include('./layout/header'); -%>
     <div class="reserve">
       <div class="container">
-        <div class="row justify-content-center py-lg-13">
+        <div class="row justify-content-center py-lg-13 d-none">
           <div class="col-4">
             <div class="btn-group w-100" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active">我的預約</button>
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <ul class="container reserve-content">
+      <ul class="container reserve-content d-none">
         <li class="row justify-content-center align-items-center py-7 border border-grey1D active">
           <div class="col-md-1">
             <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle" alt="personal pic">
@@ -135,6 +135,63 @@
           </div>
         </li>
       </ul>
+      <div class="container reserve-dicuss">
+        <div class="row justify-content-around align-items-center border-bottom py-lg-9">
+          <div class="col-2">
+            <img class="rounded-circle object-fit-cover" src="../assets/images/reserve/female-1.svg" alt="personal pic">
+          </div>
+          <div class="col-6">
+            <p class="fs-lg-2 fw-bold">Wang ming</p>
+          </div>
+          <div class="col-2">
+            <p class="fw-bold text-grey9F fs-8 fs-lg-7">
+              2023/10/26
+            </p>
+          </div>
+        </div>
+        <div class="row py-lg-9">
+          <div class="col-12">
+            <p class="fs-lg-4">預約時間：112年10月5號 15:00</p>
+          </div>
+          <div class="col-12">
+            <p class="fs-lg-4">地點：<a href="#">忠孝復興站1號出口</a></p>
+          </div>
+          <div class="col-9">
+            <p class="fs-lg-4">狀態：待回覆</p>
+          </div>
+          <div class="col-3">
+            <div class="form-check">
+              <input class="form-check-input fs-lg-4" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label fw-bold fs-lg-4" for="flexRadioDefault1">
+                取消預約
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p class="bg-black text-primary fs-lg-4 w-75 p-lg-7">
+              哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
+            </p>
+          </div>
+          <div class="col-12">
+            <p class="bg-tertiary fs-lg-4 w-75 p-lg-7 ms-auto text-end">
+              好啊，那我們就當天見！
+            </p>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <textarea class="w-100 p-lg-7 fs-lg-4" name="" id="" placeholder="請輸入文字..."></textarea>
+          </div>
+          <div class="col-6 pt-lg-13">
+            <div class="btn-group w-100" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7">送出</button>
+              <button type="button" class="btn btn-black18 text-primary py-lg-3 px-lg-7">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 

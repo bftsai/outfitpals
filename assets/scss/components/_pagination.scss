@@ -30,8 +30,8 @@
         }
     }
     .active,a:hover,a:active{
-        color: #000;
-        background: #FFF !important;
+        color: #FFF;
+        background: $primary !important;
         border-color: #000;
     }
     a:focus{
