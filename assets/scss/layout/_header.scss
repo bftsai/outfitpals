@@ -1,4 +1,40 @@
-.header{
-  background: #69F0AE;
-  font-size: 64px;
+.header {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  background: #c2c2c2;
+  font-family: "Noto Sans";
+  font-weight: bold;
+
+  nav {
+    height: 36px;
+  }
+
+  &__links {
+
+    a {
+
+      margin-right: 1rem;
+      color: $black;
+    }
+  }
+
+  &__button {
+    border: 2px solid $black;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-weight: bold;
+
+    > span {
+      display: inline-block;
+      vertical-align: bottom;
+
+    }
+
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      color: $black;
+    }
+  }
 }
