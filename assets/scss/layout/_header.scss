@@ -1,4 +1,45 @@
-.header{
-  background: #69F0AE;
-  font-size: 64px;
+.header {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  background: #c2c2c2;
+  font-family: "Noto Sans";
+  font-weight: bold;
+
+  nav {
+    height: 36px;
+  }
+
+  &__links {
+
+    a {
+
+      margin-right: 1rem;
+      text-decoration: none;
+      color: $black;
+    }
+  }
+
+  &__button {
+
+    padding: 8px 16px;
+    border-radius: 24px;
+    border-width: 2px;
+    text-decoration: none;
+    font-weight: bold;
+    color: $black;
+
+    > span {
+      display: inline-block;
+      vertical-align: bottom;
+
+    }
+
+    // header button hover的顏色尚不確定
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      color: $black;
+    }
+  }
 }
