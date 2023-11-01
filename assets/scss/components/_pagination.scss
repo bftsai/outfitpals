@@ -1,0 +1,40 @@
+.pagination{
+    img{
+        width: 44px;
+        height: 12px;
+    }
+    li:first-child,li:last-child{
+        a{
+            padding: 7.5px 12px;
+        }
+    }
+    li:first-child{
+        img{
+            rotate: 180deg;
+        }
+    }
+    li{
+        img:last-child{
+            display: none;
+        }
+        .active{
+            img{
+                height: 24px;
+            }
+            img:first-child{
+                display: none;
+            }
+            img:last-child{
+                display: block;
+            }
+        }
+    }
+    .active,a:hover,a:active{
+        color: #000;
+        background: #FFF !important;
+        border-color: #000;
+    }
+    a:focus{
+        box-shadow: 0 0 0 0;
+    }
+}
