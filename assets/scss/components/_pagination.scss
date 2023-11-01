@@ -17,7 +17,7 @@
         img:last-child{
             display: none;
         }
-        .active{
+        a:active,a:hover{
             img{
                 height: 24px;
             }
@@ -32,7 +32,7 @@
     .active,a:hover,a:active{
         color: #FFF;
         background: $primary !important;
-        border-color: #000;
+        border-color: $primary;
     }
     a:focus{
         box-shadow: 0 0 0 0;
