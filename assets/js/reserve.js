@@ -100,7 +100,7 @@ backToReserveAll[1].addEventListener('click',e=>{
         }, 0);
     }, 400);
 });
-
+//reserveMyDiscuss-
 reserveMyDiscussRadioCancel.addEventListener('click',e=>{
     if(reserveMyDiscussRadioCancel.checked===true){
         reserveMyDiscussConfirmSubmit.disabled=false;
@@ -118,12 +118,22 @@ reserveMyDiscussConfirmCancel.addEventListener('click',e=>{
     reserveMyDiscussRadioCancel.checked=false;
     reserveMyDiscussConfirmSubmit.disabled=true;
 });
-document.querySelector('.reserve-manageAppointments .row:nth-child(2)').addEventListener('click',e=>{
-    console.log('yes');
-})
-reserveManageAppointmentsRadioCheck.addEventListener('click',e=>{
-    
-})
-reserveManageAppointmentsRadioCancel.addEventListener('click',e=>{
-    
-})
+//reserveManageAppointments
+document.querySelector('.reserve-manageAppointments .row:nth-child(3)').addEventListener('click',e=>{
+    if(reserveManageAppointmentsRadioCheck.checked===true||reserveManageAppointmentsRadioCancel.checked===true){
+        reserveManageAppointmentsConfirmSubmit.disabled=false;
+    }
+});
+reserveManageAppointmentsTextarea.addEventListener('keyup',e=>{
+    if(reserveManageAppointmentsTextarea.value!==''){
+        reserveManageAppointmentsConfirmSubmit.disabled=false;
+    }else{
+        reserveManageAppointmentsConfirmSubmit.disabled=true;
+    }
+});
+reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
+    reserveManageAppointmentsTextarea.value='';
+    reserveManageAppointmentsRadioCheck.checked=false;
+    reserveManageAppointmentsRadioCancel.checked=false;
+    reserveManageAppointmentsConfirmSubmit.disabled=true;
+});

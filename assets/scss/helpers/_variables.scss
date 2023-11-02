@@ -926,7 +926,7 @@ $form-text-color:                       var(--#{$prefix}secondary-color) !defaul
 // scss-docs-end form-text-variables
 
 // scss-docs-start form-label-variables
-$form-label-margin-bottom:              .5rem !default;
+$form-label-margin-bottom:              null !default; //customer .5rem !default;
 $form-label-font-size:                  null !default;
 $form-label-font-style:                 null !default;
 $form-label-font-weight:                null !default;
