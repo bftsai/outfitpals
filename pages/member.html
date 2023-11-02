@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OutfitPals-Member</title>
+  </head>
+  <body>
+    <%- include('./layout/header'); -%>
+    <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
+      
+      <div class="container pagination justify-content-center d-none">
+        <nav aria-label="Page navigation">
+          <ul class="pagination m-0">
+            <li class="page-item">
+              <a class="page-link page-prev border-black18 bg-black" href="#" aria-label="Previous">
+                <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
+                <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li>
+            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">2</a></li>
+            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link page-next border-black18 bg-black" href="#" aria-label="Next">
+                <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
+                <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+
+    
+
+    <%- include('./layout/footer'); -%>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <!-- own JS -->
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="../assets/js/member.js"></script>
+  </body>
+</html>
