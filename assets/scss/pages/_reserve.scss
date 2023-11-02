@@ -26,7 +26,7 @@
             background-color: $greyE9;
         }
     }
-    .reserve-dicuss{
+    .reserve-myDicuss,.reserve-manageAppointments{
         img{
             width: 80px;
             height: 80px;
@@ -35,6 +35,9 @@
             resize: none;
             vertical-align: middle;
         }
+    }
+    .reserve-manageAppointments{
+
     }
 }
 @include md{
@@ -66,7 +69,7 @@
                 background-color: $greyD4 !important;
             }
         }
-        .reserve-dicuss{
+        .reserve-myDicuss,.reserve-manageAppointments{
             img{
                 width: 100px;
                 height: 100px;
