@@ -8,6 +8,11 @@
             rotate: 180deg;
         }
     }
+    li:first-child,li:last-child{
+        a{
+            padding: 7.5px 12px;
+        }
+    }
     li{
         img:last-child{
             display: none;
@@ -41,7 +46,7 @@
         }
         li:first-child,li:last-child{
             a{
-                padding: 7.5px 12px;
+                padding: 15px 24px;
             }
         }
         li{
