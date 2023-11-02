@@ -24,10 +24,18 @@ reserveContentAllLi.forEach(item=>{
         });
         console.log(stateDom.textContent);
         if(stateDom.textContent==='我的預約'){
-            reserveBtnGroup.classList.add('d-none');
-            reserveContent.classList.add('d-none');
-            pagination.classList.add('d-none');
-            reserveMyDicuss.classList.remove('d-none');
+            reserveBtnGroup.classList.add('opacity-0');
+            reserveContent.classList.add('opacity-0');
+            pagination.classList.add('opacity-0');
+            setTimeout(() => {
+                reserveBtnGroup.classList.add('d-none');
+                reserveContent.classList.add('d-none');
+                pagination.classList.add('d-none');
+                reserveMyDicuss.classList.remove('d-none');
+                setTimeout(() => {
+                    reserveMyDicuss.classList.remove('opacity-0');
+                }, 0);
+            }, 400);
         }else{
             reserveBtnGroup.classList.add('d-none');
             reserveContent.classList.add('d-none');
