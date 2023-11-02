@@ -36,9 +36,6 @@
             vertical-align: middle;
         }
     }
-    .reserve-manageAppointments{
-
-    }
 }
 @include md{
     .reserve{
@@ -54,6 +51,7 @@
     .reserve{
         .btn-group{
             .btn:hover{
+                transition: all 0.8s ease;
                 border-color: $primary !important;
                 background-color: $primary;
                 color: $white !important;
