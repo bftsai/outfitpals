@@ -9,7 +9,7 @@ $(document).ready(function () {
 });
 
 //JS
-const reserveBtnGroup=document.querySelector('.reserve-btn-group');
+const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');
 const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
 const reserveMyDicuss=document.querySelector('.reserve-myDicuss');
