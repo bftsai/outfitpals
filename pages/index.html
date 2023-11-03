@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OutfitPals</title>
-  </head>
-  <body>
-    <%- include('./layout/header'); -%>
-    <button></button>
-    <div class="btn btn-tertiary font-Oswald"> OutfitPals</div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutfitPals</title>
+</head>
+
+<body>
+  <%- include('./layout/header'); -%>
+    <!-- 以下為btn測試 -->
+    <a href="#" class="btn arrowBtn">立即註冊 OutfitPals<img src="/assets/images/components/Btn-Arrow-primary.svg"
+        alt="Btn-Arrow-primary"></a>
+
+    <a href="#" class="arrowBtn">瀏覽更多<img src="/assets/images/components/Btn-Arrow-primary.svg"
+        alt="Btn-Arrow-primary"></a>
+
+    <a href="#" class="arrowBtn">註冊 OutfitPals 立即預約<img src="/assets/images/components/Btn-Arrow-primary.svg"
+        alt="Btn-Arrow-primary"></a>
+    <br>
+    <br>
+
+    <a href="#" class="btn arrowBtn2">立即註冊 OutfitPals</a>
+
+    <a href="#" class="arrowBtn2">瀏覽更多</a>
+
+    <a href="#" class="arrowBtn2">註冊 OutfitPals 立即預約</a>
+    <!-- 以上為btn測試 -->
+
+
     <h1 class="index-title">我是首頁</h1>
-    <p class="fs-1">FS-1 test</p>
-    <span class="material-symbols-outlined fs-1">
-      search
-    </span>
-    <img src="../assets/images/cat.jpg" style="width: 300px;" alt="cat">
-    <div class="btn btn-primary">btn</div>
-    <%- include('./layout/footer'); -%>
     
-    <script type="module" src="../main.js"></script>
-    <script type="module" src="../assets/js/index.js"></script>
-  </body>
+    <%- include('./layout/footer'); -%>
+
+      <script type="module" src="../main.js"></script>
+      <script type="module" src="../assets/js/index.js"></script>
+</body>
+
 </html>
