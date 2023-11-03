@@ -1,5 +1,5 @@
 //jQuery
-//seitch reserveMyDicuss reserveManageAppointments
+//switch reserveMyDiscuss reserveManageAppointments
 $(document).ready(function () {
     $('.btn-group .btn').click(function (e) { 
         e.preventDefault();
@@ -12,12 +12,21 @@ $(document).ready(function () {
 const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');
 const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
-const reserveMyDicuss=document.querySelector('.reserve-myDicuss');
+const reserveMyDiscuss=document.querySelector('.reserve-myDiscuss');
+const reserveMyDiscussRadioCancel=document.getElementById('reserve-myDiscussCancel');
+const reserveMyDiscussTextarea=document.querySelector('.reserve-myDiscuss textarea');
+const reserveMyDiscussConfirmSubmit=document.querySelector('.reserveMyDiscussConfirmSubmit');
+const reserveMyDiscussConfirmCancel=document.querySelector('.reserveMyDiscussConfirmCancel');
 const reserveManageAppointments=document.querySelector('.reserve-manageAppointments');
 const pagination=document.querySelector('.pagination');
+const reserveManageAppointmentsRadioCheck=document.getElementById('reserve-manageAppointmentsApprove');
+const reserveManageAppointmentsRadioCancel=document.getElementById('reserve-manageAppointmentsCancel');
+const reserveManageAppointmentsTextarea=document.querySelector('.reserve-manageAppointments textarea');
+const reserveManageAppointmentsConfirmSubmit=document.querySelector('.reserveManageAppointmentsConfirmSubmit');
+const reserveManageAppointmentsConfirmCancel=document.querySelector('.reserveManageAppointmentsConfirmCancel');
 const backToReserveAll=[...document.querySelectorAll('.backToReserve')];
 
-//reserve into reserveMyDicuss or reserveManageAppointments
+//reserve into reserveMyDiscuss or reserveManageAppointments
 reserveContentAllLi.forEach(item=>{
     item.addEventListener('click',e=>{
         let stateDom=[...reserveBtnGroup.children[0].children[0].children[0].children].find(item=>{
@@ -33,9 +42,9 @@ reserveContentAllLi.forEach(item=>{
                 reserveBtnGroup.classList.add('d-none');
                 reserveContent.classList.add('d-none');
                 pagination.classList.add('d-none');
-                reserveMyDicuss.classList.remove('d-none');
+                reserveMyDiscuss.classList.remove('d-none');
                 setTimeout(() => {
-                    reserveMyDicuss.classList.remove('opacity-0');
+                    reserveMyDiscuss.classList.remove('opacity-0');
                 }, 0);
             }, 400);
         }else{
@@ -54,14 +63,17 @@ reserveContentAllLi.forEach(item=>{
         }
     })
 });
-//reserveMyDicuss back to reserve
+//reserveMyDiscuss back to reserve
 backToReserveAll[0].addEventListener('click',e=>{
-    reserveMyDicuss.classList.add('opacity-0');
+    reserveMyDiscussTextarea.value='';
+    reserveMyDiscussRadioCancel.checked=false;
+    reserveMyDiscussConfirmSubmit.disabled=true;
+    reserveMyDiscuss.classList.add('opacity-0');
     setTimeout(() => {
         reserveBtnGroup.classList.remove('d-none');
         reserveContent.classList.remove('d-none');
         pagination.classList.remove('d-none');
-        reserveMyDicuss.classList.add('d-none');
+        reserveMyDiscuss.classList.add('d-none');
         setTimeout(() => {
             reserveBtnGroup.classList.remove('opacity-0');
             reserveContent.classList.remove('opacity-0');
@@ -71,6 +83,10 @@ backToReserveAll[0].addEventListener('click',e=>{
 });
 //reserveManageAppointments back to reserve
 backToReserveAll[1].addEventListener('click',e=>{
+    reserveManageAppointmentsTextarea.value='';
+    reserveManageAppointmentsRadioCheck.checked=false;
+    reserveManageAppointmentsRadioCancel.checked=false;
+    reserveManageAppointmentsConfirmSubmit.disabled=true;
     reserveManageAppointments.classList.add('opacity-0');
     setTimeout(() => {
         reserveBtnGroup.classList.remove('d-none');
@@ -83,4 +99,41 @@ backToReserveAll[1].addEventListener('click',e=>{
             pagination.classList.remove('opacity-0');
         }, 0);
     }, 400);
+});
+//reserveMyDiscuss-
+reserveMyDiscussRadioCancel.addEventListener('click',e=>{
+    if(reserveMyDiscussRadioCancel.checked===true){
+        reserveMyDiscussConfirmSubmit.disabled=false;
+    }
+});
+reserveMyDiscussTextarea.addEventListener('keyup',e=>{
+    if(reserveMyDiscussTextarea.value!==''){
+        reserveMyDiscussConfirmSubmit.disabled=false;
+    }else{
+        reserveMyDiscussConfirmSubmit.disabled=true;
+    }
+});
+reserveMyDiscussConfirmCancel.addEventListener('click',e=>{
+    reserveMyDiscussTextarea.value='';
+    reserveMyDiscussRadioCancel.checked=false;
+    reserveMyDiscussConfirmSubmit.disabled=true;
+});
+//reserveManageAppointments
+document.querySelector('.reserve-manageAppointments .row:nth-child(3)').addEventListener('click',e=>{
+    if(reserveManageAppointmentsRadioCheck.checked===true||reserveManageAppointmentsRadioCancel.checked===true){
+        reserveManageAppointmentsConfirmSubmit.disabled=false;
+    }
+});
+reserveManageAppointmentsTextarea.addEventListener('keyup',e=>{
+    if(reserveManageAppointmentsTextarea.value!==''){
+        reserveManageAppointmentsConfirmSubmit.disabled=false;
+    }else{
+        reserveManageAppointmentsConfirmSubmit.disabled=true;
+    }
+});
+reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
+    reserveManageAppointmentsTextarea.value='';
+    reserveManageAppointmentsRadioCheck.checked=false;
+    reserveManageAppointmentsRadioCancel.checked=false;
+    reserveManageAppointmentsConfirmSubmit.disabled=true;
 });
