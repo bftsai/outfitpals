@@ -1,7 +1,6 @@
 .header {
   width: 100%;
   background: #c2c2c2;
-  // font-family: "Noto Sans";
   font-weight: bold;
 
   nav {
@@ -17,16 +16,13 @@
   }
 
   &__links {
-    // display: none;
     a {
-
       margin-right: 1rem;
       color: $black;
     }
   }
 
   &__button {
-    padding: 8px 16px;
     border-radius: 24px;
     font-weight: bold;
 
@@ -55,10 +51,8 @@
 }
 
 // lg: >= 992px
-@include lg{
-  .header {
-    &__links {
-      display: block;
-    }
-  }
-}
+// @include lg{
+//   .header {
+// 
+//   }
+// }
