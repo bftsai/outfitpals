@@ -1,0 +1,1 @@
+import"./main-857fffdd.js";import"https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js";const t="http://localhost:3000";axios.get(`${t}/users`).then(o=>{console.log(o)}).catch(o=>{console.log(o.response)});

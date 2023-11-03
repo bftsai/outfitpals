@@ -1,31 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>index</title>
-    <script type="module" crossorigin src="/outfitpals/assets/index-3ba5ae04.js"></script>
-    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-68f9493b.js">
-    <link rel="stylesheet" href="/outfitpals/assets/main-5b90b3e8.css">
-  </head>
-  <body>
-    <div class="container">
-    <h1 class="header">我是 header</h1>
-<a href="index.html">index</a>
-<a href="about.html">about</a>
-<a href="contact.html">contact</a>
-<div class="btn btn-primary">btn</div>
-</div>    <div class="btn btn-tertiary font-Oswald"> OutfitPals</div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutfitPals</title>
+  <script type="module" crossorigin src="/outfitpals/assets/index-9ca15fd7.js"></script>
+  <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-857fffdd.js">
+  <link rel="stylesheet" href="/outfitpals/assets/main-a3fd73e5.css">
+</head>
+
+<body>
+  <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top">
+    <nav class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="header__logo">
+            <img src="/outfitpals/assets/logo_white-f9b1d4ee.svg" alt="OutfitPals">
+        </a>
+
+        <div class="header__links d-none d-lg-block">
+            <a href="#">貼文牆</a>
+            <a href="#">常見問題</a>
+            <a href="#">贊助我們</a>
+            <a href="#">我的預約</a>
+            <a href="#" class="header__links__button btn btn-outline-black18 m-0 ps-4">註冊登入 <span class="material-symbols-outlined">
+                chevron_right
+                </span> </a>
+        </div>
+        <button type="button" class="header__menu-btn border-0 p-2 d-lg-none">
+            <span class="material-symbols-outlined">menu</span>
+        </div>
+    </nav>
+</header>
+<!-- 待桌機版完成後補行動版sidebar
+<div  class="header-sidebar">
+    <span class="material-symbols-outlined d-none"> close</span> 
+</div> -->    <!-- 以下為btn測試 -->
+    <a href="#" class="btn arrowBtn">立即註冊 OutfitPals<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+        alt="Btn-Arrow-primary"></a>
+
+    <a href="#" class="arrowBtn">瀏覽更多<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+        alt="Btn-Arrow-primary"></a>
+
+    <a href="#" class="arrowBtn">註冊 OutfitPals 立即預約<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+        alt="Btn-Arrow-primary"></a>
+    <br>
+    <br>
+
+    <a href="#" class="btn arrowBtn2">立即註冊 OutfitPals</a>
+
+    <a href="#" class="arrowBtn2">瀏覽更多</a>
+
+    <a href="#" class="arrowBtn2">註冊 OutfitPals 立即預約</a>
+    <!-- 以上為btn測試 -->
+
+
     <h1 class="index-title">我是首頁</h1>
-    <p class="fs-1">FS-1 test</p>
-    <span class="material-symbols-outlined fs-1">
-      search
-    </span>
-    <img src="/outfitpals/assets/cat-0c0689ae.jpg" style="width: 300px;" alt="cat">
-    <div class="btn btn-primary">btn</div>
-    <footer class="footer">我是 footer</footer>    
     
+    <footer class="footer d-flex flex-column align-items-center flex-lg-row justify-content-between  bg-grey1D py-9 px-3 py-lg-13 px-lg-18">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
+        <div class="footer__contact mb-9 mb-lg-0 fs-8 d-flex flex-column  align-items-center align-items-lg-start">
+            <img src="/outfitpals/assets/logo_white-f9b1d4ee.svg" alt="OutfitPals" class="mb-3 mb-lg-4">
     
-  </body>
+            <div class="footer__contact__info d-lg-flex flex-lg-column justify-content-lg-between">
+    
+                <div class="footer__contact__info__email mb-2 d-flex align-items-center">
+                    <span class="me-3"></span>
+                    <p>
+                        utfitPals_Offical@gmail.com
+                    </p>
+                </div>
+                <div class="footer__contact__info__phone d-flex align-items-center">
+                    <span class="me-3"></span>
+                    <p>
+                        09-1234-5678
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer__social mb-9 mb-lg-0 d-flex flex-column align-items-center">
+            <p class="font-oswald mb-3 mb-lg-4 fs-4">FOLLOW&nbsp;&nbsp;US</p>
+            <div class="footer__social__icons d-flex felx-row">
+                <a href="#" class="me-7">
+                    <img src="/outfitpals/assets/icon-facebook-b06c40a4.svg" alt="Facebook">
+                </a>
+                <a href="#" class="me-7">
+                    <img src="/outfitpals/assets/icon-instagram-7c7dc26a.svg" alt="Instagram">
+                </a> 
+                <a href="#">
+                    <img src="/outfitpals/assets/icon-x-38a49815.svg" alt="X">
+                </a>
+            </div>
+        </div>
+        <div class="footer__links d-flex flex-column align-items-center align-items-lg-end">
+            <div class="footer__links__items mb-7 mb-lg-8 fs-8 align-items-center pt-2 mt-lg-2">
+                <a href="#" class="me-7">貼文牆總覽</a>
+                <a href="#" class="me-7">贊助我們</a>
+                <a href="#" class="me-7">常見問題</a>
+                <a href="#" class="me-7 me-lg-0">預約查詢</a>
+            </div>
+            <div class="footer__copyright fs-9 pb-2 ">Copyright © 2024 OutfitPals. All rights reserved.</div>
+        </div>
+    </div>
+</footer>
+      
+      
+</body>
+
 </html>
