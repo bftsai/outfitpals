@@ -7,6 +7,8 @@
     <title>OutfitPals-Member</title>
     <!-- gmail third party login -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Include GSI library -->
+    <script src="https://accounts.google.com/gsi/client"></script>
   </head>
   <body>
     <%- include('./layout/header'); -%>
@@ -96,20 +98,20 @@
           }
         </script> -->
 
-
         <!-- just pic can't work -->
         <div class="gmailSignIn container pt-9 pt-lg-13">
           <div class="row justify-content-center">
-            <div class="col-3">
+            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
               <div id="g_id_onload"
                   data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
-                  data-context="signup"
+                  data-context="signin"
                   data-ux_mode="popup"
                   data-callback="onSignIn"
-                  data-itp_support="true">
+                  data-nonce=""
+                  data-auto_prompt="false">
               </div>
 
-              <div class="g_id_signin w-100"
+              <div class="g_id_signin"
                   data-type="standard"
                   data-shape="pill"
                   data-theme="filled_black"
@@ -122,7 +124,7 @@
         </div>
         <div class="gmailSignUp container pt-9 pt-lg-13 d-none">
           <div class="row justify-content-center">
-            <div class="col-3">
+            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
               <div id="g_id_onload"
                   data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
                   data-context="signin"
