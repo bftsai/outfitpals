@@ -5,22 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OutfitPals-Member</title>
+    <!-- gmail third party login -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Include GSI library -->
+    <script src="https://accounts.google.com/gsi/client"></script>
   </head>
   <body>
     <%- include('./layout/header'); -%>
-    <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
+    <div class="member h-radialGradienStyle-1 py-9 py-lg-13 mt-16 mt-lg-24">
         <div class="container c-switch-btn-group">
             <div class="row justify-content-center py-9 py-lg-13">
               <div class="col col-lg-4">
                 <div class="btn-group w-100" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 active">登入</button>
-                  <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7">註冊</button>
+                  <button type="button" class="signInBtn btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 active">登入</button>
+                  <button type="button" class="signUpBtn btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7">註冊</button>
                 </div>
               </div>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container border-bottom border-grey9F">
             <form class="needs-validation" novalidate>
                 <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
                     <div class="col-2 d-flex justify-content-center">
@@ -44,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center py-9 py-lg-13">
+                <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
                     <div class="col-3 d-flex">
                         <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1" type="submit">登入</button>
                     </div>
@@ -56,7 +60,93 @@
         </div>
 
 
-      <div class="container pagination justify-content-center d-none">
+        
+
+        <!-- 網路教學 -->
+        <!-- <div id="g_id_onload"
+            data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="onSignIn"
+            data-nonce=""
+            data-auto_select="true"
+            data-itp_support="true" 
+            style="width: 100%;">
+        </div>
+
+        <div class="g_id_signin"
+            data-type="standard"
+            data-shape="pill"
+            data-theme="filled_black"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="left">
+        </div>
+        <script>
+          // 登入之後
+          function onSignIn(response) {
+            // var credential = response.credential,
+            //   profile = JSON.parse(decodeURIComponent(escape(window.atob(credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))))), // 對 JWT 進行解碼
+            //   target = document.getElementById("GOOGLE_STATUS_1"),
+            
+            console.log("ID: " + responsePayload.sub);
+            console.log('Full Name: ' + responsePayload.name);
+            console.log('Given Name: ' + responsePayload.given_name);
+            console.log('Family Name: ' + responsePayload.family_name);
+            console.log("Image URL: " + responsePayload.picture);
+            console.log("Email: " + responsePayload.email);
+          }
+        </script> -->
+
+        <!-- just pic can't work -->
+        <div class="gmailSignIn container pt-9 pt-lg-13">
+          <div class="row justify-content-center">
+            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+              <div id="g_id_onload"
+                  data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
+                  data-context="signin"
+                  data-ux_mode="popup"
+                  data-callback="onSignIn"
+                  data-nonce=""
+                  data-auto_prompt="false">
+              </div>
+
+              <div class="g_id_signin"
+                  data-type="standard"
+                  data-shape="pill"
+                  data-theme="filled_black"
+                  data-text="signin_with"
+                  data-size="large"
+                  data-logo_alignment="left">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gmailSignUp container pt-9 pt-lg-13 d-none">
+          <div class="row justify-content-center">
+            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+              <div id="g_id_onload"
+                  data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
+                  data-context="signin"
+                  data-ux_mode="popup"
+                  data-callback="onSignIn"
+                  data-nonce=""
+                  data-auto_prompt="false">
+              </div>
+
+              <div class="g_id_signin"
+                  data-type="standard"
+                  data-shape="pill"
+                  data-theme="filled_black"
+                  data-text="signup_with"
+                  data-size="large"
+                  data-logo_alignment="left">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      <div class="container pagination justify-content-center d-none opacity-0">
         <nav aria-label="Page navigation">
           <ul class="pagination m-0">
             <li class="page-item">
@@ -84,10 +174,13 @@
     
 
     <%- include('./layout/footer'); -%>
+    <!-- AXIOS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <!-- own JS -->
     <script type="module" src="../main.js"></script>
     <script type="module" src="../assets/js/member.js"></script>
+    <script src="../assets/js/member_googleAPI.js"></script>
   </body>
 </html>
