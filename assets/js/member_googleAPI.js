@@ -1,3 +1,4 @@
+const account=document.getElementById('account');
 // 登入之後
 function onSignIn(response){
     var base64Url = response.credential.split('.')[1];
@@ -5,11 +6,15 @@ function onSignIn(response){
     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-
-    console.log(JSON.parse(jsonPayload));
-    return JSON.parse(jsonPayload);
-    
+    console.log(response);
+    console.log(jsonPayload);
+    console.log(JSON.parse(jsonPayload).sub);
+    window.localStorage.token=response.credential;
+    account.value=JSON.parse(jsonPayload).sub;
 };
+console.log(window.localStorage);
+
+
 
 /*
     JWT 線上編譯網站
@@ -24,3 +29,5 @@ function onSignIn(response){
     npm install jwt-decode 專門解碼 JWT (待驗證)
     https://www.npmjs.com/package/jwt-decode
 */
+
+
