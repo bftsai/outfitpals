@@ -47,3 +47,25 @@
 
     }
 }
+
+.arrowBtn2sm {
+    border: 0px;
+    transition: all 0.3s linear;
+    ;
+    background-color: $grey1D;
+    color: $primary;
+    padding: 16px 84px 16px 24px;
+
+    background-image: url(/assets/images/components/Btn-Arrow-primary.svg);
+    background-repeat: no-repeat;
+    background-size: 44px 12px;
+    background-position: bottom 48% left 88%;
+
+    &:hover {
+        background-color: $primary !important;
+        color: $black !important;
+
+        background-image: url(/assets/images/components/Btn-Arrow-black.svg);
+
+    }
+}
