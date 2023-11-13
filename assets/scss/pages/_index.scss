@@ -1,0 +1,69 @@
+.carousel-indicators{
+
+    &__one {
+        border-top: 0px solid transparent !important;
+        border-bottom: 0px solid transparent !important;
+        width: 32px !important;
+        height: 8px !important;
+        border-radius: 4px !important;
+    }
+
+    &__two {
+        border-top: 0px solid transparent !important;
+        border-bottom: 0px solid transparent !important;
+        width: 8px !important;
+        height: 8px !important;
+        border-radius: 50% !important;
+    }
+}
+
+.carousel-caption{
+    text-align: start;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-left: 12px;
+    padding-bottom: 64px;
+    color: $black;
+
+    &__sloganOne {
+        letter-spacing: 0.64px;
+    }
+
+    &__SubheadOne {
+        letter-spacing: 0.32px;
+
+    }
+
+    &__sloganTwo {
+
+        letter-spacing: 0.48px;
+    }
+}
+
+
+@include lg {
+    .carousel-caption{
+        padding-left: 64px;
+        padding-bottom: 100px;
+    
+        &__sloganOne {
+            letter-spacing: 0.96px;
+        }
+    
+        &__SubheadOne {
+            letter-spacing: 0.64px;
+    
+        }
+    
+        &__sloganTwo {
+    
+            letter-spacing: 0.48px;
+        }
+        
+        &__btnLg {
+            display: inline-block !important; 
+            height: 70px;
+        }
+    }
+}
