@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>about</title>
+  </head>
+  <body>
+    <%- include('./layout/header'); -%>
+    <div class="container d-flex justify-content-center">
+        <div class="card  my-6" style="width: 50rem;">
+            <div class="card-body">
+             
+              <label for="exampleFormControlTextarea1" class="card-title form-label display-6 d-flex justify-content-center fw-bold">請填寫您本次的逛街需求</label>
+              <textarea class="form-control my-6" id="exampleFormControlTextarea1" rows="3" placeholder="我想購買冬天穿的長袖襯衫！" style="opacity: 0.4;"></textarea>
+              <strong class="d-flex justify-content-center display-6">請確認您的預約申請</strong>
+              <p class="mt-6" style="position: relative; left: 100px;">我可以在</p>
+              <ul class="mb-6" style="position: relative; left: 100px;">
+                <li>週六    14:00 - 17:00</li>
+              </ul>
+              <p class="mt-6" style="position: relative; left: 100px;">前往</p>
+              <ul class="mb-6" style="position: relative; left: 100px;">
+                <li>台中大遠百</li>
+                <li>一中商圈</li>
+              </ul>
+              <p class="fs-6 my-6 d-flex justify-content-center" style="opacity: 0.4;">詳細的會面時間與地點將由小精靈決定後通知您</p>
+              <div class=" me-5 pe-5  my-6 d-flex justify-content-between">
+                <div class="mt-2" style="position: relative; left: 50px;">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        以上資訊確認無誤
+                    </label>
+                </div>
+
+                <a href="#" class="btn btn-primary ">Go somewhere</a>
+                
+              </div>    
+              
+            </div>
+          </div>
+    </div>
+
+    <%- include('./layout/footer'); -%>
+
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>
