@@ -11,41 +11,80 @@
 <body>
   <%- include('./layout/header'); -%>
     <!-- 輪播banner -->
-    <div id="carousel-banner" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-indicators mb-7 mb-lg-9">
-        <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0" class="active carousel-indicators__one me-2" aria-current="true"
-          aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="1" aria-label="Slide 2" class="carousel-indicators__two"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="8000">
-          <div class="d-flex align-items-center justify-content-center">
-            <img src="/assets/images/index/banner_768_1.jpg" class="d-md-none d-lg-none" alt="banner1">
+    <section class="banner">
+
+      <div id="carousel-banner" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators mb-7 mb-lg-9">
+          <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0" class="active carousel-indicators__one me-2" aria-current="true"
+            aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="1" aria-label="Slide 2" class="carousel-indicators__two"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="8000">
+            <div class="d-flex align-items-center justify-content-center">
+              <img src="/assets/images/index/banner_768_1.jpg" class="d-md-none d-lg-none" alt="banner1">
+            </div>
+            <img src="/assets/images/index/banner_768_1.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner1">
+            <img src="/assets/images/index/banner_1920_1.jpg" class="d-none d-lg-block w-100" alt="banner1">
+            <div class="carousel-caption">
+                <h1 class="carousel-caption__sloganOne fs-2 fs-lg-1 fw-bold mb-3">你還在為穿搭煩腦嗎？</h1>
+                <p class="carousel-caption__SubheadOne fs-7 fs-lg-2 fw-bold">立即預約時尚穿搭教主，引領你走進潮流世界</p>
+                <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17 d-lg-none">立即註冊 OutfitPals</a>
+                <a href="#" class="btn arrowBtn2 carousel-caption__btnLg mt-7 mt-lg-17 d-none">立即註冊 OutfitPals</a>
+            </div>
           </div>
-          <img src="/assets/images/index/banner_768_1.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner1">
-          <img src="/assets/images/index/banner_1920_1.jpg" class="d-none d-lg-block w-100" alt="banner1">
-          <div class="carousel-caption">
-              <h1 class="carousel-caption__sloganOne fs-2 fs-lg-1 fw-bold mb-3">你還在為穿搭煩腦嗎？</h1>
-              <p class="carousel-caption__SubheadOne fs-7 fs-lg-2 fw-bold">立即預約時尚穿搭教主，引領你走進潮流世界</p>
-              <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17 d-lg-none">立即註冊 OutfitPals</a>
+          <div class="carousel-item" data-bs-interval="8000">
+            <div class="d-flex align-items-center justify-content-center">
+            <img src="/assets/images/index/banner_768_2.jpg" class="d-md-none d-lg-none" alt="banner2">
+            </div>
+            <img src="/assets/images/index/banner_768_2.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner2">
+            <img src="/assets/images/index/banner_1920_2.jpg" class="d-none d-lg-block w-100" alt="banner2">
+            <div class="carousel-caption">
+              <h2 class="carousel-caption__SubheadTwo fs-3 fs-lg-1 font-oswald mb-3">WEAR DESIGN FASHION POPULAR</h2>
+              <p class='carousel-caption__SubheadOne fs-4 fs-lg-2 fw-bold'>開始分享你的時尚穿搭</p>
+              <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17  d-lg-none">立即註冊 OutfitPals</a>
               <a href="#" class="btn arrowBtn2 carousel-caption__btnLg mt-7 mt-lg-17 d-none">立即註冊 OutfitPals</a>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="8000">
-          <div class="d-flex align-items-center justify-content-center">
-          <img src="/assets/images/index/banner_768_2.jpg" class="d-md-none d-lg-none" alt="banner2">
-          </div>
-          <img src="/assets/images/index/banner_768_2.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner2">
-          <img src="/assets/images/index/banner_1920_2.jpg" class="d-none d-lg-block w-100" alt="banner2">
-          <div class="carousel-caption">
-            <h2 class="carousel-caption__SubheadTwo fs-3 fs-lg-1 font-oswald mb-3">WEAR DESIGN FASHION POPULAR</h2>
-            <p class='carousel-caption__SubheadOne fs-4 fs-lg-2 fw-bold'>開始分享你的時尚穿搭</p>
-            <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17  d-lg-none">立即註冊 OutfitPals</a>
-            <a href="#" class="btn arrowBtn2 carousel-caption__btnLg mt-7 mt-lg-17 d-none">立即註冊 OutfitPals</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="slogan">
+      <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="slogan__text d-flex flex-column align-items-center">
+          <div class="slogan__text__bgtext d-flex justify-content-between">
+            <p class="slogan__text__bgtext__left font-oswald me-9 me-lg-17">OUTFITPALS</p>
+            <p class="slogan__text__bgtext__right font-oswald">SELECT OU</p>
+          </div>
+          <h2 class="font-oswald fs-2 fs-lg-1 mt-17 mb-2 fw-normal">SELECT OUTFITPALS</h2>
+          <h3 class="fs-7 mb-9 fw-bold">你也想改善你的穿搭，卻不知從何下手嗎？</h3>
+        </div>
+        <div class="slogan__flex d-flex flex-column flex-lg-row">
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/assets/images/index/img_advantage_1.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">看遍了IG、小紅書、Youtube的穿搭教學卻頭昏眼花，真想有人直接給你客製化的建議？</div>
+          </div>
+
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/assets/images/index/img_advantage_2.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">找到想嘗試的穿搭風格，網購卻買不到合適的衣服，一個人遲遲不敢去實體店逛街？</div>
+          </div>
+
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/assets/images/index/img_advantage_3.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">對衣服沒有Sense，逛街時眼花撩亂，即使試穿了也沒有想法，真想有朋友給建議？</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
     <!-- 以下為btn測試 -->
     <!-- <a href="#" class="btn arrowBtn">立即註冊 OutfitPals<img src="/assets/images/components/Btn-Arrow-primary.svg"
         alt="Btn-Arrow-primary"></a>
@@ -64,9 +103,6 @@
 
     <a href="#" class="arrowBtn2">註冊 OutfitPals 立即預約</a> -->
     <!-- 以上為btn測試 -->
-
-
-    <h1 class="index-title">我是首頁</h1>
 
     <%- include('./layout/footer'); -%>
       <!-- bs5 js -->
