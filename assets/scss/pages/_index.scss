@@ -1,69 +1,148 @@
-.carousel-indicators{
+.banner {
 
-    &__one {
-        border-top: 0px solid transparent !important;
-        border-bottom: 0px solid transparent !important;
-        width: 32px !important;
-        height: 8px !important;
-        border-radius: 4px !important;
+    .carousel-indicators {
+
+        &__one {
+            border-top: 0px solid transparent !important;
+            border-bottom: 0px solid transparent !important;
+            width: 32px !important;
+            height: 8px !important;
+            border-radius: 4px !important;
+        }
+
+        &__two {
+            border-top: 0px solid transparent !important;
+            border-bottom: 0px solid transparent !important;
+            width: 8px !important;
+            height: 8px !important;
+            border-radius: 50% !important;
+        }
     }
 
-    &__two {
-        border-top: 0px solid transparent !important;
-        border-bottom: 0px solid transparent !important;
-        width: 8px !important;
-        height: 8px !important;
-        border-radius: 50% !important;
-    }
-}
+    .carousel-caption {
+        text-align: start;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        padding-left: 12px;
+        padding-bottom: 64px;
+        color: $black;
 
-.carousel-caption{
-    text-align: start;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    padding-left: 12px;
-    padding-bottom: 64px;
-    color: $black;
-
-    &__sloganOne {
-        letter-spacing: 0.64px;
-    }
-
-    &__SubheadOne {
-        letter-spacing: 0.32px;
-
-    }
-
-    &__sloganTwo {
-
-        letter-spacing: 0.48px;
-    }
-}
-
-
-@include lg {
-    .carousel-caption{
-        padding-left: 64px;
-        padding-bottom: 100px;
-    
         &__sloganOne {
-            letter-spacing: 0.96px;
-        }
-    
-        &__SubheadOne {
             letter-spacing: 0.64px;
-    
         }
-    
+
+        &__SubheadOne {
+            letter-spacing: 0.32px;
+
+        }
+
         &__sloganTwo {
-    
+
             letter-spacing: 0.48px;
         }
-        
-        &__btnLg {
-            display: inline-block !important; 
-            height: 70px;
+    }
+
+
+    @include lg {
+        .carousel-caption {
+            padding-left: 64px;
+            padding-bottom: 100px;
+
+            &__sloganOne {
+                letter-spacing: 0.96px;
+            }
+
+            &__SubheadOne {
+                letter-spacing: 0.64px;
+
+            }
+
+            &__sloganTwo {
+
+                letter-spacing: 0.48px;
+            }
+
+            &__btnLg {
+                display: inline-block !important;
+                height: 70px;
+            }
         }
     }
+
+
+}
+
+.slogan {
+
+    h2 {
+
+        line-height: 120%; 
+        letter-spacing: 0.32px;
+        @include xl {
+            letter-spacing: 0.48px;
+        }
+    }
+
+    h3 {
+        line-height: 120%; 
+        letter-spacing: 0.32px;
+        @include xl {
+            letter-spacing: 0.36px;
+        }
+    }
+    &__text {
+        position: relative;
+
+        &__bgtext {
+            font-size: 72px;
+            opacity: 0.04;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 500;
+            line-height: 120%;
+            letter-spacing: 0.72px;
+            position: absolute;
+            top: 80px;
+
+            @include lg {
+                font-size: 160px;
+                font-weight: 700;
+                line-height: 120%; /* 192px */
+                letter-spacing: 1.6px;
+            }
+        }
+
+    }
+
+    &__flex {}
+
+    &__item {
+
+
+        &__img {
+            width: 303px;
+            height: 227px;
+
+            @include xl {
+
+                width: 416px;
+                height: 312px;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+            }
+        }
+
+        &__description {
+            line-height: 180%;
+            /* 25.2px */
+            letter-spacing: 0.28px;
+        }
+    }
+
 }
