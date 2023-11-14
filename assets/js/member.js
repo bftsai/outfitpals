@@ -15,6 +15,7 @@ const gmailSignUp=document.querySelector('.gmailSignUp');
 const account=document.getElementById('account');
 const pwd=document.getElementById('pwd');
 //member signUp input
+const memberSignUpData=document.querySelector('.memberSignUpData');
 const signUpPwd=document.getElementById('signUpPwd');
 const signUpMail=document.getElementById('signUpMail');
 const signUpName=document.getElementById('signUpName');
@@ -36,176 +37,157 @@ const signUpIntroduce=document.getElementById('signUpIntroduce');
 //submit 
 const memberIndexSubmit=document.querySelector('.memberIndexSubmit');
 const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
+//signIn validation
 function checkSignInForm(){
-    'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  });
-};
-function checkSignUpForm(){
     'use strict'
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll('.needs-validation');
-
-    function IsEmail(email) {
-        //正規表達式
-        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(email)) {
-        return false;
-        }else{
-        return true;
-        };
-    };
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
-            event.preventDefault();
+            event.preventDefault()
             event.stopPropagation();
-            //customer 
             form.classList.add('was-validated');
-            //check email
-            if(!IsEmail(account.value)){
-                account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
-            }else{
-                signUpMail.value=account.value;
-            }
-            account.addEventListener('input', event => {
-                if(account.value===''){
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                    document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
-                }else if (!IsEmail(account.value)) {
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                    document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
-                }else{
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
-                    signUpMail.value=account.value;
-                }
-                
-            }, false);
-            account.addEventListener('paste', event => {
-                //form.classList.add('was-validated');
-                if(account.value===''){
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                    document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
-                }else if (!IsEmail(account.value)) {
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                    document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
-                }else{
-                    event.stopPropagation();
-                    account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
-                    signUpMail.value=account.value;
-                }
-                
-            }, false);
-            //check pwd
-            const pwdRegExp=new RegExp('^[A-Z][A-Za-z0-9_]{7,}');
-            if(pwd.value!==''&&!(pwdRegExp.test(pwd.value))){
-                pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
-                pwd.nextElementSibling.setAttribute("style","display:block");
-            }else{
-                signUpPwd.value=pwd.value;
-            }
+            account.addEventListener('keyup',e=>{
+                checkSign.checkMail(e.target.value);
+            });
+            account.addEventListener('paste',e=>{
+                checkSign.checkMail(e.target.value);
+            });
             pwd.addEventListener('keyup',e=>{
-                if(pwdRegExp.test(pwd.value)){
-                    pwd.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    pwd.nextElementSibling.setAttribute("style","display:none");
-                    signUpPwd.value=pwd.value;
-                }else{
-                    pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
-                    pwd.nextElementSibling.setAttribute("style","display:block");
-                }
-            },false);
+                checkSign.checkMail(e.target.value);
+            });
             pwd.addEventListener('paste',e=>{
-                if(pwdRegExp.test(pwd.value)){
-                    pwd.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    pwd.nextElementSibling.setAttribute("style","display:none");
-                    signUpPwd.value=pwd.value;
-                }else{
-                    pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                    pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
-                    pwd.nextElementSibling.setAttribute("style","display:block");
-                }
-            },false);
+                checkSign.checkMail(e.target.value);
+            });
         }, false);
     });
 };
-const checkSignUp={
+//check validation tool
+const checkSign={
     regexp:new RegExp(''),
+    checkMail(str){
+        this.regexp=new RegExp('^[\\w\\d-]+\\@[\\d\\w]{3,}\\.[\\d\\w]{3,}(\\.[\\d\\w]{2,})?$');
+        console.log(this.regexp);
+        console.log(str);
+        console.log(this.regexp.test(str));
+        if(str===''){
+            account.nextElementSibling.textContent=`請輸入密碼`;
+            return false;
+        }else if(!(this.regexp.test(str))){
+            account.classList.add('is-invalid');
+            account.nextElementSibling.textContent=`格式錯誤，電子郵件不包含特殊字元（如：!、@、#、$、%、^）`;
+            account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            account.classList.remove('is-invalid');
+            account.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
+        }
+    },
+    checkPwd(str){
+        this.regexp=new RegExp('^[A-Z][\\d\\w]{7,}$');
+        console.log(this.regexp);
+        if(str===''){
+            pwd.nextElementSibling.textContent=`請輸入密碼`;
+            return false;
+        }else if(!(this.regexp.test(str))){
+            pwd.classList.add('is-invalid');
+            pwd.nextElementSibling.textContent=`格式錯誤，密碼第一個為大寫英文，不包含特殊字元（如：!、@、#、$、%、^），最少 8 位英數字`;
+            pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            pwd.classList.remove('is-invalid');
+            pwd.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
+        }
+    },
     checkName(str){
-        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]+$');
-        if(this.regexp.test(str)){
-            console.log('yes');
-            return true;
-        }else{
-            console.log('err');
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]{5,}$');
+        if(str===''){
+            signUpName.nextElementSibling.textContent=`請輸入姓名`;
             return false;
+        }else if(!(this.regexp.test(str))){
+            signUpName.classList.add('is-invalid');
+            signUpName.nextElementSibling.textContent=`格式錯誤，姓名不包含數字或特殊字元（如：!、@、#、$、%、^）`;
+            signUpName.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            signUpName.classList.remove('is-invalid');
+            signUpName.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
         }
     },
-    checkNickName(){
-        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]+$');
-        if(this.regexp.test(str)){
-            console.log('yes');
-            return true;
-        }else{
-            console.log('err');
+    checkNickName(str){
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\\d\x20]{3,}$');
+        if(str===''){
+            signUpNickName.nextElementSibling.textContent=`請輸入暱稱`;
             return false;
+        }else if(!(this.regexp.test(str))){
+            signUpNickName.classList.add('is-invalid');
+            signUpNickName.nextElementSibling.textContent=`格式錯誤，暱稱最少三個英數字，不包含特殊字元（如：!、@、#、$、%、^）`;
+            signUpNickName.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            signUpNickName.classList.remove('is-invalid');
+            signUpNickName.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
         }
     },
-    checkBirth(){
-        this.regexp=new RegExp('^[\\d]{4}/[\\d]{2\[\\d]{2}}$');
-        if(this.regexp.test(str)){
-            console.log('yes');
-            return true;
-        }else{
-            console.log('err');
+    checkBirth(str){
+        this.regexp=new RegExp('^[\\d]{4}-[\\d]{2}-[\\d]{2}$');
+        if(str===''){
+            signUpBirth.nextElementSibling.textContent=`請輸入生日`;
             return false;
+        }else if(!(this.regexp.test(str))){
+            signUpBirth.classList.add('is-invalid');
+            signUpBirth.nextElementSibling.textContent=`格式錯誤，請輸入西元年/月/日`;
+            signUpBirth.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            signUpBirth.classList.remove('is-invalid');
+            signUpBirth.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
         }
     },
-    checkTel(){
+    checkTel(str){
         this.regexp=new RegExp('^09[\\d]{8}$');
-        if(this.regexp.test(str)){
-            console.log('yes');
-            return true;
-        }else{
-            console.log('err');
+        if(str===''){
+            signUpTel.nextElementSibling.textContent=`請輸入手機號碼`;
             return false;
+        }else if(!(this.regexp.test(str))){
+            signUpTel.classList.add('is-invalid');
+            signUpTel.nextElementSibling.textContent=`格式錯誤，格式為0912345678`;
+            signUpTel.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            signUpTel.classList.remove('is-invalid');
+            signUpTel.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
+        }
+    },
+    checkReservationLocation(str){
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]{2,}$');
+        if(str===''){
+            signUpReservationLocation.nextElementSibling.textContent=`請輸入開放預約地點`;
+            return false;
+        }else if(!(this.regexp.test(str))){
+            signUpReservationLocation.classList.add('is-invalid');
+            signUpReservationLocation.nextElementSibling.textContent=`格式錯誤，不包含數字或特殊字元（如：!、@、#、$、%、^）`;
+            signUpReservationLocation.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            return false;
+        }else{
+            signUpReservationLocation.classList.remove('is-invalid');
+            signUpReservationLocation.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            return true;
         }
     }
 }
 //signUp validation
 function signUpValidation() {  
     'use strict'
-    
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-      
+    const forms = document.querySelectorAll('.needs-validation');
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
@@ -213,22 +195,61 @@ function signUpValidation() {
             event.stopPropagation();
             form.classList.add('was-validated');
 
-            if (!form.checkValidity()||!checkSignUp.checkName(signUpName)||!checkSignUp.checkNickName(signUpNickName)||!checkSignUp.checkBirth(signUpBirth)||!checkSignUp.checkTel(signUpTel)) {
-                signUpName.addEventListener('keyup',e=>{
-                    checkSignUp.checkName(e.target.value);
-                    checkSignUp.checkNickName(e.target.value);
-                    checkSignUp.checkBirth(e.target.value);
-                    checkSignUp.checkTel(e.target.value);
-                });
-                signUpName.addEventListener('paste',e=>{
-                    checkSignUp.checkName(e.target.value);
-                    checkSignUp.checkNickName(e.target.value);
-                    checkSignUp.checkBirth(e.target.value);
-                    checkSignUp.checkTel(e.target.value);
-                });
-            }
-    
-        }, false)
+            signUpName.addEventListener('keyup',e=>{
+                if(checkSign.checkName(e.target.value)){
+
+                };
+            });
+            signUpName.addEventListener('paste',e=>{
+                if(checkSign.checkName(e.target.value)){
+
+                };
+            });
+
+            signUpNickName.addEventListener('keyup',e=>{
+                if(checkSign.checkNickName(e.target.value)){
+
+                };
+            });
+            signUpNickName.addEventListener('paste',e=>{
+                if(checkSign.checkNickName(e.target.value)){
+
+                };
+            });
+
+            signUpBirth.addEventListener('keyup',e=>{
+                if(checkSign.checkBirth(e.target.value)){
+
+                };
+            });
+            signUpBirth.addEventListener('paste',e=>{
+                if(checkSign.checkBirth(e.target.value)){
+
+                };
+            });
+
+            signUpTel.addEventListener('keyup',e=>{
+                if(checkSign.checkTel(e.target.value)){
+
+                };
+            });
+            signUpTel.addEventListener('paste',e=>{
+                if(checkSign.checkTel(e.target.value)){
+
+                };
+            });
+
+            signUpReservationLocation.addEventListener('keyup',e=>{
+                if(checkSign.checkReservationLocation(e.target.value)){
+
+                };
+            });
+            signUpReservationLocation.addEventListener('paste',e=>{
+                if(checkSign.checkReservationLocation(e.target.value)){
+
+                };
+            });
+        }, false);
     });
 };
 
@@ -238,7 +259,33 @@ signInBtn.addEventListener('click',e=>{
         item.classList.remove('active');
     });
     memberIndexSubmit.textContent='登入';
-    checkSignInForm();
+    
+    'use strict'
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+            
+            account.addEventListener('keyup',e=>{
+                checkSign.checkMail(e.target.value);
+            });
+            account.addEventListener('paste',e=>{
+                checkSign.checkMail(e.target.value);
+            });
+            pwd.addEventListener('keyup',e=>{
+                checkSign.checkPwd(e.target.value);
+            });
+            pwd.addEventListener('paste',e=>{
+                checkSign.checkPwd(e.target.value);
+            });
+
+        }, false);
+    });
+
     e.target.classList.add('active');
     gmailSignUp.classList.add('opacity-0');
     setTimeout(()=>{
@@ -254,7 +301,33 @@ signUpBtn.addEventListener('click',e=>{
         item.classList.remove('active');
     });
     memberIndexSubmit.textContent='註冊';
-    checkSignUpForm();
+    
+    'use strict'
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+            
+            account.addEventListener('keyup',e=>{
+                checkSign.checkMail(e.target.value);
+            });
+            account.addEventListener('paste',e=>{
+                checkSign.checkMail(e.target.value);
+            });
+            pwd.addEventListener('keyup',e=>{
+                checkSign.checkPwd(e.target.value);
+            });
+            pwd.addEventListener('paste',e=>{
+                checkSign.checkPwd(e.target.value);
+            });
+
+        }, false);
+    });
+
     e.target.classList.add('active');
     gmailSignIn.classList.add('opacity-0');
     setTimeout(()=>{
@@ -280,4 +353,4 @@ profileImage.addEventListener('change',e=>{
 
 memberSignUpSubmit.addEventListener('click',e=>{
     signUpValidation();
-})
+});
