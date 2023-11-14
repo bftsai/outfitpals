@@ -6,16 +6,55 @@
 
 */
 
-//
+//signIn signUp Btn
 const signInBtn=document.querySelector('.signInBtn');
 const signUpBtn=document.querySelector('.signUpBtn');
 const gmailSignIn=document.querySelector('.gmailSignIn');
 const gmailSignUp=document.querySelector('.gmailSignUp');
-
-
+//member index input
 const account=document.getElementById('account');
-// Bootstrap Validation
-(() => {
+const pwd=document.getElementById('pwd');
+//member signUp input
+const signUpPwd=document.getElementById('signUpPwd');
+const signUpMail=document.getElementById('signUpMail');
+const signUpName=document.getElementById('signUpName');
+const signUpNickName=document.getElementById('signUpNickName');
+const signUpBirth=document.getElementById('signUpBirth');
+const signUpTel=document.getElementById('signUpTel');
+const signUpMale=document.getElementById('signUpMale');
+const signUpFemale=document.getElementById('signUpFemale');
+const signUpReservationTime=document.getElementById('signUpReservationTime');
+const signUpReservationLocation=document.getElementById('signUpReservationLocation');
+const signUpHeight=document.getElementById('signUpHeight');
+const signUpWeight=document.getElementById('signUpWeight');
+const signUpPopArea=document.getElementById('signUpPopArea');
+const signUpStyle=document.getElementById('signUpStyle');
+const signUpOutfitPrice=document.getElementById('signUpOutfitPrice');
+const signUpLoveStore=document.getElementById('signUpLoveStore');
+const signUpIntroduce=document.getElementById('signUpIntroduce');
+
+//submit 
+const memberIndexSubmit=document.querySelector('.memberIndexSubmit');
+const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
+function checkSignInForm(){
+    'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  });
+};
+function checkSignUpForm(){
     'use strict'
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll('.needs-validation');
@@ -24,9 +63,9 @@ const account=document.getElementById('account');
         //正規表達式
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(!regex.test(email)) {
-          return false;
+        return false;
         }else{
-          return true;
+        return true;
         };
     };
     // Loop over them and prevent submission
@@ -36,63 +75,170 @@ const account=document.getElementById('account');
             event.stopPropagation();
             //customer 
             form.classList.add('was-validated');
-            if (!form.checkValidity()||!IsEmail(account.value)) {
-                form.classList.add('was-validated');
-            }
+            //check email
             if(!IsEmail(account.value)){
                 account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                        document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
+                document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
+                document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
+            }else{
+                signUpMail.value=account.value;
             }
-            if(form.className.includes('was-validated')){
-                account.addEventListener('input', event => {
-                    //form.classList.add('was-validated');
-                    if(account.value===''){
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                        document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
-                    }else if (!IsEmail(account.value)) {
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                        document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
-                    }else{
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
-                    }
-                    
-                }, false);
-                account.addEventListener('paste', event => {
-                    console.log('paste');
-                    //form.classList.add('was-validated');
-                    if(account.value===''){
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                        document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
-                    }else if (!IsEmail(account.value)) {
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
-                        document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
-                    }else{
-                        event.stopPropagation();
-                        account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-                        document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
-                    }
-                    
-                }, false);
+            account.addEventListener('input', event => {
+                if(account.value===''){
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
+                    document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
+                }else if (!IsEmail(account.value)) {
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
+                    document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
+                }else{
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
+                    signUpMail.value=account.value;
+                }
+                
+            }, false);
+            account.addEventListener('paste', event => {
+                //form.classList.add('was-validated');
+                if(account.value===''){
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
+                    document.getElementById('account').nextElementSibling.textContent=`請輸入您的Email`;
+                }else if (!IsEmail(account.value)) {
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: block");
+                    document.getElementById('account').nextElementSibling.textContent=`Email 格式錯誤`;
+                }else{
+                    event.stopPropagation();
+                    account.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    document.getElementById('account').nextElementSibling.setAttribute("style","display: none");
+                    signUpMail.value=account.value;
+                }
+                
+            }, false);
+            //check pwd
+            const pwdRegExp=new RegExp('^[A-Z][A-Za-z0-9_]{7,}');
+            if(pwd.value!==''&&!(pwdRegExp.test(pwd.value))){
+                pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
+                pwd.nextElementSibling.setAttribute("style","display:block");
+            }else{
+                signUpPwd.value=pwd.value;
             }
+            pwd.addEventListener('keyup',e=>{
+                if(pwdRegExp.test(pwd.value)){
+                    pwd.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    pwd.nextElementSibling.setAttribute("style","display:none");
+                    signUpPwd.value=pwd.value;
+                }else{
+                    pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
+                    pwd.nextElementSibling.setAttribute("style","display:block");
+                }
+            },false);
+            pwd.addEventListener('paste',e=>{
+                if(pwdRegExp.test(pwd.value)){
+                    pwd.setAttribute("style","border-color: var(--bs-form-valid-border-color);background-image: url('../assets/images/member/valid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    pwd.nextElementSibling.setAttribute("style","display:none");
+                    signUpPwd.value=pwd.value;
+                }else{
+                    pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);padding-right: calc(1.5em + 0.75rem);background-image: url(../assets/images/member/invalid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+                    pwd.nextElementSibling.textContent=`請輸入英文大寫為首，合計最少 8 位英數字`;
+                    pwd.nextElementSibling.setAttribute("style","display:block");
+                }
+            },false);
         }, false);
     });
-})();
+};
+const checkSignUp={
+    regexp:new RegExp(''),
+    checkName(str){
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]+$');
+        if(this.regexp.test(str)){
+            console.log('yes');
+            return true;
+        }else{
+            console.log('err');
+            return false;
+        }
+    },
+    checkNickName(){
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]+$');
+        if(this.regexp.test(str)){
+            console.log('yes');
+            return true;
+        }else{
+            console.log('err');
+            return false;
+        }
+    },
+    checkBirth(){
+        this.regexp=new RegExp('^[\\d]{4}/[\\d]{2\[\\d]{2}}$');
+        if(this.regexp.test(str)){
+            console.log('yes');
+            return true;
+        }else{
+            console.log('err');
+            return false;
+        }
+    },
+    checkTel(){
+        this.regexp=new RegExp('^09[\\d]{8}$');
+        if(this.regexp.test(str)){
+            console.log('yes');
+            return true;
+        }else{
+            console.log('err');
+            return false;
+        }
+    }
+}
+//signUp validation
+function signUpValidation() {  
+    'use strict'
+    
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+      
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
 
+            if (!form.checkValidity()||!checkSignUp.checkName(signUpName)||!checkSignUp.checkNickName(signUpNickName)||!checkSignUp.checkBirth(signUpBirth)||!checkSignUp.checkTel(signUpTel)) {
+                signUpName.addEventListener('keyup',e=>{
+                    checkSignUp.checkName(e.target.value);
+                    checkSignUp.checkNickName(e.target.value);
+                    checkSignUp.checkBirth(e.target.value);
+                    checkSignUp.checkTel(e.target.value);
+                });
+                signUpName.addEventListener('paste',e=>{
+                    checkSignUp.checkName(e.target.value);
+                    checkSignUp.checkNickName(e.target.value);
+                    checkSignUp.checkBirth(e.target.value);
+                    checkSignUp.checkTel(e.target.value);
+                });
+            }
+    
+        }, false)
+    });
+};
+
+checkSignInForm();
 signInBtn.addEventListener('click',e=>{
     [...e.target.offsetParent.children].forEach(item=>{
         item.classList.remove('active');
-    })
+    });
+    memberIndexSubmit.textContent='登入';
+    checkSignInForm();
     e.target.classList.add('active');
     gmailSignUp.classList.add('opacity-0');
     setTimeout(()=>{
@@ -106,7 +252,9 @@ signInBtn.addEventListener('click',e=>{
 signUpBtn.addEventListener('click',e=>{
     [...e.target.offsetParent.children].forEach(item=>{
         item.classList.remove('active');
-    })
+    });
+    memberIndexSubmit.textContent='註冊';
+    checkSignUpForm();
     e.target.classList.add('active');
     gmailSignIn.classList.add('opacity-0');
     setTimeout(()=>{
@@ -116,4 +264,20 @@ signUpBtn.addEventListener('click',e=>{
             gmailSignUp.classList.remove('opacity-0');
         }, 0);
     },400);
+});
+
+//signUp
+//upload pic
+const profileImage=document.getElementById('profileImage'); //input
+let profilePhoto=document.querySelector('.profilePhoto'); //image
+profileImage.addEventListener('change',e=>{
+    let reader=new FileReader();
+    reader.onload=(e)=>{
+        profilePhoto.setAttribute("src",e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+memberSignUpSubmit.addEventListener('click',e=>{
+    signUpValidation();
 })

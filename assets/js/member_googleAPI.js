@@ -12,8 +12,7 @@ function onSignIn(response){
     window.localStorage.token=response.credential;
     account.value=JSON.parse(jsonPayload).sub;
 };
-console.log(window.localStorage);
-console.log(window.localStorage);
+// console.log(window.localStorage);
 
 
 
