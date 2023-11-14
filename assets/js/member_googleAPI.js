@@ -13,6 +13,7 @@ function onSignIn(response){
     account.value=JSON.parse(jsonPayload).sub;
 };
 console.log(window.localStorage);
+console.log(window.localStorage);
 
 
 
