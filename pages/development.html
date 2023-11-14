@@ -25,7 +25,33 @@
   </head>
  
   <body>
-    <%- include('./layout/header'); -%>
+    <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top">
+        <nav class="container d-flex justify-content-between align-items-center">
+            <a href="index.html" class="header__logo">
+                <img src="/assets/images/logo_white.svg" alt="OutfitPals">
+            </a>
+            <div class="d-flex">
+                <span class="input-group-text border-0 header pe-2">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="search" class="form-control header border-0 shadow-none" placeholder="search"  style="width: 150px;">
+            </div>
+
+    
+            <div class="header__links d-none d-lg-block">
+                <a href="#">貼文牆</a>
+                <a href="#">常見問題</a>
+                <a href="#">贊助我們</a>
+                <a href="#">我的預約</a>
+                <a href="#" class="header__links__button btn btn-outline-black18 m-0 ps-4">註冊登入 <span class="material-symbols-outlined">
+                    chevron_right
+                    </span> </a>
+            </div>
+            <button type="button" class="header__menu-btn border-0 p-2 d-lg-none">
+                <span class="material-symbols-outlined">menu</span>
+            </div>
+        </nav>
+    </header>
     
     <div class="container d-flex display-6 justify-content-center mt-3">           
         <a href="#"><p class="pe-4 thumb">MEN</p></a>
