@@ -13,7 +13,7 @@
   <body>
     <%- include('./layout/header'); -%>
     <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
-        <div class="member-index ">
+        <div class="member-index">
           <div class="container c-switch-btn-group">
             <div class="row justify-content-center py-9 py-lg-13">
               <div class="col col-lg-4">
@@ -26,7 +26,7 @@
           </div>
 
           <div class="container border-bottom border-grey9F">
-              <form class="needs-validation" novalidate>
+              <form class="needs-validation memberIndexForm" novalidate>
                   <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
                       <div class="col-2 d-flex justify-content-center">
                           <label for="account" class="form-label fs-lg-5 fw-bold">帳號</label>
@@ -54,7 +54,7 @@
                           <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberIndexSubmit" type="submit">登入</button>
                       </div>
                       <div class="col-3 d-flex">
-                          <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1" type="button">取消</button>
+                          <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberIndexCancel" type="button">取消</button>
                       </div>
                   </div>
               </form>
@@ -108,7 +108,7 @@
           </div>
         </div>
 
-        <div class="member-signUpData">
+        <div class="member-signUpData d-none opacity-0">
           <div class="container">
             <form class="needs-validation memberSignUpData" novalidate>
               <div class="row mb-3 fs-lg-5">
@@ -121,8 +121,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpName" class="form-label">姓名</label>
                 </div>
                 <div class="col-lg-6">
@@ -133,8 +135,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpPwd" class="form-label">密碼</label>
                 </div>
                 <div class="col-lg-6">
@@ -142,8 +146,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpNickName" class="form-label">暱稱</label>
                 </div>
                 <div class="col-lg-6">
@@ -154,8 +160,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpBirth" class="form-label">生日</label>
                 </div>
                 <div class="col-lg-6">
@@ -166,8 +174,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpMail" class="form-label">電子信箱</label>
                 </div>
                 <div class="col-lg-6">
@@ -175,8 +185,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpTel" class="form-label">手機號碼</label>
                 </div>
                 <div class="col-lg-6">
@@ -187,8 +199,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpSex" class="form-label">性別</label>
                 </div>
                 <div class="col-lg-6">
@@ -206,13 +220,15 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpReservationTime" class="form-label">開放預約時間</label>
                 </div>
                 <div class="col-lg-6">
                   <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signUpReservationTime" name="開放預約時間" required>
-                    <option selected disabled value="">請選擇開放預約時間</option>
+                    <option selected disabled>請選擇開放預約時間</option>
                     <option>無</option>
                     <option>09：00～12：00</option>
                     <option>13：00～17：00</option>
@@ -224,8 +240,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <label for="signUpReservationLocation" class="form-label">開放預約地點</label>
                 </div>
                 <div class="col-lg-6">
@@ -331,8 +349,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-start fs-lg-5">
-                <div class="col-lg-8">
-                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                <div class="col-lg-8 d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-lg-5 me-2">
+                    star
+                  </span>
                   <span>為必填欄位</p>
                 </div>
               </div>

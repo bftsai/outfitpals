@@ -11,17 +11,19 @@
     {
       "id": 1,
       "title": "json-server",
-      "author": "typicode"
+      "author": "Red",
+      "userId": 1
     }
   ],
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "body": "red some comment",
+      "postId": 1,
+      "userId": 1
     }
   ],
   "profile": {
-    "name": "typicode"
+    "name": "red"
   }
 }
