@@ -3,3 +3,12 @@
         transition: all 0.4s ease;
     }
 }
+.member-signUpData{
+    .profileImage:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    textarea{
+        resize: none;
+    }
+}

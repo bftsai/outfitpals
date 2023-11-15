@@ -12,8 +12,9 @@
   </head>
   <body>
     <%- include('./layout/header'); -%>
-    <div class="member h-radialGradienStyle-1 py-9 py-lg-13 mt-16 mt-lg-24">
-        <div class="container c-switch-btn-group">
+    <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
+        <div class="member-index ">
+          <div class="container c-switch-btn-group">
             <div class="row justify-content-center py-9 py-lg-13">
               <div class="col col-lg-4">
                 <div class="btn-group w-100" role="group" aria-label="Basic example">
@@ -22,155 +23,357 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="container border-bottom border-grey9F">
+              <form class="needs-validation" novalidate>
+                  <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
+                      <div class="col-2 d-flex justify-content-center">
+                          <label for="account" class="form-label fs-lg-5 fw-bold">帳號</label>
+                      </div>
+                      <div class="col-6">
+                          <input type="text" class="form-control fs-lg-5 px-lg-7 py-lg-3" id="account" placeholder="請輸入Email" required>
+                          <div class="invalid-feedback fs-lg-5">
+                              請輸入您的Email
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
+                      <div class="col-2 d-flex justify-content-center">
+                          <label for="pwd" class="form-label fs-lg-5 fw-bold">密碼</label>
+                      </div>
+                      <div class="col-6">
+                          <input type="text" class="form-control fs-lg-5 px-lg-7 py-lg-3" id="pwd" placeholder="請輸入密碼" required>
+                          <div class="invalid-feedback fs-lg-5">
+                              請輸入您的密碼
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                      <div class="col-3 d-flex">
+                          <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberIndexSubmit" type="submit">登入</button>
+                      </div>
+                      <div class="col-3 d-flex">
+                          <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1" type="button">取消</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <!-- google third party login -->
+          <div class="gmailSignIn container pt-9 pt-lg-13">
+            <div class="row justify-content-center">
+              <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                <div id="g_id_onload"
+                    data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="onSignIn"
+                    data-nonce=""
+                    data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="pill"
+                    data-theme="filled_black"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gmailSignUp container pt-9 pt-lg-13 d-none">
+            <div class="row justify-content-center">
+              <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                <div id="g_id_onload"
+                    data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="onSignIn"
+                    data-nonce=""
+                    data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="pill"
+                    data-theme="filled_black"
+                    data-text="signup_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="container border-bottom border-grey9F">
-            <form class="needs-validation" novalidate>
-                <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
-                    <div class="col-2 d-flex justify-content-center">
-                        <label for="account" class="form-label fs-lg-5 fw-bold">帳號</label>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control fs-lg-5 px-lg-7 py-lg-3" id="account" placeholder="請輸入Email" required>
-                        <div class="invalid-feedback fs-lg-5">
-                            請輸入您的Email
-                        </div>
-                    </div>
+        <div class="member-signUpData">
+          <div class="container">
+            <form class="needs-validation memberSignUpData" novalidate>
+              <div class="row mb-3 fs-lg-5">
+                <div class="col">
+                  <div class="mb-3 d-flex flex-column align-items-center">
+                    <img class="profilePhoto mb-3" src="../assets/images/member/user-solid.svg" alt="profile pic" style="width: 80px;height: 80px;border-radius: 50%;">
+                    <label for="profileImage" class="profileImage form-label text-secondary">選擇大頭貼</label>
+                    <input class="form-control d-none" type="file" id="profileImage" accept="image/png,image/jpeg,image/gif,image/png">
+                  </div>
                 </div>
-                <div class="row justify-content-center align-items-center pb-7 pb-lg-13">
-                    <div class="col-2 d-flex justify-content-center">
-                        <label for="pwd" class="form-label fs-lg-5 fw-bold">密碼</label>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control fs-lg-5 px-lg-7 py-lg-3" id="pwd" placeholder="請輸入密碼" required>
-                        <div class="invalid-feedback fs-lg-5">
-                            請輸入您的密碼
-                        </div>
-                    </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpName" class="form-label">姓名</label>
                 </div>
-                <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                    <div class="col-3 d-flex">
-                        <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1" type="submit">登入</button>
-                    </div>
-                    <div class="col-3 d-flex">
-                        <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1" type="button">取消</button>
-                    </div>
+                <div class="col-lg-6">
+                  <input type="name" name="name" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpName" placeholder="請輸入姓名" required>
+                  <div class="invalid-feedback">
+                    請輸入姓名
+                  </div>
                 </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpPwd" class="form-label">密碼</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="text" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpPwd" placeholder="請輸入密碼" disabled>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpNickName" class="form-label">暱稱</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="text" name="nick name" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpNickName" placeholder="請輸入暱稱" required>
+                  <div class="invalid-feedback">
+                    請輸入暱稱
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpBirth" class="form-label">生日</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="date" name="birthday" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpBirth" placeholder="請輸入生日" required>
+                  <div class="invalid-feedback">
+                    請輸入生日
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpMail" class="form-label">電子信箱</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="email" name="email" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpMail" placeholder="請輸入電子信箱" disabled>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpTel" class="form-label">手機號碼</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="tel" name="tel" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpTel" placeholder="請輸入手機號碼" required>
+                  <div class="invalid-feedback">
+                    請輸入手機號碼
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpSex" class="form-label">性別</label>
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-check-input" type="radio" name="性別" id="signUpMale">
+                  <label class="form-check-label" for="signUpMale" required>
+                    男生
+                  </label>
+                  <input class="form-check-input" type="radio" name="性別" id="signUpFemale" checked required>
+                  <label class="form-check-label" for="signUpFemale">
+                    女生
+                  </label>
+                  <div class="invalid-feedback">
+                    請選擇性別
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpReservationTime" class="form-label">開放預約時間</label>
+                </div>
+                <div class="col-lg-6">
+                  <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signUpReservationTime" name="開放預約時間" required>
+                    <option selected disabled value="">請選擇開放預約時間</option>
+                    <option>無</option>
+                    <option>09：00～12：00</option>
+                    <option>13：00～17：00</option>
+                    <option>18：00～22：00</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    請選擇開放預約時間
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <label for="signUpReservationLocation" class="form-label">開放預約地點</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpReservationLocation" placeholder="請輸入開放預約地點" name="開放預約地點" required>
+                  <div class="invalid-feedback">
+                    請輸入開放預約地點
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpHeight" class="form-label">身高</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="number" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpHeight" placeholder="請輸入身高" name="身高">
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpWeight" class="form-label">體重</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="number" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpWeight" placeholder="請輸入體重" name="體重">
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpPopArea" class="form-label">活動範圍</label>
+                </div>
+                <div class="col-lg-6">
+                  <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signUpPopArea" name="活動範圍">
+                    <option selected disabled value="">請選擇活動範圍</option>
+                    <option>台北市</option>
+                    <option>新北市</option>
+                    <option>桃園市</option>
+                    <option>新竹市</option>
+                    <option>台中市</option>
+                    <option>苗栗市</option>
+                    <option>台南市</option>
+                    <option>高雄市</option>
+                    <option>屏東市</option>
+                    <option>宜蘭市</option>
+                    <option>花蓮市</option>
+                    <option>台東市</option>
+                    <option>綠島</option>
+                    <option>金門</option>
+                    <option>馬祖</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpStyle" class="form-label">打扮風格</label>
+                </div>
+                <div class="col-lg-6">
+                  <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signUpStyle" name="打扮風格">
+                    <option selected disabled value="">請選擇打扮風格</option>
+                    <option>日系</option>
+                    <option>韓系</option>
+                    <option>中國風</option>
+                    <option>歐系</option>
+                    <option>美系</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpOutfitPrice" class="form-label">穿搭價位</label>
+                </div>
+                <div class="col-lg-6">
+                  <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signUpOutfitPrice" name="穿搭價位">
+                    <option selected disabled value="">請選擇穿搭價位</option>
+                    <option>$1,000 以下</option>
+                    <option>$2,001～$3,000</option>
+                    <option>$3,001～$4,000</option>
+                    <option>$4,001～$5,000</option>
+                    <option>$5,001～$6,000</option>
+                    <option>無上限</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpLoveStore" class="form-label">逛街愛店</label>
+                </div>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpLoveStore" placeholder="請輸入逛街愛店" name="逛街愛店">
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
+                <div class="col-lg-2">
+                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                  <label for="signUpIntroduce" class="form-label">自我介紹</label>
+                </div>
+                <div class="col-lg-6">
+                  <textarea class="form-control fs-lg-5 py-lg-3 px-lg-7" name="自我介紹" id="signUpIntroduce" cols="30" rows="10" placeholder="請輸入自我介紹"></textarea>
+                </div>
+              </div>
+              <div class="row justify-content-center align-items-start fs-lg-5">
+                <div class="col-lg-8">
+                  <i class="fa-solid fa-star" style="color: #ff2600;"></i>
+                  <span>為必填欄位</p>
+                </div>
+              </div>
+              <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                <div class="col-3 d-flex">
+                    <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignUpSubmit" type="submit">註冊</button>
+                </div>
+                <div class="col-3 d-flex">
+                    <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignUpCancel" type="button">取消</button>
+                </div>
+            </div>
             </form>
-        </div>
-
-
-        
-
-        <!-- 網路教學 -->
-        <!-- <div id="g_id_onload"
-            data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
-            data-context="signin"
-            data-ux_mode="popup"
-            data-callback="onSignIn"
-            data-nonce=""
-            data-auto_select="true"
-            data-itp_support="true" 
-            style="width: 100%;">
-        </div>
-
-        <div class="g_id_signin"
-            data-type="standard"
-            data-shape="pill"
-            data-theme="filled_black"
-            data-text="signin_with"
-            data-size="large"
-            data-logo_alignment="left">
-        </div>
-        <script>
-          // 登入之後
-          function onSignIn(response) {
-            // var credential = response.credential,
-            //   profile = JSON.parse(decodeURIComponent(escape(window.atob(credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))))), // 對 JWT 進行解碼
-            //   target = document.getElementById("GOOGLE_STATUS_1"),
-            
-            console.log("ID: " + responsePayload.sub);
-            console.log('Full Name: ' + responsePayload.name);
-            console.log('Given Name: ' + responsePayload.given_name);
-            console.log('Family Name: ' + responsePayload.family_name);
-            console.log("Image URL: " + responsePayload.picture);
-            console.log("Email: " + responsePayload.email);
-          }
-        </script> -->
-
-        <!-- just pic can't work -->
-        <div class="gmailSignIn container pt-9 pt-lg-13">
-          <div class="row justify-content-center">
-            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
-              <div id="g_id_onload"
-                  data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
-                  data-context="signin"
-                  data-ux_mode="popup"
-                  data-callback="onSignIn"
-                  data-nonce=""
-                  data-auto_prompt="false">
-              </div>
-
-              <div class="g_id_signin"
-                  data-type="standard"
-                  data-shape="pill"
-                  data-theme="filled_black"
-                  data-text="signin_with"
-                  data-size="large"
-                  data-logo_alignment="left">
-              </div>
-            </div>
           </div>
         </div>
-        <div class="gmailSignUp container pt-9 pt-lg-13 d-none">
-          <div class="row justify-content-center">
-            <div class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2">
-              <div id="g_id_onload"
-                  data-client_id="570617244989-sbig4e3f3n0q0g1v4c730tct87fng698.apps.googleusercontent.com"
-                  data-context="signin"
-                  data-ux_mode="popup"
-                  data-callback="onSignIn"
-                  data-nonce=""
-                  data-auto_prompt="false">
-              </div>
 
-              <div class="g_id_signin"
-                  data-type="standard"
-                  data-shape="pill"
-                  data-theme="filled_black"
-                  data-text="signup_with"
-                  data-size="large"
-                  data-logo_alignment="left">
-              </div>
-            </div>
-          </div>
+        <div class="member-signInData">
+
         </div>
         
-      <div class="container pagination justify-content-center d-none opacity-0">
-        <nav aria-label="Page navigation">
-          <ul class="pagination m-0">
-            <li class="page-item">
-              <a class="page-link page-prev border-black18 bg-black" href="#" aria-label="Previous">
-                <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
-                <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">2</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link page-next border-black18 bg-black" href="#" aria-label="Next">
-                <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
-                <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <div class="container pagination justify-content-center d-none opacity-0">
+          <nav aria-label="Page navigation">
+            <ul class="pagination m-0">
+              <li class="page-item">
+                <a class="page-link page-prev border-black18 bg-black" href="#" aria-label="Previous">
+                  <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
+                  <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li>
+              <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">2</a></li>
+              <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link page-next border-black18 bg-black" href="#" aria-label="Next">
+                  <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
+                  <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
     </div>
-
-
-
     
 
     <%- include('./layout/footer'); -%>
@@ -178,6 +381,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/96a7520586.js" crossorigin="anonymous"></script>
     <!-- own JS -->
     <script type="module" src="../main.js"></script>
     <script type="module" src="../assets/js/member.js"></script>
