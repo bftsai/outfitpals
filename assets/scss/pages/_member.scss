@@ -6,9 +6,9 @@
 .member-index{
     transition: all 0.4s ease;
 }
-.member-signUpData{
+.member-signUpData,.member-signInData,.member-signInProfile,.member-signInData{
     transition: all 0.4s ease;
-    .profileImage:hover{
+    .signUpImg:hover{
         cursor: pointer;
         text-decoration: underline;
     }
