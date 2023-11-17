@@ -7,6 +7,7 @@ export const ajaxMember={
             if(register.status==201){
                 localStorage.outfitpalsToken=register.data.accessToken;
                 localStorage.outfitpalsId=register.data.user.id;
+                localStorage.outfitpalsThirdParty=false;
                 await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
                     "sign time": `${new Date()}`,
                     email: obj.email,
@@ -48,7 +49,6 @@ export const ajaxMember={
         try {
             const signIn=await axios.post(`${apiUrl}signin`,obj);
             if(signIn.status===200){
-                console.log(signIn);
                 localStorage.outfitpalsToken=signIn.data.accessToken;
                 localStorage.outfitpalsId=signIn.data.user.id;
                 this.data=signIn.data.user;
@@ -69,12 +69,24 @@ export const ajaxMember={
         } catch (err) {
             console.log(err.response.data);
             memberIndexForm.classList.add('was-validated');
-            account.classList.add('is-invalid');
-            account.nextElementSibling.textContent=err.response.data;
-            account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            if(err.response.data.includes('user')){
+                account.classList.add('is-invalid');
+                account.nextElementSibling.textContent=err.response.data;
+                account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            }else{
+                pwd.classList.add('is-invalid');
+                pwd.nextElementSibling.textContent=err.response.data;
+                pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            }
+            
         }
     },
-    renderMemberSignInProfileForm(){
+    async renderMemberSignInProfileForm(){
+        this.data=(await axios.get(`${apiUrl}users/${localStorage.outfitpalsId}`,{
+            headers:{
+                "authorization": `Bearer ${localStorage.outfitpalsToken}`
+            }
+        })).data;
         let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
@@ -226,22 +238,21 @@ export const ajaxMember={
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
             </div>
         </div>`;
-      memberSignInProfileForm.innerHTML=str;
-      memberSignInProfileForm.addEventListener('click',e=>{
-        //revise profile
-        if(e.target.className.includes('memberSignInProfileRevise')){
-            console.log(this.data);
-            this.renderMemberSignInForm();
-            memberSignInProfile.classList.add('opacity-0');
-            setTimeout(() => {
-                memberSignInProfile.classList.add('d-none');
-                memberSignInData.classList.remove('d-none');
+        memberSignInProfileForm.innerHTML=str;
+        memberSignInProfileForm.addEventListener('click',e=>{
+            //revise profile
+            if(e.target.className.includes('memberSignInProfileRevise')){
+                this.renderMemberSignInForm();
+                memberSignInProfile.classList.add('opacity-0');
                 setTimeout(() => {
-                    memberSignInData.classList.remove('opacity-0');
-                }, 0);
-            }, 400);
-        }
-    });
+                    memberSignInProfile.classList.add('d-none');
+                    memberSignInData.classList.remove('d-none');
+                    setTimeout(() => {
+                        memberSignInData.classList.remove('opacity-0');
+                    }, 0);
+                }, 400);
+            }
+        });
     
     },
     renderMemberSignInForm(){
@@ -369,7 +380,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInReservationTime" name="開放預約時間" required>
-                <option disabled>請選擇開放預約時間</option>
+                <option value="" disabled>請選擇開放預約時間</option>
                 <option>無</option>
                 <option>09：00～12：00</option>
                 <option>13：00～17：00</option>
@@ -419,7 +430,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInPopArea" name="活動範圍">
-                <option disabled>請選擇活動範圍</option>
+                <option value="" disabled>請選擇活動範圍</option>
                 <option>台北市</option>
                 <option>新北市</option>
                 <option>桃園市</option>
@@ -445,7 +456,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInStyle" name="打扮風格">
-                <option disabled>請選擇打扮風格</option>
+                <option value="" disabled>請選擇打扮風格</option>
                 <option>日系</option>
                 <option>韓系</option>
                 <option>中國風</option>
@@ -461,7 +472,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInOutfitPrice" name="穿搭價位">
-                <option disabled>請選擇穿搭價位</option>
+                <option value="" disabled>請選擇穿搭價位</option>
                 <option>$1,000 以下</option>
                 <option>$2,001～$3,000</option>
                 <option>$3,001～$4,000</option>
@@ -532,7 +543,6 @@ export const ajaxMember={
         const signInIntroduce=document.getElementById('signInIntroduce');
 
         signInImg.addEventListener('change',e=>{
-            console.log(e);
             let reader=new FileReader();
             reader.addEventListener('load',e=>{
                 signInPhoto.setAttribute('src',e.target.result);

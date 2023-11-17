@@ -79,6 +79,7 @@ const ajaxMemberGoogle={
             if(register.status===201){
                 localStorage.outfitpalsToken=register.data.accessToken;
                 localStorage.outfitpalsId=register.data.user.id;
+                localStorage.outfitpalsThirdParty='google';
                 await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
                     "sign time": `${new Date()}`,
                     email: obj.email,
@@ -113,6 +114,7 @@ const ajaxMemberGoogle={
                     "authorization": `Bearer ${token}`
                 }
             });
+            console.log(patchUsers);
         } catch (err) {
             console.log(err);
         }
@@ -121,7 +123,6 @@ const ajaxMemberGoogle={
         try {
             const signIn=await axios.post(`${apiUrl}signin`,obj);
             if(signIn.status===200){
-                console.log(signIn);
                 localStorage.outfitpalsToken=signIn.data.accessToken;
                 localStorage.outfitpalsId=signIn.data.user.id;
                 this.data=signIn.data.user;
@@ -143,7 +144,12 @@ const ajaxMemberGoogle={
             alert(err.response.data);
         }
     },
-    renderMemberSignInProfileForm(){
+    async renderMemberSignInProfileForm(){
+        this.data=(await axios.get(`${apiUrl}users/${localStorage.outfitpalsId}`,{
+            headers:{
+                "authorization": `Bearer ${localStorage.outfitpalsToken}`
+            }
+        })).data;
         let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
@@ -295,11 +301,10 @@ const ajaxMemberGoogle={
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
             </div>
         </div>`;
-      memberSignInProfileForm.innerHTML=str;
+        memberSignInProfileForm.innerHTML=str;
         memberSignInProfileForm.addEventListener('click',e=>{
         //revise profile
             if(e.target.className.includes('memberSignInProfileRevise')){
-                console.log(this.data);
                 this.renderMemberSignInForm();
                 memberSignInProfile.classList.add('opacity-0');
                 setTimeout(() => {
@@ -308,8 +313,8 @@ const ajaxMemberGoogle={
                     setTimeout(() => {
                         memberSignInData.classList.remove('opacity-0');
                     }, 0);
-            }, 400);
-        }
+                }, 400);
+            }
         });
     },
     renderMemberSignInForm(){
@@ -345,10 +350,7 @@ const ajaxMemberGoogle={
             <label for="signInPwd" class="form-label">密碼</label>
             </div>
             <div class="col-lg-6">
-            <input type="password" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInPwd" placeholder="請輸入密碼" required>
-            <div class="invalid-feedback">
-                請輸入密碼
-            </div>
+            <input type="password" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInPwd" placeholder="請輸入密碼" value="${this.data['g-pwd']}" disabled>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -387,10 +389,7 @@ const ajaxMemberGoogle={
             <label for="signInMail" class="form-label">電子信箱</label>
             </div>
             <div class="col-lg-6">
-            <input type="email" name="email" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInMail" placeholder="請輸入電子信箱" value="${this.data.email}" required>
-            <div class="invalid-feedback">
-                請輸入電子信箱
-            </div>
+            <input type="email" name="email" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInMail" placeholder="請輸入電子信箱" value="${this.data.email}" disabled>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -437,7 +436,7 @@ const ajaxMemberGoogle={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInReservationTime" name="開放預約時間" required>
-                <option disabled>請選擇開放預約時間</option>
+                <option value="" disabled>請選擇開放預約時間</option>
                 <option>無</option>
                 <option>09：00～12：00</option>
                 <option>13：00～17：00</option>
@@ -487,7 +486,7 @@ const ajaxMemberGoogle={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInPopArea" name="活動範圍">
-                <option ${this.data.PopArea==="" ? 'selected':''}  disabled>請選擇活動範圍</option>
+                <option value="" disabled>請選擇活動範圍</option>
                 <option>台北市</option>
                 <option>新北市</option>
                 <option>桃園市</option>
@@ -513,7 +512,7 @@ const ajaxMemberGoogle={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInStyle" name="打扮風格">
-                <option ${this.data.style==="" ? 'selected':''} disabled>請選擇打扮風格</option>
+                <option value="" disabled>請選擇打扮風格</option>
                 <option>日系</option>
                 <option>韓系</option>
                 <option>中國風</option>
@@ -528,8 +527,8 @@ const ajaxMemberGoogle={
             <label for="signInOutfitPrice" class="form-label">穿搭價位</label>
             </div>
             <div class="col-lg-6">
-            <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInOutfitPrice" name="穿搭價位" value="${this.data['outfit price']==="" ? '請選擇穿搭價位':this.data['outfit price']}">
-                <option ${this.data['outfit price']==="" ? 'selected':''} disabled>請選擇穿搭價位</option>
+            <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInOutfitPrice" name="穿搭價位">
+                <option value="" disabled>請選擇穿搭價位</option>
                 <option>$1,000 以下</option>
                 <option>$2,001～$3,000</option>
                 <option>$3,001～$4,000</option>
@@ -578,6 +577,38 @@ const ajaxMemberGoogle={
         document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
         document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
         document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price selectedIndex'];
+
+        const signInImg=document.getElementById('signInImg');
+        const signInPhoto=document.querySelector('.signInPhoto');
+        const signInPwd=document.getElementById('signInPwd');
+        const signInMail=document.getElementById('signInMail');
+        const signInName=document.getElementById('signInName');
+        const signInNickName=document.getElementById('signInNickName');
+        const signInBirth=document.getElementById('signInBirth');
+        const signInTel=document.getElementById('signInTel');
+        const signInMale=document.getElementById('signInMale');
+        const signInFemale=document.getElementById('signInFemale');
+        const signInReservationTime=document.getElementById('signInReservationTime');
+        const signInReservationLocation=document.getElementById('signInReservationLocation');
+        const signInHeight=document.getElementById('signInHeight');
+        const signInWeight=document.getElementById('signInWeight');
+        const signInPopArea=document.getElementById('signInPopArea');
+        const signInStyle=document.getElementById('signInStyle');
+        const signInOutfitPrice=document.getElementById('signInOutfitPrice');
+        const signInLoveStore=document.getElementById('signInLoveStore');
+        const signInIntroduce=document.getElementById('signInIntroduce');
+
+        signInImg.addEventListener('change',e=>{
+            let reader=new FileReader();
+            reader.addEventListener('load',e=>{
+                signInPhoto.setAttribute('src',e.target.result);
+            });
+            // 第二種寫法
+            // reader.onload=(e)=>{
+            //     signUpPhoto.setAttribute("src",e.target.result);
+            // };
+            reader.readAsDataURL(e.target.files[0]);
+        });
     },
     async delete(id){
         try {
@@ -595,7 +626,7 @@ function onSignIn(response){
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     console.log(response);
-    console.log(JSON.parse(jsonPayload));
+    //console.log(JSON.parse(jsonPayload));
     window.localStorage.googleToken=response.credential;
 
     let signObj={};
@@ -607,6 +638,7 @@ function onSignIn(response){
     }else{
         signObj.email=JSON.parse(jsonPayload).email;
         signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
+        signObj['g-pwd']=`Google${JSON.parse(jsonPayload).sub}`;
         signObj.image=JSON.parse(jsonPayload).picture;
         signObj.name=JSON.parse(jsonPayload).name;
         signObj['nick name']=JSON.parse(jsonPayload).given_name;
@@ -614,5 +646,15 @@ function onSignIn(response){
         ajaxMemberGoogle.register(signObj);
     }
 };
-const gmailSignUp=document.querySelector('.gmailSignUp');
-
+//init
+if(localStorage.outfitpalsThirdParty==='google'){
+    if(localStorage.outfitpalsToken&&localStorage.outfitpalsId){
+        memberIndex.classList.add('opacity-0');
+        account.value='';
+        pwd.value='';
+        ajaxMemberGoogle.renderMemberSignInProfileForm();
+        memberIndex.classList.add('d-none');
+        memberSignInProfile.classList.remove('d-none');
+        memberSignInProfile.classList.remove('opacity-0');
+    }
+}
