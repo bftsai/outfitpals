@@ -145,17 +145,50 @@ memberIndexCancel.addEventListener('click',e=>{
 //upload pic
 signUpImg.addEventListener('change',e=>{
     let reader=new FileReader();
-    reader.onload=(e)=>{
-        signUpPhoto.setAttribute("src",e.target.result);
-    };
+    reader.addEventListener('load',e=>{
+        signUpPhoto.setAttribute('src',e.target.result);
+    });
+    // 第二種寫法
+    // reader.onload=(e)=>{
+    //     signUpPhoto.setAttribute("src",e.target.result);
+    // };
     reader.readAsDataURL(e.target.files[0]);
 });
 
 memberSignUpSubmit.addEventListener('click',e=>{
     e.preventDefault();
     e.stopPropagation();
-    signUpValidation();
+    signUpValidation(signUpPhoto,signUpName,signUpPwd,signUpNickName,signUpBirth,signUpMail,signUpTel,signUpMale,signUpFemale,signUpReservationTime,signUpReservationLocation,signUpHeight,signUpWeight,signUpPopArea,signUpStyle,signUpOutfitPrice,signUpLoveStore,signUpIntroduce,memberSignUpForm);
 });
+
+memberSignInForm.addEventListener('click',e=>{
+    const signInImg=document.getElementById('signInImg');
+    const signInPhoto=document.querySelector('.signInPhoto');
+    const signInPwd=document.getElementById('signInPwd');
+    const signInMail=document.getElementById('signInMail');
+    const signInName=document.getElementById('signInName');
+    const signInNickName=document.getElementById('signInNickName');
+    const signInBirth=document.getElementById('signInBirth');
+    const signInTel=document.getElementById('signInTel');
+    const signInMale=document.getElementById('signInMale');
+    const signInFemale=document.getElementById('signInFemale');
+    const signInReservationTime=document.getElementById('signInReservationTime');
+    const signInReservationLocation=document.getElementById('signInReservationLocation');
+    const signInHeight=document.getElementById('signInHeight');
+    const signInWeight=document.getElementById('signInWeight');
+    const signInPopArea=document.getElementById('signInPopArea');
+    const signInStyle=document.getElementById('signInStyle');
+    const signInOutfitPrice=document.getElementById('signInOutfitPrice');
+    const signInLoveStore=document.getElementById('signInLoveStore');
+    const signInIntroduce=document.getElementById('signInIntroduce');
+
+    if(e.target.className.includes('memberSignInReviseSubmit')){
+        e.preventDefault();
+        e.stopPropagation();
+
+        signUpValidation(signInPhoto,signInName,signInPwd,signInNickName,signInBirth,signInMail,signInTel,signInMale,signInFemale,signInReservationTime,signInReservationLocation,signInHeight,signInWeight,signInPopArea,signInStyle,signInOutfitPrice,signInLoveStore,signInIntroduce,memberSignInForm);
+    }
+},false);
 
 
 

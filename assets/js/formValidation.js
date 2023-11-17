@@ -149,100 +149,108 @@ export const checkSign={
     }
 };
 //signUp validation
-export async function signUpValidation() {  
-    
-    memberSignUpForm.classList.add('was-validated');
+export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,male,female,reservationTime,reservationLocation,height,weight,popArea,style,price,loveStore,introduce,memberForm) {  
+
+    memberForm.classList.add('was-validated');
 
     let memberObj={};
 
-    signUpName.addEventListener('keyup',e=>{
+    name.addEventListener('keyup',e=>{
         checkSign.checkName(e.target.value);
     });
-    signUpName.addEventListener('paste',e=>{
+    name.addEventListener('paste',e=>{
         checkSign.checkName(e.target.value);
     });
 
-    signUpNickName.addEventListener('keyup',e=>{
+    pwd.addEventListener('keyup',e=>{
+        checkSign.checkName(e.target.value);
+    });
+    pwd.addEventListener('paste',e=>{
+        checkSign.checkName(e.target.value);
+    });
+
+    nickName.addEventListener('keyup',e=>{
         checkSign.checkNickName(e.target.value);
     });
-    signUpNickName.addEventListener('paste',e=>{
+    nickName.addEventListener('paste',e=>{
         checkSign.checkNickName(e.target.value);
     });
 
-    signUpBirth.addEventListener('keyup',e=>{
+    birth.addEventListener('keyup',e=>{
         checkSign.checkBirth(e.target.value);
     });
-    signUpBirth.addEventListener('paste',e=>{
+    birth.addEventListener('paste',e=>{
         checkSign.checkBirth(e.target.value);
     });
 
-    signUpMail.addEventListener('keyup',e=>{
+    email.addEventListener('keyup',e=>{
         checkSign.checkMail(e.target.value);
     });
-    signUpMail.addEventListener('paste',e=>{
+    email.addEventListener('paste',e=>{
         checkSign.checkMail(e.target.value);
     });
 
-    signUpTel.addEventListener('keyup',e=>{
+    tel.addEventListener('keyup',e=>{
         checkSign.checkTel(e.target.value);
     });
-    signUpTel.addEventListener('paste',e=>{
+    tel.addEventListener('paste',e=>{
         checkSign.checkTel(e.target.value);
     });
 
-    signUpReservationLocation.addEventListener('keyup',e=>{
+    reservationLocation.addEventListener('keyup',e=>{
         checkSign.checkReservationLocation(e.target.value);
     });
-    signUpReservationLocation.addEventListener('paste',e=>{
+    reservationLocation.addEventListener('paste',e=>{
         checkSign.checkReservationLocation(e.target.value);
     });
     
-    if(checkSign.checkName(signUpName.value)&&checkSign.checkNickName(signUpNickName.value)&&checkSign.checkBirth(signUpBirth.value)&&checkSign.checkTel(signUpTel.value)&&checkSign.checkReservationLocation(signUpReservationLocation.value)&&memberSignUpForm.checkValidity()){
-        memberObj.image=signUpPhoto.getAttribute('src');
-        memberObj.name=signUpName.value;
-        memberObj.password=signUpPwd.value;
-        memberObj['nick name']=signUpNickName.value;
-        memberObj.birthday=signUpBirth.value;
-        memberObj.tel=signUpTel.value;
-        memberObj.email=signUpMail.value;
-        memberObj['reservation time']=signUpReservationTime.value;
-        memberObj['reservation time selectedIndex']=signUpReservationTime.selectedIndex;
-        memberObj['reservation location']=signUpReservationLocation.value;
-        memberObj.height=signUpHeight.value ? signUpHeight.value:"";
-        memberObj.weight=signUpWeight.value ? signUpWeight.value:"";
-        memberObj.PopArea=signUpPopArea.value;
-        memberObj['PopArea selectedIndex']=signUpPopArea.selectedIndex;
-        memberObj.style=signUpStyle.value;
-        memberObj['style selectedIndex']=signUpStyle.selectedIndex;
-        memberObj['outfit price']=signUpOutfitPrice.value;
-        memberObj['outfit price selectedIndex']=signUpOutfitPrice.selectedIndex;
-        memberObj['love store']=signUpLoveStore.value ? signUpLoveStore.value:"";
-        memberObj.introduce=signUpIntroduce.value ? signUpIntroduce.value:"";
-        if(signUpMale.checked===true){
+    if(checkSign.checkName(name.value)&&checkSign.checkPwd(pwd.value)&&checkSign.checkNickName(nickName.value)&&checkSign.checkBirth(birth.value)&&checkSign.checkTel(tel.value)&&checkSign.checkReservationLocation(reservationLocation.value)&&memberForm.checkValidity()){
+        memberObj.image=imgSrc.getAttribute('src');
+        memberObj.name=name.value;
+        memberObj.password=pwd.value;
+        memberObj['nick name']=nickName.value;
+        memberObj.birthday=birth.value;
+        memberObj.tel=tel.value;
+        memberObj.email=email.value;
+        memberObj['reservation time']=reservationTime.value;
+        memberObj['reservation time selectedIndex']=reservationTime.selectedIndex;
+        memberObj['reservation location']=reservationLocation.value;
+        memberObj.height=height.value ? height.value:"";
+        memberObj.weight=weight.value ? weight.value:"";
+        memberObj.PopArea=popArea.value;
+        memberObj['PopArea selectedIndex']=popArea.selectedIndex;
+        memberObj.style=style.value;
+        memberObj['style selectedIndex']=style.selectedIndex;
+        memberObj['outfit price']=price.value;
+        memberObj['outfit price selectedIndex']=price.selectedIndex;
+        memberObj['love store']=loveStore.value ? loveStore.value:"";
+        memberObj.introduce=introduce.value ? introduce.value:"";
+        if(male.checked===true){
             memberObj.sex='Male';
         }else{
             memberObj.sex='Female';
         }
-        await ajaxMember.patchUsers(memberObj);
+
+        console.log(memberObj);
+        await ajaxMember.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,memberObj);
         //https://bftsai.github.io/outfitpals/index.html
-        location.href='http://localhost:5173/outfitpals/pages/index.html';
+        //location.href='http://localhost:5173/outfitpals/pages/index.html';
         signUpPhoto.setAttribute('src','../assets/images/member/user-solid.svg');
-        signUpName.value='';
-        signUpPwd.value='';
-        signUpNickName.value='';
-        signUpBirth.value='';
-        signUpTel.value='';
-        signUpMail.value='';
-        signUpReservationTime.value='';
-        signUpReservationTime.selectedIndex=0;
-        signUpReservationLocation.value='';
-        signUpHeight.value='';
-        signUpWeight.value='';
-        signUpPopArea.selectedIndex=0;
-        signUpStyle.selectedIndex=0;
-        signUpOutfitPrice.selectedIndex=0;
-        signUpLoveStore.value='';
-        signUpIntroduce.value='';
+        name.value='';
+        pwd.value='';
+        nickName.value='';
+        birth.value='';
+        tel.value='';
+        email.value='';
+        reservationTime.selectedIndex=0;
+        reservationLocation.value='';
+        height.value='';
+        weight.value='';
+        popArea.selectedIndex=0;
+        style.selectedIndex=0;
+        price.selectedIndex=0;
+        loveStore.value='';
+        introduce.value='';
     }else{
         console.log('all false');
     }

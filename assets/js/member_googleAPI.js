@@ -77,12 +77,13 @@ const ajaxMemberGoogle={
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status===201){
-                await this.patchUsers({
+                localStorage.outfitpalsToken=register.data.accessToken;
+                localStorage.outfitpalsId=register.data.user.id;
+                await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
                     "sign time": `${new Date()}`,
                     email: obj.email,
                     "third party": "google"
                 });
-                localStorage.outfitpalsToken=register.data.accessToken;
                 signUpMail.value=obj.email;
                 signUpPwd.value=obj.password;
                 signUpPhoto.setAttribute('src',obj.image);
@@ -105,15 +106,16 @@ const ajaxMemberGoogle={
             alert('google 帳號已被使用');
         }
     },
-    async patchUsers(obj){
-        let id=0;
-        const getUsers=(await axios.get(`${apiUrl}users`)).data;
-        getUsers.forEach(item=>{
-            if(item.email===obj.email){
-                id=item.id;
-            }
-        });
-        const patchUsers=await axios.patch(`${apiUrl}users/${id}`,obj)
+    async patchUsers(id,token,obj){
+        try {
+            const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
+                headers:{
+                    "authorization": `Bearer ${token}`
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
     },
     async signIn(obj){
         try {
@@ -121,6 +123,7 @@ const ajaxMemberGoogle={
             if(signIn.status===200){
                 console.log(signIn);
                 localStorage.outfitpalsToken=signIn.data.accessToken;
+                localStorage.outfitpalsId=signIn.data.user.id;
                 this.data=signIn.data.user;
 
                 memberIndex.classList.add('opacity-0');

@@ -5,12 +5,13 @@ export const ajaxMember={
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status==201){
-                await this.patchUsers({
+                localStorage.outfitpalsToken=register.data.accessToken;
+                localStorage.outfitpalsId=register.data.user.id;
+                await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
                     "sign time": `${new Date()}`,
                     email: obj.email,
                     "third party": false
                 });
-                localStorage.outfitpalsToken=register.data.accessToken;
                 signUpMail.value=account.value;
                 signUpPwd.value=pwd.value;
                 memberIndex.classList.add('opacity-0');
@@ -32,15 +33,16 @@ export const ajaxMember={
             account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
         }
     },
-    async patchUsers(obj){
-        let id=0;
-        const getUsers=(await axios.get(`${apiUrl}users`)).data;
-        getUsers.forEach(item=>{
-            if(item.email===obj.email){
-                id=item.id;
-            }
-        });
-        const patchUsers=await axios.patch(`${apiUrl}users/${id}`,obj);
+    async patchUsers(id,token,obj){
+        try {
+            const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
+                headers:{
+                    "authorization": `Bearer ${token}`
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        };
     },
     async signIn(obj){
         try {
@@ -48,6 +50,7 @@ export const ajaxMember={
             if(signIn.status===200){
                 console.log(signIn);
                 localStorage.outfitpalsToken=signIn.data.accessToken;
+                localStorage.outfitpalsId=signIn.data.user.id;
                 this.data=signIn.data.user;
 
                 memberIndex.classList.add('opacity-0');
@@ -416,7 +419,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInPopArea" name="活動範圍">
-                <option ${this.data.PopArea==="" ? 'selected':''}  disabled>請選擇活動範圍</option>
+                <option disabled>請選擇活動範圍</option>
                 <option>台北市</option>
                 <option>新北市</option>
                 <option>桃園市</option>
@@ -442,7 +445,7 @@ export const ajaxMember={
             </div>
             <div class="col-lg-6">
             <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInStyle" name="打扮風格">
-                <option ${this.data.style==="" ? 'selected':''} disabled>請選擇打扮風格</option>
+                <option disabled>請選擇打扮風格</option>
                 <option>日系</option>
                 <option>韓系</option>
                 <option>中國風</option>
@@ -457,8 +460,8 @@ export const ajaxMember={
             <label for="signInOutfitPrice" class="form-label">穿搭價位</label>
             </div>
             <div class="col-lg-6">
-            <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInOutfitPrice" name="穿搭價位" value="${this.data['outfit price']==="" ? '請選擇穿搭價位':this.data['outfit price']}">
-                <option ${this.data['outfit price']==="" ? 'selected':''} disabled>請選擇穿搭價位</option>
+            <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInOutfitPrice" name="穿搭價位">
+                <option disabled>請選擇穿搭價位</option>
                 <option>$1,000 以下</option>
                 <option>$2,001～$3,000</option>
                 <option>$3,001～$4,000</option>
@@ -507,6 +510,39 @@ export const ajaxMember={
         document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
         document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
         document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price selectedIndex'];
+
+        const signInImg=document.getElementById('signInImg');
+        const signInPhoto=document.querySelector('.signInPhoto');
+        const signInPwd=document.getElementById('signInPwd');
+        const signInMail=document.getElementById('signInMail');
+        const signInName=document.getElementById('signInName');
+        const signInNickName=document.getElementById('signInNickName');
+        const signInBirth=document.getElementById('signInBirth');
+        const signInTel=document.getElementById('signInTel');
+        const signInMale=document.getElementById('signInMale');
+        const signInFemale=document.getElementById('signInFemale');
+        const signInReservationTime=document.getElementById('signInReservationTime');
+        const signInReservationLocation=document.getElementById('signInReservationLocation');
+        const signInHeight=document.getElementById('signInHeight');
+        const signInWeight=document.getElementById('signInWeight');
+        const signInPopArea=document.getElementById('signInPopArea');
+        const signInStyle=document.getElementById('signInStyle');
+        const signInOutfitPrice=document.getElementById('signInOutfitPrice');
+        const signInLoveStore=document.getElementById('signInLoveStore');
+        const signInIntroduce=document.getElementById('signInIntroduce');
+
+        signInImg.addEventListener('change',e=>{
+            console.log(e);
+            let reader=new FileReader();
+            reader.addEventListener('load',e=>{
+                signInPhoto.setAttribute('src',e.target.result);
+            });
+            // 第二種寫法
+            // reader.onload=(e)=>{
+            //     signUpPhoto.setAttribute("src",e.target.result);
+            // };
+            reader.readAsDataURL(e.target.files[0]);
+        });
     },
     async delete(id){
         try {
