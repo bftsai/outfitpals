@@ -3,10 +3,19 @@
         transition: all 0.4s ease;
     }
 }
-.member-signUpData{
-    .profileImage:hover{
+.member-index{
+    transition: all 0.4s ease;
+}
+.member-signUpData,.member-signInData,.member-signInProfile,.member-signInData{
+    transition: all 0.4s ease;
+    .signUpImg:hover{
         cursor: pointer;
         text-decoration: underline;
+    }
+    .material-symbols-outlined{
+        color: #ff0000;
+        font-variation-settings:
+        'FILL' 1,
     }
     textarea{
         resize: none;
