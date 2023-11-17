@@ -157,22 +157,6 @@ memberSignUpSubmit.addEventListener('click',e=>{
     signUpValidation();
 });
 
-memberSignInProfileForm.addEventListener('click',e=>{
-    //revice profile
-    if(e.target.className.includes('memberSignInProfileRevise')){
-        console.log(ajaxMember.data);
-        ajaxMember.renderMemberSignInForm();
-        memberSignInProfile.classList.add('opacity-0');
-        setTimeout(() => {
-            memberSignInProfile.classList.add('d-none');
-            memberSignInData.classList.remove('d-none');
-            setTimeout(() => {
-                memberSignInData.classList.remove('opacity-0');
-            }, 0);
-        }, 400);
-    }
-});
-
 
 
 // ajaxMember.delete(2)

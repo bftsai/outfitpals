@@ -57,7 +57,7 @@ export const ajaxMember={
                     memberIndex.classList.add('d-none');
                     memberSignInProfile.classList.remove('d-none');
                     setTimeout(() => {
-                        memberSignInProfile.classList.remove('opacity-0')
+                        memberSignInProfile.classList.remove('opacity-0');
                     }, 0);
                 }, 400);
                 this.renderMemberSignInProfileForm();
@@ -224,6 +224,22 @@ export const ajaxMember={
             </div>
         </div>`;
       memberSignInProfileForm.innerHTML=str;
+      memberSignInProfileForm.addEventListener('click',e=>{
+        //revise profile
+        if(e.target.className.includes('memberSignInProfileRevise')){
+            console.log(this.data);
+            this.renderMemberSignInForm();
+            memberSignInProfile.classList.add('opacity-0');
+            setTimeout(() => {
+                memberSignInProfile.classList.add('d-none');
+                memberSignInData.classList.remove('d-none');
+                setTimeout(() => {
+                    memberSignInData.classList.remove('opacity-0');
+                }, 0);
+            }, 400);
+        }
+    });
+    
     },
     renderMemberSignInForm(){
         let str=`
@@ -467,7 +483,7 @@ export const ajaxMember={
             <label for="signInIntroduce" class="form-label">自我介紹</label>
             </div>
             <div class="col-lg-6">
-            <textarea class="form-control fs-lg-5 py-lg-3 px-lg-7" name="自我介紹" id="signInIntroduce" cols="30" rows="10" placeholder="請輸入自我介紹" value="${this.data.introduce}"></textarea>
+            <textarea class="form-control fs-lg-5 py-lg-3 px-lg-7" name="自我介紹" id="signInIntroduce" cols="30" rows="10" placeholder="請輸入自我介紹">${this.data.introduce}</textarea>
             </div>
         </div>
         <div class="row justify-content-center align-items-start fs-lg-5">
@@ -480,17 +496,17 @@ export const ajaxMember={
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInSubmit" type="submit">修改</button>
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInReviseSubmit" type="submit">修改</button>
             </div>
             <div class="col-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInCancel" type="button">取消</button>
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInReviseCancel" type="button">取消</button>
             </div>
         </div>`;
         memberSignInForm.innerHTML=str;
-        document.getElementById('signInReservationTime').selectedIndex=this.data['reservation time'];
-        document.getElementById('signInPopArea').selectedIndex=this.data.PopArea;
-        document.getElementById('signInStyle').selectedIndex=this.data.style;
-        document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price'];
+        document.getElementById('signInReservationTime').selectedIndex=this.data['reservation time selectedIndex'];
+        document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
+        document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
+        document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price selectedIndex'];
     },
     async delete(id){
         try {

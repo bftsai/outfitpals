@@ -1,3 +1,5 @@
+import { ajaxMember } from "./ajaxMember";
+
 //check validation tool
 export const checkSign={
     regexp:new RegExp(''),
@@ -147,7 +149,7 @@ export const checkSign={
     }
 };
 //signUp validation
-export function signUpValidation() {  
+export async function signUpValidation() {  
     
     memberSignUpForm.classList.add('was-validated');
 
@@ -203,13 +205,17 @@ export function signUpValidation() {
         memberObj.birthday=signUpBirth.value;
         memberObj.tel=signUpTel.value;
         memberObj.email=signUpMail.value;
-        memberObj['reservation time']=signUpReservationTime.selectedIndex;
+        memberObj['reservation time']=signUpReservationTime.value;
+        memberObj['reservation time selectedIndex']=signUpReservationTime.selectedIndex;
         memberObj['reservation location']=signUpReservationLocation.value;
         memberObj.height=signUpHeight.value ? signUpHeight.value:"";
         memberObj.weight=signUpWeight.value ? signUpWeight.value:"";
-        memberObj.PopArea=signUpPopArea.selectedIndex;
-        memberObj.style=signUpStyle.selectedIndex;
-        memberObj['outfit price']=signUpOutfitPrice.selectedIndex;
+        memberObj.PopArea=signUpPopArea.value;
+        memberObj['PopArea selectedIndex']=signUpPopArea.selectedIndex;
+        memberObj.style=signUpStyle.value;
+        memberObj['style selectedIndex']=signUpStyle.selectedIndex;
+        memberObj['outfit price']=signUpOutfitPrice.value;
+        memberObj['outfit price selectedIndex']=signUpOutfitPrice.selectedIndex;
         memberObj['love store']=signUpLoveStore.value ? signUpLoveStore.value:"";
         memberObj.introduce=signUpIntroduce.value ? signUpIntroduce.value:"";
         if(signUpMale.checked===true){
@@ -217,9 +223,26 @@ export function signUpValidation() {
         }else{
             memberObj.sex='Female';
         }
-        ajax.patchUsers(memberObj);
+        await ajaxMember.patchUsers(memberObj);
         //https://bftsai.github.io/outfitpals/index.html
         location.href='http://localhost:5173/outfitpals/pages/index.html';
+        signUpPhoto.setAttribute('src','../assets/images/member/user-solid.svg');
+        signUpName.value='';
+        signUpPwd.value='';
+        signUpNickName.value='';
+        signUpBirth.value='';
+        signUpTel.value='';
+        signUpMail.value='';
+        signUpReservationTime.value='';
+        signUpReservationTime.selectedIndex=0;
+        signUpReservationLocation.value='';
+        signUpHeight.value='';
+        signUpWeight.value='';
+        signUpPopArea.selectedIndex=0;
+        signUpStyle.selectedIndex=0;
+        signUpOutfitPrice.selectedIndex=0;
+        signUpLoveStore.value='';
+        signUpIntroduce.value='';
     }else{
         console.log('all false');
     }
