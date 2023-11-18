@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .banner {
 
     .carousel-indicators {
@@ -77,27 +81,30 @@
 
     h2 {
 
-        line-height: 120%; 
+        line-height: 120%;
         letter-spacing: 0.32px;
+
         @include xl {
             letter-spacing: 0.48px;
         }
     }
 
     h3 {
-        line-height: 120%; 
+        line-height: 120%;
         letter-spacing: 0.32px;
+
         @include xl {
             letter-spacing: 0.36px;
         }
     }
+
     &__text {
         position: relative;
 
         &__bgtext {
             font-size: 72px;
             opacity: 0.04;
-            overflow: hidden;
+            // overflow-x: hidden;
             white-space: nowrap;
             font-weight: 500;
             line-height: 120%;
@@ -108,14 +115,13 @@
             @include lg {
                 font-size: 160px;
                 font-weight: 700;
-                line-height: 120%; /* 192px */
+                line-height: 120%;
+                /* 192px */
                 letter-spacing: 1.6px;
             }
         }
 
     }
-
-    &__flex {}
 
     &__item {
 
@@ -145,4 +151,235 @@
         }
     }
 
+}
+
+
+.posts {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    &__bg {
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url(/assets/images/index/img_hot_1.jpg);
+        filter: blur(10px);
+        background-repeat: no-repeat;
+        background-size: center;
+        background-position: center;
+        background-color: rgba(255, 255, 255, 0.3);
+        background-blend-mode: color-burn;
+        z-index: -1;
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            line-height: 120%;
+            letter-spacing: 0.48px;
+            margin-top: 64px;
+        }
+
+        p {
+            letter-spacing: 0.36px;
+        }
+    }
+
+    &__slide {
+        position: relative;
+
+        &__img {
+            display: block;
+            width: 327px;
+            height: 436px;
+            border-radius: 300px;
+            object-fit: cover;
+            margin-left: 16px;
+
+        }
+
+        &__caption {
+
+            width: 351px;
+            max-height: 214px;
+
+            &__text {
+                background-color: white;
+                padding: 16px;
+
+                h4 {
+                    line-height: 120%;
+                    letter-spacing: 0.36px;
+                }
+
+                p {
+                    line-height: 180%;
+                    letter-spacing: 0.28px;
+                }
+
+                &__info {
+                    align-items: center;
+                    line-height: 120%;
+                    letter-spacing: 0.32px;
+
+                    img {
+                        width: 24px;
+                        height: 24px;
+                    }
+
+                    &__user {
+                        align-items: center;
+
+                        &__height {
+                            border-left: 1px solid $greyD4;
+                            color: $grey9F;
+                        }
+                    }
+
+                    &__btn {
+                        color: $grey9F;
+
+                        div {
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+                }
+
+                &__tag {
+                    width: 94px;
+                    background-color: $greyE9;
+                    color: $grey66;
+                    padding: 4px 12px;
+                    border-radius: 100px;
+                }
+            }
+
+            @include lg {
+
+                transform: translate3d(-50%, 100%, 0);
+                opacity: 0;
+                transition: all .3s ease-in-out;
+
+                position: absolute;
+                bottom: 143px;
+
+                &__text {
+                    display: flex;
+                    width: 640px;
+                    max-width: 640px;
+
+                }
+            }
+        }
+    }
+}
+
+@include lg {
+
+    .swiper {
+        overflow: visible !important;
+    }
+
+    .swiper-wrapper {
+        margin-left: 244px;
+        margin-top: 80px;
+    }
+
+    .swiper-slide {
+        width: 552px !important;
+    }
+
+    .swiper-slide-prev {
+        opacity: 0;
+    }
+
+
+
+    .posts {
+
+        &__bg {
+            background-size: cover;
+        }
+
+        &__title {
+            display: block;
+            position: absolute;
+
+            h2 {
+                margin-top: 50px;
+            }
+        }
+
+        &__slide {
+            position: relative;
+
+            &__img {
+                width: 540px;
+                height: 720px;
+            }
+
+            &__caption {
+                bottom: 143px;
+                transform: translate3d(-50%, 100%, 0);
+                opacity: 0;
+                transition: all .3s ease-in-out;
+
+                &__text {
+                    position: absolute;
+                    bottom: -26px;
+                    right: -20%;
+                    display: flex;
+                    width: 640px;
+                    max-width: 640px;
+                    padding: 32px 40px;
+
+                    h4 {
+                        letter-spacing: 0.56px;
+                    }
+
+                    p {
+                        letter-spacing: 0.32px;
+                    }
+
+                    &__info {
+
+                        &__btn {
+
+                            div {
+                                width: 32px;
+                                height: 32px;
+                            }
+                        }
+                    }
+
+                    &__tag {
+                        width: 112px;
+                        padding: 8px 16px;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+
+@include lg {
+
+    .swiper-slide-active figcaption {
+        transform: translate3d(-77%, 0, 0);
+        opacity: 1;
+    }
+
+    .posts__btnLg {
+        display: inline-block !important;
+        height: 70px;
+    }
 }
