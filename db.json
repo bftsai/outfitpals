@@ -5,33 +5,6 @@
       "password": "$2a$10$sFlF6BBwEWQbTjNoAsPViOSS0lE0yuowtcRoTn2AH9ShfnIPumz7S",
       "name": "Red",
       "id": 1
-    },
-    {
-      "email": "tsai19911026@gmail.com",
-      "password": "$2a$10$U6IJYI483TKmrZ9AWXtS..Y3QqvITu2ET6pcSgMWQ5JakAk//5mMW",
-      "g-pwd": "Google104952816042450976288",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocIoZ-6TRP5x7FlWOIBx5atU3tXR-ArMzIfVXTXF4zK9cKE=s96-c",
-      "name": "BF Tsai",
-      "nick name": "BF",
-      "id": 2,
-      "sign time": "Sat Nov 18 2023 10:44:20 GMT+0800 (台北標準時間)",
-      "third party": "google",
-      "birthday": "1991-10-26",
-      "tel": "0981865312",
-      "reservation time": "無",
-      "reservation time selectedIndex": 1,
-      "reservation location": "test location",
-      "height": "",
-      "weight": "",
-      "PopArea": "",
-      "PopArea selectedIndex": 0,
-      "style": "",
-      "style selectedIndex": 0,
-      "outfit price": "",
-      "outfit price selectedIndex": 0,
-      "love store": "",
-      "introduce": "",
-      "sex": "Male"
     }
   ],
   "posts": [

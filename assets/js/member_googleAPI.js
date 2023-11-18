@@ -14,6 +14,7 @@
 //axios
 //json-server
 const apiUrl='http://localhost:3000/';
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
