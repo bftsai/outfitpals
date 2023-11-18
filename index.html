@@ -6,9 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OutfitPals</title>
-  <script type="module" crossorigin src="/outfitpals/assets/index-9ca15fd7.js"></script>
-  <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-857fffdd.js">
-  <link rel="stylesheet" href="/outfitpals/assets/main-a3fd73e5.css">
+  <!-- swiper css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script type="module" crossorigin src="/outfitpals/assets/index-275135f3.js"></script>
+  <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-4b3b3cdb.js">
+  <link rel="stylesheet" href="/outfitpals/assets/main-9f6eadb7.css">
 </head>
 
 <body>
@@ -23,7 +25,7 @@
             <a href="#">常見問題</a>
             <a href="#">贊助我們</a>
             <a href="#">我的預約</a>
-            <a href="#" class="header__links__button btn btn-outline-black18 m-0 ps-4">註冊登入 <span class="material-symbols-outlined">
+            <a href="./member.html" class="header__links__button btn btn-outline-black18 m-0 ps-4">註冊登入 <span class="material-symbols-outlined">
                 chevron_right
                 </span> </a>
         </div>
@@ -35,14 +37,186 @@
 <!-- 待桌機版完成後補行動版sidebar
 <div  class="header-sidebar">
     <span class="material-symbols-outlined d-none"> close</span> 
-</div> -->    <!-- 以下為btn測試 -->
-    <a href="#" class="btn arrowBtn">立即註冊 OutfitPals<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+</div> -->    <!-- 輪播banner -->
+    <section class="banner">
+
+      <div id="carousel-banner" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators mb-7 mb-lg-9">
+          <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="0"
+            class="active carousel-indicators__one me-2" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carousel-banner" data-bs-slide-to="1" aria-label="Slide 2"
+            class="carousel-indicators__two"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="8000">
+            <div class="d-flex align-items-center justify-content-center">
+              <img src="/outfitpals/assets/banner_768_1-cdce88a7.jpg" class="d-md-none d-lg-none" alt="banner1">
+            </div>
+            <img src="/outfitpals/assets/banner_768_1-cdce88a7.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner1">
+            <img src="/outfitpals/assets/banner_1920_1-69e80d9d.jpg" class="d-none d-lg-block w-100" alt="banner1">
+            <div class="carousel-caption">
+              <h1 class="carousel-caption__sloganOne fs-2 fs-lg-1 fw-bold mb-3">你還在為穿搭煩腦嗎？</h1>
+              <p class="carousel-caption__SubheadOne fs-7 fs-lg-2 fw-bold">立即預約時尚穿搭教主，引領你走進潮流世界</p>
+              <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17 d-lg-none">立即註冊 OutfitPals</a>
+              <a href="#" class="btn arrowBtn2 carousel-caption__btnLg mt-7 mt-lg-17 d-none">立即註冊 OutfitPals</a>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="8000">
+            <div class="d-flex align-items-center justify-content-center">
+              <img src="/outfitpals/assets/banner_768_2-bb367eb1.jpg" class="d-md-none d-lg-none" alt="banner2">
+            </div>
+            <img src="/outfitpals/assets/banner_768_2-bb367eb1.jpg" class="d-none d-md-block d-lg-none w-100" alt="banner2">
+            <img src="/outfitpals/assets/banner_1920_2-290a95e5.jpg" class="d-none d-lg-block w-100" alt="banner2">
+            <div class="carousel-caption">
+              <h2 class="carousel-caption__SubheadTwo fs-3 fs-lg-1 font-oswald mb-3">WEAR DESIGN FASHION POPULAR</h2>
+              <p class='carousel-caption__SubheadOne fs-4 fs-lg-2 fw-bold'>開始分享你的時尚穿搭</p>
+              <a href="#" class="btn arrowBtn2sm mt-7 mt-lg-17  d-lg-none">立即註冊 OutfitPals</a>
+              <a href="#" class="btn arrowBtn2 carousel-caption__btnLg mt-7 mt-lg-17 d-none">立即註冊 OutfitPals</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slogan">
+      <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="slogan__text d-flex flex-column align-items-center">
+          <div class="slogan__text__bgtext d-flex justify-content-between">
+            <p class="slogan__text__bgtext__left font-oswald me-9 me-lg-17">OUTFITPALS</p>
+            <p class="slogan__text__bgtext__right font-oswald">SELECT OU</p>
+          </div>
+          <h2 class="font-oswald fs-2 fs-lg-1 mt-17 mb-2 fw-normal">SELECT OUTFITPALS</h2>
+          <h3 class="fs-7 mb-9 fw-bold">你也想改善你的穿搭，卻不知從何下手嗎？</h3>
+        </div>
+        <div class="slogan__flex d-flex flex-column flex-lg-row">
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/outfitpals/assets/img_advantage_1-68384f57.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">看遍了IG、小紅書、Youtube的穿搭教學卻頭昏眼花，真想有人直接給你客製化的建議？</div>
+          </div>
+
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/outfitpals/assets/img_advantage_2-867ff7fa.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">找到想嘗試的穿搭風格，網購卻買不到合適的衣服，一個人遲遲不敢去實體店逛街？</div>
+          </div>
+
+          <div class="slogan__item d-flex flex-column align-items-center px-7">
+            <div class="slogan__item__img d-flex justify-content-center align-items-center mb-3">
+              <img src="/outfitpals/assets/img_advantage_3-2c0ec716.svg" alt="">
+            </div>
+            <div class="slogan__item__description fs-8 mb-9">對衣服沒有Sense，逛街時眼花撩亂，即使試穿了也沒有想法，真想有朋友給建議？</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="posts">
+      <div class="posts__bg">
+      </div>
+      <div class="container wide posts__container">
+        <div class="posts__title">
+          <h2 class="fs-2 fs-lg-1 font-oswald fw-normal align-items-center">WELCOME TO OUTFITPALS</h2>
+          <p class="fs-7 fs-lg-6 fw-bold mb-9 mb-lg-0">讓穿搭高手給你朋友般的逛街陪伴</p>
+        </div>
+        <div class="swiper" id="swiper-1">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <figure class="posts__slide">
+                <img class="posts__slide__img" src="/outfitpals/assets/img_hot_1-311f7364.jpg" alt="">
+                <figcaption class="posts__slide__caption">
+                  <div class="posts__slide__caption__text d-flex flex-column">
+                    <h4 class="fs-6 fs-lg-3 fw-bold">不只是穿搭，更是一種生活態度。</h4>
+                    <p class="fs-8 fs-lg-7 mb-2 mb-lg-7 fw-normal">淡鵝黃色的雪紡細褶洋裝，內搭透膚高領，再配中筒靴，整體視覺上增添許多層次感，柔美中帶有帥性的感覺！</p>
+                    <div class="posts__slide__caption__text__info d-flex mb-lg-7 justify-content-between">
+                      <div class="posts__slide__caption__text__info__user d-flex mb-2">
+                        <img class=" me-3" src="/outfitpals/assets/img_pic-00395835.svg" alt="avatar">
+                        <p class=" me-3 fs-9 fs-lg-7">Gill WUUUU</p>
+                        <p class="posts__slide__caption__text__info__user__height ps-3 fs-9 fs-lg-7">158cm 55kg</p>
+                      </div>
+                      <div class="posts__slide__caption__text__info__btn d-flex">
+                        <div class="me-7"><span class="material-symbols-outlined">favorite</span></div>
+                        <div><span class="material-symbols-outlined">bookmark</span></div>
+                      </div>
+                    </div>
+                    <div class="posts__slide__caption__text__tag fs-8 fs-lg-7"># 日系穿搭</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- slide 2 -->
+            <div class="swiper-slide">
+              <figure class="posts__slide">
+                <img class="posts__slide__img" src="/outfitpals/assets/img_hot_2-fde912f5.jpg" alt="">
+                <figcaption class="posts__slide__caption">
+                  <div class="posts__slide__caption__text d-flex flex-column">
+                    <h4 class="fs-6 fs-lg-3 fw-bold">不只是穿搭，更是一種生活態度。</h4>
+                    <p class="fs-8 fs-lg-7 mb-2 mb-lg-7 fw-normal">淡鵝黃色的雪紡細褶洋裝，內搭透膚高領，再配中筒靴，整體視覺上增添許多層次感，柔美中帶有帥性的感覺！</p>
+                    <div class="posts__slide__caption__text__info d-flex mb-lg-7 justify-content-between">
+                      <div class="posts__slide__caption__text__info__user d-flex mb-2">
+                        <img class=" me-3" src="/outfitpals/assets/img_pic-00395835.svg" alt="avatar">
+                        <p class=" me-3 fs-9 fs-lg-7">Gill WUUUU</p>
+                        <p class="posts__slide__caption__text__info__user__height ps-3 fs-9 fs-lg-7">158cm 55kg</p>
+                      </div>
+                      <div class="posts__slide__caption__text__info__btn d-flex">
+                        <div class="me-7"><span class="material-symbols-outlined">favorite</span></div>
+                        <div><span class="material-symbols-outlined">bookmark</span></div>
+                      </div>
+                    </div>
+                    <div class="posts__slide__caption__text__tag fs-8 fs-lg-7"># 日系穿搭</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- slide 3 -->
+            <div class="swiper-slide">
+              <figure class="posts__slide">
+                <img class="posts__slide__img" src="/outfitpals/assets/img_hot_3-2b4d2ffe.jpg" alt="">
+                <figcaption class="posts__slide__caption">
+                  <div class="posts__slide__caption__text d-flex flex-column">
+                    <h4 class="fs-6 fs-lg-3 fw-bold">不只是穿搭，更是一種生活態度。</h4>
+                    <p class="fs-8 fs-lg-7 mb-2 mb-lg-7 fw-normal">淡鵝黃色的雪紡細褶洋裝，內搭透膚高領，再配中筒靴，整體視覺上增添許多層次感，柔美中帶有帥性的感覺！</p>
+                    <div class="posts__slide__caption__text__info d-flex mb-lg-7 justify-content-between">
+                      <div class="posts__slide__caption__text__info__user d-flex mb-2">
+                        <img class=" me-3" src="/outfitpals/assets/img_pic-00395835.svg" alt="avatar">
+                        <p class=" me-3 fs-9 fs-lg-7">Gill WUUUU</p>
+                        <p class="posts__slide__caption__text__info__user__height ps-3 fs-9 fs-lg-7">158cm 55kg</p>
+                      </div>
+                      <div class="posts__slide__caption__text__info__btn d-flex">
+                        <div class="me-7"><span class="material-symbols-outlined">favorite</span></div>
+                        <div><span class="material-symbols-outlined">bookmark</span></div>
+                      </div>
+                    </div>
+                    <div class="posts__slide__caption__text__tag fs-8 fs-lg-7"># 日系穿搭</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="btn arrowBtn2sm d-lg-none mb-19">瀏覽更多</a>
+        <a href="#" class="btn arrowBtn2 posts__btnLg d-none mb-19">瀏覽更多</a>
+      </div>
+    </section>
+
+
+    <section class="step">
+      <h2>APPLY FOR SERVICE</h2>
+    </section>
+    <!-- 以下為btn測試 -->
+    <!-- <a href="#" class="btn arrowBtn">立即註冊 OutfitPals<img src="/assets/images/components/Btn-Arrow-primary.svg"
         alt="Btn-Arrow-primary"></a>
 
-    <a href="#" class="arrowBtn">瀏覽更多<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+    <a href="#" class="arrowBtn">瀏覽更多<img src="/assets/images/components/Btn-Arrow-primary.svg"
         alt="Btn-Arrow-primary"></a>
 
-    <a href="#" class="arrowBtn">註冊 OutfitPals 立即預約<img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg"
+    <a href="#" class="arrowBtn">註冊 OutfitPals 立即預約<img src="/assets/images/components/Btn-Arrow-primary.svg"
         alt="Btn-Arrow-primary"></a>
     <br>
     <br>
@@ -51,12 +225,9 @@
 
     <a href="#" class="arrowBtn2">瀏覽更多</a>
 
-    <a href="#" class="arrowBtn2">註冊 OutfitPals 立即預約</a>
+    <a href="#" class="arrowBtn2">註冊 OutfitPals 立即預約</a> -->
     <!-- 以上為btn測試 -->
 
-
-    <h1 class="index-title">我是首頁</h1>
-    
     <footer class="footer d-flex flex-column align-items-center flex-lg-row justify-content-between  bg-grey1D py-9 px-3 py-lg-13 px-lg-18">
     <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
         <div class="footer__contact mb-9 mb-lg-0 fs-8 d-flex flex-column  align-items-center align-items-lg-start">
@@ -102,7 +273,16 @@
             <div class="footer__copyright fs-9 pb-2 ">Copyright © 2024 OutfitPals. All rights reserved.</div>
         </div>
     </div>
-</footer>
+</footer>      <!-- bs5 js -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+      <!-- swiper js -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <!-- own js -->
       
       
 </body>

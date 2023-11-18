@@ -1,0 +1,1 @@
+import"./main-4b3b3cdb.js";const t=document.querySelectorAll(".thumb");for(let e=0;e<t.length;e++)t[e].addEventListener("click",function(){for(let c=0;c<t.length;c++)t[c].classList.remove("active");this.classList.add("active")});
