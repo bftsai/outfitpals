@@ -8,7 +8,7 @@
 }
 .member-signUpData,.member-signInData,.member-signInProfile,.member-signInData{
     transition: all 0.4s ease;
-    .signUpImg:hover{
+    .signUpImg:hover,.signInImg:hover{
         cursor: pointer;
         text-decoration: underline;
     }
@@ -20,4 +20,9 @@
     textarea{
         resize: none;
     }
+}
+@include lg{
+    // .member-index{
+    //     height: 71vh;
+    // }
 }
