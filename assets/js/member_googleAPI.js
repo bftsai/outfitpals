@@ -287,17 +287,17 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-3 d-flex">
+            <div class="col-6 col-sm-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="submit">修改</button>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-3 d-flex">
+            <div class="col-6 col-sm-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">我的主頁</button>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-3 d-flex">
+            <div class="col-6 col-sm-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
             </div>
         </div>`;
@@ -329,7 +329,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -343,7 +343,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -354,7 +354,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -368,7 +368,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -382,7 +382,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -393,7 +393,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -407,7 +407,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -428,7 +428,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -448,7 +448,7 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center">
+            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
             <span class="material-symbols-outlined fs-lg-5 me-2">
                 star
             </span>
@@ -462,8 +462,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInHeight" class="form-label">身高</label>
             </div>
             <div class="col-lg-6">
@@ -471,8 +473,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInWeight" class="form-label">體重</label>
             </div>
             <div class="col-lg-6">
@@ -480,8 +484,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInPopArea" class="form-label">活動範圍</label>
             </div>
             <div class="col-lg-6">
@@ -506,8 +512,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInStyle" class="form-label">打扮風格</label>
             </div>
             <div class="col-lg-6">
@@ -522,8 +530,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInOutfitPrice" class="form-label">穿搭價位</label>
             </div>
             <div class="col-lg-6">
@@ -539,8 +549,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInLoveStore" class="form-label">逛街愛店</label>
             </div>
             <div class="col-lg-6">
@@ -548,8 +560,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
-            <div class="col-lg-2">
-            <i class="fa-solid fa-star" style="color: transparent;"></i>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+            <span class="material-symbols-outlined" style="color: transparent;">
+                star
+            </span>
             <label for="signInIntroduce" class="form-label">自我介紹</label>
             </div>
             <div class="col-lg-6">
@@ -565,10 +579,10 @@ const ajaxMemberGoogle={
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-3 d-flex">
+            <div class="col-6 col-lg-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInReviseSubmit" type="submit">修改</button>
             </div>
-            <div class="col-3 d-flex">
+            <div class="col-6 col-lg-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInReviseCancel" type="button">取消</button>
             </div>
         </div>`;
