@@ -13,7 +13,7 @@
   <body>
     <%- include('./layout/header'); -%>
     <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
-        <div class="member-index">
+        <div class="member-index py-lg-25">
           <div class="container c-switch-btn-group">
             <div class="row justify-content-center py-9 py-lg-13">
               <div class="col col-lg-4">
@@ -50,10 +50,10 @@
                       </div>
                   </div>
                   <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                      <div class="col-3 d-flex">
+                      <div class="col-6 col-lg-3 d-flex">
                           <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberIndexSubmit" type="submit">登入</button>
                       </div>
-                      <div class="col-3 d-flex">
+                      <div class="col-6 col-lg-3 d-flex">
                           <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberIndexCancel" type="button">取消</button>
                       </div>
                   </div>
@@ -121,7 +121,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -135,18 +135,18 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
                   <label for="signUpPwd" class="form-label">密碼</label>
                 </div>
                 <div class="col-lg-6">
-                  <input type="text" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpPwd" placeholder="請輸入密碼" disabled>
+                  <input type="password" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signUpPwd" placeholder="請輸入密碼" disabled>
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -160,7 +160,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -174,7 +174,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -185,7 +185,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -199,7 +199,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -220,7 +220,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -240,7 +240,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -254,8 +254,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpHeight" class="form-label">身高</label>
                 </div>
                 <div class="col-lg-6">
@@ -263,8 +265,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpWeight" class="form-label">體重</label>
                 </div>
                 <div class="col-lg-6">
@@ -272,8 +276,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpPopArea" class="form-label">活動範圍</label>
                 </div>
                 <div class="col-lg-6">
@@ -298,8 +304,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpStyle" class="form-label">打扮風格</label>
                 </div>
                 <div class="col-lg-6">
@@ -314,8 +322,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpOutfitPrice" class="form-label">穿搭價位</label>
                 </div>
                 <div class="col-lg-6">
@@ -331,8 +341,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpLoveStore" class="form-label">逛街愛店</label>
                 </div>
                 <div class="col-lg-6">
@@ -340,8 +352,10 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
-                <div class="col-lg-2">
-                  <i class="fa-solid fa-star" style="color: transparent;"></i>
+                <div class="col-lg-2 mb-3 mb-lg-0">
+                  <span class="material-symbols-outlined" style="color: transparent;">
+                    star
+                  </span>
                   <label for="signUpIntroduce" class="form-label">自我介紹</label>
                 </div>
                 <div class="col-lg-6">
@@ -357,10 +371,10 @@
                 </div>
               </div>
               <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                <div class="col-3 d-flex">
+                <div class="col-6 col-lg-3 d-flex">
                     <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignUpSubmit" type="submit">註冊</button>
                 </div>
-                <div class="col-3 d-flex">
+                <div class="col-6 col-lg-3 d-flex">
                     <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignUpCancel" type="button">取消</button>
                 </div>
               </div>
@@ -390,7 +404,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -404,7 +418,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -415,7 +429,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -429,7 +443,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -443,7 +457,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -454,7 +468,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -468,7 +482,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -489,7 +503,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
@@ -509,7 +523,7 @@
                 </div>
               </div>
               <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                   <span class="material-symbols-outlined fs-lg-5 me-2">
                     star
                   </span>
