@@ -3,3 +3,26 @@
         transition: all 0.4s ease;
     }
 }
+.member-index{
+    transition: all 0.4s ease;
+}
+.member-signUpData,.member-signInData,.member-signInProfile,.member-signInData{
+    transition: all 0.4s ease;
+    .signUpImg:hover,.signInImg:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    .material-symbols-outlined{
+        color: #ff0000;
+        font-variation-settings:
+        'FILL' 1,
+    }
+    textarea{
+        resize: none;
+    }
+}
+@include lg{
+    // .member-index{
+    //     height: 71vh;
+    // }
+}
