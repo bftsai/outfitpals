@@ -1,6 +1,5 @@
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
-const thumbactive = document.querySelectorAll(".active")
 
 const personalMain = document.querySelector("#personalmain")
 const reserve = document.querySelector("#reserve")
