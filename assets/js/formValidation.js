@@ -1,4 +1,4 @@
-import { ajaxMember } from "./ajaxMember";
+import { ajaxMember, cookieValue } from "./ajaxMember";
 
 //check validation tool
 export const checkSign={
@@ -6,32 +6,41 @@ export const checkSign={
     checkAccount(input,str){
         this.regexp=new RegExp('^[\\w\\d-]+\\@[\\d\\w]{3,}\\.[\\d\\w]{3,}(\\.[\\d\\w]{2,})?$');
         if(str===''){
+            input.classList.remove('is-valid-customer');
+            input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`請輸入電子郵件`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，電子郵件不包含特殊字元（如：!、#、$、%、^）`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
     checkSignUpIndexPwd(input,str){
         this.regexp=new RegExp('^[A-Z][\\d\\w]{7,}$');
         if(str===''){
+            input.classList.remove('is-valid-customer');
+            input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`請輸入密碼`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
-            input.nextElementSibling.textContent=`格式錯誤，密碼第一個為大寫英文，不包含特殊字元（如：!、@、#、$、%、^），最少 8 位英數字`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            input.classList.add('is-invalid-customer');
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -41,13 +50,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入電子郵件`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，電子郵件不包含特殊字元（如：!、#、$、%、^）`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -57,13 +68,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入姓名`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，姓名不包含數字或特殊字元（如：!、@、#、$、%、^）`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -73,13 +86,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入密碼`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，密碼第一個為大寫英文，不包含特殊字元（如：!、@、#、$、%、^），最少 8 位英數字`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -89,13 +104,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入暱稱`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，暱稱最少三個英數字，不包含特殊字元（如：!、@、#、$、%、^）`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -105,13 +122,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入生日`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，請輸入西元年/月/日`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -121,13 +140,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入手機號碼`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，格式為0912345678`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     },
@@ -137,13 +158,15 @@ export const checkSign={
             input.nextElementSibling.textContent=`請輸入開放預約地點`;
             return false;
         }else if(!(this.regexp.test(str))){
+            input.classList.remove('is-valid-customer');
             input.classList.add('is-invalid');
+            input.classList.add('is-invalid-customer');
             input.nextElementSibling.textContent=`格式錯誤，不包含數字或特殊字元（如：!、@、#、$、%、^）`;
-            input.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
             return false;
         }else{
             input.classList.remove('is-invalid');
-            input.setAttribute('style','border-color: var(--bs-form-valid-border-color);background-image: url(../assets/images/member/valid.png);background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);');
+            input.classList.remove('is-invalid-customer');
+            input.classList.add('is-valid-customer');
             return true;
         }
     }
@@ -230,10 +253,12 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         }else{
             memberObj.sex='Female';
         }
+        const outfitpalsId=Number(cookieValue('outfitpalsId'));
+        const outfitpalsToken=cookieValue('outfitpalsToken');
 
-        await ajaxMember.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,memberObj);
-        //https://bftsai.github.io/outfitpals/index.html
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,memberObj);
+        location.href='https://bftsai.github.io/outfitpals/member.html';
+        //location.href='http://localhost:5173/outfitpals/pages/member.html';
         signUpPhoto.setAttribute('src','../assets/images/member/user-solid.svg');
         name.value='';
         pwd.value='';
