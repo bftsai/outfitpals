@@ -1,4 +1,4 @@
-import { ajaxMember } from "./ajaxMember";
+import { ajaxMember, cookieValue } from "./ajaxMember";
 
 //check validation tool
 export const checkSign={
@@ -230,10 +230,12 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         }else{
             memberObj.sex='Female';
         }
+        const outfitpalsId=Number(cookieValue('outfitpalsId'));
+        const outfitpalsToken=cookieValue('outfitpalsToken');
 
-        await ajaxMember.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,memberObj);
-        //https://bftsai.github.io/outfitpals/index.html
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,memberObj);
+        location.href='https://bftsai.github.io/outfitpals/member.html';
+        // location.href='http://localhost:5173/outfitpals/pages/member.html';
         signUpPhoto.setAttribute('src','../assets/images/member/user-solid.svg');
         name.value='';
         pwd.value='';

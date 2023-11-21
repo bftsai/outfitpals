@@ -1,17 +1,28 @@
-const apiUrl='http://localhost:3000/';
+const apiUrl='https://outfitpals-web-server.onrender.com'; //render server
+// const apiUrl='http://localhost:3000/';
+//cookie
+export function cookieValue(str) {  
+    const cookieArr=document.cookie.split(';').find(item=>{
+        if(item.split('=')[0].trim()===str){
+            return item;
+        }
+    });
+    return cookieArr.split('=')[1];
+};
 export const ajaxMember={
     data: [],
     async register(obj){
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status==201){
-                localStorage.outfitpalsToken=register.data.accessToken;
-                localStorage.outfitpalsId=register.data.user.id;
-                localStorage.outfitpalsThirdParty=false;
-                await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
+                document.cookie=`outfitpalsToken=${register.data.accessToken}`;
+                document.cookie=`outfitpalsId=${register.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
+                const outfitpalsId=Number(cookieValue('outfitpalsId'));
+                const outfitpalsToken=cookieValue('outfitpalsToken')
+
+                await this.patchUsers(outfitpalsId,outfitpalsToken,{
                     "sign time": `${new Date()}`,
-                    email: obj.email,
-                    "third party": false
                 });
                 signUpMail.value=account.value;
                 signUpPwd.value=pwd.value;
@@ -35,6 +46,7 @@ export const ajaxMember={
         }
     },
     async patchUsers(id,token,obj){
+        console.log(id,token,obj);
         try {
             const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
                 headers:{
@@ -48,9 +60,11 @@ export const ajaxMember={
     async signIn(obj){
         try {
             const signIn=await axios.post(`${apiUrl}signin`,obj);
+            console.log(signIn);
             if(signIn.status===200){
-                localStorage.outfitpalsToken=signIn.data.accessToken;
-                localStorage.outfitpalsId=signIn.data.user.id;
+                document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
+                document.cookie=`outfitpalsId=${signIn.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
                 this.data=signIn.data.user;
 
                 memberIndex.classList.add('opacity-0');
@@ -82,9 +96,12 @@ export const ajaxMember={
         }
     },
     async renderMemberSignInProfileForm(){
-        this.data=(await axios.get(`${apiUrl}users/${localStorage.outfitpalsId}`,{
+        const outfitpalsId=Number(cookieValue('outfitpalsId'));
+        const outfitpalsToken=cookieValue('outfitpalsToken');
+
+        this.data=(await axios.get(`${apiUrl}users/${outfitpalsId}`,{
             headers:{
-                "authorization": `Bearer ${localStorage.outfitpalsToken}`
+                "authorization": `Bearer ${outfitpalsToken}`
             }
         })).data;
         let str=`
@@ -538,39 +555,28 @@ export const ajaxMember={
 
         const signInImg=document.getElementById('signInImg');
         const signInPhoto=document.querySelector('.signInPhoto');
-        const signInPwd=document.getElementById('signInPwd');
-        const signInMail=document.getElementById('signInMail');
-        const signInName=document.getElementById('signInName');
-        const signInNickName=document.getElementById('signInNickName');
-        const signInBirth=document.getElementById('signInBirth');
-        const signInTel=document.getElementById('signInTel');
-        const signInMale=document.getElementById('signInMale');
-        const signInFemale=document.getElementById('signInFemale');
-        const signInReservationTime=document.getElementById('signInReservationTime');
-        const signInReservationLocation=document.getElementById('signInReservationLocation');
-        const signInHeight=document.getElementById('signInHeight');
-        const signInWeight=document.getElementById('signInWeight');
-        const signInPopArea=document.getElementById('signInPopArea');
-        const signInStyle=document.getElementById('signInStyle');
-        const signInOutfitPrice=document.getElementById('signInOutfitPrice');
-        const signInLoveStore=document.getElementById('signInLoveStore');
-        const signInIntroduce=document.getElementById('signInIntroduce');
 
         signInImg.addEventListener('change',e=>{
             let reader=new FileReader();
             reader.addEventListener('load',e=>{
                 signInPhoto.setAttribute('src',e.target.result);
             });
-            // 第二種寫法
-            // reader.onload=(e)=>{
-            //     signUpPhoto.setAttribute("src",e.target.result);
-            // };
             reader.readAsDataURL(e.target.files[0]);
         });
+    },
+    async signOut(id){
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        //location.href='https://bftsai.github.io/outfitpals/member.html';
     },
     async delete(id){
         try {
             const deleted=await axios.delete(`${apiUrl}users/${id}`);
+            document.cookie=`outfitpalsToken= ''`;
+            document.cookie=`outfitpalsId= ''`;
+            document.cookie=`outfitpalsThirdParty= ''`;
         } catch (err) {
             console.log(err);
         }

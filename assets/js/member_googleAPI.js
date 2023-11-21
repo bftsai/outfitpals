@@ -1,20 +1,5 @@
-/*
-    JWT 線上編譯網站
-    https://jwt.io/#debugger
-
-    [JS] Google 第三方登入 API - GSI
-    https://vii120.coderbridge.io/2022/06/23/google-signin-gsi/
-
-    JWT JS 解碼教學
-    https://stackoverflow.com/questions/63202266/how-to-extract-full-information-of-the-users-using-google-one-tap-signin
-
-    npm install jwt-decode 專門解碼 JWT (待驗證)
-    https://www.npmjs.com/package/jwt-decode
-*/
-//axios
-//json-server
-const apiUrl='http://localhost:3000/';
-// const apiUrl='https://outfitpals-web-server.onrender.com/';
+const apiUrl='https://outfitpals-web-server.onrender.com'; //render server
+// const apiUrl='http://localhost:3000/';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
@@ -70,7 +55,15 @@ const signInStyle=document.querySelector('.signInStyle');
 const signInOutfitPrice=document.querySelector('.signInOutfitPrice');
 const signInLoveStore=document.querySelector('.signInLoveStore');
 const signInIntroduce=document.querySelector('.signInIntroduce');
-
+//cookie
+function cookieValue(str) {  
+    const cookieArr=document.cookie.split(';').find(item=>{
+        if(item.split('=')[0].trim()===str){
+            return item;
+        }
+    });
+    return cookieArr.split('=')[1];
+};
 //ajaxMemberGoogle
 const ajaxMemberGoogle={
     data:[],
@@ -78,13 +71,14 @@ const ajaxMemberGoogle={
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status===201){
-                localStorage.outfitpalsToken=register.data.accessToken;
-                localStorage.outfitpalsId=register.data.user.id;
-                localStorage.outfitpalsThirdParty='google';
-                await this.patchUsers(Number(localStorage.outfitpalsId),localStorage.outfitpalsToken,{
-                    "sign time": `${new Date()}`,
-                    email: obj.email,
-                    "third party": "google"
+                document.cookie=`outfitpalsToken=${register.data.accessToken}`;
+                document.cookie=`outfitpalsId=${register.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
+                const outfitpalsId=Number(cookieValue('outfitpalsId'));
+                const outfitpalsToken=cookieValue('outfitpalsToken');
+
+                await this.patchUsers(outfitpalsId,outfitpalsToken,{
+                    "sign time": `${new Date()}`
                 });
                 signUpMail.value=obj.email;
                 signUpPwd.value=obj.password;
@@ -124,8 +118,9 @@ const ajaxMemberGoogle={
         try {
             const signIn=await axios.post(`${apiUrl}signin`,obj);
             if(signIn.status===200){
-                localStorage.outfitpalsToken=signIn.data.accessToken;
-                localStorage.outfitpalsId=signIn.data.user.id;
+                document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
+                document.cookie=`outfitpalsId=${signIn.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
                 this.data=signIn.data.user;
 
                 memberIndex.classList.add('opacity-0');
@@ -146,9 +141,9 @@ const ajaxMemberGoogle={
         }
     },
     async renderMemberSignInProfileForm(){
-        this.data=(await axios.get(`${apiUrl}users/${localStorage.outfitpalsId}`,{
+        this.data=(await axios.get(`${apiUrl}users/${cookieValue('outfitpalsId')}`,{
             headers:{
-                "authorization": `Bearer ${localStorage.outfitpalsToken}`
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
             }
         })).data;
         let str=`
@@ -595,39 +590,28 @@ const ajaxMemberGoogle={
 
         const signInImg=document.getElementById('signInImg');
         const signInPhoto=document.querySelector('.signInPhoto');
-        const signInPwd=document.getElementById('signInPwd');
-        const signInMail=document.getElementById('signInMail');
-        const signInName=document.getElementById('signInName');
-        const signInNickName=document.getElementById('signInNickName');
-        const signInBirth=document.getElementById('signInBirth');
-        const signInTel=document.getElementById('signInTel');
-        const signInMale=document.getElementById('signInMale');
-        const signInFemale=document.getElementById('signInFemale');
-        const signInReservationTime=document.getElementById('signInReservationTime');
-        const signInReservationLocation=document.getElementById('signInReservationLocation');
-        const signInHeight=document.getElementById('signInHeight');
-        const signInWeight=document.getElementById('signInWeight');
-        const signInPopArea=document.getElementById('signInPopArea');
-        const signInStyle=document.getElementById('signInStyle');
-        const signInOutfitPrice=document.getElementById('signInOutfitPrice');
-        const signInLoveStore=document.getElementById('signInLoveStore');
-        const signInIntroduce=document.getElementById('signInIntroduce');
 
         signInImg.addEventListener('change',e=>{
             let reader=new FileReader();
             reader.addEventListener('load',e=>{
                 signInPhoto.setAttribute('src',e.target.result);
             });
-            // 第二種寫法
-            // reader.onload=(e)=>{
-            //     signUpPhoto.setAttribute("src",e.target.result);
-            // };
             reader.readAsDataURL(e.target.files[0]);
         });
+    },
+    async signOut(id){
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        //location.href='https://bftsai.github.io/outfitpals/member.html';
     },
     async delete(id){
         try {
             const deleted=await axios.delete(`${apiUrl}users/${id}`);
+            document.cookie=`outfitpalsToken= ''`;
+            document.cookie=`outfitpalsId= ''`;
+            document.cookie=`outfitpalsThirdParty= ''`;
         } catch (err) {
             console.log(err);
         }
@@ -641,29 +625,27 @@ function onSignIn(response){
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     console.log(response);
-    //console.log(JSON.parse(jsonPayload));
-    window.localStorage.googleToken=response.credential;
+    
+    document.cookie=`googleToken=${response.credential}`;
 
     let signObj={};
+    signObj.email=JSON.parse(jsonPayload).email;
+    signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
     if(signInBtn.className.includes('active')){
-        signObj.email=JSON.parse(jsonPayload).email;
-        signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
-
         ajaxMemberGoogle.signIn(signObj);
     }else{
-        signObj.email=JSON.parse(jsonPayload).email;
-        signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
         signObj['g-pwd']=`Google${JSON.parse(jsonPayload).sub}`;
         signObj.image=JSON.parse(jsonPayload).picture;
         signObj.name=JSON.parse(jsonPayload).name;
         signObj['nick name']=JSON.parse(jsonPayload).given_name;
+        signObj['third party']='google';
 
         ajaxMemberGoogle.register(signObj);
     }
 };
 //init
-if(localStorage.outfitpalsThirdParty==='google'){
-    if(localStorage.outfitpalsToken&&localStorage.outfitpalsId){
+if(cookieValue('outfitpalsThirdParty')==='google'){
+    if(('outfitpalsToken')&&('outfitpalsId')){
         memberIndex.classList.add('opacity-0');
         account.value='';
         pwd.value='';
