@@ -1,4 +1,4 @@
-const apiUrl='https://outfitpals-web-server.onrender.com'; //render server
+const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
 // const apiUrl='http://localhost:3000/';
 //cookie
 export function cookieValue(str) {  
