@@ -1,5 +1,5 @@
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-// const apiUrl='http://localhost:3000/';
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+const apiUrl='http://localhost:3000/';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
