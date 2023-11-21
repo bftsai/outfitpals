@@ -43,7 +43,6 @@ const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
 
 import { checkSign, signUpValidation } from './formValidation.js';
 import { ajaxMember, cookieValue } from './ajaxMember.js';
-
 //init
 if(cookieValue('outfitpalsThirdParty')==='false'){
     if(cookieValue('outfitpalsToken')&&cookieValue('outfitpalsId')){
@@ -207,9 +206,10 @@ memberSignInForm.addEventListener('click',e=>{
 //     .then(res=>{
 //         console.log(res);
 //     })
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 // axios.get(`${apiUrl}users`)
 //     .then(res=>{
-//         console.log(res.data[1]['sign time']);
+//         console.log(res);
 //     })
 
 
