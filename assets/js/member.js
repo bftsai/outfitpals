@@ -197,7 +197,7 @@ memberSignInForm.addEventListener('click',e=>{
 
 
 
-// ajaxMember.delete(2)
+// ajaxMember.delete(3)
 // ajaxMember.signOut(2)
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
