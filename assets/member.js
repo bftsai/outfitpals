@@ -195,8 +195,6 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-
-
 // ajaxMember.delete(2)
 // ajaxMember.signOut(2)
 // axios.post(`${apiUrl}/register`,{
