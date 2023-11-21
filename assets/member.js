@@ -43,7 +43,6 @@ const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
 
 import { checkSign, signUpValidation } from './formValidation.js';
 import { ajaxMember, cookieValue } from './ajaxMember.js';
-
 //init
 if(cookieValue('outfitpalsThirdParty')==='false'){
     if(cookieValue('outfitpalsToken')&&cookieValue('outfitpalsId')){
