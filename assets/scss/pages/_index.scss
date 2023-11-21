@@ -153,7 +153,6 @@ body {
 
 }
 
-
 .posts {
     overflow: hidden;
     position: relative;
@@ -279,110 +278,107 @@ body {
             }
         }
     }
-}
 
-@include lg {
+    @include lg {
 
-    .swiper {
-        overflow: visible !important;
-    }
-
-    .swiper-wrapper {
-        margin-left: 244px;
-        margin-top: 80px;
-    }
-
-    .swiper-slide {
-        width: 552px !important;
-    }
-
-    .swiper-slide-prev {
-        opacity: 0;
-    }
-
-
-
-    .posts {
-
-        &__bg {
-            background-size: cover;
+        .swiper {
+            overflow: visible !important;
         }
 
-        &__title {
-            display: block;
-            position: absolute;
-
-            h2 {
-                margin-top: 50px;
-            }
+        .swiper-wrapper {
+            margin-left: 244px;
+            margin-top: 80px;
         }
 
-        &__slide {
-            position: relative;
+        .swiper-slide {
+            width: 552px !important;
+        }
 
-            &__img {
-                width: 540px;
-                height: 720px;
+        .swiper-slide-prev {
+            opacity: 0;
+        }
+
+
+
+        .posts {
+
+            &__bg {
+                background-size: cover;
             }
 
-            &__caption {
-                bottom: 143px;
-                transform: translate3d(-50%, 100%, 0);
-                opacity: 0;
-                transition: all .3s ease-in-out;
+            &__title {
+                display: block;
+                position: absolute;
 
-                &__text {
-                    position: absolute;
-                    bottom: -26px;
-                    right: -20%;
-                    display: flex;
-                    width: 640px;
-                    max-width: 640px;
-                    padding: 32px 40px;
+                h2 {
+                    margin-top: 50px;
+                }
+            }
 
-                    h4 {
-                        letter-spacing: 0.56px;
-                    }
+            &__slide {
+                position: relative;
 
-                    p {
-                        letter-spacing: 0.32px;
-                    }
+                &__img {
+                    width: 540px;
+                    height: 720px;
+                }
 
-                    &__info {
+                &__caption {
+                    bottom: 143px;
+                    transform: translate3d(-50%, 100%, 0);
+                    opacity: 0;
+                    transition: all .3s ease-in-out;
 
-                        &__btn {
+                    &__text {
+                        position: absolute;
+                        bottom: -26px;
+                        right: -20%;
+                        display: flex;
+                        width: 640px;
+                        max-width: 640px;
+                        padding: 32px 40px;
 
-                            div {
-                                width: 32px;
-                                height: 32px;
+                        h4 {
+                            letter-spacing: 0.56px;
+                        }
+
+                        p {
+                            letter-spacing: 0.32px;
+                        }
+
+                        &__info {
+
+                            &__btn {
+
+                                div {
+                                    width: 32px;
+                                    height: 32px;
+                                }
                             }
                         }
-                    }
 
-                    &__tag {
-                        width: 112px;
-                        padding: 8px 16px;
+                        &__tag {
+                            width: 112px;
+                            padding: 8px 16px;
+                        }
                     }
-
                 }
             }
         }
+
+        .swiper-slide-active figcaption {
+            transform: translate3d(-77%, 0, 0);
+            opacity: 1;
+        }
+
+        .posts__btnLg {
+            display: inline-block !important;
+            height: 70px;
+        }
     }
 }
 
 
-@include lg {
-
-    .swiper-slide-active figcaption {
-        transform: translate3d(-77%, 0, 0);
-        opacity: 1;
-    }
-
-    .posts__btnLg {
-        display: inline-block !important;
-        height: 70px;
-    }
-}
 
 .step {
 
@@ -434,10 +430,11 @@ body {
 
     &__content {
         @include lg {
-            &__item{
+            &__item {
                 overflow: hidden;
             }
         }
+
         &__text {
             padding: 4px 0px 4px 24px;
             border-left: 2px solid $greyD4;
@@ -501,17 +498,17 @@ body {
     }
 
     @include lg {
-        padding: 80px 72px; 
-    
+        padding: 80px 72px;
+
         .step__content__step2__bgcolor {
             position: absolute;
             height: 240px;
             background-color: $primary;
             z-index: -1;
-    
-                top: 292px;
-                left: -26px;
-                width: 1200px;
+
+            top: 292px;
+            left: -26px;
+            width: 1200px;
         }
 
         .step2lg__text {
@@ -519,4 +516,73 @@ body {
         }
     }
 
+}
+
+.FAQ {
+    background-image: url(/assets/images/index/bg_faq.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.2);
+    background-blend-mode: color-burn;
+    padding: 64px 12px;
+
+    h2,
+    h3 {
+        line-height: 120%;
+        letter-spacing: 0.32px;
+    }
+
+    &__content {
+        background-color: $white;
+        padding: 16px;
+        gap: 16px;
+
+        &__items {
+
+            &__question {
+                line-height: 120%;
+                letter-spacing: 0.32px;
+                border-bottom: 1px dashed $greyD4;
+                color: $black;
+            }
+
+            &__answer {
+                background-color: $tertiary;
+                padding: 12px;
+                gap: 8px;
+                line-height: 180%;
+                letter-spacing: 0.28px;
+                text-align: justify;
+
+            }
+        }
+    }
+
+}
+
+@include lg {
+    .FAQ {
+        background-position: right;
+        background-size: auto;
+        padding: 80px 72px;
+
+        &__content {
+            width: 60%;
+
+            &__items {
+
+                &__question {
+
+                    letter-spacing: 0.36px;
+                }
+
+                &__answer {
+                    padding: 24px;
+                    gap: 16px;
+                    letter-spacing: 0.32px;
+                }
+            }
+        }
+    }
 }
