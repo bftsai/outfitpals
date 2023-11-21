@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <title>donate</title>
+</head>
+<body>
+    <%- include('./layout/header'); -%>
+    <div class="container p-4">
+        <div class="row">
+            <h1 class="text-center my-3">響應捐款</h1>
+            <div class="col-6">
+                <p>網站平台功能皆為免費，因經營需投入許多費用，
+                    如果你覺得本站所提供的服務有幫助到你，
+                    可以以小額捐款的方式支持，讓平台能長久經營下去。
+                </p>
+                <div class="d-flex justify-content-end my-10">
+                    <button type="button" class="btn btn-warning">立即捐款</button>
+                </div>
+                <div class="border border-secondary bg-qa p-4">
+                    <h3 class="mb-4 text-center">捐款常見問題</h3>   
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                可以用匯款的嗎?
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              抱歉，尚未開通此功能。
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                可以自己訂捐款金額嗎？
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              可以，請前往下一頁。
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                如何取消？
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                請與客服聯繫或將資料mail給我們，確認資料無誤，將退款給您。
+                                Email:utfitPals_Offical@gmail.com <br>
+                                電話:09-1234-5678
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                可以索取收據嗎？
+                              </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                可以，後面會有頁面可以填寫收據的資料。
+                              </div>
+                            </div>
+                          </div>
+                      </div>  
+                </div>
+                
+            </div>
+            <div class="col-6">
+                <!-- 輪播圖片 -->
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="/assets/images/index/img_hot_3.jpg" class="d-block w-75 mx-auto" alt="圖片3">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="/assets/images/index/img_hot_2.jpg" class="d-block w-75 mx-auto" alt="圖片2">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="/assets/images/index/img_hot_1.jpg" class="d-block w-75 mx-auto" alt="圖片1">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <%- include('./layout/footer'); -%>
+
+    <script type="module" src="../main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+   
+</body>
+</html>
