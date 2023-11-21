@@ -32,7 +32,7 @@ export default defineConfig({
     ViteEjsPlugin(),
     moveOutputPlugin(),
     copy({
-      targets: [{src: 'assets/**/*.js', dest: 'dist/assets'}],
+      targets: [{src: 'assets/**/*.js', dest: 'dist/public'}],
       hook: 'writeBundle',
     })
   ],
