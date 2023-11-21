@@ -7,7 +7,6 @@ export function cookieValue(str) {
             return item;
         }
     });
-    
     return cookieArr===undefined? undefined:cookieArr.split('=')[1];
 };
 export const ajaxMember={
