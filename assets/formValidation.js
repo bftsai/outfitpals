@@ -259,7 +259,7 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,memberObj);
         location.href='https://bftsai.github.io/outfitpals/member.html';
         //location.href='http://localhost:5173/outfitpals/pages/member.html';
-        signUpPhoto.setAttribute('src','../assets/images/member/user-solid.svg');
+        signUpPhoto.src=imgSrc.getAttribute('src');
         name.value='';
         pwd.value='';
         nickName.value='';

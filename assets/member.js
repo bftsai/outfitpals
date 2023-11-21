@@ -147,6 +147,7 @@ memberIndexCancel.addEventListener('click',e=>{
 //upload pic
 signUpImg.addEventListener('change',e=>{
     let reader=new FileReader();
+    
     reader.addEventListener('load',e=>{
         signUpPhoto.setAttribute('src',e.target.result);
     });
@@ -157,10 +158,36 @@ signUpImg.addEventListener('change',e=>{
     reader.readAsDataURL(e.target.files[0]);
 });
 
-memberSignUpSubmit.addEventListener('click',e=>{
+memberSignUpSubmit.addEventListener('click',async e=>{
     e.preventDefault();
     e.stopPropagation();
 
+    //if customer don't set profile photo can use this transform to Data photo
+    function signUpPhotoTransformToData(url) {  
+        let image=new Image();
+        let imgType=url.match(/\.jpg/)? 'image/jpeg':'image/png';
+        return new Promise((resolve,reject)=>{
+            image.onload = function () {
+                let canvas = document.createElement('canvas');
+                canvas.width = this.naturalWidth;
+                canvas.height = this.naturalHeight;
+                canvas.getContext('2d').drawImage(this, 0, 0);
+                resolve(canvas.toDataURL(imgType,1.0));
+            };
+            image.onerror = function () {
+                reject('Error: Image load failed');
+            };
+            image.src = url;
+        });
+    }
+    await signUpPhotoTransformToData(signUpPhoto.getAttribute('src'))
+    .then(res=>{
+        signUpPhoto.src=res;
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    
     signUpValidation(signUpPhoto,signUpName,signUpPwd,signUpNickName,signUpBirth,signUpMail,signUpTel,signUpMale,signUpFemale,signUpReservationTime,signUpReservationLocation,signUpHeight,signUpWeight,signUpPopArea,signUpStyle,signUpOutfitPrice,signUpLoveStore,signUpIntroduce,memberSignUpForm);
 });
 

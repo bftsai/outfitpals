@@ -46,7 +46,6 @@ export const ajaxMember={
         }
     },
     async patchUsers(id,token,obj){
-        console.log(id,token,obj);
         try {
             const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
                 headers:{
