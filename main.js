@@ -1,5 +1,5 @@
 import './assets/scss/all.scss';
-
+import "./node_modules/jquery";
 //pagination
 $(document).ready(function () {
     $('.pagination .page-num').click(function (e) { 

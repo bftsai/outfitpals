@@ -1,3 +1,5 @@
+//axios
+import axios from 'axios';
 //jQuery
 //switch reserveMyDiscuss reserveManageAppointments
 $(document).ready(function () {
@@ -7,7 +9,6 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 });
-
 //JS
 const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');

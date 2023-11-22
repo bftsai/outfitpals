@@ -43,7 +43,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        format: 'iife',
+        format: 'es',
       },
       input: Object.fromEntries(
         glob

@@ -178,8 +178,6 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
 
     memberForm.classList.add('was-validated');
 
-    let memberObj={};
-
     name.addEventListener('keyup',e=>{
         checkSign.checkName(e.target,e.target.value);
     });
@@ -230,35 +228,37 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
     });
     
     if(checkSign.checkName(name,name.value)&&checkSign.checkPwd(pwd,pwd.value)&&checkSign.checkNickName(nickName,nickName.value)&&checkSign.checkBirth(birth,birth.value)&&checkSign.checkTel(tel,tel.value)&&checkSign.checkReservationLocation(reservationLocation,reservationLocation.value)&&memberForm.checkValidity()){
-        memberObj.image=imgSrc.getAttribute('src');
-        memberObj.name=name.value;
-        memberObj.password=pwd.value;
-        memberObj['nick name']=nickName.value;
-        memberObj.birthday=birth.value;
-        memberObj.tel=tel.value;
-        memberObj.email=email.value;
-        memberObj['reservation time']=reservationTime.value;
-        memberObj['reservation time selectedIndex']=reservationTime.selectedIndex;
-        memberObj['reservation location']=reservationLocation.value;
-        memberObj.height=height.value ? height.value:"";
-        memberObj.weight=weight.value ? weight.value:"";
-        memberObj.PopArea=popArea.value;
-        memberObj['PopArea selectedIndex']=popArea.selectedIndex;
-        memberObj.style=style.value;
-        memberObj['style selectedIndex']=style.selectedIndex;
-        memberObj['outfit price']=price.value;
-        memberObj['outfit price selectedIndex']=price.selectedIndex;
-        memberObj['love store']=loveStore.value ? loveStore.value:"";
-        memberObj.introduce=introduce.value ? introduce.value:"";
+        let userObj={};
+
+        userObj.image=imgSrc.getAttribute('src');
+        userObj.name=name.value;
+        userObj.password=pwd.value;
+        userObj['nick name']=nickName.value;
+        userObj.birthday=birth.value;
+        userObj.tel=tel.value;
+        userObj.email=email.value;
+        userObj['reservation time']=reservationTime.value;
+        userObj['reservation time selectedIndex']=reservationTime.selectedIndex;
+        userObj['reservation location']=reservationLocation.value;
+        userObj.height=height.value ? height.value:"";
+        userObj.weight=weight.value ? weight.value:"";
+        userObj.PopArea=popArea.value;
+        userObj['PopArea selectedIndex']=popArea.selectedIndex;
+        userObj.style=style.value;
+        userObj['style selectedIndex']=style.selectedIndex;
+        userObj['outfit price']=price.value;
+        userObj['outfit price selectedIndex']=price.selectedIndex;
+        userObj['love store']=loveStore.value ? loveStore.value:"";
+        userObj.introduce=introduce.value ? introduce.value:"";
         if(male.checked===true){
-            memberObj.sex='Male';
+            userObj.sex='Male';
         }else{
-            memberObj.sex='Female';
+            userObj.sex='Female';
         }
         const outfitpalsId=Number(cookieValue('outfitpalsId'));
         const outfitpalsToken=cookieValue('outfitpalsToken');
 
-        await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,memberObj);
+        await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,userObj);
         location.href=locationUrl;
         signUpPhoto.src=imgSrc.getAttribute('src');
         name.value='';

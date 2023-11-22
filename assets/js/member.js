@@ -231,7 +231,7 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-// ajaxMember.delete(3)
+// ajaxMember.deleteUser(3)
 // ajaxMember.signOut(2)
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
@@ -246,5 +246,12 @@ memberSignInForm.addEventListener('click',e=>{
 //         console.log(res);
 //     })
 
+// ajaxMember.getComments();
 
-axios.post(`${apiUrl}`)
+let obj={
+    "title": "title test three",
+    "body": "body test",
+    "userId" : cookieValue('outfitpalsId')
+};
+// ajaxMember.postPosts(obj)
+// ajaxMember.deletePost(4)

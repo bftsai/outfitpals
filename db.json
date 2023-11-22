@@ -41,6 +41,20 @@
       "title": "json-server",
       "author": "Red",
       "userId": 1
+    },
+    {
+      "title": "title test",
+      "body": "body test",
+      "userId": "2",
+      "author": "BF Tsai",
+      "id": 2
+    },
+    {
+      "title": "title test three",
+      "body": "body test",
+      "userId": "2",
+      "author": "BF Tsai",
+      "id": 3
     }
   ],
   "comments": [
@@ -52,6 +66,6 @@
     }
   ],
   "profile": {
-    "name": "red"
+    "name": "Eric"
   }
 }

@@ -1,4 +1,7 @@
 //Data API
+
+import axios from "axios";
+
 //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
  const apiUrl='http://localhost:3000/';
 //location url
@@ -17,6 +20,14 @@ export function cookieValue(str) {
 const spinner=document.querySelector('.spinner-border');
 export const ajaxMember={
     data: [],
+    async getData(){
+        const result=await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        this.data=result.data;
+    },
     async register(obj){
         try {
             spinner.classList.remove('d-none');
@@ -50,6 +61,23 @@ export const ajaxMember={
             memberIndexForm.classList.add('was-validated');
             account.classList.add('is-invalid');
             account.classList.add('is-invalid-customer');
+        }
+    },
+    async deleteUser(id){
+        try {
+            spinner.classList.remove('d-none');
+            const deleted=await axios.delete(`${apiUrl}600/users/${id}`,{
+                headers:{
+                    'authorization': `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            spinner.classList.add('d-none');
+            location.href=locationUrl;
+            document.cookie=`outfitpalsToken= ''`;
+            document.cookie=`outfitpalsId= ''`;
+            document.cookie=`outfitpalsThirdParty= ''`;
+        } catch (err) {
+            console.log(err);
         }
     },
     async patchUsers(id,token,obj){
@@ -105,6 +133,14 @@ export const ajaxMember={
             }
             
         }
+    },
+    async signOut(){
+        spinner.classList.remove('d-none');
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        location.href=locationUrl;
+        spinner.classList.add('d-none');
     },
     async renderMemberSignInProfileForm(){
         const outfitpalsId=Number(cookieValue('outfitpalsId'));
@@ -582,29 +618,78 @@ export const ajaxMember={
             reader.readAsDataURL(e.target.files[0]);
         });
     },
-    async signOut(){
-        spinner.classList.remove('d-none');
-        document.cookie=`outfitpalsToken= ''`;
-        document.cookie=`outfitpalsId= ''`;
-        document.cookie=`outfitpalsThirdParty= ''`;
-        location.href=locationUrl;
-        spinner.classList.add('d-none');
+    async postPosts(obj){
+        await this.getData();
+        obj.author=this.data.name
+        const result=await axios.post(`${apiUrl}600/posts`,obj,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result)
     },
-    async delete(id){
+    async getPosts(){
+        const result=(await axios.get(`${apiUrl}600/posts`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        })).data;
+        console.log(result);
+    },
+    async deletePosts(id){
+        const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
+    async postComment(obj){
+        const result=await axios.post(`${apiUrl}600/comments`,obj,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result)
+    },
+    async getComment(){
+        const result=(await axios.get(`${apiUrl}600/comments`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        })).data;
+        console.log(result);
+    },
+    async deleteComment(id){
+        const result=await axios.delete(`${apiUrl}600/comments/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
+    async postProfile(obj){
         try {
-            spinner.classList.remove('d-none');
-            const deleted=await axios.delete(`${apiUrl}600/users/${id}`,{
-                headers:{
-                    'authorization': `Bearer ${cookieValue('outfitpalsToken')}`
-                }
-            });
-            spinner.classList.add('d-none');
-            location.href=locationUrl;
-            document.cookie=`outfitpalsToken= ''`;
-            document.cookie=`outfitpalsId= ''`;
-            document.cookie=`outfitpalsThirdParty= ''`;
+            const result=await axios.post(`${apiUrl}profile`,obj);
+            console.log(result);
         } catch (err) {
             console.log(err);
         }
-    }
+    },
+    async getProfile(){
+        try {
+            const result=(await axios.get(`${apiUrl}profile`)).data;
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteProfile(id){
+        const result=await axios.delete(`${apiUrl}600/profile/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
 };
