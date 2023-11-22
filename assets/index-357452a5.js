@@ -1,1 +1,0 @@
-import"./main-162b90ac.js";new Swiper("#swiper-1",{slidesPerView:1,centeredSlides:!0,spaceBetween:24,lazyLoading:!0,loop:!0,keyboard:{enabled:!0},breakpoints:{800:{slidesPerView:2},1400:{slidesPerView:2}}});
