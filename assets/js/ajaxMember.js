@@ -1,7 +1,6 @@
-//Data API
-
+//axios
 import axios from "axios";
-
+//Data API
 //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
  const apiUrl='http://localhost:3000/';
 //location url
@@ -17,7 +16,7 @@ export function cookieValue(str) {
     return cookieArr===undefined? undefined:cookieArr.split('=')[1];
 };
 //spinner
-const spinner=document.querySelector('.spinner-border');
+const spinner=document.querySelector('.memberSpinner');
 export const ajaxMember={
     data: [],
     async getData(){
@@ -629,12 +628,17 @@ export const ajaxMember={
         console.log(result)
     },
     async getPosts(){
-        const result=(await axios.get(`${apiUrl}600/posts`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        })).data;
-        console.log(result);
+        try {
+            const result=(await axios.get(`${apiUrl}600/posts?userId=${cookieValue('outfitpalsId')}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
     },
     async deletePosts(id){
         const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
@@ -652,13 +656,18 @@ export const ajaxMember={
         });
         console.log(result)
     },
-    async getComment(){
-        const result=(await axios.get(`${apiUrl}600/comments`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        })).data;
-        console.log(result);
+    async getComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
     },
     async deleteComment(id){
         const result=await axios.delete(`${apiUrl}600/comments/${id}`,{

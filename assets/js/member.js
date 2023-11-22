@@ -232,7 +232,7 @@ memberSignInForm.addEventListener('click',e=>{
 },false);
 
 // ajaxMember.deleteUser(3)
-// ajaxMember.signOut(2)
+// ajaxMember.signOut()
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
 //     "password": '123456789'
@@ -255,3 +255,14 @@ let obj={
 };
 // ajaxMember.postPosts(obj)
 // ajaxMember.deletePost(4)
+
+let commentObj={
+    "postId": 3,
+    "userId": Number(cookieValue('outfitpalsId')),
+    "body": "你好，我想跟你約12月31日早上九點，在東區碰面，可以嗎？",
+    "reservationTime": '112年10月5號 15:00',
+    "location": '台北車站站1號出口',
+    "state": false
+}
+// ajaxMember.postComment(commentObj)
+// ajaxMember.deleteComment(2)

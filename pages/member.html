@@ -14,11 +14,12 @@
   </head>
   <body>
     <%- include('./layout/header'); -%>
+
+    <div class="spinner-border text-black18 d-none position-absolute memberSpinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <div class="member h-radialGradienStyle-1 py-9 py-lg-13">
-        <div class="member-index py-lg-25 position-relative">
-          <div class="spinner-border text-black18 position-absolute d-none" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+        <div class="member-index py-lg-25">
           <div class="container c-switch-btn-group">
             <div class="row justify-content-center py-9 py-lg-13">
               <div class="col col-lg-4">
@@ -114,9 +115,6 @@
         </div>
 
         <div class="member-signUpData d-none opacity-0 position-relative">
-          <div class="spinner-border text-black18 position-absolute d-none" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
           <div class="container">
             <form class="needs-validation memberSignUpForm" novalidate>
               <div class="row mb-3 fs-lg-5">
@@ -391,9 +389,6 @@
         </div>
 
         <div class="member-signInProfile d-none opacity-0 position-relative">
-          <div class="spinner-border text-black18 position-absolute d-none" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
           <div class="container">
             <div class="memberSignInProfileForm">
 
@@ -436,21 +431,19 @@
     
     <%- include('./layout/footer'); -%>
     <!-- AXIOS -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script> -->
-    <!-- jQuery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/96a7520586.js" crossorigin="anonymous"></script>
     <!-- own JS -->
     <script type="module" src="../main.js"></script>
     <script type="module" src="../assets/js/member.js"></script>
     <script>
-      //location url
-      const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-      //const locationUrl='https://bftsai.github.io/outfitpals/member.html';
       //Data API
       //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
       const apiUrl='http://localhost:3000/';
+      //location url
+      const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+      //const locationUrl='https://bftsai.github.io/outfitpals/member.html';
       //spinner
       const spinner=document.querySelector('.spinner-border');
       //member pages
@@ -576,6 +569,7 @@
           async signIn(obj){
               try {
                   spinner.classList.remove('d-none');
+                  
                   const signIn=await axios.post(`${apiUrl}signin`,obj);
                   if(signIn.status===200){
                       document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
