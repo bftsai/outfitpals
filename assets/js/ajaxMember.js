@@ -1,4 +1,158 @@
-import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/";function g(e){const t=document.cookie.split(";").find(l=>{if(l.split("=")[0].trim()===e)return l});return t===void 0?void 0:t.split("=")[1]}const S={data:[],async register(e){try{const t=await axios.post(`${k}register`,e);if(t.status==201){document.cookie=`outfitpalsToken=${t.data.accessToken}`,document.cookie=`outfitpalsId=${t.data.user.id}`,document.cookie=`outfitpalsThirdParty=${t.data.user["third party"]}`;const l=Number(g("outfitpalsId")),n=g("outfitpalsToken");await this.patchUsers(l,n,{"sign time":`${new Date}`}),signUpMail.value=account.value,signUpPwd.value=pwd.value,memberIndex.classList.add("opacity-0"),setTimeout(()=>{account.value="",pwd.value="",memberIndex.classList.add("d-none"),memberSignUpData.classList.remove("d-none"),setTimeout(()=>{memberSignUpData.classList.remove("opacity-0")},0)},400)}}catch(t){console.log(t.response),memberIndexForm.classList.add("was-validated"),account.classList.add("is-invalid"),account.nextElementSibling.textContent=t.response.data,account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);")}},async patchUsers(e,t,l){try{const n=await axios.patch(`${k}600/users/${e}`,l,{headers:{authorization:`Bearer ${t}`}})}catch(n){console.log(n)}},async signIn(e){try{const t=await axios.post(`${k}signin`,e);console.log(t),t.status===200&&(document.cookie=`outfitpalsToken=${t.data.accessToken}`,document.cookie=`outfitpalsId=${t.data.user.id}`,document.cookie=`outfitpalsThirdParty=${t.data.user["third party"]}`,this.data=t.data.user,memberIndex.classList.add("opacity-0"),setTimeout(()=>{account.value="",pwd.value="",memberIndex.classList.add("d-none"),memberSignInProfile.classList.remove("d-none"),setTimeout(()=>{memberSignInProfile.classList.remove("opacity-0")},0)},400),this.renderMemberSignInProfileForm())}catch(t){console.log(t.response.data),memberIndexForm.classList.add("was-validated"),t.response.data.includes("user")?(account.classList.add("is-invalid"),account.nextElementSibling.textContent=t.response.data,account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);")):(pwd.classList.add("is-invalid"),pwd.nextElementSibling.textContent=t.response.data,pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);"))}},async renderMemberSignInProfileForm(){const e=Number(g("outfitpalsId")),t=g("outfitpalsToken");this.data=(await axios.get(`${k}users/${e}`,{headers:{authorization:`Bearer ${t}`}})).data;let l=`
+//Data API
+
+import axios from "axios";
+
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+ const apiUrl='http://localhost:3000/';
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+//cookie
+export function cookieValue(str) {  
+    const cookieArr=document.cookie.split(';').find(item=>{
+        if(item.split('=')[0].trim()===str){
+            return item;
+        }
+    });
+    return cookieArr===undefined? undefined:cookieArr.split('=')[1];
+};
+//spinner
+const spinner=document.querySelector('.spinner-border');
+export const ajaxMember={
+    data: [],
+    async getData(){
+        const result=await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        this.data=result.data;
+    },
+    async register(obj){
+        try {
+            spinner.classList.remove('d-none');
+            const register=await axios.post(`${apiUrl}register`,obj);
+            if(register.status===201){
+                document.cookie=`outfitpalsToken=${register.data.accessToken}`;
+                document.cookie=`outfitpalsId=${register.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
+                const outfitpalsId=Number(cookieValue('outfitpalsId'));
+                const outfitpalsToken=cookieValue('outfitpalsToken')
+
+                await this.patchUsers(outfitpalsId,outfitpalsToken,{
+                    "sign time": `${new Date()}`,
+                });
+                signUpMail.value=account.value;
+                signUpPwd.value=pwd.value;
+                spinner.classList.add('d-none');
+                memberIndex.classList.add('opacity-0');
+                setTimeout(() => {
+                    account.value='';
+                    pwd.value='';
+                    memberIndex.classList.add('d-none');
+                    memberSignUpData.classList.remove('d-none');
+                    setTimeout(() => {
+                        memberSignUpData.classList.remove('opacity-0')
+                    }, 0);
+                }, 400);
+            }
+        } catch (err) {
+            console.log(err.response);
+            memberIndexForm.classList.add('was-validated');
+            account.classList.add('is-invalid');
+            account.classList.add('is-invalid-customer');
+        }
+    },
+    async deleteUser(id){
+        try {
+            spinner.classList.remove('d-none');
+            const deleted=await axios.delete(`${apiUrl}600/users/${id}`,{
+                headers:{
+                    'authorization': `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            spinner.classList.add('d-none');
+            location.href=locationUrl;
+            document.cookie=`outfitpalsToken= ''`;
+            document.cookie=`outfitpalsId= ''`;
+            document.cookie=`outfitpalsThirdParty= ''`;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async patchUsers(id,token,obj){
+        try {
+            spinner.classList.remove('d-none');
+            const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
+                headers:{
+                    "authorization": `Bearer ${token}`
+                }
+            });
+            spinner.classList.add('d-none');
+        } catch (err) {
+            spinner.classList.add('d-none');
+            this.signOut();
+            console.log(err);
+        };
+    },
+    async signIn(obj){
+        try {
+            spinner.classList.remove('d-none');
+            const signIn=await axios.post(`${apiUrl}signin`,obj);
+            if(signIn.status===200){
+                document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
+                document.cookie=`outfitpalsId=${signIn.data.user.id}`;
+                document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
+                this.data=signIn.data.user;
+
+                spinner.classList.add('d-none');
+                memberIndex.classList.add('opacity-0');
+                setTimeout(() => {
+                    account.value='';
+                    pwd.value='';
+                    memberIndex.classList.add('d-none');
+                    memberSignInProfile.classList.remove('d-none');
+                    setTimeout(() => {
+                        memberSignInProfile.classList.remove('opacity-0');
+                    }, 0);
+                }, 400);
+                this.renderMemberSignInProfileForm();
+            }
+        } catch (err) {
+            console.log(err.response.data);
+            spinner.classList.add('d-none');
+            memberIndexForm.classList.add('was-validated');
+            if(err.response.data.includes('user')){
+                account.classList.add('is-invalid');
+                account.nextElementSibling.textContent=err.response.data;
+                account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            }else{
+                pwd.classList.add('is-invalid');
+                pwd.nextElementSibling.textContent=err.response.data;
+                pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            }
+            
+        }
+    },
+    async signOut(){
+        spinner.classList.remove('d-none');
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        location.href=locationUrl;
+        spinner.classList.add('d-none');
+    },
+    async renderMemberSignInProfileForm(){
+        const outfitpalsId=Number(cookieValue('outfitpalsId'));
+        const outfitpalsToken=cookieValue('outfitpalsToken');
+        spinner.classList.remove('d-none');
+        this.data=(await axios.get(`${apiUrl}600/users/${outfitpalsId}`,{
+            headers:{
+                "authorization": `Bearer ${outfitpalsToken}`
+            }
+        })).data;
+        spinner.classList.add('d-none');
+        let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
                 <div class="mb-3 d-flex flex-column align-items-center">
@@ -27,7 +181,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
                 <p>暱稱</p>
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data["nick name"]}</p>
+                <p class="fs-lg-5">${this.data['nick name']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -67,7 +221,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
                 <p>開放預約時間</p>
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data["reservation time"]}</p>
+                <p class="fs-lg-5">${this.data['reservation time']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -75,7 +229,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
                 <p>開放預約地點</p>
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data["reservation location"]}</p>
+                <p class="fs-lg-5">${this.data['reservation location']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -115,7 +269,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
                 <p>穿搭價位</p>
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data["outfit price"]}</p>
+                <p class="fs-lg-5">${this.data['outfit price']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -123,7 +277,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
                 <p>逛街愛店</p>
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data["love store"]}</p>
+                <p class="fs-lg-5">${this.data['love store']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
@@ -148,7 +302,25 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <div class="col-6 col-sm-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
             </div>
-        </div>`;memberSignInProfileForm.innerHTML=l,memberSignInProfileForm.addEventListener("click",n=>{n.target.className.includes("memberSignInProfileRevise")&&(this.renderMemberSignInForm(),memberSignInProfile.classList.add("opacity-0"),setTimeout(()=>{memberSignInProfile.classList.add("d-none"),memberSignInData.classList.remove("d-none"),setTimeout(()=>{memberSignInData.classList.remove("opacity-0")},0)},400))})},renderMemberSignInForm(){let e=`
+        </div>`;
+        memberSignInProfileForm.innerHTML=str;
+        memberSignInProfileForm.addEventListener('click',e=>{
+            //revise profile
+            if(e.target.className.includes('memberSignInProfileRevise')){
+                this.renderMemberSignInForm();
+                memberSignInProfile.classList.add('opacity-0');
+                setTimeout(() => {
+                    memberSignInProfile.classList.add('d-none');
+                    memberSignInData.classList.remove('d-none');
+                    setTimeout(() => {
+                        memberSignInData.classList.remove('opacity-0');
+                    }, 0);
+                }, 400);
+            }
+        });
+    },
+    renderMemberSignInForm(){
+        let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
             <div class="mb-3 d-flex flex-column align-items-center">
@@ -194,7 +366,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <label for="signInNickName" class="form-label">暱稱</label>
             </div>
             <div class="col-lg-6">
-            <input type="text" name="nick name" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInNickName" placeholder="請輸入暱稱" value="${this.data["nick name"]}" required>
+            <input type="text" name="nick name" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInNickName" placeholder="請輸入暱稱" value="${this.data['nick name']}" required>
             <div class="invalid-feedback">
                 請輸入暱稱
             </div>
@@ -250,11 +422,11 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <label for="signInSex" class="form-label">性別</label>
             </div>
             <div class="col-lg-6">
-            <input class="form-check-input" type="radio" name="性別" id="signInMale" ${this.data.sex==="Male"?"checked":""}>
+            <input class="form-check-input" type="radio" name="性別" id="signInMale" ${this.data.sex==='Male'? 'checked':''}>
             <label class="form-check-label" for="signInMale" required>
                 男生
             </label>
-            <input class="form-check-input" type="radio" name="性別" id="signInFemale" ${this.data.sex==="Female"?"checked":""}>
+            <input class="form-check-input" type="radio" name="性別" id="signInFemale" ${this.data.sex==='Female'? 'checked':''}>
             <label class="form-check-label" for="signInFemale">
                 女生
             </label>
@@ -291,7 +463,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <label for="signInReservationLocation" class="form-label">開放預約地點</label>
             </div>
             <div class="col-lg-6">
-            <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInReservationLocation" placeholder="請輸入開放預約地點" name="開放預約地點" value="${this.data["reservation location"]}" required>
+            <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInReservationLocation" placeholder="請輸入開放預約地點" name="開放預約地點" value="${this.data['reservation location']}" required>
             <div class="invalid-feedback">
                 請輸入開放預約地點
             </div>
@@ -392,7 +564,7 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <label for="signInLoveStore" class="form-label">逛街愛店</label>
             </div>
             <div class="col-lg-6">
-            <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInLoveStore" placeholder="請輸入逛街愛店" name="逛街愛店" value="${this.data["love store"]}">
+            <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInLoveStore" placeholder="請輸入逛街愛店" name="逛街愛店" value="${this.data['love store']}">
             </div>
         </div>
         <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
@@ -421,4 +593,103 @@ import"./main-321b60bf.js";const k="https://outfitpals-web-server.onrender.com/"
             <div class="col-6 col-lg-3 d-flex">
                 <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInReviseCancel" type="button">取消</button>
             </div>
-        </div>`;memberSignInForm.innerHTML=e,document.getElementById("signInReservationTime").selectedIndex=this.data["reservation time selectedIndex"],document.getElementById("signInPopArea").selectedIndex=this.data["PopArea selectedIndex"],document.getElementById("signInStyle").selectedIndex=this.data["style selectedIndex"],document.getElementById("signInOutfitPrice").selectedIndex=this.data["outfit price selectedIndex"];const t=document.getElementById("signInImg"),l=document.querySelector(".signInPhoto");t.addEventListener("change",n=>{let d=new FileReader;d.addEventListener("load",r=>{l.setAttribute("src",r.target.result)}),d.readAsDataURL(n.target.files[0])})},async signOut(e){document.cookie="outfitpalsToken= ''",document.cookie="outfitpalsId= ''",document.cookie="outfitpalsThirdParty= ''",location.href="http://localhost:5173/outfitpals/pages/member.html"},async delete(e){try{const t=await axios.delete(`${k}users/${e}`);document.cookie="outfitpalsToken= ''",document.cookie="outfitpalsId= ''",document.cookie="outfitpalsThirdParty= ''"}catch(t){console.log(t)}}},i={regexp:new RegExp(""),checkAccount(e,t){return this.regexp=new RegExp("^[\\w\\d-]+\\@[\\d\\w]{3,}\\.[\\d\\w]{3,}(\\.[\\d\\w]{2,})?$"),t===""?(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="請輸入電子郵件",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，電子郵件不包含特殊字元（如：!、#、$、%、^）",!1)},checkSignUpIndexPwd(e,t){return this.regexp=new RegExp("^[A-Z][\\d\\w]{7,}$"),t===""?(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="請輸入密碼",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),!1)},checkMail(e,t){return this.regexp=new RegExp("^[\\w\\d-]+\\@[\\d\\w]{3,}\\.[\\d\\w]{3,}(\\.[\\d\\w]{2,})?$"),t===""?(e.nextElementSibling.textContent="請輸入電子郵件",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，電子郵件不包含特殊字元（如：!、#、$、%、^）",!1)},checkName(e,t){return this.regexp=new RegExp("^[一-龥_a-zA-Z ]{5,}$"),t===""?(e.nextElementSibling.textContent="請輸入姓名",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，姓名不包含數字或特殊字元（如：!、@、#、$、%、^）",!1)},checkPwd(e,t){return this.regexp=new RegExp("^[A-Z][\\d\\w]{7,}$"),t===""?(e.nextElementSibling.textContent="請輸入密碼",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，密碼第一個為大寫英文，不包含特殊字元（如：!、@、#、$、%、^），最少 8 位英數字",!1)},checkNickName(e,t){return this.regexp=new RegExp("^[一-龥_a-zA-Z\\d ]{1,}$"),t===""?(e.nextElementSibling.textContent="請輸入暱稱",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，暱稱最少三個英數字，不包含特殊字元（如：!、@、#、$、%、^）",!1)},checkBirth(e,t){return this.regexp=new RegExp("^[\\d]{4}-[\\d]{2}-[\\d]{2}$"),t===""?(e.nextElementSibling.textContent="請輸入生日",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，請輸入西元年/月/日",!1)},checkTel(e,t){return this.regexp=new RegExp("^09[\\d]{8}$"),t===""?(e.nextElementSibling.textContent="請輸入手機號碼",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，格式為0912345678",!1)},checkReservationLocation(e,t){return this.regexp=new RegExp("^[一-龥_a-zA-Z ]{2,}$"),t===""?(e.nextElementSibling.textContent="請輸入開放預約地點",!1):this.regexp.test(t)?(e.classList.remove("is-invalid"),e.classList.remove("is-invalid-customer"),e.classList.add("is-valid-customer"),!0):(e.classList.remove("is-valid-customer"),e.classList.add("is-invalid"),e.classList.add("is-invalid-customer"),e.nextElementSibling.textContent="格式錯誤，不包含數字或特殊字元（如：!、@、#、$、%、^）",!1)}};async function N(e,t,l,n,d,r,m,v,T,p,u,f,b,y,I,h,x,L,w){w.classList.add("was-validated");let a={};if(t.addEventListener("keyup",s=>{i.checkName(s.target,s.target.value)}),t.addEventListener("paste",s=>{i.checkName(s.target,s.target.value)}),l.addEventListener("keyup",s=>{i.checkPwd(s.target,s.target.value)}),l.addEventListener("paste",s=>{i.checkPwd(s.target,s.target.value)}),n.addEventListener("keyup",s=>{i.checkNickName(s.target,s.target.value)}),n.addEventListener("paste",s=>{i.checkNickName(s.target,s.target.value)}),d.addEventListener("keyup",s=>{i.checkBirth(s.target,s.target.value)}),d.addEventListener("paste",s=>{i.checkBirth(s.target,s.target.value)}),r.addEventListener("keyup",s=>{i.checkMail(s.target,s.target.value)}),r.addEventListener("paste",s=>{i.checkMail(s.target,s.target.value)}),m.addEventListener("keyup",s=>{i.checkTel(s.target,s.target.value)}),m.addEventListener("paste",s=>{i.checkTel(s.target,s.target.value)}),u.addEventListener("keyup",s=>{i.checkReservationLocation(s.target,s.target.value)}),u.addEventListener("paste",s=>{i.checkReservationLocation(s.target,s.target.value)}),i.checkName(t,t.value)&&i.checkPwd(l,l.value)&&i.checkNickName(n,n.value)&&i.checkBirth(d,d.value)&&i.checkTel(m,m.value)&&i.checkReservationLocation(u,u.value)&&w.checkValidity()){a.image=e.getAttribute("src"),a.name=t.value,a.password=l.value,a["nick name"]=n.value,a.birthday=d.value,a.tel=m.value,a.email=r.value,a["reservation time"]=p.value,a["reservation time selectedIndex"]=p.selectedIndex,a["reservation location"]=u.value,a.height=f.value?f.value:"",a.weight=b.value?b.value:"",a.PopArea=y.value,a["PopArea selectedIndex"]=y.selectedIndex,a.style=I.value,a["style selectedIndex"]=I.selectedIndex,a["outfit price"]=h.value,a["outfit price selectedIndex"]=h.selectedIndex,a["love store"]=x.value?x.value:"",a.introduce=L.value?L.value:"",v.checked===!0?a.sex="Male":a.sex="Female";const s=Number(g("outfitpalsId")),q=g("outfitpalsToken");await S.patchUsers(s,q,a),location.href="https://bftsai.github.io/outfitpals/member.html",signUpPhoto.src=e.getAttribute("src"),t.value="",l.value="",n.value="",d.value="",m.value="",r.value="",p.selectedIndex=0,u.value="",f.value="",b.value="",y.selectedIndex=0,I.selectedIndex=0,h.selectedIndex=0,x.value="",L.value=""}else console.log("all false")}const j=document.querySelector(".member-index"),U=document.querySelector(".memberIndexForm");document.querySelector(".member-signUpData");const M=document.querySelector(".memberSignUpForm"),R=document.querySelector(".member-signInProfile");document.querySelector(".memberSignInProfileForm");document.querySelector(".member-signInData");const A=document.querySelector(".memberSignInForm"),C=document.querySelector(".signInBtn"),F=document.querySelector(".signUpBtn"),$=document.querySelector(".gmailSignIn"),P=document.querySelector(".gmailSignUp"),o=document.getElementById("account"),c=document.getElementById("pwd"),D=document.getElementById("signUpImg");let E=document.querySelector(".signUpPhoto");const H=document.getElementById("signUpPwd"),O=document.getElementById("signUpMail"),z=document.getElementById("signUpName"),W=document.getElementById("signUpNickName"),Z=document.getElementById("signUpBirth"),V=document.getElementById("signUpTel"),_=document.getElementById("signUpMale"),G=document.getElementById("signUpFemale"),J=document.getElementById("signUpReservationTime"),K=document.getElementById("signUpReservationLocation"),Q=document.getElementById("signUpHeight"),X=document.getElementById("signUpWeight"),Y=document.getElementById("signUpPopArea"),ee=document.getElementById("signUpStyle"),te=document.getElementById("signUpOutfitPrice"),se=document.getElementById("signUpLoveStore"),le=document.getElementById("signUpIntroduce"),B=document.querySelector(".memberIndexSubmit"),ie=document.querySelector(".memberIndexCancel"),ae=document.querySelector(".memberSignUpSubmit");g("outfitpalsThirdParty")==="false"&&g("outfitpalsToken")&&g("outfitpalsId")&&(j.classList.add("opacity-0"),o.value="",c.value="",S.renderMemberSignInProfileForm(),j.classList.add("d-none"),R.classList.remove("d-none"),R.classList.remove("opacity-0"));C.addEventListener("click",e=>{[...e.target.offsetParent.children].forEach(t=>{t.classList.remove("active")}),o.value="",c.value="",B.textContent="登入",U.classList.remove("was-validated"),o.classList.remove("is-invalid"),o.setAttribute("style",""),c.classList.remove("is-invalid"),c.setAttribute("style",""),e.target.classList.add("active"),P.classList.add("opacity-0"),setTimeout(()=>{P.classList.add("d-none"),$.classList.remove("d-none"),setTimeout(()=>{$.classList.remove("opacity-0")},0)},400)});F.addEventListener("click",e=>{[...e.target.offsetParent.children].forEach(t=>{t.classList.remove("active")}),o.value="",c.value="",B.textContent="註冊",U.classList.remove("was-validated"),o.classList.remove("is-invalid"),o.setAttribute("style",""),c.classList.remove("is-invalid"),c.setAttribute("style",""),e.target.classList.add("active"),$.classList.add("opacity-0"),setTimeout(()=>{$.classList.add("d-none"),P.classList.remove("d-none"),setTimeout(()=>{P.classList.remove("opacity-0")},0)},400)});B.addEventListener("click",e=>{if(e.preventDefault(),e.stopPropagation(),U.classList.add("was-validated"),i.checkAccount(o,o.value),i.checkSignUpIndexPwd(c,c.value),o.addEventListener("keyup",t=>{i.checkAccount(t.target,t.target.value)}),o.addEventListener("paste",t=>{i.checkAccount(t.target,t.target.value)}),c.addEventListener("keyup",t=>{i.checkSignUpIndexPwd(t.target,t.target.value)}),c.addEventListener("paste",t=>{i.checkSignUpIndexPwd(t.target,t.target.value)}),i.checkAccount(o,o.value)&&i.checkSignUpIndexPwd(c,c.value)){let t={};t.email=o.value,t.password=c.value,t["third party"]="false",C.className.includes("active")?S.signIn(t):S.register(t)}});ie.addEventListener("click",e=>{o.value="",c.value=""});D.addEventListener("change",e=>{let t=new FileReader;t.addEventListener("load",l=>{E.setAttribute("src",l.target.result)}),t.readAsDataURL(e.target.files[0])});ae.addEventListener("click",async e=>{e.preventDefault(),e.stopPropagation(),g("outfitpalsThirdParty")==="false"&&await function(l){let n=new Image,d=l.match(/\.jpg/)?"image/jpeg":"image/png";return new Promise((r,m)=>{n.onload=function(){let v=document.createElement("canvas");v.width=this.naturalWidth,v.height=this.naturalHeight,v.getContext("2d").drawImage(this,0,0),r(v.toDataURL(d,1))},n.onerror=function(){m("Error: Image load failed")},n.src=l})}(E.getAttribute("src")).then(l=>{E.src=l}).catch(l=>{console.log(l)}),N(E,z,H,W,Z,O,V,_,G,J,K,Q,X,Y,ee,te,se,le,M)});A.addEventListener("click",e=>{document.getElementById("signInImg");const t=document.querySelector(".signInPhoto"),l=document.getElementById("signInPwd"),n=document.getElementById("signInMail"),d=document.getElementById("signInName"),r=document.getElementById("signInNickName"),m=document.getElementById("signInBirth"),v=document.getElementById("signInTel"),T=document.getElementById("signInMale"),p=document.getElementById("signInFemale"),u=document.getElementById("signInReservationTime"),f=document.getElementById("signInReservationLocation"),b=document.getElementById("signInHeight"),y=document.getElementById("signInWeight"),I=document.getElementById("signInPopArea"),h=document.getElementById("signInStyle"),x=document.getElementById("signInOutfitPrice"),L=document.getElementById("signInLoveStore"),w=document.getElementById("signInIntroduce");e.target.className.includes("memberSignInReviseSubmit")?(e.preventDefault(),e.stopPropagation(),N(t,d,l,r,m,n,v,T,p,u,f,b,y,I,h,x,L,w,A)):e.target.className.includes("memberSignInReviseCancel")&&(location.href="http://localhost:5173/outfitpals/pages/member.html")},!1);
+        </div>`;
+        memberSignInForm.innerHTML=str;
+        if(cookieValue('outfitpalsThirdParty')==='google'){
+            const signInPwd=document.getElementById('signInPwd');
+            const signInMail=document.getElementById('signInMail');
+            signInPwd.value=this.data['g-pwd'];
+            signInPwd.setAttribute('disabled','');
+            signInMail.setAttribute('disabled','');
+        }
+        document.getElementById('signInReservationTime').selectedIndex=this.data['reservation time selectedIndex'];
+        document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
+        document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
+        document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price selectedIndex'];
+
+        const signInImg=document.getElementById('signInImg');
+        const signInPhoto=document.querySelector('.signInPhoto');
+
+        signInImg.addEventListener('change',e=>{
+            let reader=new FileReader();
+            reader.addEventListener('load',e=>{
+                signInPhoto.setAttribute('src',e.target.result);
+            });
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    },
+    async postPosts(obj){
+        await this.getData();
+        obj.author=this.data.name
+        const result=await axios.post(`${apiUrl}600/posts`,obj,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result)
+    },
+    async getPosts(){
+        const result=(await axios.get(`${apiUrl}600/posts`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        })).data;
+        console.log(result);
+    },
+    async deletePosts(id){
+        const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
+    async postComment(obj){
+        const result=await axios.post(`${apiUrl}600/comments`,obj,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result)
+    },
+    async getComment(){
+        const result=(await axios.get(`${apiUrl}600/comments`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        })).data;
+        console.log(result);
+    },
+    async deleteComment(id){
+        const result=await axios.delete(`${apiUrl}600/comments/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
+    async postProfile(obj){
+        try {
+            const result=await axios.post(`${apiUrl}profile`,obj);
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getProfile(){
+        try {
+            const result=(await axios.get(`${apiUrl}profile`)).data;
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteProfile(id){
+        const result=await axios.delete(`${apiUrl}600/profile/${id}`,{
+            headers: {
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+            }
+        });
+        console.log(result);
+    },
+};

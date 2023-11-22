@@ -1,7 +1,68 @@
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-// const apiUrl='http://localhost:3000/';
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+//Data API
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+const apiUrl='http://localhost:3000/';
+//spinner
+const spinner=document.querySelector('.spinner-border');
+//member pages
+const memberIndex=document.querySelector('.member-index');
+const memberIndexForm=document.querySelector('.memberIndexForm');
+const memberSignUpData=document.querySelector('.member-signUpData');
+const memberSignUpForm=document.querySelector('.memberSignUpForm');
+const memberSignInProfile=document.querySelector('.member-signInProfile');
+const memberSignInProfileForm=document.querySelector('.memberSignInProfileForm');
+const memberSignInData=document.querySelector('.member-signInData');
+const memberSignInForm=document.querySelector('.memberSignInForm');
+//signUp index
+//signIn signUp Btn
+const signInBtn=document.querySelector('.signInBtn');
+const signUpBtn=document.querySelector('.signUpBtn');
+const account=document.getElementById('account');
+const pwd=document.getElementById('pwd');
+//member signUp input
+const signUpImg=document.getElementById('signUpImg'); //input
+let signUpPhoto=document.querySelector('.signUpPhoto'); //image
+const signUpPwd=document.getElementById('signUpPwd');
+const signUpMail=document.getElementById('signUpMail');
+const signUpName=document.getElementById('signUpName');
+const signUpNickName=document.getElementById('signUpNickName');
+const signUpBirth=document.getElementById('signUpBirth');
+const signUpTel=document.getElementById('signUpTel');
+const signUpMale=document.getElementById('signUpMale');
+const signUpFemale=document.getElementById('signUpFemale');
+const signUpReservationTime=document.getElementById('signUpReservationTime');
+const signUpReservationLocation=document.getElementById('signUpReservationLocation');
+const signUpHeight=document.getElementById('signUpHeight');
+const signUpWeight=document.getElementById('signUpWeight');
+const signUpPopArea=document.getElementById('signUpPopArea');
+const signUpStyle=document.getElementById('signUpStyle');
+const signUpOutfitPrice=document.getElementById('signUpOutfitPrice');
+const signUpLoveStore=document.getElementById('signUpLoveStore');
+const signUpIntroduce=document.getElementById('signUpIntroduce');
+//member signIn
+const signInPhoto=document.querySelector('.signInPhoto') //img
+const signInImg=document.getElementById('signInImg') //input
+const signInName=document.querySelector('.signInName');
+const signInPwd=document.querySelector('.signInPwd');
+const signInNickName=document.querySelector('.signInNickName');
+const signInBirth=document.querySelector('.signInBirth');
+const signInMail=document.querySelector('.signInMail');
+const signInTel=document.querySelector('.signInTel');
+const signInMale=document.querySelector('.signInMale');
+const signInFemale=document.querySelector('.signInFemale');
+const signInReservationTime=document.querySelector('.signInReservationTime');
+const signInReservationLocation=document.querySelector('.signInReservationLocation');
+const signInHeight=document.querySelector('.signInHeight');
+const signInWeight=document.querySelector('.signInWeight');
+const signInPopArea=document.querySelector('.signInPopArea');
+const signInStyle=document.querySelector('.signInStyle');
+const signInOutfitPrice=document.querySelector('.signInOutfitPrice');
+const signInLoveStore=document.querySelector('.signInLoveStore');
+const signInIntroduce=document.querySelector('.signInIntroduce');
 //cookie
-export function cookieValue(str) {  
+function cookieValue(str) {  
     const cookieArr=document.cookie.split(';').find(item=>{
         if(item.split('=')[0].trim()===str){
             return item;
@@ -9,23 +70,30 @@ export function cookieValue(str) {
     });
     return cookieArr===undefined? undefined:cookieArr.split('=')[1];
 };
-export const ajaxMember={
-    data: [],
+//ajaxMemberGoogle
+const ajaxMemberGoogle={
+    data:[],
     async register(obj){
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
-            if(register.status==201){
+            if(register.status===201){
+                spinner.classList.add('d-none');
                 document.cookie=`outfitpalsToken=${register.data.accessToken}`;
                 document.cookie=`outfitpalsId=${register.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
+                document.cookie=`googleToken=${register.data.user.googleToken}`;
                 const outfitpalsId=Number(cookieValue('outfitpalsId'));
-                const outfitpalsToken=cookieValue('outfitpalsToken')
+                const outfitpalsToken=cookieValue('outfitpalsToken');
 
                 await this.patchUsers(outfitpalsId,outfitpalsToken,{
-                    "sign time": `${new Date()}`,
+                    "sign time": `${new Date()}`
                 });
-                signUpMail.value=account.value;
-                signUpPwd.value=pwd.value;
+                signUpMail.value=obj.email;
+                signUpPwd.value=obj.password;
+                signUpPhoto.setAttribute('src',obj.image);
+                signUpName.value=obj.name;
+                signUpNickName.value=obj['nick name'];
+
                 memberIndex.classList.add('opacity-0');
                 setTimeout(() => {
                     account.value='';
@@ -38,33 +106,36 @@ export const ajaxMember={
                 }, 400);
             }
         } catch (err) {
-            console.log(err.response);
-            memberIndexForm.classList.add('was-validated');
-            account.classList.add('is-invalid');
-            account.nextElementSibling.textContent=err.response.data;
-            account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+          spinner.classList.add('d-none');
+            console.log(err);
+            alert('google 帳號已被使用');
         }
     },
     async patchUsers(id,token,obj){
         try {
+            spinner.classList.remove('d-none');
             const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
                 headers:{
                     "authorization": `Bearer ${token}`
                 }
             });
+            spinner.classList.add('d-none');
+            console.log(patchUsers);
         } catch (err) {
+            spinner.classList.add('d-none');
             console.log(err);
-        };
+        }
     },
     async signIn(obj){
         try {
+            spinner.classList.remove('d-none');
             const signIn=await axios.post(`${apiUrl}signin`,obj);
-            console.log(signIn);
             if(signIn.status===200){
                 document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
                 document.cookie=`outfitpalsId=${signIn.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
                 this.data=signIn.data.user;
+                spinner.classList.add('d-none');
 
                 memberIndex.classList.add('opacity-0');
                 setTimeout(() => {
@@ -73,36 +144,24 @@ export const ajaxMember={
                     memberIndex.classList.add('d-none');
                     memberSignInProfile.classList.remove('d-none');
                     setTimeout(() => {
-                        memberSignInProfile.classList.remove('opacity-0');
+                        memberSignInProfile.classList.remove('opacity-0')
                     }, 0);
                 }, 400);
                 this.renderMemberSignInProfileForm();
-                //location.href='https://bftsai.github.io/outfitpals/index.html';
             }
         } catch (err) {
-            console.log(err.response.data);
-            memberIndexForm.classList.add('was-validated');
-            if(err.response.data.includes('user')){
-                account.classList.add('is-invalid');
-                account.nextElementSibling.textContent=err.response.data;
-                account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-            }else{
-                pwd.classList.add('is-invalid');
-                pwd.nextElementSibling.textContent=err.response.data;
-                pwd.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
-            }
-            
+            spinner.classList.add('d-none');
+            alert(err.response.data);
         }
     },
     async renderMemberSignInProfileForm(){
-        const outfitpalsId=Number(cookieValue('outfitpalsId'));
-        const outfitpalsToken=cookieValue('outfitpalsToken');
-
-        this.data=(await axios.get(`${apiUrl}users/${outfitpalsId}`,{
+        spinner.classList.remove('d-none');
+        this.data=(await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
             headers:{
-                "authorization": `Bearer ${outfitpalsToken}`
+                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
             }
         })).data;
+        spinner.classList.add('d-none');
         let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
@@ -256,20 +315,19 @@ export const ajaxMember={
         </div>`;
         memberSignInProfileForm.innerHTML=str;
         memberSignInProfileForm.addEventListener('click',e=>{
-            //revise profile
-            if(e.target.className.includes('memberSignInProfileRevise')){
-                this.renderMemberSignInForm();
-                memberSignInProfile.classList.add('opacity-0');
+          //revise profile
+          if(e.target.className.includes('memberSignInProfileRevise')){
+            this.renderMemberSignInForm();
+            memberSignInProfile.classList.add('opacity-0');
+            setTimeout(() => {
+                memberSignInProfile.classList.add('d-none');
+                memberSignInData.classList.remove('d-none');
                 setTimeout(() => {
-                    memberSignInProfile.classList.add('d-none');
-                    memberSignInData.classList.remove('d-none');
-                    setTimeout(() => {
-                        memberSignInData.classList.remove('opacity-0');
-                    }, 0);
-                }, 400);
-            }
+                    memberSignInData.classList.remove('opacity-0');
+                }, 0);
+            }, 400);
+          }
         });
-    
     },
     renderMemberSignInForm(){
         let str=`
@@ -304,10 +362,7 @@ export const ajaxMember={
             <label for="signInPwd" class="form-label">密碼</label>
             </div>
             <div class="col-lg-6">
-            <input type="password" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInPwd" placeholder="請輸入密碼" required>
-            <div class="invalid-feedback">
-                請輸入密碼
-            </div>
+            <input type="password" name="pwd" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInPwd" placeholder="請輸入密碼" value="${this.data['g-pwd']}" disabled>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -346,10 +401,7 @@ export const ajaxMember={
             <label for="signInMail" class="form-label">電子信箱</label>
             </div>
             <div class="col-lg-6">
-            <input type="email" name="email" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInMail" placeholder="請輸入電子信箱" value="${this.data.email}" required>
-            <div class="invalid-feedback">
-                請輸入電子信箱
-            </div>
+            <input type="email" name="email" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInMail" placeholder="請輸入電子信箱" value="${this.data.email}" disabled>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -563,21 +615,31 @@ export const ajaxMember={
             reader.readAsDataURL(e.target.files[0]);
         });
     },
-    async signOut(id){
-        document.cookie=`outfitpalsToken= ''`;
-        document.cookie=`outfitpalsId= ''`;
-        document.cookie=`outfitpalsThirdParty= ''`;
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
-        //location.href='https://bftsai.github.io/outfitpals/member.html';
-    },
-    async delete(id){
-        try {
-            const deleted=await axios.delete(`${apiUrl}users/${id}`);
-            document.cookie=`outfitpalsToken= ''`;
-            document.cookie=`outfitpalsId= ''`;
-            document.cookie=`outfitpalsThirdParty= ''`;
-        } catch (err) {
-            console.log(err);
-        }
+};
+// Google third party login
+function onSignIn(response){
+    spinner.classList.remove('d-none');
+    var base64Url = response.credential.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    
+    spinner.classList.add('d-none');
+
+    let signObj={};
+    signObj.email=JSON.parse(jsonPayload).email;
+    signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
+    signObj.googleToken=response.credential;
+    if(signInBtn.className.includes('active')){
+        ajaxMemberGoogle.signIn(signObj);
+    }else{
+        signObj['g-pwd']=`Google${JSON.parse(jsonPayload).sub}`;
+        signObj.image=JSON.parse(jsonPayload).picture;
+        signObj.name=JSON.parse(jsonPayload).name;
+        signObj['nick name']=JSON.parse(jsonPayload).given_name;
+        signObj['third party']='google';
+
+        ajaxMemberGoogle.register(signObj);
     }
 };
