@@ -32,7 +32,7 @@ export default defineConfig({
     ViteEjsPlugin(),
     moveOutputPlugin(),
     copy({
-      targets: [{src: 'assets/**/*.js', dest: 'dist/assets'}],
+      targets: [{src: 'assets/**/*.js', dest: 'dist/assets/js'}],
       hook: 'writeBundle',
     })
   ],
@@ -42,6 +42,9 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      output: {
+        format: 'iife',
+      },
       input: Object.fromEntries(
         glob
           .sync('pages/**/*.html')

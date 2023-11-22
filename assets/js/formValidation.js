@@ -1,5 +1,7 @@
 import { ajaxMember, cookieValue } from "./ajaxMember";
-
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //check validation tool
 export const checkSign={
     regexp:new RegExp(''),
@@ -257,8 +259,7 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         const outfitpalsToken=cookieValue('outfitpalsToken');
 
         await ajaxMember.patchUsers(outfitpalsId,outfitpalsToken,memberObj);
-        //location.href='https://bftsai.github.io/outfitpals/member.html';
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        location.href=locationUrl;
         signUpPhoto.src=imgSrc.getAttribute('src');
         name.value='';
         pwd.value='';

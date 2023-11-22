@@ -1,3 +1,6 @@
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
@@ -44,7 +47,7 @@ const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
 import { checkSign, signUpValidation } from './formValidation.js';
 import { ajaxMember, cookieValue } from './ajaxMember.js';
 //init
-if(cookieValue('outfitpalsThirdParty')==='false'){
+if(cookieValue('outfitpalsThirdParty')==='false'||cookieValue('outfitpalsThirdParty')==='google'){
     if(cookieValue('outfitpalsToken')&&cookieValue('outfitpalsId')){
         memberIndex.classList.add('opacity-0');
         account.value='';
@@ -65,8 +68,12 @@ signInBtn.addEventListener('click',e=>{
     memberIndexSubmit.textContent='登入';  
     memberIndexForm.classList.remove('was-validated');
     account.classList.remove('is-invalid');
+    account.classList.remove('is-valid-customer');
+    account.classList.remove('is-invalid-customer');
     account.setAttribute("style","");
     pwd.classList.remove('is-invalid');
+    pwd.classList.remove('is-valid-customer');
+    pwd.classList.remove('is-invalid-customer');
     pwd.setAttribute("style","");  
 
     e.target.classList.add('active');
@@ -142,7 +149,6 @@ memberIndexCancel.addEventListener('click',e=>{
     pwd.value='';
 });
 
-
 //signUp
 //upload pic
 signUpImg.addEventListener('change',e=>{
@@ -158,29 +164,30 @@ signUpImg.addEventListener('change',e=>{
     reader.readAsDataURL(e.target.files[0]);
 });
 
+//if customer don't set profile photo can use this transform to Data photo
+function signUpPhotoTransformToData(url) {  
+    console.log(url);
+    let image=new Image();
+    let imgType=url.match(/\.jpg/)? 'image/jpeg':'image/png';
+    return new Promise((resolve,reject)=>{
+        image.onload = function () {
+            let canvas = document.createElement('canvas');
+            canvas.width = this.naturalWidth;
+            canvas.height = this.naturalHeight;
+            canvas.getContext('2d').drawImage(this, 0, 0);
+            resolve(canvas.toDataURL(imgType,1.0));
+        };
+        image.onerror = function () {
+            reject('Error: Image load failed');
+        };
+        image.src = url;
+    });
+};
 memberSignUpSubmit.addEventListener('click',async e=>{
     e.preventDefault();
     e.stopPropagation();
 
     if(cookieValue('outfitpalsThirdParty')==='false'){
-        //if customer don't set profile photo can use this transform to Data photo
-        function signUpPhotoTransformToData(url) {  
-            let image=new Image();
-            let imgType=url.match(/\.jpg/)? 'image/jpeg':'image/png';
-            return new Promise((resolve,reject)=>{
-                image.onload = function () {
-                    let canvas = document.createElement('canvas');
-                    canvas.width = this.naturalWidth;
-                    canvas.height = this.naturalHeight;
-                    canvas.getContext('2d').drawImage(this, 0, 0);
-                    resolve(canvas.toDataURL(imgType,1.0));
-                };
-                image.onerror = function () {
-                    reject('Error: Image load failed');
-                };
-                image.src = url;
-            });
-        }
         await signUpPhotoTransformToData(signUpPhoto.getAttribute('src'))
         .then(res=>{
             signUpPhoto.src=res;
@@ -220,11 +227,11 @@ memberSignInForm.addEventListener('click',e=>{
 
         signUpValidation(signInPhoto,signInName,signInPwd,signInNickName,signInBirth,signInMail,signInTel,signInMale,signInFemale,signInReservationTime,signInReservationLocation,signInHeight,signInWeight,signInPopArea,signInStyle,signInOutfitPrice,signInLoveStore,signInIntroduce,memberSignInForm);
     }else if(e.target.className.includes('memberSignInReviseCancel')){
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
+        location.href=locationUrl;
     }
 },false);
 
-// ajaxMember.delete(2)
+// ajaxMember.delete(3)
 // ajaxMember.signOut(2)
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
@@ -240,4 +247,4 @@ memberSignInForm.addEventListener('click',e=>{
 //     })
 
 
-
+axios.post(`${apiUrl}`)
