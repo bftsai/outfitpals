@@ -31,6 +31,10 @@ export default defineConfig({
     liveReload(['./layout/**/*.ejs', './pages/**/*.ejs', './pages/**/*.html']),
     ViteEjsPlugin(),
     moveOutputPlugin(),
+    copy({
+      targets: [{src: 'assets/**/*.js', dest: 'dist/assets/js/'}],
+      hook: 'writeBundle',
+    })
   ],
   server: {
     // 啟動 server 時預設開啟的頁面
