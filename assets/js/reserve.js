@@ -1,4 +1,7 @@
+//axios
+import axios from 'axios';
 //jQuery
+import $ from "jquery";
 //switch reserveMyDiscuss reserveManageAppointments
 $(document).ready(function () {
     $('.btn-group .btn').click(function (e) { 
@@ -7,7 +10,6 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 });
-
 //JS
 const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');
@@ -137,3 +139,45 @@ reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
     reserveManageAppointmentsRadioCancel.checked=false;
     reserveManageAppointmentsConfirmSubmit.disabled=true;
 });
+
+import { ajaxMember,cookieValue } from "./ajaxMember";
+// ajaxMember.deleteUser(3)
+// ajaxMember.signOut()
+// axios.post(`${apiUrl}/register`,{
+//     email: 'test@gamil.com',
+//     "password": '123456789'
+// })
+//     .then(res=>{
+//         console.log(res);
+//     })
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
+
+
+// ajaxMember.getPosts();
+
+let obj={
+    "title": "title test three",
+    "body": "body test",
+    "userId" : cookieValue('outfitpalsId')
+};
+// ajaxMember.postPosts(obj)
+// ajaxMember.deletePost(4)
+
+
+
+
+async function test() {  
+    const postsArr=await ajaxMember.getPosts()
+    console.log(postsArr)
+    if(postsArr!==undefined){
+        postsArr.forEach(async(item,index)=>{
+            const postId=item.id;
+            const commentsArr=await ajaxMember.getComment(postId);
+            commentsArr.forEach(item=>{
+                console.log(item);
+            })
+        })
+    }
+}
+
+test();

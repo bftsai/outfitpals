@@ -1,5 +1,11 @@
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-// const apiUrl='http://localhost:3000/';
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+//Data API
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+const apiUrl='http://localhost:3000/';
+//spinner
+const spinner=document.querySelector('.spinner-border');
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
@@ -71,9 +77,11 @@ const ajaxMemberGoogle={
         try {
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status===201){
+                spinner.classList.add('d-none');
                 document.cookie=`outfitpalsToken=${register.data.accessToken}`;
                 document.cookie=`outfitpalsId=${register.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
+                document.cookie=`googleToken=${register.data.user.googleToken}`;
                 const outfitpalsId=Number(cookieValue('outfitpalsId'));
                 const outfitpalsToken=cookieValue('outfitpalsToken');
 
@@ -98,30 +106,36 @@ const ajaxMemberGoogle={
                 }, 400);
             }
         } catch (err) {
+          spinner.classList.add('d-none');
             console.log(err);
             alert('google 帳號已被使用');
         }
     },
     async patchUsers(id,token,obj){
         try {
+            spinner.classList.remove('d-none');
             const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
                 headers:{
                     "authorization": `Bearer ${token}`
                 }
             });
+            spinner.classList.add('d-none');
             console.log(patchUsers);
         } catch (err) {
+            spinner.classList.add('d-none');
             console.log(err);
         }
     },
     async signIn(obj){
         try {
+            spinner.classList.remove('d-none');
             const signIn=await axios.post(`${apiUrl}signin`,obj);
             if(signIn.status===200){
                 document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
                 document.cookie=`outfitpalsId=${signIn.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
                 this.data=signIn.data.user;
+                spinner.classList.add('d-none');
 
                 memberIndex.classList.add('opacity-0');
                 setTimeout(() => {
@@ -134,18 +148,20 @@ const ajaxMemberGoogle={
                     }, 0);
                 }, 400);
                 this.renderMemberSignInProfileForm();
-                //location.href='https://bftsai.github.io/outfitpals/index.html';
             }
         } catch (err) {
+            spinner.classList.add('d-none');
             alert(err.response.data);
         }
     },
     async renderMemberSignInProfileForm(){
-        this.data=(await axios.get(`${apiUrl}users/${cookieValue('outfitpalsId')}`,{
+        spinner.classList.remove('d-none');
+        this.data=(await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
             headers:{
                 "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
             }
         })).data;
+        spinner.classList.add('d-none');
         let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
@@ -299,18 +315,18 @@ const ajaxMemberGoogle={
         </div>`;
         memberSignInProfileForm.innerHTML=str;
         memberSignInProfileForm.addEventListener('click',e=>{
-        //revise profile
-            if(e.target.className.includes('memberSignInProfileRevise')){
-                this.renderMemberSignInForm();
-                memberSignInProfile.classList.add('opacity-0');
+          //revise profile
+          if(e.target.className.includes('memberSignInProfileRevise')){
+            this.renderMemberSignInForm();
+            memberSignInProfile.classList.add('opacity-0');
+            setTimeout(() => {
+                memberSignInProfile.classList.add('d-none');
+                memberSignInData.classList.remove('d-none');
                 setTimeout(() => {
-                    memberSignInProfile.classList.add('d-none');
-                    memberSignInData.classList.remove('d-none');
-                    setTimeout(() => {
-                        memberSignInData.classList.remove('opacity-0');
-                    }, 0);
-                }, 400);
-            }
+                    memberSignInData.classList.remove('opacity-0');
+                }, 0);
+            }, 400);
+          }
         });
     },
     renderMemberSignInForm(){
@@ -599,38 +615,22 @@ const ajaxMemberGoogle={
             reader.readAsDataURL(e.target.files[0]);
         });
     },
-    async signOut(id){
-        document.cookie=`outfitpalsToken= ''`;
-        document.cookie=`outfitpalsId= ''`;
-        document.cookie=`outfitpalsThirdParty= ''`;
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
-        //location.href='https://bftsai.github.io/outfitpals/member.html';
-    },
-    async delete(id){
-        try {
-            const deleted=await axios.delete(`${apiUrl}users/${id}`);
-            document.cookie=`outfitpalsToken= ''`;
-            document.cookie=`outfitpalsId= ''`;
-            document.cookie=`outfitpalsThirdParty= ''`;
-        } catch (err) {
-            console.log(err);
-        }
-    }
 };
 // Google third party login
 function onSignIn(response){
+    spinner.classList.remove('d-none');
     var base64Url = response.credential.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-    console.log(response);
     
-    document.cookie=`googleToken=${response.credential}`;
+    spinner.classList.add('d-none');
 
     let signObj={};
     signObj.email=JSON.parse(jsonPayload).email;
     signObj.password=`Google${JSON.parse(jsonPayload).sub}`;
+    signObj.googleToken=response.credential;
     if(signInBtn.className.includes('active')){
         ajaxMemberGoogle.signIn(signObj);
     }else{
@@ -643,15 +643,3 @@ function onSignIn(response){
         ajaxMemberGoogle.register(signObj);
     }
 };
-//init
-if(cookieValue('outfitpalsThirdParty')==='google'){
-    if(('outfitpalsToken')&&('outfitpalsId')){
-        memberIndex.classList.add('opacity-0');
-        account.value='';
-        pwd.value='';
-        ajaxMemberGoogle.renderMemberSignInProfileForm();
-        memberIndex.classList.add('d-none');
-        memberSignInProfile.classList.remove('d-none');
-        memberSignInProfile.classList.remove('opacity-0');
-    }
-}
