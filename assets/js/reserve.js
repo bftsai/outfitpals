@@ -141,43 +141,71 @@ reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
 });
 
 import { ajaxMember,cookieValue } from "./ajaxMember";
-// ajaxMember.deleteUser(3)
-// ajaxMember.signOut()
-// axios.post(`${apiUrl}/register`,{
-//     email: 'test@gamil.com',
-//     "password": '123456789'
-// })
-//     .then(res=>{
-//         console.log(res);
-//     })
-// const apiUrl='https://outfitpals-web-server.onrender.com/';
-
-
-// ajaxMember.getPosts();
-
-let obj={
-    "title": "title test three",
-    "body": "body test",
-    "userId" : cookieValue('outfitpalsId')
-};
-// ajaxMember.postPosts(obj)
-// ajaxMember.deletePost(4)
-
-
-
-
-async function test() {  
-    const postsArr=await ajaxMember.getPosts()
-    console.log(postsArr)
-    if(postsArr!==undefined){
-        postsArr.forEach(async(item,index)=>{
-            const postId=item.id;
-            const commentsArr=await ajaxMember.getComment(postId);
-            commentsArr.forEach(item=>{
+const reserveComponent={
+    data:{},
+    async getPostArr(){
+        try {
+            const postArr=await ajaxMember.getPosts();
+            return postArr;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getCommentArr(id){
+        try {
+            const commentsArr=await ajaxMember.getComment(id);
+            return commentsArr;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getUserData(id){
+        try {
+            const commentUser=await ajaxMember.getUserData(id);
+            return commentUser;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async render(){
+        let str='',postIdArr=[];
+        const postArr=await this.getPostArr();
+        postArr.forEach(item=>{
+            postIdArr.push(item.id);
+            console.log(item,postIdArr);
+        });
+        postIdArr.forEach(async item=>{
+            const commentsArr=await this.getCommentArr(item);
+            console.log(1);
+            commentsArr.forEach(async item=>{
                 console.log(item);
+                if(item.state===false){
+                    const userData=await this.getUserData(item.userId); 
+                    const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
+                    str+=`<li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
+                    <div class="col-3 col-lg-2">
+                    <img src="${userData.image}" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+                    </div>
+                    <div class="col-5 col-sm-6 col-lg-8">
+                    <div class="card-body position-relative">
+                        <p class="card-title fs-5 fs-lg-3 fw-bold">${userData.name}</p>
+                        <p class="card-text multiline-ellipsis">
+                        ${item.body}
+                        </p>
+                        <span class="badge rounded-pill text-bg-greyE9 text-grey66 position-absolute fs-lg-8 top-10 start-100 start-sm-75 start-md-50 start-lg-30">預約中</span>
+                    </div>
+                    </div>
+                    <div class="col-4 col-sm-3 col-lg-2">
+                    <p class="card-text text-grey9F fs-8 text-end text-md-center">
+                        ${time}
+                    </p>
+                    </div>
+                    </li>`;
+                }
+                reserveContent.innerHTML=str
             })
         })
+        console.log(2);
     }
-}
-
-test();
+};
+reserveComponent.render();

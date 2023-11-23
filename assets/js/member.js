@@ -248,20 +248,20 @@ memberSignInForm.addEventListener('click',e=>{
 
 // ajaxMember.getComments();
 
-let obj={
-    "title": "title test three",
-    "body": "body test",
-    "userId" : cookieValue('outfitpalsId')
+let postObj={
+    "title": "title two",
+    "body": "body bla bla bla bla bla bla bla bla ",
+    "userId" : Number(cookieValue('outfitpalsId'))
 };
-// ajaxMember.postPosts(obj)
-// ajaxMember.deletePost(4)
-
+// ajaxMember.postPosts(postObj)
+// ajaxMember.deletePosts(2)
+console.log((new Date).toUTCString());
 let commentObj={
     "postId": 3,
     "userId": Number(cookieValue('outfitpalsId')),
-    "body": "你好，我想跟你約12月31日早上九點，在東區碰面，可以嗎？",
-    "reservationTime": '112年10月5號 15:00',
-    "location": '台北車站站1號出口',
+    "body": "你好，我想跟你約2月28日上午九點，在東區碰面，可以嗎？",
+    "reservationTime": '113年2月28號 09:00',
+    "location": '忠孝復興1號出口',
     "state": false
 }
 // ajaxMember.postComment(commentObj)

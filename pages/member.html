@@ -526,7 +526,7 @@
                       const outfitpalsToken=cookieValue('outfitpalsToken');
 
                       await this.patchUsers(outfitpalsId,outfitpalsToken,{
-                          "sign time": `${new Date()}`
+                        "sign time": new Date().toUTCString(),
                       });
                       signUpMail.value=obj.email;
                       signUpPwd.value=obj.password;
@@ -596,179 +596,186 @@
               }
           },
           async renderMemberSignInProfileForm(){
-              spinner.classList.remove('d-none');
-              this.data=(await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
-                  headers:{
-                      "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-                  }
-              })).data;
-              spinner.classList.add('d-none');
-              let str=`
-              <div class="row mb-3 fs-lg-5">
-                  <div class="col">
-                      <div class="mb-3 d-flex flex-column align-items-center">
-                          <img class="mb-3" src="${this.data.image}" alt="profile pic" style="width: 80px;height: 80px;border-radius: 50%;">
-                      </div>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-                  <div class="col-4 col-lg-2">
-                      <p>姓名</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.name}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>密碼</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">********</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>暱稱</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data['nick name']}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>生日</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.birthday}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>電子信箱</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.email}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>手機號碼</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.tel}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>性別</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.sex}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>開放預約時間</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data['reservation time']}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>開放預約地點</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data['reservation location']}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>身高</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.height}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>體重</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.weight}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>活動範圍</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.PopArea}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>打扮風格</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.style}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>穿搭價位</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data['outfit price']}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>逛街愛店</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data['love store']}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
-                  <div class="col-4 col-lg-2">
-                      <p>自我介紹</p>
-                  </div>
-                  <div class="col-6 col-lg-4 col-xl-3">
-                      <p class="fs-lg-5">${this.data.introduce}</p>
-                  </div>
-              </div>
-              <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                  <div class="col-6 col-sm-3 d-flex">
-                      <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="submit">修改</button>
-                  </div>
-              </div>
-              <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                  <div class="col-6 col-sm-3 d-flex">
-                      <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">我的主頁</button>
-                  </div>
-              </div>
-              <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                  <div class="col-6 col-sm-3 d-flex">
-                      <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
-                  </div>
-              </div>`;
-              memberSignInProfileForm.innerHTML=str;
-              memberSignInProfileForm.addEventListener('click',e=>{
+              try {
+                const outfitpalsId=Number(cookieValue('outfitpalsId'));
+                const outfitpalsToken=cookieValue('outfitpalsToken');
+                spinner.classList.remove('d-none');
+                this.data=(await axios.get(`${apiUrl}600/users/${outfitpalsId}`,{
+                    headers:{
+                        "authorization": `Bearer ${outfitpalsToken}`
+                    }
+                })).data;
+                spinner.classList.add('d-none');
+                let str=`
+                <div class="row mb-3 fs-lg-5">
+                    <div class="col">
+                        <div class="mb-3 d-flex flex-column align-items-center">
+                            <img class="mb-3" src="${this.data.image}" alt="profile pic" style="width: 80px;height: 80px;border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
+                    <div class="col-4 col-lg-2">
+                        <p>姓名</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.name}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>密碼</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">********</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>暱稱</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data['nick name']}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>生日</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.birthday}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>電子信箱</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.email}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>手機號碼</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.tel}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>性別</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.sex}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>開放預約時間</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data['reservation time']}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>開放預約地點</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data['reservation location']}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>身高</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.height}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>體重</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.weight}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>活動範圍</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.PopArea}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>打扮風格</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.style}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>穿搭價位</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data['outfit price']}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>逛街愛店</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data['love store']}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
+                    <div class="col-4 col-lg-2">
+                        <p>自我介紹</p>
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3">
+                        <p class="fs-lg-5">${this.data.introduce}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                    <div class="col-6 col-sm-3 d-flex">
+                        <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="submit">修改</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                    <div class="col-6 col-sm-3 d-flex">
+                        <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">我的主頁</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                    <div class="col-6 col-sm-3 d-flex">
+                        <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
+                    </div>
+                </div>`;
+                memberSignInProfileForm.innerHTML=str;
+                memberSignInProfileForm.addEventListener('click',e=>{
                 //revise profile
                 if(e.target.className.includes('memberSignInProfileRevise')){
                   this.renderMemberSignInForm();
                   memberSignInProfile.classList.add('opacity-0');
                   setTimeout(() => {
-                      memberSignInProfile.classList.add('d-none');
-                      memberSignInData.classList.remove('d-none');
-                      setTimeout(() => {
-                          memberSignInData.classList.remove('opacity-0');
-                      }, 0);
+                    memberSignInProfile.classList.add('d-none');
+                    memberSignInData.classList.remove('d-none');
+                    setTimeout(() => {
+                        memberSignInData.classList.remove('opacity-0');
+                    }, 0);
                   }, 400);
                 }
-              });
+                });
+              } 
+              catch (err) {
+                  console.log(err);
+              }
           },
           renderMemberSignInForm(){
               let str=`

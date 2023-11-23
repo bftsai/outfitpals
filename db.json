@@ -69,16 +69,18 @@
       "userId": 1
     },
     {
-      "title": "title test",
-      "body": "body test",
-      "userId": "2",
+      "title": "title one",
+      "body": "body bla bla bla bla bla bla bla bla ",
+      "userId": 2,
+      "postTime": "Thu, 23 Nov 2023 02:21:46 GMT",
       "author": "BF Tsai",
       "id": 2
     },
     {
-      "title": "title test three",
-      "body": "body test",
-      "userId": "2",
+      "title": "title two",
+      "body": "body bla bla bla bla bla bla bla bla ",
+      "userId": 2,
+      "postTime": "Thu, 23 Nov 2023 02:22:09 GMT",
       "author": "BF Tsai",
       "id": 3
     }
@@ -93,18 +95,20 @@
     {
       "postId": 2,
       "userId": 3,
-      "body": "你好，我想跟你約xx月xx日早上九點，在東區碰面，可以嗎？",
-      "reservationTime": "112年10月5號 15:00",
-      "location": "忠孝復興站1號出口",
+      "body": "你好，我想跟你約4月1日下午一點，在台北車站碰面，可以嗎？",
+      "reservationTime": "113年4月1號 13:00",
+      "location": "台北車站站1號出口",
+      "postTime": "Thu, 23 Nov 2023 02:29:05 GMT",
       "state": false,
       "id": 2
     },
     {
       "postId": 3,
       "userId": 3,
-      "body": "你好，我想跟你約12月31日早上九點，在東區碰面，可以嗎？",
-      "reservationTime": "112年10月5號 15:00",
-      "location": "台北車站站1號出口",
+      "body": "你好，我想跟你約2月28日上午九點，在東區碰面，可以嗎？",
+      "reservationTime": "113年2月28號 09:00",
+      "location": "忠孝復興1號出口",
+      "postTime": "Thu, 23 Nov 2023 02:31:24 GMT",
       "state": false,
       "id": 3
     }
