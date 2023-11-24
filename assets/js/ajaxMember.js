@@ -626,7 +626,7 @@ export const ajaxMember={
         try {
             await this.getUserData(cookieValue('outfitpalsId'));
             obj.author=this.data.name;
-            obj.postTime=new Date.toUTCString();
+            obj.postTime=new Date().toUTCString();
             const result=await axios.post(`${apiUrl}600/posts`,obj,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
@@ -640,6 +640,19 @@ export const ajaxMember={
     async getPosts(){
         try {
             const result=(await axios.get(`${apiUrl}600/posts?userId=${cookieValue('outfitpalsId')}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostsById(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/posts?PostId=${id}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -664,7 +677,7 @@ export const ajaxMember={
     },
     async postComment(obj){
         try {
-            obj.postTime=new Date.toUTCString();
+            obj.postTime=new Date().toUTCString();
             const result=await axios.post(`${apiUrl}600/comments`,obj,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
@@ -677,7 +690,7 @@ export const ajaxMember={
     },
     async getComment(id){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
+            const result=(await axios.get(`${apiUrl}440/comments/${id}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -696,6 +709,45 @@ export const ajaxMember={
                 }
             });
             console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async patchComment(id,obj){
+        try {
+            const result=await axios.patch(`${apiUrl}600/comments/${id}`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getUserComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
         } catch (err) {
             console.log(err);
         }
