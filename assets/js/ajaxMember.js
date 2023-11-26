@@ -1,5 +1,11 @@
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-// const apiUrl='http://localhost:3000/';
+//axios
+import axios from "axios";
+//Data API
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+ const apiUrl='http://localhost:3000/';
+//location url
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //cookie
 export function cookieValue(str) {  
     const cookieArr=document.cookie.split(';').find(item=>{
@@ -7,15 +13,30 @@ export function cookieValue(str) {
             return item;
         }
     });
-    
     return cookieArr===undefined? undefined:cookieArr.split('=')[1];
 };
+//spinner
+const spinner=document.querySelector('.memberSpinner');
 export const ajaxMember={
     data: [],
+    async getUserData(id){
+        try {
+            const result=await axios.get(`${apiUrl}440/users/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            this.data=result.data;
+            return this.data;
+        } catch (err) {
+            console.log(err);
+        }
+    },
     async register(obj){
         try {
+            spinner.classList.remove('d-none');
             const register=await axios.post(`${apiUrl}register`,obj);
-            if(register.status==201){
+            if(register.status===201){
                 document.cookie=`outfitpalsToken=${register.data.accessToken}`;
                 document.cookie=`outfitpalsId=${register.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
@@ -23,10 +44,11 @@ export const ajaxMember={
                 const outfitpalsToken=cookieValue('outfitpalsToken')
 
                 await this.patchUsers(outfitpalsId,outfitpalsToken,{
-                    "sign time": `${new Date()}`,
+                    "sign time": new Date().toUTCString(),
                 });
                 signUpMail.value=account.value;
                 signUpPwd.value=pwd.value;
+                spinner.classList.add('d-none');
                 memberIndex.classList.add('opacity-0');
                 setTimeout(() => {
                     account.value='';
@@ -42,32 +64,52 @@ export const ajaxMember={
             console.log(err.response);
             memberIndexForm.classList.add('was-validated');
             account.classList.add('is-invalid');
-            account.nextElementSibling.textContent=err.response.data;
-            account.setAttribute("style","border-color: var(--bs-form-invalid-border-color);background-image: url('../assets/images/member/invalid.png');background-repeat: no-repeat;background-position: right calc(0.375em + 0.1875rem) center;background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);");
+            account.classList.add('is-invalid-customer');
+        }
+    },
+    async deleteUser(id){
+        try {
+            spinner.classList.remove('d-none');
+            const deleted=await axios.delete(`${apiUrl}600/users/${id}`,{
+                headers:{
+                    'authorization': `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            spinner.classList.add('d-none');
+            location.href=locationUrl;
+            document.cookie=`outfitpalsToken= ''`;
+            document.cookie=`outfitpalsId= ''`;
+            document.cookie=`outfitpalsThirdParty= ''`;
+        } catch (err) {
+            console.log(err);
         }
     },
     async patchUsers(id,token,obj){
-        console.log(id,token,obj);
         try {
+            spinner.classList.remove('d-none');
             const patchUsers=await axios.patch(`${apiUrl}600/users/${id}`,obj,{
                 headers:{
                     "authorization": `Bearer ${token}`
                 }
             });
+            spinner.classList.add('d-none');
         } catch (err) {
+            spinner.classList.add('d-none');
+            this.signOut();
             console.log(err);
         };
     },
     async signIn(obj){
         try {
+            spinner.classList.remove('d-none');
             const signIn=await axios.post(`${apiUrl}signin`,obj);
-            console.log(signIn);
             if(signIn.status===200){
                 document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
                 document.cookie=`outfitpalsId=${signIn.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${signIn.data.user['third party']}`;
                 this.data=signIn.data.user;
 
+                spinner.classList.add('d-none');
                 memberIndex.classList.add('opacity-0');
                 setTimeout(() => {
                     account.value='';
@@ -79,10 +121,10 @@ export const ajaxMember={
                     }, 0);
                 }, 400);
                 this.renderMemberSignInProfileForm();
-                //location.href='https://bftsai.github.io/outfitpals/index.html';
             }
         } catch (err) {
             console.log(err.response.data);
+            spinner.classList.add('d-none');
             memberIndexForm.classList.add('was-validated');
             if(err.response.data.includes('user')){
                 account.classList.add('is-invalid');
@@ -96,15 +138,24 @@ export const ajaxMember={
             
         }
     },
+    async signOut(){
+        spinner.classList.remove('d-none');
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        location.href=locationUrl;
+        spinner.classList.add('d-none');
+    },
     async renderMemberSignInProfileForm(){
         const outfitpalsId=Number(cookieValue('outfitpalsId'));
         const outfitpalsToken=cookieValue('outfitpalsToken');
-
-        this.data=(await axios.get(`${apiUrl}users/${outfitpalsId}`,{
+        spinner.classList.remove('d-none');
+        this.data=(await axios.get(`${apiUrl}600/users/${outfitpalsId}`,{
             headers:{
                 "authorization": `Bearer ${outfitpalsToken}`
             }
         })).data;
+        spinner.classList.add('d-none');
         let str=`
         <div class="row mb-3 fs-lg-5">
             <div class="col">
@@ -271,7 +322,6 @@ export const ajaxMember={
                 }, 400);
             }
         });
-    
     },
     renderMemberSignInForm(){
         let str=`
@@ -549,6 +599,13 @@ export const ajaxMember={
             </div>
         </div>`;
         memberSignInForm.innerHTML=str;
+        if(cookieValue('outfitpalsThirdParty')==='google'){
+            const signInPwd=document.getElementById('signInPwd');
+            const signInMail=document.getElementById('signInMail');
+            signInPwd.value=this.data['g-pwd'];
+            signInPwd.setAttribute('disabled','');
+            signInMail.setAttribute('disabled','');
+        }
         document.getElementById('signInReservationTime').selectedIndex=this.data['reservation time selectedIndex'];
         document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
         document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
@@ -565,21 +622,162 @@ export const ajaxMember={
             reader.readAsDataURL(e.target.files[0]);
         });
     },
-    async signOut(id){
-        document.cookie=`outfitpalsToken= ''`;
-        document.cookie=`outfitpalsId= ''`;
-        document.cookie=`outfitpalsThirdParty= ''`;
-        location.href='http://localhost:5173/outfitpals/pages/member.html';
-        //location.href='https://bftsai.github.io/outfitpals/member.html';
-    },
-    async delete(id){
+    async postPosts(obj){
         try {
-            const deleted=await axios.delete(`${apiUrl}users/${id}`);
-            document.cookie=`outfitpalsToken= ''`;
-            document.cookie=`outfitpalsId= ''`;
-            document.cookie=`outfitpalsThirdParty= ''`;
+            await this.getUserData(cookieValue('outfitpalsId'));
+            obj.author=this.data.name;
+            obj.postTime=new Date().toUTCString();
+            const result=await axios.post(`${apiUrl}600/posts`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result)
         } catch (err) {
             console.log(err);
         }
-    }
+    },
+    async getPosts(){
+        try {
+            const result=(await axios.get(`${apiUrl}600/posts?userId=${cookieValue('outfitpalsId')}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostsById(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/posts?PostId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deletePosts(id){
+        try {
+            const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async postComment(obj){
+        try {
+            obj.postTime=new Date().toUTCString();
+            const result=await axios.post(`${apiUrl}600/comments`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result)
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteComment(id){
+        try {
+            const result=await axios.delete(`${apiUrl}600/comments/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async patchComment(id,obj){
+        try {
+            const result=await axios.patch(`${apiUrl}600/comments/${id}`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getUserComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async postProfile(obj){
+        try {
+            const result=await axios.post(`${apiUrl}profile`,obj);
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getProfile(){
+        try {
+            const result=(await axios.get(`${apiUrl}profile`)).data;
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteProfile(id){
+        try {
+            const result=await axios.delete(`${apiUrl}600/profile/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
 };

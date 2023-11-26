@@ -1,5 +1,6 @@
 import './assets/scss/all.scss';
-
+// import $ from "jquery";
+// import axios from 'axios';
 //pagination
 $(document).ready(function () {
     $('.pagination .page-num').click(function (e) { 

@@ -1,4 +1,12 @@
+
+.spinner-border.memberSpinner{
+    left: 49.5%;
+    top: 50%;
+}
 .member{
+    p{
+        word-break: break-all;
+    }
     .gmailSignIn,.gmailSignUp{
         transition: all 0.4s ease;
     }

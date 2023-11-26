@@ -32,6 +32,10 @@
             top: 50%; /* 垂直置中 */
             transform: translateY(-50%);
         }
+
+        #current-day {
+            background-color: palegoldenrod;
+        }
     </style>
   <body>
     <%- include('./layout/header'); -%>
@@ -317,61 +321,61 @@
                                     <th scope="col">Thu</th>
                                     <th scope="col">Fri</th>
                                     <th scope="col">Sat</th>
-                                    <th scope="col">Sum</th>
+                                    <th scope="col">Sun</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1-7</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">8-9</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">10-17</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">18-25</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">25-31</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                </tbody>
+                                    <tr>
+                                      <th scope="row">1-7</th>
+                                      <td data-row="1" data-col="1"></td>
+                                      <td data-row="1" data-col="2"></td>
+                                      <td data-row="1" data-col="3"></td>
+                                      <td data-row="1" data-col="4"></td>
+                                      <td data-row="1" data-col="5"></td>
+                                      <td data-row="1" data-col="6"></td>
+                                      <td data-row="1" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">8-9</th>
+                                      <td data-row="2" data-col="1"></td>
+                                      <td data-row="2" data-col="2"></td>
+                                      <td data-row="2" data-col="3"></td>
+                                      <td data-row="2" data-col="4"></td>
+                                      <td data-row="2" data-col="5"></td>
+                                      <td data-row="2" data-col="6"></td>
+                                      <td data-row="2" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">10-17</th>
+                                      <td data-row="3" data-col="1"></td>
+                                      <td data-row="3" data-col="2"></td>
+                                      <td data-row="3" data-col="3"></td>
+                                      <td data-row="3" data-col="4"></td>
+                                      <td data-row="3" data-col="5"></td>
+                                      <td data-row="3" data-col="6"></td>
+                                      <td data-row="3" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">18-25</th>
+                                      <td data-row="4" data-col="1"></td>
+                                      <td data-row="4" data-col="2"></td>
+                                      <td data-row="4" data-col="3"></td>
+                                      <td data-row="4" data-col="4"></td>
+                                      <td data-row="4" data-col="5"></td>
+                                      <td data-row="4" data-col="6"></td>
+                                      <td data-row="4" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">25-31</th>
+                                      <td data-row="5" data-col="1"></td>
+                                      <td data-row="5" data-col="2"></td>
+                                      <td data-row="5" data-col="3"></td>
+                                      <td data-row="5" data-col="4"></td>
+                                      <td data-row="5" data-col="5"></td>
+                                      <td data-row="5" data-col="6"></td>
+                                      <td data-row="5" data-col="7"></td>
+                                    </tr>
+                                  </tbody>
                               </table>
                         </div>
         
