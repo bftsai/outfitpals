@@ -29,13 +29,16 @@ const reserveMyDiscuss=document.querySelector('.reserve-myDiscuss');
 const reserveMyDiscussRadioForm=document.querySelector('.reserve-myDiscuss-Radio-Form');
 const reserveMyDiscussRadioCancel=document.getElementById('reserve-myDiscussCancel');
 const reserveMyDiscussTextarea=document.querySelector('.reserve-myDiscuss textarea');
+const reserveMyDiscussConfirmGroup=document.querySelector('.reserveMyDiscussConfirmGroup');
 const reserveMyDiscussConfirmSubmit=document.querySelector('.reserveMyDiscussConfirmSubmit');
 const reserveMyDiscussConfirmCancel=document.querySelector('.reserveMyDiscussConfirmCancel');
 //manage appointment
 const reserveManageAppointments=document.querySelector('.reserve-manageAppointments');
+const reserveManageAppointmentsRadioForm=document.querySelector('.reserve-manageAppointments-Radio-Form')
 const reserveManageAppointmentsRadioCheck=document.getElementById('reserve-manageAppointmentsApprove');
 const reserveManageAppointmentsRadioCancel=document.getElementById('reserve-manageAppointmentsCancel');
 const reserveManageAppointmentsTextarea=document.querySelector('.reserve-manageAppointments textarea');
+const reserveManageAppointmentsConfirmGroup=document.querySelector('.reserveManageAppointmentsConfirmGroup');
 const reserveManageAppointmentsConfirmSubmit=document.querySelector('.reserveManageAppointmentsConfirmSubmit');
 const reserveManageAppointmentsConfirmCancel=document.querySelector('.reserveManageAppointmentsConfirmCancel');
 
@@ -79,7 +82,7 @@ const reserveComponent={
         if(stateDom.textContent==='我的預約'){
             reserveContent.innerHTML='';
             if(commentArr.length!==0){
-                commentArr.forEach(async item=>{
+                commentArr.forEach(async (item,index)=>{
                     const userData=await this.getUserData(item.userId);
                     const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
 
@@ -110,7 +113,7 @@ const reserveComponent={
                     cardText.textContent=item.body;
                     const badge=document.createElement('span');
                     badge.className='badge rounded-pill text-bg-greyE9 text-grey66 position-absolute fs-lg-8 top-10 start-100 start-sm-75 start-md-50 start-lg-30';
-                    badge.textContent=item.state===false? '預約中':(badge.textContent=item.state==='accept'? '預約成功':'已拒絕');
+                    badge.textContent=item.state===false? '預約中':(badge.textContent=item.state==='accept'? '預約成功':(badge.textContent=item.state==='reject'? '已拒絕':'已取消'));
                     cardBody.appendChild(cardTitle);
                     cardBody.appendChild(cardText);
                     cardBody.appendChild(badge);
@@ -126,49 +129,51 @@ const reserveComponent={
                     spinner.classList.add('d-none');
                     
                     const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
-                    reserveContentAllLi.forEach(item=>{
-                        item.addEventListener('click',async e=>{
-                            spinner.classList.remove('d-none');
-                            reserveBtnGroup.classList.add('opacity-0');
-                            reserveContent.classList.add('opacity-0');
-                            pagination.classList.add('opacity-0');
+                    reserveContentAllLi[index].addEventListener('click',async e=>{
+                        spinner.classList.remove('d-none');
+                        reserveBtnGroup.classList.add('opacity-0');
+                        reserveContent.classList.add('opacity-0');
+                        pagination.classList.add('opacity-0');
+                        setTimeout(() => {
+                            reserveBtnGroup.classList.add('d-none');
+                            reserveContent.classList.add('d-none');
+                            pagination.classList.add('d-none');
+                            reserveMyDiscuss.classList.remove('d-none');
                             setTimeout(() => {
-                                reserveBtnGroup.classList.add('d-none');
-                                reserveContent.classList.add('d-none');
-                                pagination.classList.add('d-none');
-                                reserveMyDiscuss.classList.remove('d-none');
-                                setTimeout(() => {
-                                    reserveMyDiscuss.classList.remove('opacity-0');
-                                    spinner.classList.add('d-none');
-                                }, 0);
-                            }, 400);
+                                reserveMyDiscuss.classList.remove('opacity-0');
+                                spinner.classList.add('d-none');
+                            }, 0);
+                        }, 400);
 
-                            const commentId=e.target.closest('li').getAttribute('data-id');
-                            reserveMyDiscuss.setAttribute('data-id',commentId);
-                            const comment=await reserveComponent.getCommentObj(commentId);
-                            const time=new Date(comment.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
-                            const posterData=await reserveComponent.getUserData(comment.userId);
+                        const commentId=e.target.closest('li').getAttribute('data-id');
+                        reserveMyDiscuss.setAttribute('data-id',commentId);
+                        const comment=await reserveComponent.getCommentObj(commentId);
+                        const time=new Date(comment.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
+                        const posterData=await reserveComponent.getUserData(comment.userId);
+                        
+                        if(comment.state==='accept'||comment.state==='reject'||comment.state==='cancel'){
+                            reserveMyDiscussRadioForm.classList.add('d-none');
+                            reserveMyDiscussConfirmGroup.classList.add('d-none');
+                        }else if(comment.state===false){
+                            reserveMyDiscussRadioForm.classList.remove('d-none');
+                            reserveMyDiscussConfirmGroup.classList.remove('d-none');
+                        }
 
-                            if(comment.state==='accept'||comment.state==='reject'||comment.state==='cancel'){
-                                reserveMyDiscussRadioForm.classList.add('d-none')
-                            }
+                        const image=document.querySelector('.reserve-myDiscuss .image');
+                        const name=document.querySelector('.reserve-myDiscuss .name');
+                        const date=document.querySelector('.reserve-myDiscuss .date');
+                        const reservationTime=document.querySelector('.reserve-myDiscuss .reservationTime');
+                        const location=document.querySelector('.reserve-myDiscuss .location');
+                        const state=document.querySelector('.reserve-myDiscuss .state');
+                        const commentBody=document.querySelector('.reserve-myDiscuss .commentBody');
 
-                            const image=document.querySelector('.reserve-myDiscuss .image');
-                            const name=document.querySelector('.reserve-myDiscuss .name');
-                            const date=document.querySelector('.reserve-myDiscuss .date');
-                            const reservationTime=document.querySelector('.reserve-myDiscuss .reservationTime');
-                            const location=document.querySelector('.reserve-myDiscuss .location');
-                            const state=document.querySelector('.reserve-myDiscuss .state');
-                            const commentBody=document.querySelector('.reserve-myDiscuss .commentBody');
-
-                            image.src=posterData.image;
-                            name.textContent=posterData.name;
-                            date.textContent=time;
-                            reservationTime.textContent=comment.reservationTime;
-                            location.textContent=comment.location;
-                            state.textContent=comment.state===false? '預約中':(comment.state==='accept'?'預約成功':'已取消');
-                            commentBody.textContent=comment.body;
-                        });
+                        image.src=posterData.image;
+                        name.textContent=posterData.name;
+                        date.textContent=time;
+                        reservationTime.textContent=comment.reservationTime;
+                        location.textContent=comment.location;
+                        state.textContent=comment.state===false? '預約中':(comment.state==='accept'?'預約成功':(comment.state==='reject'?'已拒絕':'已取消'));
+                        commentBody.textContent=comment.body;
                     });
                 });
             }
@@ -180,7 +185,7 @@ const reserveComponent={
                     const postId=item.id;
                     const commentsArr=await this.getPostCommentArr(postId) //取得所有回覆貼文的留言
                     
-                    commentsArr.forEach(async item=>{
+                    commentsArr.forEach(async (item,index)=>{
                         const userData=await this.getUserData(item.userId); //按順序取得所有回覆者的個資
                         const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
                         
@@ -201,9 +206,11 @@ const reserveComponent={
                         const col5=document.createElement('div');
                         col5.className='col-5 col-sm-6 col-lg-8';
                         li.appendChild(col5);
+
                         const cardBody=document.createElement('div');
                         cardBody.className='card-body position-relative';
                         col5.appendChild(cardBody);
+
                         const cardTitle=document.createElement('p');
                         cardTitle.className='card-title fs-5 fs-lg-3 fw-bold';
                         cardTitle.textContent=userData.name;
@@ -212,61 +219,71 @@ const reserveComponent={
                         cardText.textContent=item.body;
                         const badge=document.createElement('span');
                         badge.className='badge rounded-pill text-bg-greyE9 text-grey66 position-absolute fs-lg-8 top-10 start-100 start-sm-75 start-md-50 start-lg-30';
-                        badge.textContent=item.state===false? '預約中':(badge.textContent=item.state==='accept'? '預約成功':'已拒絕');
-                        cardBody.append(cardTitle);
-                        cardBody.append(cardText);
-                        cardBody.append(badge);
-
-                        spinner.classList.add('d-none');
+                        badge.textContent=item.state===false? '預約中':(badge.textContent=item.state==='accept'? '預約成功':(badge.textContent=item.state==='reject'? '已拒絕':'已取消'));
+                        cardBody.appendChild(cardTitle);
+                        cardBody.appendChild(cardText);
+                        cardBody.appendChild(badge);
 
                         const col4=document.createElement('div');
                         col4.className='col-4 col-sm-3 col-lg-2';
                         li.appendChild(col4);
+                        cardText=document.createElement('p');
                         cardText.className='card-text text-grey9F fs-8 text-end text-md-center';
                         cardText.textContent=time;
                         col4.appendChild(cardText);
+                        spinner.classList.add('d-none');
 
                         const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
                         //reserve into reserveManageAppointments
                         reserveContentAllLi.forEach(item=>{
-                            item.addEventListener('click',async e=>{
-                                spinner.classList.remove('d-none');
-                                reserveBtnGroup.classList.add('opacity-0');
-                                reserveContent.classList.add('opacity-0');
-                                pagination.classList.add('opacity-0');
-                                setTimeout(() => {
-                                    reserveBtnGroup.classList.add('d-none');
-                                    reserveContent.classList.add('d-none');
-                                    pagination.classList.add('d-none');
-                                    reserveManageAppointments.classList.remove('d-none');
+                            if(Number(item.getAttribute('data-id'))===postId){
+                                item.addEventListener('click',async e=>{
+                                    spinner.classList.remove('d-none');
+                                    reserveBtnGroup.classList.add('opacity-0');
+                                    reserveContent.classList.add('opacity-0');
+                                    pagination.classList.add('opacity-0');
                                     setTimeout(() => {
-                                        reserveManageAppointments.classList.remove('opacity-0');
-                                        spinner.classList.add('d-none');
-                                    }, 0);
-                                }, 400);
+                                        reserveBtnGroup.classList.add('d-none');
+                                        reserveContent.classList.add('d-none');
+                                        pagination.classList.add('d-none');
+                                        reserveManageAppointments.classList.remove('d-none');
+                                        setTimeout(() => {
+                                            reserveManageAppointments.classList.remove('opacity-0');
+                                            spinner.classList.add('d-none');
+                                        }, 0);
+                                    }, 400);
 
-                                const commentId=e.target.closest('li').getAttribute('data-id');
-                                reserveManageAppointments.setAttribute('data-id',commentId);
-                                const comment=await reserveComponent.getCommentObj(commentId);
-                                const time=new Date(comment.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
-                                const commenterData=await reserveComponent.getUserData(comment.userId);
+                                    const commentId=e.target.closest('li').getAttribute('data-id');
+                                    reserveManageAppointments.setAttribute('data-id',commentId);
+                                    const comment=await reserveComponent.getCommentObj(commentId);
+                                    const time=new Date(comment.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
+                                    const commenterData=await reserveComponent.getUserData(comment.userId);
+        
+                                    if(comment.state==='accept'||comment.state==='reject'||comment.state==='cancel'){
+                                        reserveManageAppointmentsRadioForm.classList.add('d-none');
+                                        reserveManageAppointmentsConfirmGroup.classList.add('d-none');
+                                    }else if(comment.state===false){
+                                        reserveManageAppointmentsRadioForm.classList.remove('d-none');
+                                        reserveManageAppointmentsConfirmGroup.classList.remove('d-none');
+                                    }
 
-                                const image=document.querySelector('.reserve-manageAppointments .image');
-                                const name=document.querySelector('.reserve-manageAppointments .name');
-                                const date=document.querySelector('.reserve-manageAppointments .date');
-                                const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime');
-                                const location=document.querySelector('.reserve-manageAppointments .location');
-                                const state=document.querySelector('.reserve-manageAppointments .state');
-                                const commentBody=document.querySelector('.reserve-manageAppointments .commentBody');
-                                
-                                image.src=commenterData.image;
-                                name.textContent=commenterData.name;
-                                date.textContent=time;
-                                reservationTime.textContent=comment.reservationTime;
-                                location.textContent=comment.location;
-                                state.textContent=comment.state===false? '預約中':(comment.state==='accept'? '預約成功':'已拒絕');
-                                commentBody.textContent=comment.body;
-                            })
+                                    const image=document.querySelector('.reserve-manageAppointments .image');
+                                    const name=document.querySelector('.reserve-manageAppointments .name');
+                                    const date=document.querySelector('.reserve-manageAppointments .date');
+                                    const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime');
+                                    const location=document.querySelector('.reserve-manageAppointments .location');
+                                    const state=document.querySelector('.reserve-manageAppointments .state');
+                                    const commentBody=document.querySelector('.reserve-manageAppointments .commentBody');
+                                    
+                                    image.src=commenterData.image;
+                                    name.textContent=commenterData.name;
+                                    date.textContent=time;
+                                    reservationTime.textContent=comment.reservationTime;
+                                    location.textContent=comment.location;
+                                    state.textContent=comment.state===false? '預約中':(comment.state==='accept'? '預約成功':(comment.state==='reject'? '已拒絕':'已取消'));
+                                    commentBody.textContent=comment.body;
+                                })
+                            }
                         });
                     });
                 });
@@ -305,6 +322,7 @@ reserveMyDiscussConfirmSubmit.addEventListener('click',async e=>{
         }
     } catch (err) {
         console.log(err);
+        spinner.classList.add('d-none');
     }
 })
 reserveMyDiscussConfirmCancel.addEventListener('click',e=>{
@@ -358,19 +376,31 @@ reserveManageAppointmentsTextarea.addEventListener('keyup',e=>{
         reserveManageAppointmentsConfirmSubmit.disabled=true;
     }
 });
-reserveManageAppointmentsConfirmSubmit.addEventListener('click',e=>{
+
+reserveManageAppointmentsConfirmSubmit.addEventListener('click',async e=>{
     e.preventDefault();
-    console.log('click');
-    let obj={}
-    if(reserveManageAppointmentsRadioCheck.checked===true){
-        obj.state='accept';
-        ajaxMember
-    }else if(reserveManageAppointmentsRadioCancel.checked===true){
-        obj.state='reject';
-        ajaxMember
+    try {
+        spinner.classList.remove('d-none');
+        let obj={}
+        const id=reserveManageAppointments.getAttribute('data-id');
+        if(reserveManageAppointmentsRadioCheck.checked===true){
+            obj.state='accept';
+            await ajaxMember.patchComment(id,obj);
+            spinner.classList.add('d-none');
+        }else if(reserveManageAppointmentsRadioCancel.checked===true){
+            obj.state='reject';
+            await ajaxMember.patchComment(id,obj);
+            spinner.classList.add('d-none');
+        }
+        location.href=locationUrl;
+    } catch (err) {
+        console.log(err);
+        spinner.classList.add('d-none');
     }
-})
+});
+
 reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
+    spinner.classList.remove('d-none');
     reserveManageAppointmentsTextarea.value='';
     reserveManageAppointmentsRadioCheck.checked=false;
     reserveManageAppointmentsRadioCancel.checked=false;
@@ -385,6 +415,7 @@ reserveManageAppointmentsConfirmCancel.addEventListener('click',e=>{
             reserveBtnGroup.classList.remove('opacity-0');
             reserveContent.classList.remove('opacity-0');
             pagination.classList.remove('opacity-0');
+            spinner.classList.add('d-none');
         }, 0);
     }, 400);
 });
@@ -409,3 +440,11 @@ backToReserveAll[1].addEventListener('click',e=>{
         }, 0);
     }, 400);
 });
+
+
+let obj={}
+obj.state=false;
+function patchComment(id,obj) {  
+    ajaxMember.patchComment(id,obj);
+}
+// patchComment(5,obj)

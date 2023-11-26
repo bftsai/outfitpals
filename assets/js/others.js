@@ -101,15 +101,19 @@ var firstDateOfThisMonth = new Date(thisYear, thisMonth, 1); //建立今年今�
 var firstDateDayOfThisMonth = firstDateOfThisMonth.getDay(); //取得今年今月1日是禮拜幾
 var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //儲存每月的天數，其中2月為28或29
 if ((thisYear % 4 == 0 && thisYear % 100 != 0) || (thisYear % 400 == 0)) monthDays[1] = 29; //若是閏年，2月設為29日
-let to = today.getDate()-1;
+
+let to = today.getDate();
 
 // 填今月日期在TD格子上，從今年今月1日是禮拜幾開始填1~今月天數
+days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day");
+
 for (var i = 1; i <= monthDays[thisMonth]; i++) {
-    days[firstDateDayOfThisMonth + to - 1].setAttribute("id", "current-day");
+
     var index = firstDateDayOfThisMonth + i - 2;
 
     if (index >= 0 && index < days.length) {
         days[index].innerHTML = i;
+        
     }
 }
 
@@ -119,7 +123,10 @@ left.addEventListener("click", function() {
     td.forEach(function(td, index) {
         td.innerHTML = "　";
     });
-
+    var currentDayElement = document.getElementById("current-day");
+    if (currentDayElement) {
+        currentDayElement.removeAttribute("id");
+    }
     if (seeMonth > 1) {
         seeMonth -= 1;
         thisMonth -= 1;
@@ -137,11 +144,14 @@ left.addEventListener("click", function() {
     }
     if ((thisYear % 4 == 0 && thisYear % 100 != 0) || (thisYear % 400 == 0)) monthDays[1] = 29; 
     for (var i = 1; i <= monthDays[thisMonth]; i++) {
+        
         var index = firstDateDayOfThisMonth + i - 2;
     
         if (index >= 0 && index < days.length) {
+            
             days[index].innerHTML = i;
         }
+
     }
 
     months.innerHTML = `<strong class="fs-2"  id="months">${thisYear}-${seeMonth}月</strong>`;
@@ -151,7 +161,10 @@ right.addEventListener("click", function() {
     td.forEach(function(td, index) {
         td.innerHTML = "　";
     });
-
+    var currentDayElement = document.getElementById("current-day");
+    if (currentDayElement) {
+        currentDayElement.removeAttribute("id");
+    }
     if (seeMonth < 12) {
         seeMonth += 1;
         thisMonth += 1;
@@ -169,13 +182,14 @@ right.addEventListener("click", function() {
     }
     if ((thisYear % 4 == 0 && thisYear % 100 != 0) || (thisYear % 400 == 0)) monthDays[1] = 29; 
     for (var i = 1; i <= monthDays[thisMonth]; i++) {
+        
         var index = firstDateDayOfThisMonth + i - 2;
     
         if (index >= 0 && index < days.length) {
             days[index].innerHTML = i;
         }
     }
-
+    
     months.innerHTML = `<strong class="fs-2"  id="months">${thisYear}-${seeMonth}月</strong>`;
 });
 
