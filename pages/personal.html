@@ -16,8 +16,22 @@
             padding-right: 20px;
         }
         .table {
-    table-layout: fixed; 
-    }
+        table-layout: fixed; 
+        }
+        .input-with-icon {
+             position: relative;
+        }
+
+        .input-with-icon input {
+            padding-left: 30px; /* 為圖示留出空間 */
+        }
+
+        .input-with-icon .icon-inside {
+            position: absolute;
+            left: 10px; /* 調整圖示位置 */
+            top: 50%; /* 垂直置中 */
+            transform: translateY(-50%);
+        }
     </style>
   <body>
     <%- include('./layout/header'); -%>
@@ -278,13 +292,12 @@
                 <div class="row  align-items-center" style="height: 600px;">
                     <div class="col-6 ">
                         <div class="d-flex justify-content-center">
-                            <strong class="fs-2">選擇預約時段</strong>
+                            <strong class="fs-2">設定預約時段</strong>
                         </div>
                         
-                        <div class="d-flex justify-content-between mb-5">
-                            <p><i class="bi bi-calendar-x-fill text-danger"></i></i>已被預約</p>
+                        <div class="d-flex justify-content-around mb-5">
+                            <p><i class="bi bi-calendar-x-fill text-danger"></i></i>用戶已預約</p>
                             <p><i class="bi bi-calendar2-check-fill text-info"></i>可預約時段</p>
-                            <p><i class="bi bi-calendar-plus-fill text-warning"></i>您已選取</p>
                         </div>
                         
                         <div class="d-flex justify-content-center my-5">
@@ -366,48 +379,53 @@
                     </div>
                     
                     <div class="col-6">
+                        <br>
+                        <br>
                         <div class="d-flex justify-content-center">
                             <strong class="fs-2">活動地點</strong>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <p>請勾選下下方您可前往的地點</p>
-                        </div>
-                        <br><br><br><br><br>
-                        <div class="d-flex justify-content-center align-items-center align-items-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
+                            <p>請設定下下方您可前往的地點</p>
                         </div>
                         <br><br><br>
-                        <div class="d-flex justify-content-center my-5">
-                            <button type="submit" class="btn btn-primary">修改我的預約資訊</button>
+                        <div class="ms-5">
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex ">
+                                    <div class="input-with-icon ">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div class="d-flex justify-content-center my-5 ">
+                            <button type="submit" class="btn btn-primary ">修改我的預約資訊</button>
                         </div>
                     </div>
                 </div>
