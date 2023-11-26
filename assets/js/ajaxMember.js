@@ -715,7 +715,7 @@ export const ajaxMember={
     },
     async patchComment(id,obj){
         try {
-            const result=await axios.patch(`${apiUrl}600/comments/${id}`,obj,{
+            const result=await axios.patch(`${apiUrl}660/comments/${id}`,obj,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }

@@ -115,7 +115,7 @@
       "reservationTime": "113年4月1號 13:00",
       "location": "台北車站站1號出口",
       "postTime": "Thu, 23 Nov 2023 02:29:05 GMT",
-      "state": false,
+      "state": "cancel",
       "id": 2
     },
     {
@@ -134,7 +134,7 @@
       "body": "你好，我想跟你約3月28日上午十點，在中山站碰面，可以嗎？",
       "reservationTime": "113年3月28號 10:00",
       "location": "中山站1號出口",
-      "state": "reject",
+      "state": "accept",
       "checked": false,
       "postTime": "Fri, 24 Nov 2023 04:39:07 GMT",
       "id": 4
@@ -145,7 +145,7 @@
       "body": "你好，我想跟你約1月12日下午三點，在西門碰面，可以嗎？",
       "reservationTime": "113年1月12號 15:00",
       "location": "西門捷運站1號出口",
-      "state": false,
+      "state": "reject",
       "checked": false,
       "postTime": "Fri, 24 Nov 2023 04:40:19 GMT",
       "id": 5
