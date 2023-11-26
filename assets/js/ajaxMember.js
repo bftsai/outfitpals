@@ -19,13 +19,18 @@ export function cookieValue(str) {
 const spinner=document.querySelector('.memberSpinner');
 export const ajaxMember={
     data: [],
-    async getData(){
-        const result=await axios.get(`${apiUrl}600/users/${cookieValue('outfitpalsId')}`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        this.data=result.data;
+    async getUserData(id){
+        try {
+            const result=await axios.get(`${apiUrl}440/users/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            this.data=result.data;
+            return this.data;
+        } catch (err) {
+            console.log(err);
+        }
     },
     async register(obj){
         try {
@@ -39,7 +44,7 @@ export const ajaxMember={
                 const outfitpalsToken=cookieValue('outfitpalsToken')
 
                 await this.patchUsers(outfitpalsId,outfitpalsToken,{
-                    "sign time": `${new Date()}`,
+                    "sign time": new Date().toUTCString(),
                 });
                 signUpMail.value=account.value;
                 signUpPwd.value=pwd.value;
@@ -618,14 +623,19 @@ export const ajaxMember={
         });
     },
     async postPosts(obj){
-        await this.getData();
-        obj.author=this.data.name
-        const result=await axios.post(`${apiUrl}600/posts`,obj,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        console.log(result)
+        try {
+            await this.getUserData(cookieValue('outfitpalsId'));
+            obj.author=this.data.name;
+            obj.postTime=new Date().toUTCString();
+            const result=await axios.post(`${apiUrl}600/posts`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result)
+        } catch (err) {
+            console.log(err);
+        }
     },
     async getPosts(){
         try {
@@ -640,23 +650,83 @@ export const ajaxMember={
             console.log(err);
         }
     },
+    async getPostsById(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/posts?PostId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
     async deletePosts(id){
-        const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        console.log(result);
+        try {
+            const result=await axios.delete(`${apiUrl}600/posts/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
     },
     async postComment(obj){
-        const result=await axios.post(`${apiUrl}600/comments`,obj,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        console.log(result)
+        try {
+            obj.postTime=new Date().toUTCString();
+            const result=await axios.post(`${apiUrl}600/comments`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result)
+        } catch (err) {
+            console.log(err);
+        }
     },
     async getComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteComment(id){
+        try {
+            const result=await axios.delete(`${apiUrl}600/comments/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async patchComment(id,obj){
+        try {
+            const result=await axios.patch(`${apiUrl}600/comments/${id}`,obj,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostComment(id){
         try {
             const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
                 headers: {
@@ -669,13 +739,18 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async deleteComment(id){
-        const result=await axios.delete(`${apiUrl}600/comments/${id}`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        console.log(result);
+    async getUserComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
     },
     async postProfile(obj){
         try {
@@ -694,11 +769,15 @@ export const ajaxMember={
         }
     },
     async deleteProfile(id){
-        const result=await axios.delete(`${apiUrl}600/profile/${id}`,{
-            headers: {
-                "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
-            }
-        });
-        console.log(result);
+        try {
+            const result=await axios.delete(`${apiUrl}600/profile/${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            });
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
     },
 };
