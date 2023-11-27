@@ -16,8 +16,26 @@
             padding-right: 20px;
         }
         .table {
-    table-layout: fixed; 
-    }
+        table-layout: fixed; 
+        }
+        .input-with-icon {
+             position: relative;
+        }
+
+        .input-with-icon input {
+            padding-left: 30px; /* 為圖示留出空間 */
+        }
+
+        .input-with-icon .icon-inside {
+            position: absolute;
+            left: 10px; /* 調整圖示位置 */
+            top: 50%; /* 垂直置中 */
+            transform: translateY(-50%);
+        }
+
+        #current-day {
+            background-color: palegoldenrod;
+        }
     </style>
   <body>
     <%- include('./layout/header'); -%>
@@ -278,19 +296,18 @@
                 <div class="row  align-items-center" style="height: 600px;">
                     <div class="col-6 ">
                         <div class="d-flex justify-content-center">
-                            <strong class="fs-2">選擇預約時段</strong>
+                            <strong class="fs-2">設定預約時段</strong>
                         </div>
                         
-                        <div class="d-flex justify-content-between mb-5">
-                            <p><i class="bi bi-calendar-x-fill text-danger"></i></i>已被預約</p>
+                        <div class="d-flex justify-content-around mb-5">
+                            <p><i class="bi bi-calendar-x-fill text-danger"></i></i>用戶已預約</p>
                             <p><i class="bi bi-calendar2-check-fill text-info"></i>可預約時段</p>
-                            <p><i class="bi bi-calendar-plus-fill text-warning"></i>您已選取</p>
                         </div>
                         
                         <div class="d-flex justify-content-center my-5">
-                            <i class="bi bi-caret-left-fill fs-2"></i>
-                            <strong class="fs-2">2023-12月</strong>
-                            <i class="bi bi-caret-right-fill fs-2"></i>
+                            <i class="bi bi-caret-left-fill fs-2" id="left"></i>
+                            <strong class="fs-2"  id="months"></strong>
+                            <i class="bi bi-caret-right-fill fs-2" id="right" ></i>
                         </div>
         
                         <div class="d-flex justify-content-center mt-5 table-responsive-xxl table-responsive">
@@ -304,61 +321,61 @@
                                     <th scope="col">Thu</th>
                                     <th scope="col">Fri</th>
                                     <th scope="col">Sat</th>
-                                    <th scope="col">Sum</th>
+                                    <th scope="col">Sun</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1-7</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">8-9</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">10-17</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">18-25</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">25-31</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                </tbody>
+                                    <tr>
+                                      <th scope="row">1-7</th>
+                                      <td data-row="1" data-col="1"></td>
+                                      <td data-row="1" data-col="2"></td>
+                                      <td data-row="1" data-col="3"></td>
+                                      <td data-row="1" data-col="4"></td>
+                                      <td data-row="1" data-col="5"></td>
+                                      <td data-row="1" data-col="6"></td>
+                                      <td data-row="1" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">8-9</th>
+                                      <td data-row="2" data-col="1"></td>
+                                      <td data-row="2" data-col="2"></td>
+                                      <td data-row="2" data-col="3"></td>
+                                      <td data-row="2" data-col="4"></td>
+                                      <td data-row="2" data-col="5"></td>
+                                      <td data-row="2" data-col="6"></td>
+                                      <td data-row="2" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">10-17</th>
+                                      <td data-row="3" data-col="1"></td>
+                                      <td data-row="3" data-col="2"></td>
+                                      <td data-row="3" data-col="3"></td>
+                                      <td data-row="3" data-col="4"></td>
+                                      <td data-row="3" data-col="5"></td>
+                                      <td data-row="3" data-col="6"></td>
+                                      <td data-row="3" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">18-25</th>
+                                      <td data-row="4" data-col="1"></td>
+                                      <td data-row="4" data-col="2"></td>
+                                      <td data-row="4" data-col="3"></td>
+                                      <td data-row="4" data-col="4"></td>
+                                      <td data-row="4" data-col="5"></td>
+                                      <td data-row="4" data-col="6"></td>
+                                      <td data-row="4" data-col="7"></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">25-31</th>
+                                      <td data-row="5" data-col="1"></td>
+                                      <td data-row="5" data-col="2"></td>
+                                      <td data-row="5" data-col="3"></td>
+                                      <td data-row="5" data-col="4"></td>
+                                      <td data-row="5" data-col="5"></td>
+                                      <td data-row="5" data-col="6"></td>
+                                      <td data-row="5" data-col="7"></td>
+                                    </tr>
+                                  </tbody>
                               </table>
                         </div>
         
@@ -366,48 +383,53 @@
                     </div>
                     
                     <div class="col-6">
+                        <br>
+                        <br>
                         <div class="d-flex justify-content-center">
                             <strong class="fs-2">活動地點</strong>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <p>請勾選下下方您可前往的地點</p>
-                        </div>
-                        <br><br><br><br><br>
-                        <div class="d-flex justify-content-center align-items-center align-items-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Default checkbox
-                                </label>
-                            </div>
+                            <p>請設定下下方您可前往的地點</p>
                         </div>
                         <br><br><br>
-                        <div class="d-flex justify-content-center my-5">
-                            <button type="submit" class="btn btn-primary">修改我的預約資訊</button>
+                        <div class="ms-5">
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex ">
+                                    <div class="input-with-icon ">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center  ms-5">
+                                <div class="form-check d-flex">
+                                    <div class="input-with-icon">
+                                        <input type="text" class="form-control  border-0 shadow-none" placeholder="請輸入地點"  style="width: 200px;">
+                                        <i class="bi bi-pencil-square icon-inside "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div class="d-flex justify-content-center my-5 ">
+                            <button type="submit" class="btn btn-primary ">修改我的預約資訊</button>
                         </div>
                     </div>
                 </div>

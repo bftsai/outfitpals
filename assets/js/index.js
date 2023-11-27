@@ -1,6 +1,26 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 //swiper
+<<<<<<< HEAD
+// new Swiper("#swiper-1", {
+//     slidesPerView: 1,
+//     centeredSlides: true,
+//     spaceBetween: 24,
+//     lazyLoading: true,
+//     loop: true,
+//     keyboard: {
+//         enabled: true,
+//     },
+//     breakpoints: {
+//         800: {
+//             slidesPerView: 2
+//         },
+//         1400: {
+//             slidesPerView: 2
+//         }
+//     }
+// });
+=======
 new Swiper("#swiper-1", {
     slidesPerView: 1,
     centeredSlides: true,
@@ -40,3 +60,4 @@ faqQuestion.forEach(function (item, index) {
         }
     });
 });
+>>>>>>> e575aa4b152620f8230e0ce4957474c83690b80a
