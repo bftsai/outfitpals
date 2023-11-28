@@ -11,11 +11,12 @@ new Swiper("#swiper-1", {
         enabled: true,
     },
     breakpoints: {
-        800: {
-            slidesPerView: 2
+    
+        1200:{
+            slidesPerView: 1,
         },
         1400: {
-            slidesPerView: 2
+            slidesPerView: 1.5,
         }
     }
 });
