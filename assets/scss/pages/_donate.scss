@@ -2,7 +2,7 @@ h1 {
     font-size: 36px;
 }
 
-p{
+.donate-detail{
   font-size: 20px;
 }
 .bg-qa{
@@ -13,4 +13,47 @@ p{
 .accordion-button{
   background-color: 
   #54992f1f;
+}
+
+.FAQ {
+  background-image: url(/assets/images/index/bg_faq.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.2);
+  background-blend-mode: color-burn;
+  padding: 64px 12px;
+
+  h2,
+  h3 {
+      line-height: 120%;
+      letter-spacing: 0.32px;
+  }
+
+  &__content {
+      background-color: $white;
+      padding: 16px;
+      gap: 16px;
+
+      &__items {
+
+          &__question {
+              line-height: 120%;
+              letter-spacing: 0.32px;
+              border-bottom: 1px dashed $greyD4;
+              color: $black;
+          }
+
+          &__answer {
+              background-color: $tertiary;
+              padding: 12px;
+              gap: 8px;
+              line-height: 180%;
+              letter-spacing: 0.28px;
+              text-align: justify;
+
+          }
+      }
+  }
+
 }
