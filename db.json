@@ -59,14 +59,52 @@
       "love store": "",
       "introduce": "",
       "sex": "Male"
+    },
+    {
+      "email": "xzxz753951@gmail.com",
+      "password": "$2a$10$lZPOGUAoDcHGTprQEr.LcuxvKG2Ciq5YXeFxkJ7sWLKE7xxhoeGTG",
+      "googleToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlNzJkYTFkZjUwMWNhNmY3NTZiZjEwM2ZkN2M3MjAyOTQ3NzI1MDYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE3MDExNzk1MzYsImF1ZCI6IjU3MDYxNzI0NDk4OS1zYmlnNGUzZjNuMHEwZzF2NGM3MzB0Y3Q4N2ZuZzY5OC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMjkzOTUyNDk3NTM0NzM1NDcwMSIsImVtYWlsIjoieHp4ejc1Mzk1MUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNTcwNjE3MjQ0OTg5LXNiaWc0ZTNmM24wcTBnMXY0YzczMHRjdDg3Zm5nNjk4LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkthaW5nIGxpbSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NMNDR3OEhZdks2VTE5TDZkVTZFRDEyQmFNY0d3VGV6T0x6dkNHdnpfVm9CODA9czk2LWMiLCJnaXZlbl9uYW1lIjoiS2FpbmciLCJmYW1pbHlfbmFtZSI6ImxpbSIsImlhdCI6MTcwMTE3OTgzNiwiZXhwIjoxNzAxMTgzNDM2LCJqdGkiOiJkZDE0MDY5NTE5NjI4ODNlNWY3NzA0YWNiZDMyNWEwYTkxNzNiMTFhIn0.j58lqwwGOM_CNxrVJyBdx9BkDRby-pHxR6h6oEEFX9Ky6sZVmUA06CUGcl-hZN5TxrklEH1yPhS6P8Yh5vH6M2GA6_zE20iSW8stW1OzquH9buhyLVzIE70smwQgBrS1ktq9v0mX08T0A1d3vLvKacw3uxmRoGnHyes5TrNOQQkADsmSEPB-Yvzs4qUBjliaQIWor348JLlXWbQ07NnE-479HnC9Pmg4fjUxi8XmZp15IJaR0K71V2bZotl4ydZ1C-ZXMNcImRpWr3EICbrlbZfvrhvrtEyeVr-MVey1JfJ4-IWLqS1X2BfQi_HwIYToXn9a_tps5BIWjMv2NrbwXQ",
+      "g-pwd": "Google112939524975347354701",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocL44w8HYvK6U19L6dU6ED12BaMcGwTezOLzvCGvz_VoB80=s96-c",
+      "name": "Oria Lin",
+      "nick name": "Oria",
+      "third party": "google",
+      "id": 4,
+      "sign time": "Tue, 28 Nov 2023 13:57:16 GMT",
+      "birthday": "2000-07-11",
+      "tel": "0988888888",
+      "reservation time": "無",
+      "reservation time selectedIndex": 1,
+      "reservation location": "沒有",
+      "height": "158",
+      "weight": "50",
+      "PopArea": "台南市",
+      "PopArea selectedIndex": 7,
+      "style": "日系",
+      "style selectedIndex": 1,
+      "outfit price": "$1,000 以下",
+      "outfit price selectedIndex": 1,
+      "love store": "",
+      "introduce": "",
+      "sex": "Female"
     }
   ],
   "posts": [
     {
+      "title": "title test",
+      "body": "body bla bla bla bla bla bla bla bla ",
+      "imgUrl": "https://picsum.photos/200/300",
+      "userId": 2,
+      "postTime": "Thu, 23 Nov 2023 02:21:46 GMT",
+      "author": "TE TEST",
       "id": 1,
-      "title": "json-server",
-      "author": "Red",
-      "userId": 1
+      "likeCounts": 15,
+      "favoriteCounts": 8,
+      "outfitStyle": "日系風格",
+      "brands": [
+        "Brand A",
+        "Brand B"
+      ]
     },
     {
       "title": "title one",
@@ -188,6 +226,36 @@
       "Week": "3",
       "date": "5",
       "id": 6
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "postId": [
+        1,
+        4
+      ]
+    }
+  ],
+  "likes": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postIds": 1
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "postIds": [
+        2,
+        4
+      ]
     }
   ]
 }

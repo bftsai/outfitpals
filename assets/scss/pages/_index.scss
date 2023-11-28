@@ -164,7 +164,6 @@ body {
     overflow: hidden;
     position: relative;
     height: 100%;
-    width: 100%;
 
     &__bg {
 
@@ -208,7 +207,6 @@ body {
             border-radius: 300px;
             object-fit: cover;
             margin-left: 16px;
-
         }
 
         &__caption {
@@ -296,12 +294,8 @@ body {
         }
 
         .swiper-wrapper {
-            margin-left: 244px;
+            margin-left: 265px;
             margin-top: 80px;
-        }
-
-        .swiper-slide {
-            width: 552px !important;
         }
 
         .swiper-slide-prev {
@@ -327,7 +321,7 @@ body {
 
             &__slide {
                 position: relative;
-
+                margin: 0;
                 // margin-bottom: 1rem;
                 &__img {
                     width: 540px;
@@ -541,7 +535,7 @@ body {
     background-image: url(/assets/images/index/bg_faq.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: auto;
+    background-size: auto !important;
     background-color: rgba(255, 255, 255, 0.2);
     background-blend-mode: color-burn;
     padding: 64px 12px;
@@ -586,7 +580,8 @@ body {
                 text-align: justify;
                 max-height: 0;
                 overflow: hidden;
-                transition: 0.25s ease-in-out;
+                transition: 0.4s ease-in-out;
+                padding: 0 !important; 
             }
 
             .FAQopen {
@@ -603,25 +598,16 @@ body {
                 from {
                     height: 0px;
                 }
-
                 to {
                     max-height: 130px;
-                    padding: 12px;
                 }
             }
 
             @keyframes slideout {
                 from {
                     max-height: 130px;
-                    padding: 12px;
                 }
-
-                50% {
-                    padding: 12px;
-                }
-
                 to {
-
                     height: 0px;
                 }
             }
@@ -632,8 +618,8 @@ body {
 
 @include lg {
     .FAQ {
-        background-position: right;
-        background-size: auto;
+        background-position: right !important;
+        background-size: auto !important;
         padding: 80px 72px;
 
         &__content {
@@ -648,6 +634,7 @@ body {
                 &__answer {
                     gap: 16px;
                     letter-spacing: 0.32px;
+                    padding: 0;
                 }
 
                 .FAQopen {
@@ -664,26 +651,16 @@ body {
                     from {
                         height: 0px;
                     }
-
                     to {
                         max-height: 120px;
-                        padding: 24px;
-
                     }
                 }
 
                 @keyframes slideout {
                     from {
                         max-height: 120px;
-                        padding: 24px;
                     }
-
-                    50% {
-                        padding: 24px;
-                    }
-
                     to {
-
                         height: 0px;
                     }
                 }
