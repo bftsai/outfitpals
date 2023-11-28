@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OutfitPals-Reserve</title>
-    <script type="module" crossorigin src="/outfitpals/assets/reserve-68b2bc6d.js"></script>
-    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-1baa1838.js">
-    <link rel="stylesheet" href="/outfitpals/assets/main-497636f4.css">
+    <script type="module" crossorigin src="/outfitpals/assets/reserve-fc04995a.js"></script>
+    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-56f4b848.js">
+    <link rel="modulepreload" crossorigin href="/outfitpals/assets/ajaxMember-e4a1da22.js">
+    <link rel="stylesheet" href="/outfitpals/assets/main-124fc71d.css">
   </head>
   <body>
     <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top">
@@ -33,7 +34,10 @@
 <!-- 待桌機版完成後補行動版sidebar
 <div  class="header-sidebar">
     <span class="material-symbols-outlined d-none"> close</span> 
-</div> -->    <div class="reserve h-radialGradienStyle-1 pb-9 pb-lg-13">
+</div> -->    <div class="spinner-border text-black18 d-none position-absolute memberSpinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="reserve h-radialGradienStyle-1 pb-9 pb-lg-13">
       <div class="container c-switch-btn-group">
         <div class="row justify-content-center py-9 py-lg-13">
           <div class="col col-lg-4">
@@ -45,9 +49,9 @@
         </div>
       </div>
       <ul class="container reserve-content pb-9 pb-lg-13">
-        <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D active">
+        <!-- <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D active">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -66,7 +70,7 @@
         </li>
         <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -85,7 +89,7 @@
         </li>
         <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -104,7 +108,7 @@
         </li>
         <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -123,7 +127,7 @@
         </li>
         <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -142,7 +146,7 @@
         </li>
         <li class="row justify-content-between justify-content-lg-center align-items-center py-7 border border-grey1D">
           <div class="col-3 col-lg-2">
-            <img src="/outfitpals/assets/female-1-29b594c2.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
+            <img src="../assets/images/reserve/female-1.svg" class="object-fit-cover rounded-circle d-block mx-auto" alt="personal pic">
           </div>
           <div class="col-5 col-sm-6 col-lg-8">
             <div class="card-body position-relative">
@@ -158,7 +162,7 @@
               2023/10/26
             </p>
           </div>
-        </li>
+        </li> -->
       </ul>
       <div class="container reserve-myDiscuss d-none opacity-0">
         <p>
@@ -168,28 +172,28 @@
         </p>
         <div class="row justify-content-around align-items-center border-bottom border-grey9F py-7 py-lg-9">
           <div class="col-3 col-lg-2">
-            <img class="rounded-circle object-fit-cover" src="/outfitpals/assets/female-1-29b594c2.svg" alt="personal pic">
+            <img class="rounded-circle object-fit-cover image" src="/outfitpals/assets/female-1-29b594c2.svg" alt="personal pic">
           </div>
           <div class="col-5 col-lg-6">
-            <p class="fs-4 fs-lg-2 fw-bold">Wang ming</p>
+            <p class="fs-4 fs-lg-2 fw-bold name">Wang ming</p>
           </div>
           <div class="col-4 col-lg-2">
-            <p class="fw-bold text-grey9F fs-8 fs-lg-7 text-end text-lg-start">
+            <p class="fw-bold text-grey9F fs-8 fs-lg-7 text-end text-lg-start date">
               2023/10/26
             </p>
           </div>
         </div>
         <div class="row py-7 py-lg-9">
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">預約時間：112年10月5號 15:00</p>
+            <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-8 col-lg-9">
-            <p class="fs-lg-4 fw-bold">狀態：預約中</p>
+            <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
           </div>
-          <div class="col-4 col-lg-3">
+          <div class="col-4 col-lg-3 reserve-myDiscuss-Radio-Form">
             <div class="form-check">
               <input class="form-check-input fs-lg-4" type="radio" name="reserve-myDiscuss" id="reserve-myDiscussCancel">
               <label class="form-check-label fw-bold fs-lg-4" for="reserve-myDiscussCancel">
@@ -205,7 +209,7 @@
             </p>
           </div>
           <div class="col-8 d-flex align-self-end">
-            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9">
+            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9 commentBody">
               好啊，那我們就當天見！
             </p>
           </div>
@@ -215,7 +219,7 @@
             <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="" placeholder="請輸入文字..."></textarea>
           </div>
           <div class="col-6">
-            <div class="c-confirm-btn-group btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
+            <div class="c-confirm-btn-group reserveMyDiscussConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveMyDiscussConfirmSubmit" disabled>送出</button>
               <button type="button" class="btn btn-black18 text-primary py-lg-3 px-lg-7 reserveMyDiscussConfirmCancel">取消</button>
             </div>
@@ -230,28 +234,28 @@
         </p>
         <div class="row justify-content-around align-items-center border-bottom border-grey9F py-7 py-lg-9">
           <div class="col-3 col-lg-2">
-            <img class="rounded-circle object-fit-cover" src="/outfitpals/assets/female-1-29b594c2.svg" alt="personal pic">
+            <img class="rounded-circle object-fit-cover image" src="/outfitpals/assets/female-1-29b594c2.svg" alt="personal pic">
           </div>
           <div class="col-5 col-lg-6">
-            <p class="fs-4 fs-lg-2 fw-bold">Wang ming</p>
+            <p class="fs-4 fs-lg-2 fw-bold name">Wang ming</p>
           </div>
           <div class="col-4 col-lg-2">
-            <p class="fw-bold text-grey9F fs-8 fs-lg-7 text-end text-lg-start">
+            <p class="fw-bold text-grey9F fs-8 fs-lg-7 text-end text-lg-start date">
               2023/10/26
             </p>
           </div>
         </div>
         <div class="row py-7 py-lg-9">
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">預約時間：112年10月5號 15:00</p>
+            <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-5 col-lg-6">
-            <p class="fs-lg-4 fw-bold">狀態：預約中</p>
+            <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
           </div>
-          <div class="col-7 col-lg-6 d-flex justify-content-around">
+          <div class="col-7 col-lg-6 d-flex justify-content-around  reserve-manageAppointments-Radio-Form">
             <div class="form-check">
               <input class="form-check-input fs-lg-4" type="radio" name="reserve-manageAppointments" id="reserve-manageAppointmentsApprove">
               <label class="form-check-label fw-bold fs-lg-4" for="reserve-manageAppointmentsApprove">
@@ -268,7 +272,7 @@
         </div>
         <div class="row flex-column">
           <div class="col-8 d-flex">
-            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 mb-7 mb-lg-9">
+            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 mb-7 mb-lg-9 commentBody">
               哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
             </p>
           </div>
@@ -280,10 +284,10 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-10">
-            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="" placeholder="請輸入文字..."></textarea>
+            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="reserveManageAppointmentsArea" placeholder="請輸入文字..."></textarea>
           </div>
           <div class="col-6">
-            <div class="c-confirm-btn-group btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
+            <div class="c-confirm-btn-group reserveManageAppointmentsConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveManageAppointmentsConfirmSubmit" disabled>送出</button>
               <button type="button" class="btn btn-black18 text-primary py-lg-3 px-lg-7 reserveManageAppointmentsConfirmCancel">取消</button>
             </div>
