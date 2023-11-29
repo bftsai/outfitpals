@@ -247,12 +247,12 @@
     {
       "id": 1,
       "userId": 1,
-      "postIds": 1
+      "postId": 1
     },
     {
       "id": 2,
       "userId": 3,
-      "postIds": [
+      "postId": [
         2,
         4
       ]
