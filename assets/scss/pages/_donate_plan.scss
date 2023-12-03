@@ -4,6 +4,7 @@
 
 #donate_section{
     height: 1000px;
+    margin-top: 50px;
 }
   #donate_section .res-steps-container .res-steps {
       width: 25%;
@@ -81,5 +82,15 @@
       color: #0aa7e1
   }
 
-  
-  
+  .res-step-form{
+    .material-symbols-outlined{
+        color: #ff0000;
+        font-variation-settings:
+        'FILL' 1,
+    }
+  }
+
+  .required:after {
+    content: " *";
+    color: red;
+}
