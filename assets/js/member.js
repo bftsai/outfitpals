@@ -29,8 +29,6 @@ const signUpBirth=document.getElementById('signUpBirth');
 const signUpTel=document.getElementById('signUpTel');
 const signUpMale=document.getElementById('signUpMale');
 const signUpFemale=document.getElementById('signUpFemale');
-const signUpReservationTime=document.getElementById('signUpReservationTime');
-const signUpReservationLocation=document.getElementById('signUpReservationLocation');
 const signUpHeight=document.getElementById('signUpHeight');
 const signUpWeight=document.getElementById('signUpWeight');
 const signUpPopArea=document.getElementById('signUpPopArea');
@@ -78,11 +76,13 @@ signInBtn.addEventListener('click',e=>{
 
     e.target.classList.add('active');
     gmailSignUp.classList.add('opacity-0');
+    memberIndexForm.classList.add('opacity-0');
     setTimeout(()=>{
         gmailSignUp.classList.add('d-none');
         gmailSignIn.classList.remove('d-none');
         setTimeout(() => {
             gmailSignIn.classList.remove('opacity-0');
+            memberIndexForm.classList.remove('opacity-0');
         }, 0);
     },400);
 });
@@ -102,11 +102,13 @@ signUpBtn.addEventListener('click',e=>{
 
     e.target.classList.add('active');
     gmailSignIn.classList.add('opacity-0');
+    memberIndexForm.classList.add('opacity-0');
     setTimeout(()=>{
         gmailSignIn.classList.add('d-none');
         gmailSignUp.classList.remove('d-none');
         setTimeout(() => {
             gmailSignUp.classList.remove('opacity-0');
+            memberIndexForm.classList.remove('opacity-0');
         }, 0);
     },400);
     
@@ -197,7 +199,7 @@ memberSignUpSubmit.addEventListener('click',async e=>{
         })
     }
     
-    signUpValidation(signUpPhoto,signUpName,signUpPwd,signUpNickName,signUpBirth,signUpMail,signUpTel,signUpMale,signUpFemale,signUpReservationTime,signUpReservationLocation,signUpHeight,signUpWeight,signUpPopArea,signUpStyle,signUpOutfitPrice,signUpLoveStore,signUpIntroduce,memberSignUpForm);
+    signUpValidation(signUpPhoto,signUpName,signUpPwd,signUpNickName,signUpBirth,signUpMail,signUpTel,signUpMale,signUpFemale,signUpHeight,signUpWeight,signUpPopArea,signUpStyle,signUpOutfitPrice,signUpLoveStore,signUpIntroduce,memberSignUpForm);
 });
 
 memberSignInForm.addEventListener('click',e=>{
@@ -211,8 +213,6 @@ memberSignInForm.addEventListener('click',e=>{
     const signInTel=document.getElementById('signInTel');
     const signInMale=document.getElementById('signInMale');
     const signInFemale=document.getElementById('signInFemale');
-    const signInReservationTime=document.getElementById('signInReservationTime');
-    const signInReservationLocation=document.getElementById('signInReservationLocation');
     const signInHeight=document.getElementById('signInHeight');
     const signInWeight=document.getElementById('signInWeight');
     const signInPopArea=document.getElementById('signInPopArea');
@@ -225,7 +225,7 @@ memberSignInForm.addEventListener('click',e=>{
         e.preventDefault();
         e.stopPropagation();
 
-        signUpValidation(signInPhoto,signInName,signInPwd,signInNickName,signInBirth,signInMail,signInTel,signInMale,signInFemale,signInReservationTime,signInReservationLocation,signInHeight,signInWeight,signInPopArea,signInStyle,signInOutfitPrice,signInLoveStore,signInIntroduce,memberSignInForm);
+        signUpValidation(signInPhoto,signInName,signInPwd,signInNickName,signInBirth,signInMail,signInTel,signInMale,signInFemale,signInHeight,signInWeight,signInPopArea,signInStyle,signInOutfitPrice,signInLoveStore,signInIntroduce,memberSignInForm);
     }else if(e.target.className.includes('memberSignInReviseCancel')){
         location.href=locationUrl;
     }
@@ -256,15 +256,14 @@ let postObj={
 
 // ajaxMember.postPosts(postObj)
 // ajaxMember.deletePosts(2)
-console.log((new Date).toUTCString());
+
 let commentObj={
-    "postId": 5,
+    "posterId": 2,
     "userId": Number(cookieValue('outfitpalsId')),
-    "body": "你好，我想跟你約1月12日下午三點，在西門碰面，可以嗎？",
-    "reservationTime": '113年1月12號 15:00',
-    "location": '西門捷運站1號出口',
-    "state": false,
-    "checked": false 
+    "body": "你好，我想跟你約4月27日晚上七點，在新埔站碰面，可以嗎？",
+    "reservationTime": '113年4月27號 19:00',
+    "location": '新埔捷運站1號出口',
+    "state": false
 }
 // let commentObj={
 //     "postId": 5,
@@ -276,4 +275,4 @@ let commentObj={
 //     "checked": false //accept、reject、wait
 // }
 // ajaxMember.postComment(commentObj)
-// ajaxMember.deleteComment(2)
+// ajaxMember.deleteComment(4)

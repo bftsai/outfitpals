@@ -36,7 +36,7 @@
     },
     {
       "email": "test@mail.com",
-      "password": "$2a$10$pQNRN1DUtNctYwHt4e44V.f0S04JfHmLeZ3so4Dxt.RzDhWFCt0He",
+      "password": "$2a$10$kZFdxBC8xSlHnzAWD8XT9enHtKgb6CIqzLqgWGhbwbWAJHaB5difG",
       "third party": "false",
       "id": 3,
       "sign time": "Thu Nov 23 2023 00:01:12 GMT+0800 (台北標準時間)",
@@ -49,7 +49,7 @@
       "reservation time selectedIndex": 1,
       "reservation location": "test location two",
       "height": "",
-      "weight": "",
+      "weight": "70",
       "PopArea": "",
       "PopArea selectedIndex": 0,
       "style": "",
@@ -180,45 +180,43 @@
       "userId": 1
     },
     {
-      "postId": 2,
-      "userId": 3,
-      "body": "你好，我想跟你約4月1日下午一點，在台北車站碰面，可以嗎？",
-      "reservationTime": "113年4月1號 13:00",
-      "location": "台北車站站1號出口",
-      "postTime": "Thu, 23 Nov 2023 02:29:05 GMT",
-      "state": "cancel",
-      "id": 2
-    },
-    {
-      "postId": 3,
-      "userId": 3,
-      "body": "你好，我想跟你約2月28日上午九點，在東區碰面，可以嗎？",
-      "reservationTime": "113年2月28號 09:00",
-      "location": "忠孝復興1號出口",
-      "postTime": "Thu, 23 Nov 2023 02:31:24 GMT",
-      "state": false,
-      "id": 3
-    },
-    {
-      "postId": 4,
-      "userId": 2,
-      "body": "你好，我想跟你約3月28日上午十點，在中山站碰面，可以嗎？",
-      "reservationTime": "113年3月28號 10:00",
-      "location": "中山站1號出口",
-      "state": "accept",
-      "checked": false,
-      "postTime": "Fri, 24 Nov 2023 04:39:07 GMT",
-      "id": 4
-    },
-    {
-      "postId": 5,
+      "posterId": 3,
       "userId": 2,
       "body": "你好，我想跟你約1月12日下午三點，在西門碰面，可以嗎？",
       "reservationTime": "113年1月12號 15:00",
       "location": "西門捷運站1號出口",
-      "state": "reject",
-      "checked": false,
-      "postTime": "Fri, 24 Nov 2023 04:40:19 GMT",
+      "state": false,
+      "postTime": "Sun, 03 Dec 2023 16:33:24 GMT",
+      "id": 2
+    },
+    {
+      "posterId": 3,
+      "userId": 2,
+      "body": "你好，我想跟你約2月21日上午時點，在東區碰面，可以嗎？",
+      "reservationTime": "113年2月21號 10:00",
+      "location": "忠孝復興捷運站1號出口",
+      "state": false,
+      "postTime": "Sun, 03 Dec 2023 16:34:28 GMT",
+      "id": 3
+    },
+    {
+      "posterId": 2,
+      "userId": 3,
+      "body": "你好，我想跟你約3月25日上午九點，在中山站碰面，可以嗎？",
+      "reservationTime": "113年3月25號 09:00",
+      "location": "中山捷運站1號出口",
+      "state": false,
+      "postTime": "Sun, 03 Dec 2023 16:35:52 GMT",
+      "id": 4
+    },
+    {
+      "posterId": 2,
+      "userId": 3,
+      "body": "你好，我想跟你約4月27日晚上七點，在新埔站碰面，可以嗎？",
+      "reservationTime": "113年4月27號 19:00",
+      "location": "新埔捷運站1號出口",
+      "state": false,
+      "postTime": "Sun, 03 Dec 2023 16:36:42 GMT",
       "id": 5
     }
   ],
@@ -273,14 +271,6 @@
       "id": 1,
       "userId": 1,
       "postId": 1
-    },
-    {
-      "id": 2,
-      "userId": 3,
-      "postId": [
-        2,
-        4
-      ]
     }
   ]
 }
