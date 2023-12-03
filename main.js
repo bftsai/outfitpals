@@ -1,5 +1,5 @@
 import './assets/scss/all.scss';
-// import $ from "jquery";
+import $ from "jquery";
 // import axios from 'axios';
 //pagination
 $(document).ready(function () {
