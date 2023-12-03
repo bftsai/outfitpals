@@ -1,14 +1,18 @@
 // body{
 //     overflow-x: hidden;
 //   }
-  #employer-post-new-job .res-steps-container .res-steps {
+
+#donate_section{
+    height: 1000px;
+}
+  #donate_section .res-steps-container .res-steps {
       width: 25%;
       text-align: center;
       float: left;
       cursor: pointer
   }
   
-  #employer-post-new-job .res-steps-container .res-steps .res-step-bar {
+  #donate_section .res-steps-container .res-steps .res-step-bar {
       -webkit-border-radius: 50% !important;
       -moz-border-radius: 50% !important;
       -ms-border-radius: 50% !important;
@@ -24,14 +28,14 @@
       font-size: 20px
   }
   
-  #employer-post-new-job .res-steps-container .res-steps .res-progress-title {
+  #donate_section .res-steps-container .res-steps .res-progress-title {
       text-align: center;
       font-size: 15px;
       padding-top: 10px;
       display: block
   }
   
-  #employer-post-new-job .res-steps-container .res-steps .res-progress-bar {
+  #donate_section .res-steps-container .res-steps .res-progress-bar {
       height: 5px;
       background: #0aa7e1;
       width: 50%;
@@ -39,42 +43,43 @@
       float: left
   }
   
-  #employer-post-new-job .res-steps-container .res-step-two .res-progress-bar, #employer-post-new-job .res-steps-container .res-step-three .res-progress-bar, #employer-post-new-job .res-steps-container .res-step-four .res-progress-bar {
+  #donate_section .res-steps-container .res-step-two .res-progress-bar, #donate_section .res-steps-container .res-step-three .res-progress-bar, #donate_section .res-steps-container .res-step-four .res-progress-bar {
       width: 100%;
       margin-left: 0%
   }
   
-  #employer-post-new-job .res-steps-container .res-step-four .res-progress-bar {
+  #donate_section .res-steps-container .res-step-four .res-progress-bar {
       width: 50%;
       margin-right: 50%
   }
   
-  #employer-post-new-job .res-step-form {
+  #donate_section .res-step-form {
       border: 1px solid #d2d2d2;
       box-shadow: 0px 6px 4px -2px silver;
       position: absolute
   }
   
-  #employer-post-new-job .res-step-form h3 {
+  #donate_section .res-step-form h3 {
       margin: 10px 0;
       color: #0aa7e1;
       font-size: 18px
   }
   
-  #employer-post-new-job .res-step-form .form-horizontal label {
+  #donate_section .res-step-form .form-horizontal label {
       font-weight: normal
   }
   
-  #employer-post-new-job .res-form-two, #employer-post-new-job .res-form-three, #employer-post-new-job .res-form-four {
+  #donate_section .res-form-two, #donate_section .res-form-three, #donate_section .res-form-four {
       left: 150%
   }
   
-  #employer-post-new-job .active .res-step-bar {
+  #donate_section .active .res-step-bar {
       background: #f19b20 !important
   }
   
-  #employer-post-new-job .active .res-progress-title {
+  #donate_section .active .res-progress-title {
       color: #0aa7e1
   }
 
+  
   
