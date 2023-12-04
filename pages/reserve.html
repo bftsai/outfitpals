@@ -15,7 +15,7 @@
       <div class="container c-switch-btn-group">
         <div class="row justify-content-center py-9 py-lg-13">
           <div class="col col-lg-4">
-            <div class="btn-group w-100" role="group" aria-label="Basic example">
+            <div class="reserveBtnSwitch btn-group w-100" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 active">我的預約</button>
               <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7">預約管理</button>
             </div>
@@ -162,7 +162,7 @@
             <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">地點：<a target="_blank" href="#" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-8 col-lg-9">
             <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
@@ -177,21 +177,13 @@
           </div>
         </div>
         <div class="row flex-column">
-          <div class="col-8 d-flex">
-            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 mb-7 mb-lg-9">
-              哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
-            </p>
-          </div>
           <div class="col-8 d-flex align-self-end">
-            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9 commentBody">
+            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9 commentBody">
               好啊，那我們就當天見！
             </p>
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-10">
-            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="" placeholder="請輸入文字..."></textarea>
-          </div>
           <div class="col-6">
             <div class="c-confirm-btn-group reserveMyDiscussConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveMyDiscussConfirmSubmit" disabled>送出</button>
@@ -224,7 +216,10 @@
             <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">手機號碼：<a target="_blank" href="tel" class="tel">0912123456</a></p>
+          </div>
+          <div class="col-12">
+            <p class="fs-lg-4 fw-bold">地點：<a target="_blank" href="https://www.google.com.tw/maps?q=" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-5 col-lg-6">
             <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
@@ -239,7 +234,7 @@
             <div class="form-check">
               <input class="form-check-input fs-lg-4" type="radio" name="reserve-manageAppointments" id="reserve-manageAppointmentsCancel">
               <label class="form-check-label fw-bold fs-lg-4" for="reserve-manageAppointmentsCancel">
-                取消預約
+                拒絕預約
               </label>
             </div>
           </div>
@@ -250,16 +245,8 @@
               哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
             </p>
           </div>
-          <div class="col-8 d-flex align-self-end">
-            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9">
-              好啊，那我們就當天見！
-            </p>
-          </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-10">
-            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="reserveManageAppointmentsArea" placeholder="請輸入文字..."></textarea>
-          </div>
           <div class="col-6">
             <div class="c-confirm-btn-group reserveManageAppointmentsConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveManageAppointmentsConfirmSubmit" disabled>送出</button>
@@ -268,19 +255,17 @@
           </div>
         </div>
       </div>
-      <div class="container pagination justify-content-center">
+      <div class="container paginationArea">
         <nav aria-label="Page navigation">
-          <ul class="pagination m-0">
-            <li class="page-item">
+          <ul class="pagination m-0 justify-content-center">
+            <li class="page-item prev">
               <a class="page-link page-prev border-black18 bg-black" href="#" aria-label="Previous">
                 <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
                 <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
               </a>
             </li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">2</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">3</a></li>
-            <li class="page-item">
+            <!-- <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li> -->
+            <li class="page-item next">
               <a class="page-link page-next border-black18 bg-black" href="#" aria-label="Next">
                 <img src="../assets/images/components/Btn-Arrow-primary.svg" alt="pagination arrow">
                 <img src="../assets/images/components/Btn-Arrow-black.svg" alt="pagination arrow">
@@ -298,6 +283,7 @@
     <%- include('./layout/footer'); -%>
     <!-- own JS -->
     <script type="module" src="../main.js"></script>
+    <script type="module" src="../assets/js/componentPagination.js"></script>
     <script type="module" src="../assets/js/reserve.js"></script>
   </body>
 </html>
