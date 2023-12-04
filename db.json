@@ -87,6 +87,13 @@
       "love store": "",
       "introduce": "",
       "sex": "Female"
+    },
+    {
+      "email": "oriatest@mail.com",
+      "password": "$2a$10$abKGJst.1Gm1.B..ABOqrulv6cliVozBC25KpdZVeRfumRss850j.",
+      "third party": "false",
+      "id": 5,
+      "sign time": "Sun, 03 Dec 2023 11:26:56 GMT"
     }
   ],
   "posts": [
