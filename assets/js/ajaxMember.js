@@ -27,6 +27,7 @@ export const ajaxMember={
                 }
             });
             this.data=result.data;
+            //console.log(this.data);
             return this.data;
         } catch (err) {
             console.log(err);
@@ -65,6 +66,8 @@ export const ajaxMember={
             memberIndexForm.classList.add('was-validated');
             account.classList.add('is-invalid');
             account.classList.add('is-invalid-customer');
+            account.nextElementSibling.textContent=err.response.data;
+            spinner.classList.add('d-none');
         }
     },
     async deleteUser(id){
@@ -671,6 +674,32 @@ export const ajaxMember={
             });
             console.log(result);
             return result;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getAllPostComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getAllUserComment(id){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
         } catch (err) {
             console.log(err);
         }

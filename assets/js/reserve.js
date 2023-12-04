@@ -20,7 +20,6 @@ $(document).ready(function () {
 //JS
 const locationUrl='http://localhost:5173/outfitpals/pages/reserve.html';
 
-
 const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');
 const backToReserveAll=[...document.querySelectorAll('.backToReserve')];
@@ -42,6 +41,8 @@ const reserveManageAppointmentsConfirmCancel=document.querySelector('.reserveMan
 //pagination
 const paginationArea=document.querySelector('.paginationArea');
 const pagination=document.querySelector('.pagination');
+const paginationPrev=document.querySelector('.pagination .prev');
+const paginationNext=document.querySelector('.pagination .next');
 
 const reserveComponent={
     data:{},
@@ -55,6 +56,14 @@ const reserveComponent={
     },
     getCommentObj(id){
         const commentsArr=ajaxMember.getComment(id);
+        return commentsArr;
+    },
+    getAllPostCommentArr(id){
+        const commentsArr=ajaxMember.getAllPostComment(id);
+        return commentsArr;
+    },
+    getAllUserComment(id){
+        const commentsArr=ajaxMember.getAllUserComment(id);
         return commentsArr;
     },
     getPostCommentArr(id,page){
@@ -85,6 +94,7 @@ const reserveComponent={
             if(stateDom.textContent==='我的預約'){
                 reserveContent.innerHTML='';
                 if(commentArr.length!==0){
+                    //render comment
                     commentArr.forEach(async (item,index)=>{
                         const posterData=await this.getUserData(item.posterId);
                         const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
@@ -128,7 +138,9 @@ const reserveComponent={
                         cardText.className='card-text text-grey9F fs-8 text-end text-md-center';
                         cardText.textContent=time;
                         col4.appendChild(cardText);
-    
+
+                        paginationArea.classList.remove('d-none');
+
                         spinner.classList.add('d-none');
                         
                         const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
@@ -175,12 +187,27 @@ const reserveComponent={
                             date.textContent=time;
                             reservationTime.textContent=comment.reservationTime;
                             location.textContent=comment.location;
+                            location.href=`https://www.google.com.tw/maps?q=${comment.location}`;
                             state.textContent=comment.state===false? '預約中':(comment.state==='accept'?'預約成功':(comment.state==='reject'?'已拒絕':'已取消'));
                             commentBody.textContent=comment.body;
                         });
                     });
+                }else{
+                    const li=document.createElement('li');
+                    li.className='row justify-content-between justify-content-lg-center align-items-center py-7';
+                    reserveContent.appendChild(li);
+                    const col3=document.createElement('div');
+                    col3.className='col-3 col-lg-2';
+                    li.appendChild(col3);
+                    const p=document.createElement('p');
+                    p.className=`card-title fs-5 fs-lg-3 fw-bold text-danger`
+                    p.textContent=`目前尚無預約`;
+                    col3.appendChild(p);
+
+                    paginationArea.classList.add('d-none');
+
+                    spinner.classList.add('d-none');
                 }
-                
             }else if(stateDom.textContent==='預約管理'){
                 reserveContent.innerHTML='';
                 if(postArr.length!==0){
@@ -231,6 +258,9 @@ const reserveComponent={
                         cardText.className='card-text text-grey9F fs-8 text-end text-md-center';
                         cardText.textContent=time;
                         col4.appendChild(cardText);
+
+                        paginationArea.classList.remove('d-none');
+
                         spinner.classList.add('d-none');
     
                         const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
@@ -270,6 +300,7 @@ const reserveComponent={
                                 const name=document.querySelector('.reserve-manageAppointments .name');
                                 const date=document.querySelector('.reserve-manageAppointments .date');
                                 const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime');
+                                const tel=document.querySelector('.reserve-manageAppointments .tel');
                                 const location=document.querySelector('.reserve-manageAppointments .location');
                                 const state=document.querySelector('.reserve-manageAppointments .state');
                                 const commentBody=document.querySelector('.reserve-manageAppointments .commentBody');
@@ -278,29 +309,83 @@ const reserveComponent={
                                 name.textContent=commenterData.name;
                                 date.textContent=time;
                                 reservationTime.textContent=comment.reservationTime;
+                                tel.textContent=commenterData.tel;
+                                tel.href=`tel:${commenterData.tel}`;
                                 location.textContent=comment.location;
+                                location.href=`https://www.google.com.tw/maps?q=${comment.location}`;
                                 state.textContent=comment.state===false? '預約中':(comment.state==='accept'? '預約成功':(comment.state==='reject'? '已拒絕':'已取消'));
                                 commentBody.textContent=comment.body;
                             })
                         });
                     });
+                }else{
+                    const li=document.createElement('li');
+                    li.className='row justify-content-between justify-content-lg-center align-items-center py-7';
+                    reserveContent.appendChild(li);
+                    const col3=document.createElement('div');
+                    col3.className='col-3 col-lg-2';
+                    li.appendChild(col3);
+                    const p=document.createElement('p');
+                    p.className=`card-title fs-5 fs-lg-3 fw-bold text-danger`
+                    p.textContent=`目前尚無預約`;
+                    col3.appendChild(p);
+
+                    paginationArea.classList.add('d-none');
+
+                    spinner.classList.add('d-none');
                 }
             }
         }, 400);
 
         
     },
+    async renderPagination(){
+        const stateDom=[...reserveBtnGroup.children[0].children[0].children[0].children].find(item=>{
+            if(item.className.includes('active')){
+                return item;
+            }
+        });
+        let paginationLength=0;
+        if(stateDom.textContent==='我的預約'){
+            paginationLength=(await this.getAllPostCommentArr(cookieValue('outfitpalsId'))).length;
+        }else{
+            paginationLength=(await this.getAllUserComment(cookieValue('outfitpalsId'))).length;
+        }
+        
+        const countPageDelete=pagination.childElementCount-1;
+        for (let i = 1; i < countPageDelete; i++) {
+            pagination.removeChild(pagination.children[1]);
+        }
+
+        //render pagination
+        for(let i=1;i<=Number((paginationLength/1).toFixed(0));i++){
+            if(i===1){
+                const li=document.createElement('li');
+                li.className='page-item';
+                paginationPrev.parentNode.insertBefore(li,paginationPrev.nextSibling);
+
+                const a=document.createElement('a');
+                a.className='page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active';
+                a.href='#';
+                a.textContent=i;
+                li.appendChild(a);
+            }else{
+                const li=document.createElement('li');
+                li.className='page-item';
+                paginationNext.parentNode.insertBefore(li,pagination.children[i]);
+                //paginationNext
+                const a=document.createElement('a');
+                a.className='page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5';
+                a.href='#';
+                a.textContent=i;
+                li.appendChild(a);
+            }
+        };
+    }
 };
 
 reserveComponent.render(1);
-reserveBtnGroup.addEventListener('click',e=>{
-    [...pagination.children].forEach((item,index)=>{
-        item.children[0].classList.remove('active');
-        if(index===1){
-            item.children[0].classList.add('active');
-        }
-    })
-})
+reserveComponent.renderPagination();
 //pagination
 pagination.addEventListener('click',e=>{
     if(Number(e.target.textContent)!==0){
@@ -312,7 +397,17 @@ pagination.addEventListener('click',e=>{
             }
         })
     }
-})
+});
+reserveBtnGroup.addEventListener('click',e=>{
+    if(pagination.childElementCount>2){
+        [...pagination.children].forEach((item,index)=>{
+            item.children[0].classList.remove('active');
+            if(index===1){
+                item.children[0].classList.add('active');
+            }
+        });
+    }
+});
 
 //reserve my discuss
 reserveMyDiscussRadioCancel.addEventListener('click',e=>{
