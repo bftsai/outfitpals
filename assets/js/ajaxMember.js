@@ -27,6 +27,7 @@ export const ajaxMember={
                 }
             });
             this.data=result.data;
+            //console.log(this.data);
             return this.data;
         } catch (err) {
             console.log(err);
@@ -65,6 +66,8 @@ export const ajaxMember={
             memberIndexForm.classList.add('was-validated');
             account.classList.add('is-invalid');
             account.classList.add('is-invalid-customer');
+            account.nextElementSibling.textContent=err.response.data;
+            spinner.classList.add('d-none');
         }
     },
     async deleteUser(id){
@@ -218,22 +221,6 @@ export const ajaxMember={
             </div>
             <div class="col-6 col-lg-4 col-xl-3">
                 <p class="fs-lg-5">${this.data.sex}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>開放預約時間</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data['reservation time']}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>開放預約地點</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data['reservation location']}</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
@@ -440,40 +427,6 @@ export const ajaxMember={
             </div>
         </div>
         <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
-            <span class="material-symbols-outlined fs-lg-5 me-2">
-                star
-            </span>
-            <label for="signInReservationTime" class="form-label">開放預約時間</label>
-            </div>
-            <div class="col-lg-6">
-            <select class="form-select fs-lg-5 py-lg-3 px-lg-7" id="signInReservationTime" name="開放預約時間" required>
-                <option value="" disabled>請選擇開放預約時間</option>
-                <option>無</option>
-                <option>09：00～12：00</option>
-                <option>13：00～17：00</option>
-                <option>18：00～22：00</option>
-            </select>
-            <div class="invalid-feedback">
-                請選擇開放預約時間
-            </div>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
-            <span class="material-symbols-outlined fs-lg-5 me-2">
-                star
-            </span>
-            <label for="signInReservationLocation" class="form-label">開放預約地點</label>
-            </div>
-            <div class="col-lg-6">
-            <input type="text" class="form-control fs-lg-5 py-lg-3 px-lg-7" id="signInReservationLocation" placeholder="請輸入開放預約地點" name="開放預約地點" value="${this.data['reservation location']}" required>
-            <div class="invalid-feedback">
-                請輸入開放預約地點
-            </div>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
             <div class="col-lg-2 mb-3 mb-lg-0">
             <span class="material-symbols-outlined" style="color: transparent;">
                 star
@@ -606,7 +559,6 @@ export const ajaxMember={
             signInPwd.setAttribute('disabled','');
             signInMail.setAttribute('disabled','');
         }
-        document.getElementById('signInReservationTime').selectedIndex=this.data['reservation time selectedIndex'];
         document.getElementById('signInPopArea').selectedIndex=this.data['PopArea selectedIndex'];
         document.getElementById('signInStyle').selectedIndex=this.data['style selectedIndex'];
         document.getElementById('signInOutfitPrice').selectedIndex=this.data['outfit price selectedIndex'];
@@ -726,9 +678,9 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async getPostComment(id){
+    async getAllPostComment(id){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?postId=${id}`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -739,9 +691,35 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async getUserComment(id){
+    async getAllUserComment(id){
         try {
             const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getPostComment(id,page){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=1`,{
+                headers: {
+                    "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
+                }
+            })).data;
+            //console.log(result);
+            return result
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async getUserComment(id,page){
+        try {
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=1`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }

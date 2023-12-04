@@ -1,418 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Donate_plan</title>
+  </head>
+  <body>
     <%- include('./layout/header'); -%>
-    <section id="employer-post-new-job">
+
+    <div class="container p-4">
+      <section id="donate_section">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-10 col-xs-offset-1" id="container">
-                    <div class="res-steps-container">
-                        <div class="res-steps res-step-one active" data-class=".res-form-one">
-                            <div class="res-step-bar">1</div>
-                            <div class="res-progress-bar"></div>
-                            <div class="res-progress-title">填寫捐款資料</div>
-                        </div>
-                        <div class="res-steps res-step-two" data-class=".res-form-two">
-                            <div class="res-step-bar">2</div>
-                            <div class="res-progress-bar"></div>
-                            <div class="res-progress-title">填寫信用卡資料</div>
-                        </div>
-                        <div class="res-steps res-step-three" data-class=".res-form-three">
-                            <div class="res-step-bar">3</div>
-                            <div class="res-progress-bar"></div>
-                            <div class="res-progress-title">填寫收據資料</div>
-                        </div>
-                        <div class="res-steps res-step-four" data-class=".res-form-four">
-                            <div class="res-step-bar">4</div>
-                            <div class="res-progress-bar"></div>
-                            <div class="res-progress-title">個資聲明</div>
-                        </div>
-                    </div>
-                    <div class="clearfix">&nbsp;</div>
-                    <div class="clearfix">&nbsp;</div>
+          <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+              <div class="res-steps-container">
+                <div
+                  class="res-steps res-step-one active"
+                  data-class=".res-form-one"
+                >
+                  <div class="res-step-bar">1</div>
+                  <div class="res-progress-bar"></div>
+                  <div class="res-progress-title">填寫捐款資料</div>
                 </div>
-                <div class="div-form">
-                    <div class="res-step-form col-md-6 offset-md-3 res-form-one">
-                        <h3 class="text-center">填寫捐款資料</h3>
-                        <form class="form-horizontal">
-                          <div class="form-group row">
-                                <label for="choose-title" class="col-sm-3 control-label">捐款類型</label>
-                                <div class="col-sm-8">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                        <label class="form-check-label" for="option1">自訂金額</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                        <label class="form-check-label" for="option2">選擇數量</label>
-                                    </div>
-                                </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="choose-title" class="col-sm-3 control-label">捐款金額</label>
-                            <div class="col-sm-2">
-                                <p>新台幣</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="email" class="form-control" id="inputemail3">
-                            </div>
-                            <div class="col-sm-1">
-                                <p>元</p>
-                            </div>
-                          </div> 
-                          <div class="form-group row">
-                            <label for="choose-title" class="col-sm-3 control-label">捐款類別</label>
-                            <div class="col-sm-8">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                    <label class="form-check-label" for="option1">單次捐款</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                    <label class="form-check-label" for="option2">每月定期捐款</label>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="choose-title" class="col-sm-3 control-label">捐款方式</label>
-                            <div class="col-sm-8">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                    <label class="form-check-label" for="option1">Visa/Master/JCB</label>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="text-center">
-                                    <button type="button" class="btn btn-default col-xs-offset-1 btn res-btn-orange" data-class=".res-form-one">下一步</button>
-                            </div>
-                          </div>
-                        </form>
-                    </div>
-
-                    <div class="res-step-form col-md-6 offset-md-3 res-form-two">
-                        <h3 class="text-center">填寫信用卡資料</h3>
-                        <form class="form-horizontal">
-                          <div class="row mb-3">
-                            <label for="inputname3" class="col-sm-2 col-form-label">姓名</label>
-                            <div class="col-sm-8">
-                                  <input type="name" class="form-control" id="inputname3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputcard3" class="col-sm-2 col-form-label">信用卡</label>
-                            <div class="col-sm-8">
-                              <input type="card" class="form-control" id="inputcard3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputnumber3" class="col-sm-2 col-form-label">卡號</label>
-                            <div class="col-sm-2">
-                              <input type="card" class="form-control" id="inputnumber3">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="card" class="form-control" id="inputnumber3">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="card" class="form-control" id="inputnumber3">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="card" class="form-control" id="inputnumber3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputperiod3" class="col-sm-2 col-form-label">有效期限</label>
-                            <div class="col-sm-2">
-                              <input type="period" class="form-control" id="inputperiod3">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="period" class="form-control" id="inputperiod3">
-                            </div>
-                            <label for="inputcheckcode3" class="col-sm-2 col-form-label">檢查碼</label>
-                            <div class="col-sm-2">
-                                <input type="checkcode" class="form-control" id="inputcheckcode3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputphonenumber3" class="col-sm-2 col-form-label">手機號碼</label>
-                            <div class="col-sm-8">
-                              <input type="phonenumber" class="form-control" id="inputphonenumber3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputemail3" class="col-sm-2 col-form-label">電子郵件</label>
-                            <div class="col-sm-8">
-                              <input type="email" class="form-control" id="inputemail3">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="text-center">
-                                    <button type="button" class="btn btn-default btn res-btn-gray" data-class=".res-form-two">上一步</button>
-                                    <button type="button" class="btn btn-default col-xs-offset-1 btn res-btn-orange" data-class=".res-form-two">下一步</button>
-                            </div>
-                          </div>
-                        </form>
-                    </div>
-
-                    <div class="res-step-form col-md-6 offset-md-3 res-form-three">
-                        <h3 class="text-center">填寫收據資料</h3>
-                        <form class="form-horizontal">
-                          <div class="form-group row">
-                                <label for="choose-title" class="col-sm-3 control-label">是否需要紙本收據</label>
-                                <div class="col-sm-8">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                        <label class="form-check-label" for="option1">不索取</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                        <label class="form-check-label" for="option2">電子收據</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                        <label class="form-check-label" for="option2">紙本收據(需要提供完整地址)</label>
-                                    </div>
-                                </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="choose-title" class="col-sm-3 control-label">收據類型</label>
-                            <div class="col-sm-8">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                    <label class="form-check-label" for="option1">個人</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                    <label class="form-check-label" for="option2">公司/團體</label>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="choose-title" class="col-sm-3 control-label">收據抬頭</label>
-                            <div class="col-sm-4">
-                                <input type="email" class="form-control" id="inputemail3">
-                              </div>
-                            <div class="col-sm-4">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option1" checked>
-                                    <label class="form-check-label" for="option1">先生</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="optradio" id="option2">
-                                    <label class="form-check-label" for="option2">小姐</label>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputidcard3" class="col-sm-2 col-form-label">身分證字號</label>
-                            <div class="col-sm-8">
-                              <input type="idcard" class="form-control" id="inputidcard3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputphonenumber3" class="col-sm-2 col-form-label">手機號碼</label>
-                            <div class="col-sm-8">
-                              <input type="phonenumber" class="form-control" id="inputphonenumber3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputbirthday3" class="col-sm-2 col-form-label">生日</label>
-                            <div class="col-sm-8">
-                              <input type="birthday" class="form-control" id="inputbirthday3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputemail3" class="col-sm-2 col-form-label">電子郵件</label>
-                            <div class="col-sm-8">
-                              <input type="email" class="form-control" id="inputemail3">
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="inputemail3" class="col-sm-2 col-form-label">地址</label>
-                            <div class="col-sm-8">
-                              <input type="email" class="form-control" id="inputemail3">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-3 control-label">備註</label>
-                            <div class="col-sm-10">
-                              <textarea class="form-control" rows="3" placeholder="填寫備註事項"></textarea>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="text-center">
-                                    <button type="button" class="btn btn-default btn res-btn-gray" data-class=".res-form-three">上一步</button>
-                                    <button type="button" class="btn btn-default col-xs-offset-1 btn res-btn-orange" data-class=".res-form-three">下一步</button>
-                            </div>
-                          </div>
-                        </form>
-                    </div>
-
-                    <div class="res-step-form col-md-6 offset-md-3 res-form-four">
-                        <h3 class="text-center">個資法聲明</h3>
-                        <p>
-                            感謝您的愛心捐款，OutfitPals平台向您取得之個人資料，包含個人姓名、身分證字號、電話、信用卡<br>
-                            及電子郵件地址等，將僅限使用於本會捐款服務與管理、募款徵信、會務活動等使用，本會遵守個人資料<br>
-                            保護法妥善保護您的個人資訊。
-                        </p>
-                        <p> 
-                            注意<br>
-                            近日接到民眾來電，表示接到與捐款相關詐騙電話，要求更改或解除分期設定。<br>
-                            OutfitPals平台提醒您，本會不會致電要求變更捐款方式，若接獲可疑來電要求您前往ATM進行任何操作<br>
-                            設定或匯款，切勿回覆訊息或依對方指示動作，以保護自身財務安全。請撥打165反詐騙諮詢專線或與本網站聯絡。
-                        </p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                我已詳閱並同意
-                            </label>
-                        </div>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            確認付款
-                        </button>
-                          
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">付款成功</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <p>您已完成付款，謝謝您的支持</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <a href="./index.html" class="btn btn-secondary">回到首頁</a>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="res-steps res-step-two" data-class=".res-form-two">
+                  <div class="res-step-bar">2</div>
+                  <div class="res-progress-bar"></div>
+                  <div class="res-progress-title">填寫信用卡資料</div>
                 </div>
+                <div
+                  class="res-steps res-step-three"
+                  data-class=".res-form-three"
+                >
+                  <div class="res-step-bar">3</div>
+                  <div class="res-progress-bar"></div>
+                  <div class="res-progress-title">填寫收據資料</div>
+                </div>
+                <div
+                  class="res-steps res-step-four"
+                  data-class=".res-form-four"
+                >
+                  <div class="res-step-bar">4</div>
+                  <div class="res-progress-bar"></div>
+                  <div class="res-progress-title">個資聲明</div>
+                </div>
+              </div>
             </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <form>
+              <!-- STEP1 -->
+              <div class="res-step-form col-md-6 offset-md-3 res-form-one">
+                <h3 class="text-center">填寫捐款資料</h3>
+                <div class="form-horizontal p-4">
+                  <div class="row mb-3">
+                    <label for="choose-title" class="col-sm-2 control-label"
+                      >捐款金額</label
+                    >
+                    <div class="col-sm-4">
+                      <input
+                        type="money"
+                        class="form-control"
+                        id="choose-title"
+                      />
+                    </div>
+                    <div class="col-sm-1">
+                      <p>元</p>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="choose_type" class="col-sm-2 control-label"
+                      >捐款類別</label
+                    >
+                    <div class="col-sm-8">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="donate_type"
+                          id="choose_type_one"
+                          checked
+                        />
+                        <label class="form-check-label" for="choose_type_one"
+                          >單次捐款</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="donate_type"
+                          id="donate_type_month"
+                        />
+                        <label class="form-check-label" for="donate_type_month"
+                          >每月定期捐款</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="choose-method" class="col-sm-2 control-label"
+                      >捐款方式</label
+                    >
+                    <div class="col-sm-8">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="method"
+                          id="choose-method"
+                          checked
+                        />
+                        <label class="form-check-label" for="choose-method"
+                          >Visa/Master/JCB</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="text-center">
+                      <a href="./donate.html" class="btn btn-secondary"
+                        >上一步</a
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-primary col-xs-offset-1"
+                        data-class=".res-form-one"
+                      >
+                        下一步
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- STEP2 -->
+              <div class="res-step-form col-md-6 offset-md-3 res-form-two">
+                <h3 class="text-center">填寫信用卡資料</h3>
+                <div class="form-horizontal p-4">
+                  <div class="row mb-3">
+                    <label
+                      for="donate_name"
+                      class="col-sm-2 col-form-label required"
+                      >姓名</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_name"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="donate_number"
+                      class="col-sm-2 col-form-label required"
+                      >卡號</label
+                    >
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="donate_number"
+                        required
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="donate_number"
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="donate_number"
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="donate_number"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="donate_time"
+                      class="col-sm-2 col-form-label required"
+                      >有效期限</label
+                    >
+                    <div class="col-sm-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_time"
+                        required
+                        placeholder="MM"
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_time"
+                        required
+                        placeholder="YY"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="donate_checkcode"
+                      class="col-sm-2 col-form-label required"
+                      >檢查碼</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_checkcode"
+                        required
+                        placeholder="卡片背面三碼"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="donate_phonenumber"
+                      class="col-sm-2 col-form-label required"
+                      >手機號碼</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_phonenumber"
+                        required
+                        maxlength="11"
+                        pattern="09\d{2}-\d{6}"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="donate_mail" class="col-sm-2 col-form-label"
+                      >電子郵件</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="donate_mail"
+                        placeholder="輸入xxx@xxx.xxx"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-class=".res-form-two"
+                      >
+                        上一步
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary col-xs-offset-1"
+                        data-class=".res-form-two"
+                      >
+                        下一步
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- STEP3 -->
+              <div class="res-step-form col-md-6 offset-md-3 res-form-three">
+                <h3 class="text-center">填寫收據資料</h3>
+                <div class="form-horizontal p-4">
+                  <div class="row mb-3">
+                    <label
+                      for="no-choose-receipt"
+                      class="col-sm-3 control-label required"
+                      >是否需要紙本收據</label
+                    >
+                    <div class="col-sm-8">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="choose-receipt"
+                          id="no-choose-receipt"
+                          checked
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="no-choose-receipt required"
+                          >不索取</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="choose-receipt"
+                          id="choose-receipt-mail"
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="choose-receipt-mail required"
+                          >電子收據</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="choose-receipt"
+                          id="choose-receipt-paper"
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="choose-receipt-paper required"
+                          >紙本收據(需要提供完整地址)</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="choose-receipttype-personal"
+                      class="col-sm-3 control-label required"
+                      >收據類型</label
+                    >
+                    <div class="col-sm-8">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="receipt-type"
+                          id="choose-receipttype-personal"
+                          checked
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="choose-receipttype-personal required"
+                          >個人</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="receipt-type"
+                          id="choose-receipttype-group"
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="choose-receipttype-group required"
+                          >公司/團體</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="receipt_name"
+                      class="col-sm-3 control-label required"
+                      >收據抬頭</label
+                    >
+                    <div class="col-sm-4">
+                      <input
+                        type="name"
+                        class="form-control"
+                        id="receipt_name"
+                        required
+                      />
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="receipt-header"
+                          id="receipt-header-mr"
+                          checked
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="receipt-header-mr required"
+                          >先生</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="receipt-header"
+                          id="receipt-header-miss"
+                          required
+                        />
+                        <label
+                          class="form-check-label"
+                          for="receipt-header-miss required"
+                          >小姐</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="receipt_idcard"
+                      class="col-sm-2 col-form-label required"
+                      >身分證字號</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="receipt_idcard"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="receipt_phone"
+                      class="col-sm-2 col-form-label required"
+                      >手機號碼</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="receipt_phone"
+                        required
+                        maxlength="11"
+                        pattern="09\d{2}-\d{6}"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label
+                      for="receipt_birthday"
+                      class="col-sm-2 col-form-label required"
+                      >生日</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="receipt_birthday"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="receipt_mail" class="col-sm-2 col-form-label"
+                      >電子郵件</label
+                    >
+                    <div class="col-sm-8">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="receipt_mail"
+                        placeholder="輸入xxx@xxx.xxx"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="receipt_address" class="col-sm-2 col-form-label"
+                      >地址</label
+                    >
+                    <div class="col-sm-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="donate_number"
+                        required
+                        placeholder="郵遞區號"
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="receipt_address"
+                        placeholder="縣市"
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="receipt_address"
+                        placeholder="鄉"
+                      />
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-sm-8 mt-3 offset-md-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="receipt_address"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="remark" class="col-sm-3 control-label"
+                      >備註</label
+                    >
+                    <div class="col-sm-10 mt-2">
+                      <textarea
+                        class="form-control"
+                        rows="3"
+                        placeholder="填寫備註事項"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-class=".res-form-three"
+                      >
+                        上一步
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary col-xs-offset-1"
+                        data-class=".res-form-three"
+                      >
+                        下一步
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- STEP4 -->
+              <div class="res-step-form col-md-6 offset-md-3 res-form-four">
+                <h3 class="text-center">個資法聲明</h3>
+                <div class="p-4">
+                  <p>
+                    感謝您的愛心捐款，OutfitPals平台向您取得之個人資料，包含個人姓名、身分證字號、電話、信用<br />
+                    卡及電子郵件地址等，將僅限使用於本會捐款服務與管理、募款徵信、會務活動等使用，本會遵守個<br />
+                    人資料保護法妥善保護您的個人資訊。
+                  </p>
+                  <br />
+                  <p>
+                    <i
+                      class="fa-solid fa-triangle-exclamation fa-sm text-danger"
+                    ></i>
+                    注意
+                  </p>
+                  <br />
+                  <p>
+                    近日接到民眾來電，表示接到與捐款相關詐騙電話，要求更改或解除分期設定。<br />
+                    OutfitPals平台提醒您，本會不會致電要求變更捐款方式，若接獲可疑來電要求您前往ATM進行任何操作
+                    設定或匯款，切勿回覆訊息或依對方指示動作，以保護自身財務安全。請撥打165反詐騙諮詢專線或與本網站聯絡。
+                  </p>
+                  <br />
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      我已詳閱並同意
+                    </label>
+                  </div>
+                  <br />
+                  <!-- Button trigger modal -->
+                  <div class="row mb-3">
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-class=".res-form-four"
+                      >
+                        上一步
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        確認付款
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          付款成功
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>您已完成付款，謝謝您的支持</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="./index.html" class="btn btn-primary"
+                          >回到首頁</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-    </section>
-    
+      </section>
+    </div>
+
     <%- include('./layout/footer'); -%>
-   
-
+    <!-- own js -->
     <script type="module" src="../main.js"></script>
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/dist/bootstrap-icons.min.js"></script>
+    <!-- font awesome -->
+    <script
+      src="https://kit.fontawesome.com/96a7520586.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
     <script>
-    $(document).ready(function(){
-    var steps = ['.res-step-one','.res-step-two','.res-step-three','.res-step-four'];
-	var i = 1;
-	$(".res-step-form .res-btn-orange").click(function(){
-		var getClass = $(this).attr('data-class');
-		$(".res-steps").removeClass('active');
-		$(steps[i]).addClass('active');
-		i++;
-		if(getClass != ".res-form-four"){
-			$(getClass).animate({
-				left: '-150%'
-			}, 500, function(){
-				$(getClass).css('left', '150%');
-			});
-			$(getClass).next().animate({
-				left: '0%'
-			}, 500, function(){
-				$(this).css('display','block');
-			});
-		}
-	});
+      $(document).ready(function () {
+        var steps = [
+          ".res-step-one",
+          ".res-step-two",
+          ".res-step-three",
+          ".res-step-four",
+        ];
+        var i = 1;
+        $(".res-step-form .btn-primary").click(function () {
+          var getClass = $(this).attr("data-class");
+          $(".res-steps").removeClass("active");
+          $(steps[i]).addClass("active");
+          i++;
+          if (getClass != ".res-form-four") {
+            $(getClass).animate(
+              {
+                left: "-150%",
+              },
+              500,
+              function () {
+                $(getClass).css("left", "150%");
+              }
+            );
+            $(getClass)
+              .next()
+              .animate(
+                {
+                  left: "0%",
+                },
+                500,
+                function () {
+                  $(this).css("display", "block");
+                }
+              );
+          }
+        });
 
-	/* step back */
-	$(".res-step-form .res-btn-gray").click(function(){
-		var getClass = $(this).attr('data-class');
-		$(".res-steps").removeClass('active');
-		i--;
-		$(steps[i-1]).addClass('active');
-		$(getClass).prev().css('left','-150%')
-		$(getClass).animate({
-			left: '150%'
-		}, 500);
-		$(getClass).prev().animate({
-			left: '0%'
-		}, 500)
-	});
+        /* step back */
+        $(".res-step-form .btn-secondary").click(function () {
+          var getClass = $(this).attr("data-class");
+          $(".res-steps").removeClass("active");
+          i--;
+          $(steps[i - 1]).addClass("active");
+          $(getClass).prev().css("left", "-150%");
+          $(getClass).animate(
+            {
+              left: "150%",
+            },
+            500
+          );
+          $(getClass).prev().animate(
+            {
+              left: "0%",
+            },
+            500
+          );
+        });
 
-	/* click from top bar steps */
-	$('.res-step-one').click(function(){
-		if(!$(this).hasClass('active')){
-			$(".res-steps").removeClass('active');
-			i = 0;
-			$(steps[i]).addClass('active');
-			i++;
-			$('.res-form-one').css('left','-150%');
-			$('.res-form-two, .res-form-three, .res-form-four').animate({
-				left: '150%'
-			}, 500);
-			$('.res-form-one').animate({
-				left: '0%'
-			}, 500);
-		}
-	});
+        /* click from top bar steps */
+        $(".res-step-one").click(function () {
+          if (!$(this).hasClass("active")) {
+            $(".res-steps").removeClass("active");
+            i = 0;
+            $(steps[i]).addClass("active");
+            i++;
+            $(".res-form-one").css("left", "-150%");
+            $(".res-form-two, .res-form-three, .res-form-four").animate(
+              {
+                left: "150%",
+              },
+              500
+            );
+            $(".res-form-one").animate(
+              {
+                left: "0%",
+              },
+              500
+            );
+          }
+        });
 
-	$('.res-step-two').click(function(){
-		if(!$(this).hasClass('active')){
-			$(".res-steps").removeClass('active');
-			i = 1;
-			$(steps[i]).addClass('active');
-			i++;
-			$('.res-form-two').css('left','-150%');
-			$('.res-form-one, .res-form-three, .res-form-four').animate({
-				left: '150%'
-			}, 500);
-			$('.res-form-two').animate({
-				left: '0%'
-			}, 500);
-		}
-	});
+        $(".res-step-two").click(function () {
+          if (!$(this).hasClass("active")) {
+            $(".res-steps").removeClass("active");
+            i = 1;
+            $(steps[i]).addClass("active");
+            i++;
+            $(".res-form-two").css("left", "-150%");
+            $(".res-form-one, .res-form-three, .res-form-four").animate(
+              {
+                left: "150%",
+              },
+              500
+            );
+            $(".res-form-two").animate(
+              {
+                left: "0%",
+              },
+              500
+            );
+          }
+        });
 
-	$('.res-step-three').click(function(){
-		if(!$(this).hasClass('active')){
-			$(".res-steps").removeClass('active');
-			i = 2;
-			$(steps[i]).addClass('active');
-			i++;
-			$('.res-form-three').css('left','-150%');
-			$('.res-form-one, .res-form-two, .res-form-four').animate({
-				left: '150%'
-			}, 500);
-			$('.res-form-three').animate({
-				left: '0%'
-			}, 500);
-		}
-	});
+        $(".res-step-three").click(function () {
+          if (!$(this).hasClass("active")) {
+            $(".res-steps").removeClass("active");
+            i = 2;
+            $(steps[i]).addClass("active");
+            i++;
+            $(".res-form-three").css("left", "-150%");
+            $(".res-form-one, .res-form-two, .res-form-four").animate(
+              {
+                left: "150%",
+              },
+              500
+            );
+            $(".res-form-three").animate(
+              {
+                left: "0%",
+              },
+              500
+            );
+          }
+        });
 
-	$('.res-step-four').click(function(){
-		if(!$(this).hasClass('active')){
-			$(".res-steps").removeClass('active');
-			i = 3;
-			$(steps[i]).addClass('active');
-			i++;
-			$('.res-form-four').css('left','-150%');
-			$('.res-form-one, .res-form-two, .res-form-three').animate({
-				left: '150%'
-			}, 500);
-			$('.res-form-four').animate({
-				left: '0%'
-			}, 500);
-		}
-	});
-});
+        $(".res-step-four").click(function () {
+          if (!$(this).hasClass("active")) {
+            $(".res-steps").removeClass("active");
+            i = 3;
+            $(steps[i]).addClass("active");
+            i++;
+            $(".res-form-four").css("left", "-150%");
+            $(".res-form-one, .res-form-two, .res-form-three").animate(
+              {
+                left: "150%",
+              },
+              500
+            );
+            $(".res-form-four").animate(
+              {
+                left: "0%",
+              },
+              500
+            );
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
