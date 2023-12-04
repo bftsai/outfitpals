@@ -27,51 +27,16 @@
     <%- include('./layout/header'); -%>
     <br>
     <div class="container my-6 ">
-        <div class="row">
-            <div class="col-6  d-flex">
-                <div class="circle-box" style="width: 150px; height: 150px;"></div>
-                <div class="d-flex position-relative">
-                    <div>
-                        <strong class="px-5 display-4 ">Eric</strong>
-                        <p class="ms-5">你好！我是Selen～喜歡可以多層次穿搭的冬天</p>
-                        <p class="fs-3 pt-1 mt-5 position-absolute top-0 start-50" style="opacity: 0.4;">183cm70kg</p>
-                        <div class="d-flex">
-                            <p class="ms-5">活動範圍 :</p>
-                            <p>台北</p>
-                        </div>
-                        <div class="d-flex">
-                            <p class="ms-5">穿搭價位 :</p>
-                            <p>3000</p>
-                        </div>
-                    </div>    
-                </div>
-            </div>
-            <div class="col-3 d-flex align-items-center">
-                <div>
-                    <p class="fs-2">服飾品牌</p>
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
-                </div>
-            </div>
-            <div class="col-3 d-flex align-items-center">
-                <div>
-                    <p class="fs-2">服飾品牌</p>
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
-                </div>
-            </div>
+        <div class="row other">
+
         </div>
     </div>
     <br>
     <br>
     <div class="container d-flex display-6 justify-content-center my-3" >
         <div class="d-flex ms-5" style="position: relative; right: 40px;">
-            <a href="#" class="thumb-link"><p class="pe-5 thumb active">貼文總覽</p></a>
-            <a href="#" class="thumb-link"><p class="ps-5 thumb">預約資訊</p></a>  
+            <a href="#" class="thumb-link "><p class="pe-5 thumb active">貼文總覽</p></a>
+            <a href="#" class="thumb-link" id="nologin"><p class="ps-5 thumb">預約資訊</p></a>  
         </div>
     </div>
     <hr>
@@ -303,7 +268,7 @@
                         <table class="table table-bordered border-primary border-5 align-middle " id="dataTable">
                             <thead>
                               <tr>
-                                <th scope="col"></th>
+
                                 <th scope="col">Mon</th>
                                 <th scope="col">Tue</th>
                                 <th scope="col">Wed</th>
@@ -315,7 +280,7 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row">1-7</th>
+
                                 <td data-row="1" data-col="1"></td>
                                 <td data-row="1" data-col="2"></td>
                                 <td data-row="1" data-col="3"></td>
@@ -325,7 +290,7 @@
                                 <td data-row="1" data-col="7"></td>
                               </tr>
                               <tr>
-                                <th scope="row">8-9</th>
+
                                 <td data-row="2" data-col="1"></td>
                                 <td data-row="2" data-col="2"></td>
                                 <td data-row="2" data-col="3"></td>
@@ -335,7 +300,6 @@
                                 <td data-row="2" data-col="7"></td>
                               </tr>
                               <tr>
-                                <th scope="row">10-17</th>
                                 <td data-row="3" data-col="1"></td>
                                 <td data-row="3" data-col="2"></td>
                                 <td data-row="3" data-col="3"></td>
@@ -345,7 +309,6 @@
                                 <td data-row="3" data-col="7"></td>
                               </tr>
                               <tr>
-                                <th scope="row">18-25</th>
                                 <td data-row="4" data-col="1"></td>
                                 <td data-row="4" data-col="2"></td>
                                 <td data-row="4" data-col="3"></td>
@@ -355,7 +318,6 @@
                                 <td data-row="4" data-col="7"></td>
                               </tr>
                               <tr>
-                                <th scope="row">25-31</th>
                                 <td data-row="5" data-col="1"></td>
                                 <td data-row="5" data-col="2"></td>
                                 <td data-row="5" data-col="3"></td>
@@ -367,18 +329,21 @@
                             </tbody>
                           </table>
                     </div>
-    
+                    <div class="d-flex justify-content-center">
+                        <strong class="text-danger">!如果要重新選擇日期請刷新頁面!</strong>
+                    </div>
     
                 </div>
                 
-                <div class="col-6">
+                <div class="col-6 mt-5">
+                    <br><br>
                     <div class="d-flex justify-content-center">
                         <strong class="fs-2">活動地點</strong>
                     </div>
                     <div class="d-flex justify-content-center">
                         <p>請勾選下下方您可前往的地點</p>
                     </div>
-                    <br><br><br><br><br>
+                    <br><br>
                     <div class="me-5"> 
                         <div class="d-flex justify-content-center  ">
                             <div class="form-check">
@@ -413,8 +378,27 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <br><br><br>
+                    <br><br>
+                    <div class="d-flex justify-content-center">
+                        <strong class="fs-2">時間</strong>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p>請填寫您可前往的時間區間(必填)</p>
+                    </div>
+                    <div class="d-flex justify-content-center ">
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control  border-0 shadow-none oc1" placeholder="14"  style="width: 50px;" required>:
+                            <input type="text" class="form-control  border-0 shadow-none mu1" placeholder="00"  style="width: 50px;">~
+                            <input type="text" class="form-control  border-0 shadow-none oc2" placeholder="17"  style="width: 50px;">:
+                            <input type="text" class="form-control  border-0 shadow-none mu2" placeholder="30"  style="width: 50px;">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <strong class="text-warning">對方方便時間</strong>
+                        <div class="usetime"><p>18:00-19:00</p></div>
+                    </div>
+
+                    <br><br>
                     <div class="d-flex justify-content-center my-5">
                         <button type="submit" class="btn btn-primary ctn"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">繼續填寫需求</button>
                     </div>
@@ -423,7 +407,22 @@
             <br>
             <br>
         </div>
+
     </div>
+    <br><br><br><br>
+    <div class="container  d-none" id="unopen">
+        <div class="custom-container d-flex justify-content-center align-items-center ">
+            <div>
+                <h1 class="display-3 mb-5" style="opacity: 0.4;">未開放預約申請</h1>
+                <br>
+                <p class="d-flex justify-content-center mt-5">很可惜，Selen尚未成為逛街小精靈想預約陪逛服務嗎？</p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary  my-6 bkdep">繼續瀏覽其他人的穿搭</button>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <br><br><br><br>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -436,11 +435,11 @@
             <div class="modal-body">
                 <div class="container justify-content-center">
                           <label for="exampleFormControlTextarea1" class="card-title form-label display-6 d-flex justify-content-center fw-bold">請填寫您本次的逛街需求</label>
-                          <textarea class="form-control my-6 text" id="exampleFormControlTextarea1" rows="3" placeholder="我想購買冬天穿的長袖襯衫！" style="opacity: 0.4;"></textarea>
+                          <textarea class="form-control my-6 text" id="exampleFormControlTextarea1" rows="3" placeholder="必須填寫" style="opacity: 0.4;"></textarea>
                           <strong class="d-flex justify-content-center display-6">請確認您的預約申請</strong>
                           <p class="mt-6" style="position: relative; left: 100px;">我可以在</p>
-                          <ul class="mb-6" style="position: relative; left: 100px;">
-                            <li>週六    14:00 - 17:00</li>
+                          <ul class="mb-6 tim" style="position: relative; left: 100px;">
+                            
                           </ul>
                           <p class="mt-6" style="position: relative; left: 100px;">前往</p>
                           <ul class="mb-6 pos" style="position: relative; left: 100px;">
@@ -451,8 +450,8 @@
             </div>
             <div class="modal-footer d-flex justify-content-between">
                 <div>
-                    <input class="form-check-input me-2 doublecheck" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label " for="flexCheckDefault">
+                    <input class="form-check-input me-2 doublecheck" type="checkbox" value="" id="flexCheckDefault" disabled>
+                    <label class="form-check-label " for="flexCheckDefault" >
                         以上資訊確認無誤
                     </label>
                 </div>
@@ -493,8 +492,8 @@
                           </div>
             
                           <p class="mt-6" style="position: relative; left: 100px;">我可以在</p>
-                          <ul class="mb-6" style="position: relative; left: 100px;">
-                            <li>週六    14:00 - 17:00</li>
+                          <ul class="mb-6 tim2" style="position: relative; left: 100px;">
+                            
                           </ul>
                           <p class="mt-6" style="position: relative; left: 100px;">前往</p>
                           <ul class="mb-6 ans3" style="position: relative; left: 100px;">
@@ -507,9 +506,43 @@
             </div>
         </div>
         </div>
-
-        <div></div>
     </div>
+
+    <!-- Modal HTML -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body">
+            <!-- Modal 內容 -->
+            <p class="fs-4">你沒有註冊</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">好吧</button>
+            <button type="button" class="btn btn-primary" id="gologin">去註冊</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModa2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body">
+            <!-- Modal 內容 -->
+            <p class="fs-4">這個人還沒有建檔</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">好吧</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <%- include('./layout/footer'); -%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>

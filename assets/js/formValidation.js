@@ -154,27 +154,9 @@ export const checkSign={
             return true;
         }
     },
-    checkReservationLocation(input,str){
-        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]{2,}$');
-        if(str===''){
-            input.nextElementSibling.textContent=`請輸入開放預約地點`;
-            return false;
-        }else if(!(this.regexp.test(str))){
-            input.classList.remove('is-valid-customer');
-            input.classList.add('is-invalid');
-            input.classList.add('is-invalid-customer');
-            input.nextElementSibling.textContent=`格式錯誤，不包含數字或特殊字元（如：!、@、#、$、%、^）`;
-            return false;
-        }else{
-            input.classList.remove('is-invalid');
-            input.classList.remove('is-invalid-customer');
-            input.classList.add('is-valid-customer');
-            return true;
-        }
-    }
 };
 //signUp validation
-export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,male,female,reservationTime,reservationLocation,height,weight,popArea,style,price,loveStore,introduce,memberForm) {  
+export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,male,female,height,weight,popArea,style,price,loveStore,introduce,memberForm) {  
 
     memberForm.classList.add('was-validated');
 
@@ -219,15 +201,8 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
     tel.addEventListener('paste',e=>{
         checkSign.checkTel(e.target,e.target.value);
     });
-
-    reservationLocation.addEventListener('keyup',e=>{
-        checkSign.checkReservationLocation(e.target,e.target.value);
-    });
-    reservationLocation.addEventListener('paste',e=>{
-        checkSign.checkReservationLocation(e.target,e.target.value);
-    });
     
-    if(checkSign.checkName(name,name.value)&&checkSign.checkPwd(pwd,pwd.value)&&checkSign.checkNickName(nickName,nickName.value)&&checkSign.checkBirth(birth,birth.value)&&checkSign.checkTel(tel,tel.value)&&checkSign.checkReservationLocation(reservationLocation,reservationLocation.value)&&memberForm.checkValidity()){
+    if(checkSign.checkName(name,name.value)&&checkSign.checkPwd(pwd,pwd.value)&&checkSign.checkNickName(nickName,nickName.value)&&checkSign.checkBirth(birth,birth.value)&&checkSign.checkTel(tel,tel.value)&&memberForm.checkValidity()){
         let userObj={};
 
         userObj.image=imgSrc.getAttribute('src');
@@ -237,9 +212,6 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         userObj.birthday=birth.value;
         userObj.tel=tel.value;
         userObj.email=email.value;
-        userObj['reservation time']=reservationTime.value;
-        userObj['reservation time selectedIndex']=reservationTime.selectedIndex;
-        userObj['reservation location']=reservationLocation.value;
         userObj.height=height.value ? height.value:"";
         userObj.weight=weight.value ? weight.value:"";
         userObj.PopArea=popArea.value;
@@ -267,8 +239,6 @@ export async function signUpValidation(imgSrc,name,pwd,nickName,birth,email,tel,
         birth.value='';
         tel.value='';
         email.value='';
-        reservationTime.selectedIndex=0;
-        reservationLocation.value='';
         height.value='';
         weight.value='';
         popArea.selectedIndex=0;

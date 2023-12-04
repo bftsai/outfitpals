@@ -47,4 +47,39 @@
 //             row.classList.add('d-none')
 //         }
         
+
+    // })
+
+
+    axios.get("http://localhost:3000/posts")
+    .then(function(res){
+        document.querySelector(".card1").innerHTML=`<img src="/assets/images/reserve/female-1.svg" style="width: 350px; height: 350px;"                 class="object-fit-cover">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col mt-2 d-flex others" onclick="handleCardClick(event)">
+                                             <div class="circle-box" style="background-image: url('/assets/images/reserve/female-1.svg');"></div>
+                                                <div class="ms-2">
+                                                    <strong>${res.data[0].author}</strong>
+                                                    <p>${res.data[0].body}</p>
+                                                </div>
+                                             </div>
+                                            <div class="col-2 d-flex flex-row-reverse">
+                                                <p class="bi bi-bookmark display-6 mt-2" onclick="handleIconClick(event)"></p>
+                                                <p class="bi bi-heart display-6 mt-2 me-3" style="position: relative; top: 2px;" onclick="handleIconClick(event)"></p>
+                                            </div>
+                                        </div>
+                                    </div>`
+
+                                    var userId = res.data[0].userId;
+                                    console.log(userId)
+        document.querySelector(".others").addEventListener("click",function(){
+            var userId = res.data[4].userId;
+            console.log(userId)
+            // 使用 window.location.href 將頁面導航到另一個 URL，這裡的 URL 中包含 userId 參數
+            window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + userId;
+        })
+        
+    })
+
 //     })
+
