@@ -18,3 +18,10 @@ h1 {
 .FAQ__donateContent{
   width: auto;
 }
+.donate_card {
+  background-image: url(/assets/images/donate/donate_background.PNG);
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+  position: relative;
+}
