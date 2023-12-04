@@ -111,11 +111,11 @@
       "reservation location": "無 ",
       "height": "180",
       "weight": "77",
-      "PopArea": "",
+      "PopArea": "台北",
       "PopArea selectedIndex": 0,
-      "style": "",
+      "style": "韓系",
       "style selectedIndex": 0,
-      "outfit price": "",
+      "outfit price": "1000",
       "outfit price selectedIndex": 0,
       "love store": "",
       "introduce": "",
@@ -245,17 +245,35 @@
       ]
     },
     {
+      "isopen": false,
+      "userId": "4",
+      "otherdate": "11/2,12/3,1/25",
+      "pos1": "基隆",
+      "pos2": "台北",
+      "pos3": "花蓮",
+      "pos4": "墾丁",
+      "oktime": "17:20~19:00",
+      "id": 3,
+      "okday": [
+        "11/16",
+        "11/15",
+        "11/14",
+        "12/15",
+        "12/22"
+      ]
+    },
+    {
       "isopen": true,
       "userId": "5",
-      "otherdate": "",
+      "otherdate": "11/2,12/3,1/25",
       "pos1": "高雄",
       "pos2": "新北",
       "pos3": "台中",
       "pos4": "嘉義",
       "okday": [
-        "12/16",
-        "12/14",
-        "12/12"
+        "12/9",
+        "12/8",
+        "12/7"
       ],
       "oktime": "19:00~20:00",
       "id": 6

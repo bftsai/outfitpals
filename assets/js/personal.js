@@ -36,7 +36,11 @@ const p4 = document.querySelector(".p4")
 const t1 = document.querySelector(".t1")                                              
 const m1 = document.querySelector(".m1")                                              
 const t2 = document.querySelector(".t2")                                              
-const m2 = document.querySelector(".m2")                                               
+const m2 = document.querySelector(".m2")
+
+//個人資料渲染
+const personal = document.querySelector(".personal")                                               
+
 
 
 //時間
@@ -61,7 +65,7 @@ days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day"); //今�
 //26416387@gmail.com
 function init(){
     axios.post("http://localhost:3000/login",{
-        "email": "26416387@gmail.com",
+        "email": "123456@gmail.com",
         "password":"A123456789"
     })
     .then(function(response){
@@ -76,6 +80,8 @@ function init(){
     
 }
 init();
+
+
 
 
 function getCookie(name) {  
@@ -93,13 +99,62 @@ function getCookie(name) {
 
 const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("userId");
-history.pushState(null, null, `?id=${userId}`);
-const id = location.href.split("=")[1];
+// history.pushState(null, null, `?id=${userId}`);
+// const id = location.href.split("=")[1];
+
+axios.get(`http://localhost:3000/users?id=${userId}`)
+.then(function(res){
+
+    
+
+    personal.innerHTML=`
+                        <div class="col-6  d-flex">
+                        <div class="circle-box" style="width: 150px; height: 150px;"></div>
+                        <div class="d-flex position-relative ">
+                            <div>
+                                <div class="row justify-content-center align-items-center" >
+                                    <div class="col">
+                                        <strong class="display-5 text-nowrap">${res.data[0].name}</strong>
+                                        </div>
+                                        <div class="col">
+                                            <p class="fs-3 mt-3" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                    </div>
+                                </div>
+                                <p class="ms-5">你好！我是Selen～喜歡可以多層次穿搭的冬天</p>
+                                <div class="d-flex">
+                                    <p class="ms-5">活動範圍 :</p>
+                                    <p>${res.data[0].PopArea}</p>
+                                </div>
+                                <div class="d-flex">
+                                    <p class="ms-5">穿搭價位 :</p>
+                                    <p>${res.data[0]["outfit price"]}</p>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex align-items-center">
+                        <div>
+                            <p class="fs-2">服飾品牌</p>
+                            <div class="d-flex">
+                                <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-3 d-flex align-items-center mt-3">
+                    <button type="button" class="btn btn-primary fs-3 " id="reservebtn">我的收藏</button> 
+                    </div> `
+})
+
+
+
 
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
-            axios.get(`http://localhost:3000/personal?userId=${id}`)
+            axios.get(`http://localhost:3000/personal?userId=${userId}`)
             .then(function(res){
                 
                 if(res.data.length == 0){     //判斷是否第一次登陸
@@ -462,33 +517,33 @@ if (storedToken != null) {     //判斷登入
         }
     }
     fetchData();
+
+
+    reservebtn.addEventListener("click",function(){
+        personalnav.classList.add("d-none")
+        personalselect.classList.add("d-none")
+        reserve.classList.add('d-none')
+        personalMain.classList.add('d-none')
+        collect.classList.remove('d-none')
+    
+    })
+    
+    
+    
+    goback.addEventListener("click",function(){
+        collect.classList.add('d-none')
+        personalnav.classList.remove("d-none")
+        personalselect.classList.remove("d-none")
+        personalMain.classList.remove('d-none')
+    })
 }
 
 
 
 
-reservebtn.addEventListener("click",function(){
-    personalnav.classList.add("d-none")
-    personalselect.classList.add("d-none")
-    reserve.classList.add('d-none')
-    personalMain.classList.add('d-none')
-    collect.classList.remove('d-none')
-
-})
 
 
 
-goback.addEventListener("click",function(){
-    collect.classList.add('d-none')
-    personalnav.classList.remove("d-none")
-    personalselect.classList.remove("d-none")
-    personalMain.classList.remove('d-none')
-})
-
-
-function reloadPage() {
-    location.reload();
-}
 
 
 
