@@ -23,12 +23,9 @@ $sidebar-height : 270px;
     z-index: 1;
 }
 .sidebar{
-
     height:$sidebar-height ;
     margin-bottom: -$sidebar-height;
     transition: margin-bottom 0.1s;
-
-
 }
 
 
