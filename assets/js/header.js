@@ -32,10 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         switchBarHr.classList.remove('d-none');
     }
 });
+
 // 以下為搜尋列表顯示及隱藏
 const header = document.querySelector("header")
 const search = document.querySelector(".search") //搜尋Btn
 const searchList = document.querySelector(".searchList")
+const sidebar = document.querySelector(".sidebar")
 const switchBar = document.querySelector(".switchBar")
 const switchBarHr = document.querySelector(".switchBarHr")
 const thumb = document.querySelectorAll(".thumb")
@@ -69,16 +71,24 @@ for (let i = 0; i < thumbLinks.length; i++) {
         if (search.contains(clickedElement)) {
             // 隱藏 search 元素
             search.classList.add('d-none');
+            // 顯示row元素
             row.classList.remove('d-none')
+            sidebar.classList.remove('d-none')
         }
 
     })
-    document.addEventListener("click",function(event){
-        const clickedElement = event.target;
-        if (!searchList.contains(clickedElement)) {
-            // 隱藏 search 元素
-            header.classList.remove('sidebar-toggled');
-            search.classList.remove('d-none');
-            row.classList.add('d-none')
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.pathname === '/outfitpals/pages/development.html') {
+            document.addEventListener("click",function(event){
+                const clickedElement = event.target;
+                if (!searchList.contains(clickedElement)) {
+                    // 隱藏 search 元素
+                    header.classList.remove('sidebar-toggled');
+                    search.classList.remove('d-none');
+                    row.classList.add('d-none')
+                    sidebar.classList.add('d-none')
+                }
+            })
         }
-    })
+    });
