@@ -85,7 +85,7 @@ days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day");
 //26416387@gmail.com
 function init(){                                        //登入器
     axios.post("http://localhost:3000/login",{
-        "email": "123456@gmail.com",
+        "email": "tset@gmail.com",
         "password":"A123456789"
     })
     .then(function(response){
@@ -99,7 +99,7 @@ function init(){                                        //登入器
     })
     
 }
-init();
+// init();
 
 function getCookie(name) {  
     const cookies = document.cookie.split(';').map(cookie => cookie.trim());
@@ -115,7 +115,7 @@ function getCookie(name) {
 
 
 const storedToken = getCookie("outfitpalsToken");
-const userId = getCookie("userId");
+const userId = getCookie("outfitpalsId");
 const id = location.href.split("=")[1];
 
 
@@ -178,7 +178,7 @@ if (storedToken != null) {   //判斷登陸
                 nologin.addEventListener("click",function(){
                     myModa2.show();   
                 })
-            }
+            } 
             const isopen =res.data[0].isopen;
             const otherdate = res.data[0].otherdate.split(",");
             const okday = res.data[0].okday;
