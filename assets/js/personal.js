@@ -63,23 +63,23 @@ days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day"); //今�
 
 //123456@gmail.com
 //26416387@gmail.com
-function init(){
-    axios.post("http://localhost:3000/login",{
-        "email": "123456@gmail.com",
-        "password":"A123456789"
-    })
-    .then(function(response){
-        const token=response.data.accessToken
-        document.cookie=`outfitpalsToken=${response.data.accessToken}`
-        document.cookie=`userId=${response.data.user.id}`
-        console.log('用户已登录:',token);
-    })
-    .catch(function(error){
-        console.log('並沒有登錄')
-    })
+// function init(){
+//     axios.post("http://localhost:3000/login",{
+//         "email": "test@mail.com",
+//         "password":"A1234567"
+//     })
+//     .then(function(response){
+//         const token=response.data.accessToken
+//         document.cookie=`outfitpalsToken=${response.data.accessToken}`
+//         document.cookie=`userId=${response.data.user.id}`
+//         console.log('用户已登录:',token);
+//     })
+//     .catch(function(error){
+//         console.log('並沒有登錄')
+//     })
     
-}
-init();
+// }
+// init();
 
 
 
@@ -98,15 +98,12 @@ function getCookie(name) {
 
 
 const storedToken = getCookie("outfitpalsToken");
-const userId = getCookie("userId");
+const userId = getCookie("outfitpalsId");
 // history.pushState(null, null, `?id=${userId}`);
 // const id = location.href.split("=")[1];
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
-
-    
-
     personal.innerHTML=`
                         <div class="col-6  d-flex">
                         <div class="circle-box" style="width: 150px; height: 150px;"></div>
