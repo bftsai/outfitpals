@@ -30,6 +30,7 @@ export const ajaxMember={
             //console.log(this.data);
             return this.data;
         } catch (err) {
+            this.signOut();
             console.log(err);
         }
     },
