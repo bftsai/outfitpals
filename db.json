@@ -170,6 +170,18 @@
       "author": "Red Tsai",
       "postTime": "Fri, 24 Nov 2023 04:37:49 GMT",
       "id": 5
+    },
+    {
+      "title": "",
+      "body": "",
+      "imgUrl": "/outfitpals/assets/images/create/image (1).png",
+      "userId": "4",
+      "postTime": "Tue, 05 Dec 2023 11:58:22 GMT",
+      "likeCounts": 0,
+      "favoriteCounts": 0,
+      "outfitStyle": "",
+      "brands": "",
+      "id": 6
     }
   ],
   "comments": [
@@ -275,6 +287,18 @@
       ],
       "oktime": "19:00~20:00",
       "id": 6
+    },
+    {
+      "isopen": false,
+      "userId": null,
+      "otherdate": "",
+      "pos1": "請填寫",
+      "pos2": "請填寫",
+      "pos3": "請填寫",
+      "pos4": "請填寫",
+      "okday": [],
+      "oktime": "12:00~12:00",
+      "id": 7
     }
   ],
   "favorites": [
