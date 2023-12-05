@@ -469,7 +469,9 @@ if (storedToken != null) {   //判斷登陸
             }
 
             //push 到 json
-            let alltoala = []
+            
+
+           
             go.addEventListener("click",function(){
                 let location = []
                 let want = text.value
@@ -482,24 +484,24 @@ if (storedToken != null) {   //判斷登陸
                         location.push(labelElement.innerText.trim()) 
                     }
                 });
-                
-                let dat = {
-
+                axios.post("http://localhost:3000/comments" ,{           
                     "posterId": id, //貼文id 
-                    "userId": userId, //留言者id 
-                    "body": want, //留言內容
-                    "reservationTime": reservationTime, //留言預約時間
-                    "location": location, //留言碰面地址
-                    "state": false, //預約狀態，預設都給boolean 值false
-                    "postTime": postTime //留言時間，麻煩要先轉到 UTCstring
-
-                }
-                alltoala.push(dat)
+                    "userId": userId,  
+                    "body": want, 
+                    "reservationTime": reservationTime,
+                    "location": location,
+                    "state": false, 
+                    "postTime": postTime 
+                }) 
+                
 
                 ans.innerHTML = `<p>${want}</p>`
             })
-            // axios.post("http://localhost:3000/reserve" , alltoala)     
-             console.log(alltoala)
+
+        
+
+                 
+            
 
 
             //判斷是否開預約
