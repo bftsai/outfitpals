@@ -14,38 +14,44 @@
   <body>
     <%- include('./layout/header'); -%>
     <div class="container   d-flex">
-        <div class="circle-box  mt-3 me-3 " style="width: 100px;height:100px ;"></div>
+        <div class="circle-box  mt-3 me-3 avatar " style="width: 100px;height:100px ;">
+            <img src="https://picsum.photos/200/300" alt="">
+        </div>
         <div class="display-6 d-flex align-items-center ms-3">eric</div>   
     </div>
     <br><br>
-    <div class="container mb-5">
-        <div class="d-flex justify-content-center">
+    <div class="container d-flex flex-column justify-content-center mb-5">
+        <!-- <div class="d-flex justify-content-center mb-8">
             <img src="/assets/images/create/image (1).png" class="" style="width: 500px; height: 600px;">
+        </div> -->
+        <div class="mb-3 d-flex flex-column align-items-center">
+            <img class="upLoadPhoto mb-3" src="/assets/images/create/image (1).png" alt="post pic" style="width: 500px;height: 600px;">
+            <label for="upLoadImg" class="upLoadImg form-label text-secondary">上傳穿搭照片</label>
+            <input class="form-control d-none" type="file" id="upLoadImg" accept="image/png,image/jpeg,image/gif,image/png">
+          </div>
+        <div class=" d-flex justify-content-center my-4 ms-5" >
+                <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >標題</span>
+                <input type="text" class="form-control addTitle" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 430px;">
         </div>
-        <br>
-        <div class=" d-flex justify-content-around my-4 ms-5" >
-                <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >身高</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 150px;">
+        <div class=" d-flex justify-content-center mt-4 ms-5" >
+            <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >內文</span>
+            <input type="text" class="form-control addBody" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 430px;">
         </div>
-        <div class=" d-flex justify-content-around mt-4 ms-5" >
-            <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >體重</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 150px;">
-        </div>
-        <div class=" d-flex justify-content-around mt-4 me-1" >
+        <div class=" d-flex justify-content-center mt-4 me-1" >
             <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >風格標籤</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 150px;">
+            <input type="text" class="form-control addOutfitStyle" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 430px;">
         </div>
-        <div class=" d-flex justify-content-around mt-4 me-1" >
+        <div class=" d-flex justify-content-center mt-4 me-1" >
             <span class="input-group-text border-0 bg-white" id="inputGroup-sizing-sm" >品牌標籤</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 150px;">
+            <input type="text" class="form-control addBrands" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="width: 430px;">
         </div>
         <div class="d-flex justify-content-center my-5">
-            <button type="submit" class="btn btn-primary">建立</button>
+            <button type="submit" class="btn btn-primary createPost">建立</button>
         </div>
     </div>
 
     <%- include('./layout/footer'); -%>
-
+<script type="module" src="../assets/js/create.js"></script>
     <script type="module" src="../main.js"></script>
   </body>
 </html>
