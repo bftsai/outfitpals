@@ -425,6 +425,10 @@ reserveMyDiscussConfirmSubmit.addEventListener('click',async e=>{
             const id=reserveMyDiscuss.getAttribute('data-id');
             obj.state='cancel';
             await ajaxMember.patchComment(id,obj);
+
+            const personalObj={}
+            const posterId=(await ajaxMember.getComment(id)).posterId;
+            await ajaxMember.patchPersonalOtherday(posterId,personalObj);
             spinner.classList.add('d-none');
             location.href=locationUrl;
         }

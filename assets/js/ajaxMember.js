@@ -30,6 +30,7 @@ export const ajaxMember={
             //console.log(this.data);
             return this.data;
         } catch (err) {
+            this.signOut();
             console.log(err);
         }
     },
@@ -647,8 +648,8 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
-            return result
+            console.log(result);
+            return result;
         } catch (err) {
             console.log(err);
         }
@@ -685,7 +686,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
+            
             return result
         } catch (err) {
             console.log(err);
@@ -698,7 +699,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
+            
             return result
         } catch (err) {
             console.log(err);
@@ -711,7 +712,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
+            
             return result
         } catch (err) {
             console.log(err);
@@ -724,7 +725,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
+            
             return result
         } catch (err) {
             console.log(err);
@@ -733,7 +734,7 @@ export const ajaxMember={
     async postProfile(obj){
         try {
             const result=await axios.post(`${apiUrl}profile`,obj);
-            console.log(result);
+            
         } catch (err) {
             console.log(err);
         }
@@ -741,7 +742,7 @@ export const ajaxMember={
     async getProfile(){
         try {
             const result=(await axios.get(`${apiUrl}profile`)).data;
-            console.log(result);
+            
         } catch (err) {
             console.log(err);
         }
@@ -753,9 +754,17 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             });
-            console.log(result);
+            
         } catch (err) {
             console.log(err);
         }
     },
+    async patchPersonalOtherday(id,obj){
+        try {
+            const result=await axios.patch(`${apiUrl}personal?userId=${id}`,obj);
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 };

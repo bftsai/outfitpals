@@ -2,6 +2,9 @@ const pagination=document.querySelector('.pagination');
 const paginationPrev=document.querySelector('.pagination .prev');
 const paginationNext=document.querySelector('.pagination .next');
 pagination.addEventListener('click',e=>{
+    if(e.target.nodeName==='UL'){
+        return
+    }
     if(Number(e.target.textContent)!==0){
         [...pagination.children].forEach(item=>{
             item.children[0].classList.remove('active')
