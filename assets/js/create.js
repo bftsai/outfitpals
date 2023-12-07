@@ -30,23 +30,23 @@ upLoadImg.addEventListener('change',e=>{
 });
 
 
-let obj = {
-    "title": addTitle.value,
-    "body": addBody.value,
-    "imgUrl": upLoadPhoto.getAttribute('src'),
-    "userId": outfitpalsId,
-    "postTime": new Date().toUTCString(),
-    "likeCounts": 0,
-    "favoriteCounts": 0,
-    "outfitStyle": addOutfitStyle.value,
-    "brands": addBrands.value
-}
 createPost.addEventListener('click',function(e){
+    let obj = {
+        "title": addTitle.value,
+        "body": addBody.value,
+        "imgUrl": upLoadPhoto.getAttribute('src'),
+        "userId": outfitpalsId,
+        "postTime": new Date().toUTCString(),
+        "likeCounts": 0,
+        "favoriteCounts": 0,
+        "outfitStyle": addOutfitStyle.value,
+        "brands": addBrands.value
+    }
     console.log(obj);
-    createPosts()
+    createPosts(obj)
 })
 
-function createPosts(){
+function createPosts(obj){
 
     axios.post('http://localhost:3000/posts', obj)
     .then(res => {
