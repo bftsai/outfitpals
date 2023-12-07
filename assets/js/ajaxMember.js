@@ -282,17 +282,22 @@ export const ajaxMember={
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="submit">修改</button>
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="button">修改</button>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">我的主頁</button>
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</button>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="submit">我的收藏</button>
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="button">我的收藏</button>
+            </div>
+        </div>
+        <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+            <div class="col-6 col-sm-3 d-flex">
+            <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignOut" type="button">登出</button>
             </div>
         </div>`;
         memberSignInProfileForm.innerHTML=str;
@@ -309,6 +314,11 @@ export const ajaxMember={
                     }, 0);
                 }, 400);
             }
+        });
+        const memberSignOut=document.querySelector('.memberSignOut');
+        memberSignOut.addEventListener('click',e=>{
+            e.preventDefault();
+            this.signOut();
         });
     },
     renderMemberSignInForm(){
