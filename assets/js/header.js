@@ -23,6 +23,25 @@ if(outfitpalsToken) {
 })
 }
 
+// 會導致註冊後怪怪的，需再調整
+// 登入後發生變化
+// let currentToken = getCookie('outfitpalsToken');
+
+// function checkTokenChange() {
+//   const newToken = getCookie('outfitpalsToken');
+
+//   if (newToken !== currentToken) {
+//     console.log('Token has changed. Reloading...');
+//     currentToken = newToken;
+//     location.reload();
+//   }
+// }
+
+// // 初始執行一次检查
+// checkTokenChange();
+
+// // 每秒檢查一次
+// setInterval(checkTokenChange, 1000);
 
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
@@ -92,3 +111,5 @@ for (let i = 0; i < thumbLinks.length; i++) {
             })
         }
     });
+
+    
