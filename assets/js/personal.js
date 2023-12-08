@@ -99,44 +99,44 @@ function getCookie(name) {
 
 const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
-// history.pushState(null, null, `?id=${userId}`);
-// const id = location.href.split("=")[1];
+
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
-
+    
     personal.innerHTML=`
+                        <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
-                        <div class="circle-box" style="width: 150px; height: 150px;"></div>
-                        <div class="d-flex position-relative ">
-                            <div>
-                                <div class="row justify-content-center align-items-center" >
-                                    <div class="col">
-                                        <strong class="display-5 text-nowrap">${res.data[0].name}</strong>
-                                        </div>
+                       
+                            <div class="d-flex position-relative ">
+                                <div class="ms-2">
+                                    <div class="row ms-5 align-items-center" >
                                         <div class="col">
-                                            <p class="fs-3 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            <strong class="display-6 text-nowrap">${res.data[0].name}</strong>
+                                            </div>
+                                            <div class="col">
+                                            <p class="fs-4 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            </div>
+                                    </div>
+                                    <p class="ms-5 mt-5">${res.data[0].introduce}</p>
+                                    <div class="d-flex">
+                                        <p class="ms-5">活動範圍 :</p>
+                                        <p>${res.data[0].PopArea}</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p class="ms-5">穿搭價位 :</p>
+                                        <p>${res.data[0]["outfit price"]}</p>
                                     </div>
                                 </div>
-                                <p class="ms-5 mt-5">${res.data[0].introduce}</p>
-                                <div class="d-flex">
-                                    <p class="ms-5">活動範圍 :</p>
-                                    <p>${res.data[0].PopArea}</p>
-                                </div>
-                                <div class="d-flex">
-                                    <p class="ms-5">穿搭價位 :</p>
-                                    <p>${res.data[0]["outfit price"]}</p>
-                                </div>
-                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3 d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
                         <div class = "sty">
                         
                         </div>
                     </div>
-                    <div class="col-3 d-flex align-items-center mt-3">
-                    <button type="button" class="btn btn-primary fs-3 " id="reservebtn">我的收藏</button> 
+                    <div class="col-2 d-flex align-items-center mt-3">
+                    <button type="button" class="btn btn-primary fs-5 " id="reservebtn">我的收藏</button> 
                     </div> 
                     `
          
@@ -144,15 +144,15 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
          const stys = res.data[0].style.split(" ");
          console.log(stys.length)
             if(stys.length <2){
-                sty.innerHTML =` <p class="fs-2 ">穿衣風格</p>
-                <div class="d-flex">
-                    <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-pill  ms-3">${stys[0]}</button>
                 </div>`
                 
             }else{
                 
-                sty.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
-                <div class="d-flex">
+                sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
+                <div class="d-flex justify-content-center">
                     <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
                 </div>        
                 <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>`
@@ -174,7 +174,7 @@ if (storedToken != null) {     //判斷登入
                     axios.post(`http://localhost:3000/personal`,{
                         "isopen": false,
                         "userId": Number(userId),
-                        "otherdate": [],
+                        "otherdate": "",
                         "pos1": "請填寫",
                         "pos2": "請填寫",
                         "pos3": "請填寫",

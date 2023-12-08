@@ -111,14 +111,14 @@
       "reservation location": "無 ",
       "height": "180",
       "weight": "77",
-      "PopArea": "台北",
-      "PopArea selectedIndex": 0,
-      "style": "韓系",
-      "style selectedIndex": 0,
-      "outfit price": "1000",
-      "outfit price selectedIndex": 0,
-      "love store": "",
-      "introduce": "",
+      "PopArea": "台北市",
+      "PopArea selectedIndex": 1,
+      "style": "韓系 日系",
+      "style selectedIndex": 2,
+      "outfit price": "$2,001～$3,000",
+      "outfit price selectedIndex": 2,
+      "love store": "ZARA NET",
+      "introduce": "隨便打一點東西",
       "sex": "Female"
     },
     {
@@ -225,7 +225,7 @@
     {
       "title": "title test",
       "body": "body bla bla bla bla bla bla bla bla ",
-      "imgUrl": "https://picsum.photos/id/237/200/300",
+      "imgUrl": "https://picsum.photos/id/237/200/200",
       "userId": 6,
       "postTime": "Thu, 23 Nov 2023 02:21:46 GMT",
       "author": "TE TEST",
@@ -241,7 +241,7 @@
     {
       "title": "title test",
       "body": "body bla bla bla bla bla bla bla bla ",
-      "imgUrl": "https://picsum.photos/id/237/200/300",
+      "imgUrl": "https://picsum.photos/id/237/200/500",
       "userId": 6,
       "postTime": "Thu, 23 Nov 2023 02:21:46 GMT",
       "author": "TE TEST",
@@ -479,6 +479,30 @@
       "state": false,
       "postTime": "Tue, 05 Dec 2023 14:02:25 GMT",
       "id": 10
+    },
+    {
+      "posterId": 10,
+      "userId": 11,
+      "body": "我想買一些衣服",
+      "reservationTime": "2023年 12/ 18:00~19:00",
+      "location": [
+        "台北火車站"
+      ],
+      "state": false,
+      "postTime": "Fri, 08 Dec 2023 11:42:50 GMT",
+      "id": 11
+    },
+    {
+      "posterId": 11,
+      "userId": 10,
+      "body": "我有選擇障礙",
+      "reservationTime": "2023年 12/ 18:30~19:30",
+      "location": [
+        "台北地下街"
+      ],
+      "state": false,
+      "postTime": "Fri, 08 Dec 2023 11:56:06 GMT",
+      "id": 12
     }
   ],
   "profile": {
@@ -586,16 +610,36 @@
       "id": 10
     },
     {
-      "isopen": false,
+      "isopen": true,
       "userId": "10",
       "otherdate": "",
-      "pos1": "請填寫",
-      "pos2": "請填寫",
-      "pos3": "請填寫",
-      "pos4": "請填寫",
-      "okday": [],
-      "oktime": "12:00~12:00",
+      "pos1": "台北火車站",
+      "pos2": "西門町",
+      "pos3": "合歡山",
+      "pos4": "六腳學院",
+      "okday": [
+        "12/13",
+        "12/15",
+        "12/17"
+      ],
+      "oktime": "17:30~19:00",
       "id": 11
+    },
+    {
+      "isopen": true,
+      "userId": 11,
+      "otherdate": "",
+      "pos1": "北投公園",
+      "pos2": "台北地下街",
+      "pos3": "五指山",
+      "pos4": "101",
+      "okday": [
+        "12/15",
+        "12/1",
+        "12/29"
+      ],
+      "oktime": "18:00~19:30",
+      "id": 12
     }
   ],
   "favorites": [

@@ -114,41 +114,42 @@ function getCookie(name) {
 
 const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
-const id = location.href.split("=")[1];
-
+const id = parseInt(location.href.split("=")[1], 10);
 
 
 axios.get(`http://localhost:3000/users?id=${id}`)
 .then(function(res){
-    other.innerHTML=`<div class="col-6  d-flex">
-                        <div class="circle-box" style="width: 150px; height: 150px;"></div>
-                        <div class="d-flex position-relative">
-                            <div>
-                                <div class="row justify-content-center align-items-center" >
-                                    <div class="col">
-                                        <strong class="display-4 text-nowrap">${res.data[0].name}</strong>
-                                        </div>
+    other.innerHTML=`                       
+                        <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
+                        <div class="col-6  d-flex">
+                    
+                            <div class="d-flex position-relative ">
+                                <div class="ms-2">
+                                    <div class="row ms-5 align-items-center" >
                                         <div class="col">
-                                            <p class="fs-3 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            <strong class="display-6 text-nowrap">${res.data[0].name}</strong>
+                                            </div>
+                                            <div class="col">
+                                            <p class="fs-4 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            </div>
+                                    </div>
+                                    <p class="ms-5 mt-5">${res.data[0].introduce}</p>
+                                    <div class="d-flex">
+                                        <p class="ms-5">活動範圍 :</p>
+                                        <p>${res.data[0].PopArea}</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p class="ms-5">穿搭價位 :</p>
+                                        <p>${res.data[0]["outfit price"]}</p>
                                     </div>
                                 </div>
-                                <p class="ms-5">${res.data[0].introduce}</p>
-                                <div class="d-flex">
-                                    <p class="ms-5">活動範圍 :</p>
-                                    <p>${res.data[0].PopArea}</p>
-                                </div>
-                                <div class="d-flex">
-                                    <p class="ms-5">穿搭價位 :</p>
-                                    <p>${res.data[0]["outfit price"]}</p>
-                                </div>
-                            </div>    
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3 d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
                         <div class = "sto">
                         </div>
                     </div>
-                    <div class="col-3 d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
                         <div class = "sty">
                         </div>
                     </div>`
@@ -156,37 +157,40 @@ axios.get(`http://localhost:3000/users?id=${id}`)
                     const sty = document.querySelector(".sty")
                     const stys = res.data[0].style.split(" ");
                        if(stys.length <2){
-                           sty.innerHTML =` <p class="fs-2 me-5">穿衣風格</p>
-                           <div class="d-flex">
-                               <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                           sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
+                           <div class="d-flex justify-content-center">
+                               <button type="button" class="btn btn-primary btn-pill  ms-3">${stys[0]}</button>
                            </div>`
                            
                        }else{
                            
-                           sty.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
-                           <div class="d-flex">
-                               <button type="button" class="btn btn-primary btn-pill ms-5">${stys[0]}</button>
-                           </div>        
-                           <button type="button" class="btn btn-primary btn-pill mt-3 ms-5">${stys[1]}</button>`
-           
+                           sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ">穿衣風格</p>
+                           <div class="d-flex justify-content-center">
+                               <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                            </div>   
+                            <div class="d-flex justify-content-center">       
+                                <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>
+                            </div>`  
                        }
 
                     const sto = document.querySelector(".sto")
                     const stos = res.data[0]["love store"].split(" ");
                     if(stos.length <2){
-                        sto.innerHTML =` <p class="fs-2 me-5">穿衣風格</p>
-                        <div class="d-flex">
+                        sto.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">愛逛商店</p>
+                        <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-primary btn-pill ms-3">${stos[0]}</button>
                         </div>`
                         
                     }else{
                         
-                        sto.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
-                        <div class="d-flex">
+                        sto.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">愛逛商店</p>
+                        <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-primary btn-pill ms-5">${stos[0]}</button>
-                        </div>        
-                        <button type="button" class="btn btn-primary btn-pill mt-3 ms-5">${stos[1]}</button>`
-        
+                        </div>       
+                        <div class="d-flex justify-content-center"> 
+                        <button type="button" class="btn btn-primary btn-pill mt-3 ms-5">${stos[1]}</button>
+                        </div>`
+
                     }
     
 })
