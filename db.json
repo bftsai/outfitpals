@@ -487,18 +487,6 @@
     },
     {
       "isopen": false,
-      "userId": "",
-      "otherdate": "",
-      "pos1": "請填寫",
-      "pos2": "請填寫",
-      "pos3": "請填寫",
-      "pos4": "請填寫",
-      "okday": [],
-      "oktime": "12:00~12:00",
-      "id": 9
-    },
-    {
-      "isopen": false,
       "userId": "9",
       "otherdate": "",
       "pos1": "請填寫",

@@ -231,7 +231,7 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-// ajaxMember.deleteUser(7)
+// ajaxMember.deleteUser(12)
 // ajaxMember.signOut()
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
