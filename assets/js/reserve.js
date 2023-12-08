@@ -4,6 +4,8 @@ import axios from 'axios';
 import $ from "jquery";
 //customer function
 import { ajaxMember,cookieValue } from "./ajaxMember";
+//bootstrap
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 //spinner
 const spinner=document.querySelector('.memberSpinner');
@@ -20,6 +22,8 @@ $(document).ready(function () {
 //JS
 const locationUrl='http://localhost:5173/outfitpals/pages/reserve.html';
 
+const unLogin=document.querySelector('.unLogin');
+const reserve=document.querySelector('.reserve');
 const reserveBtnGroup=document.querySelector('.c-switch-btn-group');
 const reserveContent=document.querySelector('.reserve-content');
 const backToReserveAll=[...document.querySelectorAll('.backToReserve')];
@@ -336,8 +340,6 @@ const reserveComponent={
                 }
             }
         }, 400);
-
-        
     },
     async renderPagination(){
         const stateDom=[...reserveBtnGroup.children[0].children[0].children[0].children].find(item=>{
@@ -384,8 +386,24 @@ const reserveComponent={
     }
 };
 
-reserveComponent.render(1);
-reserveComponent.renderPagination();
+if(cookieValue('outfitpalsId')!=="''"&&cookieValue('outfitpalsToken')!=="''"&&cookieValue('outfitpalsThirdParty')!=="''"){
+    unLogin.classList.add('d-none');
+    reserve.classList.add('pb-9');
+    reserve.classList.add('pb-lg-13');
+    reserveBtnGroup.classList.remove('d-none');
+    reserveContent.classList.remove('d-none');
+    reserveComponent.render(1);
+    reserveComponent.renderPagination();
+}else{
+    unLogin.classList.remove('d-none');
+    reserve.classList.remove('pb-9');
+    reserve.classList.remove('pb-lg-13');
+    reserveBtnGroup.classList.add('d-none');
+    reserveContent.classList.add('d-none');
+    paginationArea.classList.add('d-none');
+}
+
+
 //pagination
 pagination.addEventListener('click',e=>{
     if(Number(e.target.textContent)!==0){
