@@ -2,7 +2,7 @@
     background-image: url(/assets/images/index/bg_faq.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: auto !important;
+    background-size: auto !important; //cover在大於2000px才不會空白，auto接近設計稿
     background-color: rgba(255, 255, 255, 0.2);
     background-blend-mode: color-burn;
     padding: 64px 12px;
@@ -105,11 +105,11 @@
 
                 .FAQopen {
                     margin-top: 16px;
-                    animation: slidein 0.25s ease-in-out forwards;
+                    animation: slidein 0.5s ease-in-out forwards;
                 }
 
                 .FAQclose {
-                    animation: slideout 0.25s ease-in-out forwards;
+                    animation: slideout 0.5s ease-in-out forwards;
 
                 }
 

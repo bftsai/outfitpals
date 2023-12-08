@@ -97,7 +97,6 @@ function getCookie(name) {
     return null;
 }
 
-
 const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
 // history.pushState(null, null, `?id=${userId}`);
