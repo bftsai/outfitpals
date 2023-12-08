@@ -65,7 +65,7 @@ export const checkSign={
         }
     },
     checkName(input,str){
-        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]{5,}$');
+        this.regexp=new RegExp('^[\u4e00-\u9fa5_a-zA-Z\x20]{2,}$');
         if(str===''){
             input.nextElementSibling.textContent=`請輸入姓名`;
             return false;
