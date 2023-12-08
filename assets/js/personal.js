@@ -43,6 +43,7 @@ const personal = document.querySelector(".personal")
 
 
 
+
 //時間
 let days = document.getElementsByTagName("td"); //將td標籤放入days物件集合中
 var today = new Date();
@@ -104,6 +105,7 @@ const userId = getCookie("outfitpalsId");
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
+
     personal.innerHTML=`
                         <div class="col-6  d-flex">
                         <div class="circle-box" style="width: 150px; height: 150px;"></div>
@@ -114,10 +116,10 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                                         <strong class="display-5 text-nowrap">${res.data[0].name}</strong>
                                         </div>
                                         <div class="col">
-                                            <p class="fs-3 mt-3" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            <p class="fs-3 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
                                     </div>
                                 </div>
-                                <p class="ms-5">你好！我是Selen～喜歡可以多層次穿搭的冬天</p>
+                                <p class="ms-5 mt-5">${res.data[0].introduce}</p>
                                 <div class="d-flex">
                                     <p class="ms-5">活動範圍 :</p>
                                     <p>${res.data[0].PopArea}</p>
@@ -130,19 +132,34 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                         </div>
                     </div>
                     <div class="col-3 d-flex align-items-center">
-                        <div>
-                            <p class="fs-2">服飾品牌</p>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
+                        <div class = "sty">
+                        
                         </div>
                     </div>
-
-
                     <div class="col-3 d-flex align-items-center mt-3">
                     <button type="button" class="btn btn-primary fs-3 " id="reservebtn">我的收藏</button> 
-                    </div> `
+                    </div> 
+                    `
+         
+         const sty = document.querySelector(".sty")
+         const stys = res.data[0].style.split(" ");
+         console.log(stys.length)
+            if(stys.length <2){
+                sty.innerHTML =` <p class="fs-2 ">穿衣風格</p>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                </div>`
+                
+            }else{
+                
+                sty.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                </div>        
+                <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>`
+
+            }
+
 })
 
 
@@ -157,8 +174,8 @@ if (storedToken != null) {     //判斷登入
                 if(res.data.length == 0){     //判斷是否第一次登陸
                     axios.post(`http://localhost:3000/personal`,{
                         "isopen": false,
-                        "userId": userId,
-                        "otherdate": "",
+                        "userId": Number(userId),
+                        "otherdate": [],
                         "pos1": "請填寫",
                         "pos2": "請填寫",
                         "pos3": "請填寫",
@@ -465,6 +482,8 @@ if (storedToken != null) {     //判斷登入
                                     location.reload();
                                 })
                            })
+
+                           
     
     
     

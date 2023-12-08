@@ -76,7 +76,7 @@
             var userId = res.data[4].userId;
             console.log(userId)
             // 使用 window.location.href 將頁面導航到另一個 URL，這裡的 URL 中包含 userId 參數
-            window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + userId;
+            window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + userId + "&page=1";
         })
         
     })

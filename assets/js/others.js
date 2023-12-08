@@ -1,11 +1,8 @@
 function handleUserIdParameter() {                               //提前選染url
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
-
-    // 在這裡可以根據 userId 做一些處理，例如發送請求獲取相應的數據
-    console.log("userId from URL:", userId);
-
     // 在這裡可以執行相應的邏輯，例如渲染頁面
+            
 }
 
 // 在頁面加載時執行處理 URL 中的 userId 參數
@@ -61,6 +58,7 @@ const myModa2 = new bootstrap.Modal(document.getElementById('myModa2'));
 
 //個人資料渲染
 const other = document.querySelector(".other")    
+const otherspost = document.querySelector(".otherspost")    
 
 
 //日期
@@ -119,6 +117,7 @@ const userId = getCookie("outfitpalsId");
 const id = location.href.split("=")[1];
 
 
+
 axios.get(`http://localhost:3000/users?id=${id}`)
 .then(function(res){
     other.innerHTML=`<div class="col-6  d-flex">
@@ -130,10 +129,10 @@ axios.get(`http://localhost:3000/users?id=${id}`)
                                         <strong class="display-4 text-nowrap">${res.data[0].name}</strong>
                                         </div>
                                         <div class="col">
-                                            <p class="fs-3 mt-3" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            <p class="fs-3 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
                                     </div>
                                 </div>
-                                <p class="ms-5">你好！我是Selen～喜歡可以多層次穿搭的冬天</p>
+                                <p class="ms-5">${res.data[0].introduce}</p>
                                 <div class="d-flex">
                                     <p class="ms-5">活動範圍 :</p>
                                     <p>${res.data[0].PopArea}</p>
@@ -146,26 +145,144 @@ axios.get(`http://localhost:3000/users?id=${id}`)
                         </div>
                     </div>
                     <div class="col-3 d-flex align-items-center">
-                        <div>
-                            <p class="fs-2">服飾品牌</p>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
+                        <div class = "sto">
                         </div>
                     </div>
                     <div class="col-3 d-flex align-items-center">
-                        <div>
-                            <p class="fs-2">服飾風格</p>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-pill ms-3">${res.data[0].style}</button>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
+                        <div class = "sty">
                         </div>
                     </div>`
+
+                    const sty = document.querySelector(".sty")
+                    const stys = res.data[0].style.split(" ");
+                       if(stys.length <2){
+                           sty.innerHTML =` <p class="fs-2 me-5">穿衣風格</p>
+                           <div class="d-flex">
+                               <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                           </div>`
+                           
+                       }else{
+                           
+                           sty.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
+                           <div class="d-flex">
+                               <button type="button" class="btn btn-primary btn-pill ms-5">${stys[0]}</button>
+                           </div>        
+                           <button type="button" class="btn btn-primary btn-pill mt-3 ms-5">${stys[1]}</button>`
+           
+                       }
+
+                    const sto = document.querySelector(".sto")
+                    const stos = res.data[0]["love store"].split(" ");
+                    if(stos.length <2){
+                        sto.innerHTML =` <p class="fs-2 me-5">穿衣風格</p>
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-primary btn-pill ms-3">${stos[0]}</button>
+                        </div>`
+                        
+                    }else{
+                        
+                        sto.innerHTML = ` <p class="fs-2 ">穿衣風格</p>
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-primary btn-pill ms-5">${stos[0]}</button>
+                        </div>        
+                        <button type="button" class="btn btn-primary btn-pill mt-3 ms-5">${stos[1]}</button>`
+        
+                    }
     
 })
 
+
+axios.get(`http://localhost:3000/posts?userId=${id}`)
+.then(function(res){
+    let postdata =res.data
+    const page = location.href.split("=")[2];
+    otherspost.innerHTML =`<div class="row justify-content-between post1">
+                        </div>
+                        <div class="row justify-content-between mt-5 post2">
+
+                        </div>
+                        <div class="row justify-content-between mt-5 post3">
+
+                        </div>
+                        <div class="pe-5 me-5 mt-5">
+                        <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-lg-center my-3">
+                            <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
+                            <div class = "page d-flex">
+
+                            </div>
+                            <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
+                        </ul>
+                        </nav>
+                        </div>
+                    `
+                    const postsPerPage = 9;
+                    const postContainers = [".post1", ".post2", ".post3"];
+                   
+                    
+                    // 換頁
+                    // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
+                        const startIndex = (page - 1) * postsPerPage;
+                        
+                        // // 清空所有容器，只需要在分页循环外清空一次
+                        // postContainers.forEach(containerClass => {
+                        //     const container = document.querySelector(containerClass);
+                        //     container.innerHTML = '';
+                        // });
+                        const endIndex = startIndex + postsPerPage;
+                        for (let i = startIndex; i < endIndex && i < postdata.length; i++) {
+                            const postIndex = i % postsPerPage;
+                           
+                            // 通过嵌套循环，将每个容器的生成逻辑移到循环内部
+                            postContainers.forEach((containerClass, index) => {                                
+                                if (postIndex >= index * (postsPerPage / postContainers.length) &&
+                                    postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
+                                    const container = document.querySelector(containerClass);
+                                    const imgUrl = postdata[i].imgUrl;
+                                    // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
+                                    container.innerHTML += `<div class="col-4">
+                                        <div class="card" style="width: 350px; height: 450px;">
+                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                        </div>
+                                    </div>`;
+                                }
+                            });
+                        }
+                    // }
+        const one = document.querySelector(".page"); 
+        let maxPages = 100; 
+        if (postdata.length > 0) {
+            for (let i = 1; i <= Math.min(maxPages, Math.ceil(postdata.length / 8)); i++) {
+                one.innerHTML += `<li class="page-item"><a href="#" class="page-link border-0">${i}</a></li>`;
+            }
+        }
+        const l = document.querySelector(".l"); 
+        const r = document.querySelector(".r"); 
+        r.addEventListener("click", function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            var currentPage = parseInt(urlParams.get('page')) || 1;
+            var newPage = currentPage + 1;
+            urlParams.set('page', newPage);
+            // 构建新的URL
+            var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+            // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+            window.history.replaceState({}, document.title, newUrl);
+        });
+        l.addEventListener("click", function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            var currentPage = parseInt(urlParams.get('page')) || 1;
+            if(currentPage > 1 ){
+                var newPage = currentPage - 1;
+                urlParams.set('page', newPage);
+                // 构建新的URL
+                var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+                // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+                window.history.replaceState({}, document.title, newUrl);
+            }
+
+        });
+
+})
 
 
 if (storedToken != null) {   //判斷登陸
@@ -485,8 +602,8 @@ if (storedToken != null) {   //判斷登陸
                     }
                 });
                 axios.post("http://localhost:3000/comments" ,{           
-                    "posterId": id, //貼文id 
-                    "userId": userId,  
+                    "posterId": Number(id),  
+                    "userId": Number(userId),  
                     "body": want, 
                     "reservationTime": reservationTime,
                     "location": location,
