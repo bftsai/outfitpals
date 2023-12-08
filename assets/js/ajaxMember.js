@@ -48,6 +48,7 @@ export const ajaxMember={
                 await this.patchUsers(outfitpalsId,outfitpalsToken,{
                     "sign time": new Date().toUTCString(),
                 });
+                await this.postPersonal();
                 signUpMail.value=account.value;
                 signUpPwd.value=pwd.value;
                 spinner.classList.add('d-none');
@@ -69,6 +70,24 @@ export const ajaxMember={
             account.classList.add('is-invalid-customer');
             account.nextElementSibling.textContent=err.response.data;
             spinner.classList.add('d-none');
+        }
+    },
+    async postPersonal(){
+        try {
+            const result=await axios.post(`${apiUrl}personal`,{
+                "isopen": false,
+                "userId": Number(cookieValue('outfitpalsId')),
+                "otherdate": [],
+                "pos1": "請填寫",
+                "pos2": "請填寫",
+                "pos3": "請填寫",
+                "pos4": "請填寫",
+                "okday":[],
+                "oktime":"12:00~12:00" ,
+            });
+            
+        } catch (err) {
+            console.log(err);
         }
     },
     async deleteUser(id){
@@ -769,10 +788,13 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async patchPersonalOtherday(id,obj){
+    async patchPersonalOtherday(id,str){
         try {
-            const result=await axios.patch(`${apiUrl}personal?userId=${id}`,obj);
-            console.log(result);
+            const personalObj=(await axios.get(`${apiUrl}personal?userId=${id}`)).data[0];
+            personalObj.otherdate.push(str);
+            
+            const patchPersonal=(await axios.patch(`${apiUrl}personal/${id}`,personalObj)).data;
+            console.log(patchPersonal);
         } catch (err) {
             console.log(err);
         }

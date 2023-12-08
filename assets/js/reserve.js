@@ -444,6 +444,12 @@ reserveMyDiscussConfirmSubmit.addEventListener('click',async e=>{
             obj.state='cancel';
             await ajaxMember.patchComment(id,obj);
 
+            const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            const reservationTime=`${month}/${day}`;
+
+            await ajaxMember.patchPersonalOtherday(id,reservationTime);
+
             const personalObj={}
             const posterId=(await ajaxMember.getComment(id)).posterId;
             await ajaxMember.patchPersonalOtherday(posterId,personalObj);
@@ -504,9 +510,16 @@ reserveManageAppointmentsConfirmSubmit.addEventListener('click',async e=>{
         spinner.classList.remove('d-none');
         let obj={}
         const id=reserveManageAppointments.getAttribute('data-id');
+        
         if(reserveManageAppointmentsRadioCheck.checked===true){
             obj.state='accept';
             await ajaxMember.patchComment(id,obj);
+
+            const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            const reservationTime=`${month}/${day}`;
+
+            await ajaxMember.patchPersonalOtherday(id,reservationTime);
             spinner.classList.add('d-none');
         }else if(reserveManageAppointmentsRadioCancel.checked===true){
             obj.state='reject';
@@ -567,3 +580,5 @@ function patchComment(id,obj) {
     ajaxMember.patchComment(id,obj);
 }
 // patchComment(5,obj)
+
+// ajaxMember.patchPersonalOtherday(12,'12/1')
