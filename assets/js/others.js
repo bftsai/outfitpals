@@ -81,22 +81,22 @@ days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day");
 
 //123456@gmail.com
 //26416387@gmail.com
-function init(){                                        //登入器
-    axios.post("http://localhost:3000/login",{
-        "email": "tset@gmail.com",
-        "password":"A123456789"
-    })
-    .then(function(response){
-        const token=response.data.accessToken
-        document.cookie=`outfitpalsToken=${response.data.accessToken}`
-        document.cookie=`userId=${response.data.user.id}`
-        console.log('用户已登录:',token);
-    })
-    .catch(function(error){
-        console.log('並沒有登錄')
-    })
+// function init(){                                        //登入器
+//     axios.post("http://localhost:3000/login",{
+//         "email": "tset@gmail.com",
+//         "password":"A123456789"
+//     })
+//     .then(function(response){
+//         const token=response.data.accessToken
+//         document.cookie=`outfitpalsToken=${response.data.accessToken}`
+//         document.cookie=`userId=${response.data.user.id}`
+//         console.log('用户已登录:',token);
+//     })
+//     .catch(function(error){
+//         console.log('並沒有登錄')
+//     })
     
-}
+// }
 // init();
 
 function getCookie(name) {  

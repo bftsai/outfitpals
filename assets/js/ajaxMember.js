@@ -1,5 +1,5 @@
 //axios
-import axios from "axios";
+import axios from "axios"
 //Data API
 //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
  const apiUrl='http://localhost:3000/';
