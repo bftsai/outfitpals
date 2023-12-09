@@ -245,10 +245,10 @@ axios.get(`http://localhost:3000/posts?userId=${id}`)
                                     const imgUrl = postdata[i].imgUrl;
                                     // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
                                     container.innerHTML += `<div class="col-4">
-                                        <div class="card" style="width: 350px; height: 450px;">
-                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                                        </div>
-                                    </div>`;
+                                                            <div class="card" style="width: 350px; height: 450px;">
+                                                                <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                                            </div>
+                                                            </div>`;
                                 }
                             });
                         }

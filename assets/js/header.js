@@ -120,3 +120,10 @@ for (let i = 0; i < thumbLinks.length; i++) {
         f.preventDefault(); 
         window.location.href = "http://localhost:5173/outfitpals/pages/personal.html?page=1"
     })
+
+    const gopost = document.querySelector(".gopost")
+    gopost.addEventListener("click",function(f){
+        f.stopPropagation();
+        f.preventDefault(); 
+        window.location.href = "http://localhost:5173/outfitpals/pages/development.html?page=1"
+    })
