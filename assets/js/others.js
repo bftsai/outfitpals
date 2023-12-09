@@ -1,12 +1,12 @@
-function handleUserIdParameter() {                               //提前選染url
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
-    // 在這裡可以執行相應的邏輯，例如渲染頁面
+// function handleUserIdParameter() {                               //提前選染url
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const userId = urlParams.get('userId');
+//     // 在這裡可以執行相應的邏輯，例如渲染頁面
             
-}
+// }
 
 // 在頁面加載時執行處理 URL 中的 userId 參數
-window.onload = handleUserIdParameter;
+// window.onload = handleUserIdParameter;
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
@@ -245,10 +245,10 @@ axios.get(`http://localhost:3000/posts?userId=${id}`)
                                     const imgUrl = postdata[i].imgUrl;
                                     // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
                                     container.innerHTML += `<div class="col-4">
-                                        <div class="card" style="width: 350px; height: 450px;">
-                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                                        </div>
-                                    </div>`;
+                                                            <div class="card" style="width: 350px; height: 450px;">
+                                                                <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                                            </div>
+                                                            </div>`;
                                 }
                             });
                         }

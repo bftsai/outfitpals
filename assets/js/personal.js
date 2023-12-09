@@ -1,11 +1,11 @@
 
-function handleUserIdParameter() {                               //提前選染url
-    const urlParams = new URLSearchParams(window.location.search);
+// function handleUserIdParameter() {                               //提前選染url
+//     const urlParams = new URLSearchParams(window.location.search);
             
-}
+// }
 
-// 在頁面加載時執行處理 URL 中的 userId 參數
-window.onload = handleUserIdParameter;
+// // 在頁面加載時執行處理 URL 中的 userId 參數
+// window.onload = handleUserIdParameter;
 
 //兩頁換頁
 const thumbLinks = document.querySelectorAll(".thumb-link");  
@@ -176,7 +176,7 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
 .then(function(res){
     let postdata =res.data
     console.log(postdata)
-    const page = location.href.split("=")[2];
+    const page = location.href.split("=")[1];
     otherspost.innerHTML =`<div class="row justify-content-between post1">
                         </div>
                         <div class="row justify-content-between mt-5 post2">
