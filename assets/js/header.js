@@ -1,7 +1,14 @@
-let outfitpalsToken = getCookie('outfitpalsToken')
+//axios
+import axios from "axios"
 
+//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+const apiUrl='http://localhost:3000/';
+
+let outfitpalsToken = getCookie('outfitpalsToken')
+let outfitpalsId = getCookie('outfitpalsId')
 const signupBtn = document.querySelector('.signupBtn')
 const loginShow = document.querySelectorAll('.loginShow')
+const avatar = document.querySelector('.avatar')
 
 // 取出特定cookie的值，name記得帶字串
 function getCookie(name) {
@@ -10,8 +17,28 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
  
+// 取得登入者資料
+function getAvatar(){
+
+    axios.get(`${apiUrl}users?id=${outfitpalsId}`)
+    .then(res => {
+        let userAvatarUrl = res.data[0].image
+        renderAvatar(userAvatarUrl)
+    })
+    .catch(err =>(
+        console.log(err.response)
+        
+    ))
+}
+// 根據user頭像渲染header avatar
+function renderAvatar(userAvatarUrl) {
+    avatar.innerHTML = `<img src="${userAvatarUrl}" alt="userAvatar">`
+}
+
+getAvatar()
+
 //   判斷是否有token，切換header樣式
-if(outfitpalsToken) {
+if(outfitpalsToken.length > 2) {
     signupBtn.classList.add('d-none')
     loginShow.forEach(item => {
         item.classList.remove('d-none')
@@ -23,25 +50,25 @@ if(outfitpalsToken) {
 })
 }
 
-// 會導致註冊後怪怪的，需再調整
+// 會導致註冊後需填寫資料時發生重整，無法正確填寫
 // 登入後發生變化
-// let currentToken = getCookie('outfitpalsToken');
+let currentToken = getCookie('outfitpalsToken');
 
-// function checkTokenChange() {
-//   const newToken = getCookie('outfitpalsToken');
+function checkTokenChange() {
+  const newToken = getCookie('outfitpalsToken');
 
-//   if (newToken !== currentToken) {
-//     console.log('Token has changed. Reloading...');
-//     currentToken = newToken;
-//     location.reload();
-//   }
-// }
+  if (newToken !== currentToken) {
+    console.log('Token has changed. Reloading...');
+    currentToken = newToken;
+    location.reload();
+  }
+}
 
-// // 初始執行一次检查
-// checkTokenChange();
+// 初始執行一次检查
+checkTokenChange();
 
-// // 每秒檢查一次
-// setInterval(checkTokenChange, 1000);
+// 每秒檢查一次
+setInterval(checkTokenChange, 1000);
 
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
