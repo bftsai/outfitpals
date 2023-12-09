@@ -112,4 +112,11 @@ for (let i = 0; i < thumbLinks.length; i++) {
         }
     });
 
-    
+
+
+    const gopersonal =document.querySelector(".gopersonal")
+    gopersonal.addEventListener("click",function(f){
+        f.stopPropagation();
+        f.preventDefault(); 
+        window.location.href = "http://localhost:5173/outfitpals/pages/personal.html?page=1"
+    })

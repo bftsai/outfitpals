@@ -1,12 +1,12 @@
-function handleUserIdParameter() {                               //提前選染url
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
-    // 在這裡可以執行相應的邏輯，例如渲染頁面
+// function handleUserIdParameter() {                               //提前選染url
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const userId = urlParams.get('userId');
+//     // 在這裡可以執行相應的邏輯，例如渲染頁面
             
-}
+// }
 
 // 在頁面加載時執行處理 URL 中的 userId 參數
-window.onload = handleUserIdParameter;
+// window.onload = handleUserIdParameter;
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
