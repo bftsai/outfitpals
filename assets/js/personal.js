@@ -1,3 +1,12 @@
+
+function handleUserIdParameter() {                               //提前選染url
+    const urlParams = new URLSearchParams(window.location.search);
+            
+}
+
+// 在頁面加載時執行處理 URL 中的 userId 參數
+window.onload = handleUserIdParameter;
+
 //兩頁換頁
 const thumbLinks = document.querySelectorAll(".thumb-link");  
 const thumb= document.querySelectorAll(".thumb");
@@ -39,7 +48,10 @@ const t2 = document.querySelector(".t2")
 const m2 = document.querySelector(".m2")
 
 //個人資料渲染
-const personal = document.querySelector(".personal")                                               
+const personal = document.querySelector(".personal")              
+const otherspost = document.querySelector(".otherspost")    
+
+
 
 
 
@@ -98,53 +110,160 @@ function getCookie(name) {
 
 const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
-// history.pushState(null, null, `?id=${userId}`);
-// const id = location.href.split("=")[1];
+
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
+    
     personal.innerHTML=`
+                        <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
-                        <div class="circle-box" style="width: 150px; height: 150px;"></div>
-                        <div class="d-flex position-relative ">
-                            <div>
-                                <div class="row justify-content-center align-items-center" >
-                                    <div class="col">
-                                        <strong class="display-5 text-nowrap">${res.data[0].name}</strong>
-                                        </div>
+                       
+                            <div class="d-flex position-relative ">
+                                <div class="ms-2">
+                                    <div class="row ms-5 align-items-center" >
                                         <div class="col">
-                                            <p class="fs-3 mt-3" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            <strong class="display-6 text-nowrap">${res.data[0].name}</strong>
+                                            </div>
+                                            <div class="col">
+                                            <p class="fs-4 mt-3 text-nowrap" style="opacity: 0.4;">${res.data[0].height}cm ${res.data[0].weight}kg</p>
+                                            </div>
+                                    </div>
+                                    <p class="ms-5 mt-5">${res.data[0].introduce}</p>
+                                    <div class="d-flex">
+                                        <p class="ms-5">活動範圍 :</p>
+                                        <p>${res.data[0].PopArea}</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <p class="ms-5">穿搭價位 :</p>
+                                        <p>${res.data[0]["outfit price"]}</p>
                                     </div>
                                 </div>
-                                <p class="ms-5">你好！我是Selen～喜歡可以多層次穿搭的冬天</p>
-                                <div class="d-flex">
-                                    <p class="ms-5">活動範圍 :</p>
-                                    <p>${res.data[0].PopArea}</p>
-                                </div>
-                                <div class="d-flex">
-                                    <p class="ms-5">穿搭價位 :</p>
-                                    <p>${res.data[0]["outfit price"]}</p>
-                                </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-3 d-flex align-items-center">
-                        <div>
-                            <p class="fs-2">服飾品牌</p>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-pill ms-3">OnniStyle</button>
                             </div>
-                            <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">OnniStyle</button>
+                        </div>
+                    <div class="col-2 d-flex align-items-center">
+                        <div class = "sty">
+                        
                         </div>
                     </div>
+                    <div class="col-2 d-flex align-items-center mt-3">
+                    <button type="button" class="btn btn-primary fs-5 " id="reservebtn">我的收藏</button> 
+                    </div> 
+                    `
+         
+         const sty = document.querySelector(".sty")
+         const stys = res.data[0].style.split(" ");
+         console.log(stys.length)
+            if(stys.length <2){
+                sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-pill  ms-3">${stys[0]}</button>
+                </div>`
+                
+            }else{
+                
+                sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                </div>        
+                <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>`
 
+            }
 
-                    <div class="col-3 d-flex align-items-center mt-3">
-                    <button type="button" class="btn btn-primary fs-3 " id="reservebtn">我的收藏</button> 
-                    </div> `
 })
 
+axios.get(`http://localhost:3000/posts?userId=${userId}`)
+.then(function(res){
+    let postdata =res.data
+    console.log(postdata)
+    const page = location.href.split("=")[2];
+    otherspost.innerHTML =`<div class="row justify-content-between post1">
+                        </div>
+                        <div class="row justify-content-between mt-5 post2">
 
+                        </div>
+                        <div class="row justify-content-between mt-5 post3">
+
+                        </div>
+                        <div class="pe-5 me-5 mt-5">
+                        <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-lg-center my-3">
+                            <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
+                            <div class = "page d-flex">
+
+                            </div>
+                            <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
+                        </ul>
+                        </nav>
+                        </div>
+                    `
+                    const postsPerPage = 9;
+                    const postContainers = [".post1", ".post2", ".post3"];
+                   
+                    
+                    // 換頁
+                    // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
+                        const startIndex = (page - 1) * postsPerPage;
+                        
+                        // // 清空所有容器，只需要在分页循环外清空一次
+                        // postContainers.forEach(containerClass => {
+                        //     const container = document.querySelector(containerClass);
+                        //     container.innerHTML = '';
+                        // });
+                        const endIndex = startIndex + postsPerPage;
+                        for (let i = startIndex; i < endIndex && i < postdata.length; i++) {
+                            const postIndex = i % postsPerPage;
+                           
+                            // 通过嵌套循环，将每个容器的生成逻辑移到循环内部
+                            postContainers.forEach((containerClass, index) => {                                
+                                if (postIndex >= index * (postsPerPage / postContainers.length) &&
+                                    postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
+                                    const container = document.querySelector(containerClass);
+                                    const imgUrl = postdata[i].imgUrl;
+                                    // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
+                                    container.innerHTML += `<div class="col-4">
+                                        <div class="card" style="width: 350px; height: 450px;">
+                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                        </div>
+                                    </div>`;
+                                }
+                            });
+                        }
+                    // }
+        const one = document.querySelector(".page"); 
+        let maxPages = 100; 
+        if (postdata.length > 0) {
+            for (let i = 1; i <= Math.min(maxPages, Math.ceil(postdata.length / 8)); i++) {
+                one.innerHTML += `<li class="page-item"><a href="#" class="page-link border-0">${i}</a></li>`;
+            }
+        }
+        const l = document.querySelector(".l"); 
+        const r = document.querySelector(".r"); 
+        r.addEventListener("click", function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            var currentPage = parseInt(urlParams.get('page')) || 1;
+            var newPage = currentPage + 1;
+            urlParams.set('page', newPage);
+            // 构建新的URL
+            var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+            // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+            window.history.replaceState({}, document.title, newUrl);
+        });
+        l.addEventListener("click", function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            var currentPage = parseInt(urlParams.get('page')) || 1;
+            if(currentPage > 1 ){
+                var newPage = currentPage - 1;
+                urlParams.set('page', newPage);
+                // 构建新的URL
+                var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+                // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+                window.history.replaceState({}, document.title, newUrl);
+            }
+
+        });
+
+})
 
 
 if (storedToken != null) {     //判斷登入
@@ -156,7 +275,7 @@ if (storedToken != null) {     //判斷登入
                 if(res.data.length == 0){     //判斷是否第一次登陸
                     axios.post(`http://localhost:3000/personal`,{
                         "isopen": false,
-                        "userId": userId,
+                        "userId": Number(userId),
                         "otherdate": "",
                         "pos1": "請填寫",
                         "pos2": "請填寫",
@@ -464,6 +583,8 @@ if (storedToken != null) {     //判斷登入
                                     location.reload();
                                 })
                            })
+
+                           
     
     
     
