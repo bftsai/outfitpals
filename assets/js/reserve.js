@@ -515,11 +515,13 @@ reserveManageAppointmentsConfirmSubmit.addEventListener('click',async e=>{
             obj.state='accept';
             await ajaxMember.patchComment(id,obj);
 
-            const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            const reservationTime=`${month}/${day}`;
+            //const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime')
+            //const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            //const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            //const reservationTime=`${month}/${day}`;
+            
 
-            await ajaxMember.patchPersonalOtherday(id,reservationTime);
+            //await ajaxMember.patchPersonalOtherday(id,`${month}/${day}`);
             spinner.classList.add('d-none');
         }else if(reserveManageAppointmentsRadioCancel.checked===true){
             obj.state='reject';
@@ -579,6 +581,13 @@ obj.state=false;
 function patchComment(id,obj) {  
     ajaxMember.patchComment(id,obj);
 }
-// patchComment(5,obj)
+// patchComment(11,obj)
 
 // ajaxMember.patchPersonalOtherday(12,'12/1')
+async function edit(id){
+    const result=await axios.patch(`http://localhost:3000/personal/${id}`,{
+        otherdate:[]
+    });
+    console.log(result);
+}
+// edit(11)

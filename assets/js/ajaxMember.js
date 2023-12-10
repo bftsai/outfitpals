@@ -306,7 +306,7 @@ export const ajaxMember={
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</button>
+                <a href='personal.html' class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</a>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
