@@ -11,12 +11,13 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 const spinner=document.querySelector('.memberSpinner');
 //switch reserveMyDiscuss reserveManageAppointments
 $(document).ready(function () {
-    $('.btn-group .btn').click(function (e) { 
+    $('.btn-group.reserveBtnSwitch .btn').click(function (e) { 
         e.preventDefault();
         spinner.classList.remove('d-none');
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
         reserveComponent.render(1);
+        reserveComponent.renderPagination();
     });
 });
 //JS
@@ -56,25 +57,27 @@ const reserveComponent={
     },
     getCommentPostArr(id){
         const postArr=ajaxMember.getPostsById(id);
+        this.data=postArr;
         return postArr;
     },
     getCommentObj(id){
         const commentsArr=ajaxMember.getComment(id);
+        this.data=commentsArr;
         return commentsArr;
     },
-    getAllPostCommentArr(id){
-        const commentsArr=ajaxMember.getAllPostComment(id);
-        return commentsArr;
-    },
-    getAllUserComment(id){
+    getAllUserComment(id){ //取得我的預約
         const commentsArr=ajaxMember.getAllUserComment(id);
         return commentsArr;
     },
-    getPostCommentArr(id,page){
+    getAllPostComment(id){ //取得預約管理
+        const commentsArr=ajaxMember.getAllPostComment(id);
+        return commentsArr;
+    },
+    getPostCommentArr(id,page){ //取得預約管理
         const commentsArr=ajaxMember.getPostComment(id,page);
         return commentsArr;
     },
-    getUserComment(id,page){
+    getUserComment(id,page){ //取得我的預約
         const commentsArr=ajaxMember.getUserComment(id,page);
         return commentsArr;
     },
@@ -83,14 +86,14 @@ const reserveComponent={
         return commentUser;
     },
     async render(page){
-        const postArr=await this.getPostCommentArr(cookieValue('outfitpalsId'),page); //取得登入者貼文
-        const commentArr=await this.getUserComment(cookieValue('outfitpalsId'),page); //取得登入者的預約
+        const commentArr=await this.getUserComment(cookieValue('outfitpalsId'),page); //取得我的預約
+        const postArr=await this.getPostCommentArr(cookieValue('outfitpalsId'),page); //取得預約管理
         const stateDom=[...reserveBtnGroup.children[0].children[0].children[0].children].find(item=>{
             if(item.className.includes('active')){
                 return item;
             }
         });
-
+        
         reserveContent.classList.add('opacity-0');
         setTimeout(() => {
             reserveContent.classList.remove('opacity-0');
@@ -99,6 +102,7 @@ const reserveComponent={
                 reserveContent.innerHTML='';
                 if(commentArr.length!==0){
                     //render comment
+                    console.log(commentArr);
                     commentArr.forEach(async (item,index)=>{
                         const posterData=await this.getUserData(item.posterId);
                         const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
@@ -215,6 +219,7 @@ const reserveComponent={
             }else if(stateDom.textContent==='預約管理'){
                 reserveContent.innerHTML='';
                 if(postArr.length!==0){
+                    console.log(postArr);
                     postArr.forEach(async item=>{
                         const userData=await this.getUserData(item.userId) //取得所有回覆留言者的資訊
                         
@@ -349,9 +354,9 @@ const reserveComponent={
         });
         let paginationLength=0;
         if(stateDom.textContent==='我的預約'){
-            paginationLength=(await this.getAllPostCommentArr(cookieValue('outfitpalsId'))).length;
-        }else{
             paginationLength=(await this.getAllUserComment(cookieValue('outfitpalsId'))).length;
+        }else{
+            paginationLength=(await this.getAllPostComment(cookieValue('outfitpalsId'))).length;
         }
         
         const countPageDelete=pagination.childElementCount-1;
@@ -406,7 +411,7 @@ if(cookieValue('outfitpalsId')!=="''"&&cookieValue('outfitpalsToken')!=="''"&&co
 
 //pagination
 pagination.addEventListener('click',e=>{
-    if(Number(e.target.textContent)!==0){
+    if((e.target.nodeName==='LI'||e.target.nodeName==='A')&&e.target.closest('a').className.includes('page-num')){
         reserveComponent.render(Number(e.target.textContent));
     }else{
         [...pagination.children].forEach(item=>{
@@ -429,7 +434,6 @@ reserveBtnGroup.addEventListener('click',e=>{
 
 //reserve my discuss
 reserveMyDiscussRadioCancel.addEventListener('click',e=>{
-    console.log('click');
     if(reserveMyDiscussRadioCancel.checked===true){
         reserveMyDiscussConfirmSubmit.disabled=false;
     }
@@ -442,17 +446,9 @@ reserveMyDiscussConfirmSubmit.addEventListener('click',async e=>{
         if(reserveMyDiscussRadioCancel.checked===true){
             const id=reserveMyDiscuss.getAttribute('data-id');
             obj.state='cancel';
+            
             await ajaxMember.patchComment(id,obj);
 
-            const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            const reservationTime=`${month}/${day}`;
-
-            await ajaxMember.patchPersonalOtherday(id,reservationTime);
-
-            const personalObj={}
-            const posterId=(await ajaxMember.getComment(id)).posterId;
-            await ajaxMember.patchPersonalOtherday(posterId,personalObj);
             spinner.classList.add('d-none');
             location.href=locationUrl;
         }
@@ -515,13 +511,13 @@ reserveManageAppointmentsConfirmSubmit.addEventListener('click',async e=>{
             obj.state='accept';
             await ajaxMember.patchComment(id,obj);
 
-            //const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime')
-            //const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            //const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
-            //const reservationTime=`${month}/${day}`;
-            
+            const personalId=(await reserveComponent.getCommentObj(id)).posterId;
+            const reservationTime=document.querySelector('.reserve-manageAppointments .reservationTime');
+            const month=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[1];
+            const day=reservationTime.textContent.split(' ')[0].split(new RegExp('[^\\d]'))[2];
+            console.log(id,personalId);
+            await ajaxMember.patchPersonalOtherday(personalId,`${month}/${day}`);
 
-            //await ajaxMember.patchPersonalOtherday(id,`${month}/${day}`);
             spinner.classList.add('d-none');
         }else if(reserveManageAppointmentsRadioCancel.checked===true){
             obj.state='reject';
@@ -581,13 +577,19 @@ obj.state=false;
 function patchComment(id,obj) {  
     ajaxMember.patchComment(id,obj);
 }
-// patchComment(11,obj)
+// patchComment(12,obj)
 
 // ajaxMember.patchPersonalOtherday(12,'12/1')
-async function edit(id){
+async function editPersonalOthers(id){
     const result=await axios.patch(`http://localhost:3000/personal/${id}`,{
         otherdate:[]
     });
     console.log(result);
 }
-// edit(11)
+// editPersonalOthers(11)
+
+async function deletePost(id) {  
+    const result=axios.delete(`http://localhost:3000/posts/${id}`);
+    console.log(result);
+}
+// deletePost(17)

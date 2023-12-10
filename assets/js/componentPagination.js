@@ -2,12 +2,12 @@ const pagination=document.querySelector('.pagination');
 const paginationPrev=document.querySelector('.pagination .prev');
 const paginationNext=document.querySelector('.pagination .next');
 pagination.addEventListener('click',e=>{
-    if(e.target.nodeName==='UL'){
+    if((e.target.nodeName!=='LI')&&(e.target.nodeName!=='A')&&(e.target.nodeName!=='IMG')){
         return
     }
-    if(Number(e.target.textContent)!==0){
+    if((e.target.nodeName==="LI"||e.target.nodeName==="A")&&e.target.closest('a').className.includes('page-num')){
         [...pagination.children].forEach(item=>{
-            item.children[0].classList.remove('active')
+            item.children[0].classList.remove('active');
         })
         e.target.classList.add('active');
     }else{
@@ -16,6 +16,7 @@ pagination.addEventListener('click',e=>{
                 if(pagination.children[i].children[0].className.includes('active')){
                     pagination.children[i].children[0].classList.remove('active');
                     pagination.children[i-1].children[0].classList.add('active');
+                    break;
                 }
             }
         }else if(e.target.closest('a').className.includes('page-next')){
@@ -23,6 +24,7 @@ pagination.addEventListener('click',e=>{
                 if(pagination.children[i].children[0].className.includes('active')){
                     pagination.children[i].children[0].classList.remove('active');
                     pagination.children[i+1].children[0].classList.add('active');
+                    break;
                 }
             }
         }
