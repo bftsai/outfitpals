@@ -20,7 +20,6 @@ const collect = document.querySelector("#collect")
 const noopen = document.querySelector("#noopen")
 
 //按鈕
-const goback = document.querySelector("#goback")
 const setting = document.querySelector(".setting")
 
 //日期
@@ -49,7 +48,7 @@ const m2 = document.querySelector(".m2")
 //個人資料渲染
 const personal = document.querySelector(".personal")              
 const otherspost = document.querySelector(".otherspost")    
-
+const collectpost = document.querySelector(".collectpost")
 
 
 
@@ -89,7 +88,6 @@ const userId = getCookie("outfitpalsId");
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
-    
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
@@ -152,6 +150,47 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                 reserve.classList.add('d-none')
                 personalMain.classList.add('d-none')
                 collect.classList.remove('d-none')
+
+                collect.innerHTML = `
+                <div class="container ">
+                    <div class="row my-6 align-items-center" >
+                            <div class="col-6 d-flex justify-content-center">
+                                <div class="d-flex align-items-center ">
+                                    <div class="circle-box" style="width: 100px; height: 100px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div>
+                                    <strong class="display-6 ms-3 text-nowrap">${res.data[0].name}</strong>
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary ps-5 ms-5" id="goback">返回我的主頁</button> 
+                            </div>
+                    </div>                        
+                </div>
+                 <hr class="m-1">
+                 <br>`
+
+                //收藏
+                collect.innerHTML += `<div class="container mb-5 ">
+                    <div class="row justify-content-between mt-4 ms-5 coll">
+
+                    </div>
+                </div> `
+                 const goback = document.querySelector("#goback")
+                 goback.addEventListener("click",function(){
+                    collect.classList.add('d-none')
+                    personalnav.classList.remove("d-none")
+                    personalselect.classList.remove("d-none")
+                    personalMain.classList.remove('d-none')
+                })
+                const coll = document.querySelector(".coll")
+                axios.get(`http://localhost:3000/favorites?_expand=post`)
+                .then(function(res){
+                    console.log(res.data[0].post)
+                    coll.innerHTML += `<div class="col-4">
+                    <div class="card" style="width: 350px; height: 450px;">
+                        <img src="${res.data[0].post.imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                    </div>
+                </div>`
+                })
 
             })
 
@@ -249,6 +288,9 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
             }
 
         });
+
+
+
 
 })
 
@@ -629,12 +671,7 @@ if (storedToken != null) {     //判斷登入
     
     
     
-    goback.addEventListener("click",function(){
-        collect.classList.add('d-none')
-        personalnav.classList.remove("d-none")
-        personalselect.classList.remove("d-none")
-        personalMain.classList.remove('d-none')
-    })
+
 }
 
 

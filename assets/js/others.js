@@ -39,8 +39,6 @@ const ans3 = document.querySelector(".ans3")
 
 const oc1 = document.querySelector(".oc1")
 const mu1 = document.querySelector(".mu1")
-const oc2 = document.querySelector(".oc2")
-const mu2 = document.querySelector(".mu2")
 
 
 const d1 = document.querySelector(".d1")                                         
@@ -492,7 +490,8 @@ if (storedToken != null) {   //判斷登陸
                             td.innerHTML = originalContents[index];
                             dates.pop();
                         } else {
-                            dates.push(`${seeMonth}/${e.target.textContent}`)
+                            dates.push(`${seeMonth}月${e.target.textContent}號`)
+                            console.log(dates)
                             td.classList.add("go");
                             td.innerHTML='<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>' ;
                         }
@@ -504,7 +503,8 @@ if (storedToken != null) {   //判斷登陸
                             
 
                         } else {
-                            dates.push(`${seeMonth}/${e.target.textContent}`)
+                            dates.push(`${seeMonth}月${e.target.textContent}號`)
+                            console.log(dates)
                             td.classList.add("go");
                             td.innerHTML='<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>' ;
                         }
@@ -530,8 +530,8 @@ if (storedToken != null) {   //判斷登陸
                     pos.innerHTML = '';
                     ans3.innerHTML = '';
                     text.value = '';
-                    tim.innerHTML = `<li>${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}</li>`;
-                    tim2.innerHTML = `<li>${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}</li>`;
+                    tim.innerHTML = `<li>${oc1.value}:${mu1.value}</li>`;
+                    tim2.innerHTML = `<li>${oc1.value}:${mu1.value}</li>`;
                     checkboxElements.forEach(function (checkbox, index) {
                         if (checkbox.checked) {
                             var labelElement = document.querySelector('.d' + (index + 1));
@@ -576,7 +576,7 @@ if (storedToken != null) {   //判斷登陸
                 let want = text.value
                 let postTime= new Date().toUTCString()
 
-                let reservationTime =`${thisYear}年 ${dates} ${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}`
+                let reservationTime =`${thisYear}年${dates} ${oc1.value}:${mu1.value}`
                 checkboxElements.forEach(function (checkbox, index) {
                     if (checkbox.checked) {
                         var labelElement = document.querySelector('.d' + (index + 1));
