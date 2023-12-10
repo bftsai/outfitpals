@@ -14,7 +14,6 @@ const thumb= document.querySelectorAll(".thumb");
 const personalMain = document.querySelector("#personalmain")
 const reserve = document.querySelector("#reserve")
 
-const reservebtn = document.querySelector("#reservebtn")
 const personalnav = document.querySelector("#personalnav")
 const personalselect = document.querySelector("#personalselect")
 const collect = document.querySelector("#collect")
@@ -68,30 +67,6 @@ var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //儲存每月
 if ((thisYear % 4 == 0 && thisYear % 100 != 0) || (thisYear % 400 == 0)) monthDays[1] = 29; //若是閏年，2月設為29日
 let to = today.getDate();
 days[firstDateDayOfThisMonth + to - 2].setAttribute("id", "current-day"); //今天日期
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//123456@gmail.com
-//26416387@gmail.com
-// function init(){
-//     axios.post("http://localhost:3000/login",{
-//         "email": "test@mail.com",
-//         "password":"A1234567"
-//     })
-//     .then(function(response){
-//         const token=response.data.accessToken
-//         document.cookie=`outfitpalsToken=${response.data.accessToken}`
-//         document.cookie=`userId=${response.data.user.id}`
-//         console.log('用户已登录:',token);
-//     })
-//     .catch(function(error){
-//         console.log('並沒有登錄')
-//     })
-    
-// }
-// init();
 
 
 
@@ -153,7 +128,6 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
          
          const sty = document.querySelector(".sty")
          const stys = res.data[0].style.split(" ");
-         console.log(stys.length)
             if(stys.length <2){
                 sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">穿衣風格</p>
                 <div class="d-flex justify-content-center">
@@ -170,32 +144,45 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
 
             }
 
+
+            const reservebtn = document.querySelector("#reservebtn")
+            reservebtn.addEventListener("click",function(){
+                personalnav.classList.add("d-none")
+                personalselect.classList.add("d-none")
+                reserve.classList.add('d-none')
+                personalMain.classList.add('d-none')
+                collect.classList.remove('d-none')
+
+            })
+
 })
+
+
 
 axios.get(`http://localhost:3000/posts?userId=${userId}`)
 .then(function(res){
+
     let postdata =res.data
-    console.log(postdata)
     const page = location.href.split("=")[1];
     otherspost.innerHTML =`<div class="row justify-content-between post1">
-                        </div>
-                        <div class="row justify-content-between mt-5 post2">
-
-                        </div>
-                        <div class="row justify-content-between mt-5 post3">
-
-                        </div>
-                        <div class="pe-5 me-5 mt-5">
-                        <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-lg-center my-3">
-                            <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
-                            <div class = "page d-flex">
+                            </div>
+                            <div class="row justify-content-between mt-5 post2">
 
                             </div>
-                            <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
-                        </ul>
-                        </nav>
-                        </div>
+                            <div class="row justify-content-between mt-5 post3">
+
+                            </div>
+                            <div class="pe-5 me-5 mt-5">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-lg-center my-3">
+                                <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
+                                <div class = "page d-flex">
+
+                                </div>
+                                <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
+                            </ul>
+                            </nav>
+                            </div>
                     `
                     const postsPerPage = 9;
                     const postContainers = [".post1", ".post2", ".post3"];
@@ -264,6 +251,8 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
         });
 
 })
+
+
 
 
 if (storedToken != null) {     //判斷登入
@@ -636,14 +625,7 @@ if (storedToken != null) {     //判斷登入
     fetchData();
 
 
-    reservebtn.addEventListener("click",function(){
-        personalnav.classList.add("d-none")
-        personalselect.classList.add("d-none")
-        reserve.classList.add('d-none')
-        personalMain.classList.add('d-none')
-        collect.classList.remove('d-none')
-    
-    })
+
     
     
     
@@ -660,16 +642,6 @@ if (storedToken != null) {     //判斷登入
 
 
 
-
-
-
-
-// function setCookie(name, value, days) {
-//     const expires = new Date();
-//     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-//     const cookieString = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
-//     document.cookie = cookieString;
-// }
 
 
 
