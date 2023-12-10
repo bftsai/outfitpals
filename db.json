@@ -541,6 +541,30 @@
       "state": false,
       "postTime": "Fri, 08 Dec 2023 11:56:06 GMT",
       "id": 12
+    },
+    {
+      "posterId": 6,
+      "userId": 11,
+      "body": "測試",
+      "reservationTime": "2023年 12/13 13:00~17:30",
+      "location": [
+        "台北"
+      ],
+      "state": false,
+      "postTime": "Sun, 10 Dec 2023 13:03:57 GMT",
+      "id": 13
+    },
+    {
+      "posterId": 6,
+      "userId": 11,
+      "body": "再測一次",
+      "reservationTime": "2023年12月7號 16:00",
+      "location": [
+        "桃園"
+      ],
+      "state": false,
+      "postTime": "Sun, 10 Dec 2023 13:27:42 GMT",
+      "id": 14
     }
   ],
   "profile": {
@@ -695,7 +719,7 @@
   "favorites": [
     {
       "id": 1,
-      "userId": 1,
+      "userId": 11,
       "postId": 1
     }
   ],

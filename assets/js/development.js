@@ -54,6 +54,7 @@ import axios from "axios";
 
         axios.get("http://localhost:3000/posts?_expand=user")
         .then(function(res){
+            console.log(res.data)
             let postdata =res.data
             let userImage;
             let username ;
