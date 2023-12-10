@@ -181,15 +181,19 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                     personalselect.classList.remove("d-none")
                     personalMain.classList.remove('d-none')
                 })
+                //收藏渲染
                 const coll = document.querySelector(".coll")
                 axios.get(`http://localhost:3000/favorites?_expand=post`)
                 .then(function(res){
                     console.log(res.data[0].post)
                     coll.innerHTML += `<div class="col-4">
                     <div class="card" style="width: 350px; height: 450px;">
-                        <img src="${res.data[0].post.imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                    </div>
-                </div>`
+                        <img src="${res.data[0].post.imgUrl}" style="width: 350px; height: 400px;" class="object-fit-cover bg-cover" >
+                        <div class="card-body dontmove">                                                                                                 
+                                        <strong>eric</strong>
+                            </div>
+                        </div>
+                        `
                 })
 
             })
