@@ -574,7 +574,7 @@
     {
       "isopen": true,
       "userId": "6",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "台北",
       "pos2": "桃園",
       "pos3": "台中",
@@ -592,7 +592,7 @@
     {
       "isopen": false,
       "userId": "4",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "基隆",
       "pos2": "台北",
       "pos3": "花蓮",
@@ -610,7 +610,7 @@
     {
       "isopen": true,
       "userId": "5",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "高雄",
       "pos2": "新北",
       "pos3": "台中",
@@ -626,7 +626,7 @@
     {
       "isopen": true,
       "userId": "3",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -638,7 +638,7 @@
     {
       "isopen": false,
       "userId": "7",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -650,7 +650,7 @@
     {
       "isopen": false,
       "userId": "9",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -662,7 +662,7 @@
     {
       "isopen": true,
       "userId": "10",
-      "otherdate": "",
+      "otherdate": ["12月9號"],
       "pos1": "台北火車站",
       "pos2": "西門町",
       "pos3": "合歡山",
@@ -678,7 +678,7 @@
     {
       "isopen": true,
       "userId": 11,
-      "otherdate": "",
+      "otherdate": ["12月9號"],
       "pos1": "北投公園",
       "pos2": "台北地下街",
       "pos3": "五指山",
