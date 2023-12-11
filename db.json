@@ -228,8 +228,8 @@
       "postTime": "Thu, 23 Nov 2023 02:21:46 GMT",
       "author": "TE TEST",
       "id": 1,
-      "likeCounts": 7,
-      "favoriteCounts": 9,
+      "likeCounts": 6,
+      "favoriteCounts": 12,
       "outfitStyle": "日系風格",
       "brands": [
         "Brand A",
@@ -245,7 +245,7 @@
       "author": "TE TEST",
       "id": 2,
       "likeCounts": 26,
-      "favoriteCounts": 10,
+      "favoriteCounts": 28,
       "outfitStyle": "日系風格",
       "brands": [
         "Brand A",
@@ -261,7 +261,7 @@
       "author": "TE TEST",
       "id": 3,
       "likeCounts": 7,
-      "favoriteCounts": 8,
+      "favoriteCounts": 10,
       "outfitStyle": "日系風格",
       "brands": [
         "Brand A",
@@ -534,13 +534,37 @@
       "posterId": 11,
       "userId": 10,
       "body": "我有選擇障礙",
-      "reservationTime": "2023年 12/ 18:30~19:30",
+      "reservationTime": "2023年12月21號 18:30~19:30",
       "location": [
         "台北地下街"
       ],
       "state": false,
       "postTime": "Fri, 08 Dec 2023 11:56:06 GMT",
       "id": 12
+    },
+    {
+      "posterId": 6,
+      "userId": 11,
+      "body": "測試",
+      "reservationTime": "2023年 12/13 13:00~17:30",
+      "location": [
+        "台北"
+      ],
+      "state": false,
+      "postTime": "Sun, 10 Dec 2023 13:03:57 GMT",
+      "id": 13
+    },
+    {
+      "posterId": 6,
+      "userId": 11,
+      "body": "再測一次",
+      "reservationTime": "2023年12月7號 16:00",
+      "location": [
+        "桃園"
+      ],
+      "state": false,
+      "postTime": "Sun, 10 Dec 2023 13:27:42 GMT",
+      "id": 14
     }
   ],
   "profile": {
@@ -550,7 +574,7 @@
     {
       "isopen": true,
       "userId": "6",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "台北",
       "pos2": "桃園",
       "pos3": "台中",
@@ -568,7 +592,7 @@
     {
       "isopen": false,
       "userId": "4",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "基隆",
       "pos2": "台北",
       "pos3": "花蓮",
@@ -586,7 +610,7 @@
     {
       "isopen": true,
       "userId": "5",
-      "otherdate": "11/2,12/3,1/25",
+      "otherdate": [],
       "pos1": "高雄",
       "pos2": "新北",
       "pos3": "台中",
@@ -602,7 +626,7 @@
     {
       "isopen": true,
       "userId": "3",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -614,7 +638,7 @@
     {
       "isopen": false,
       "userId": "7",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -626,7 +650,7 @@
     {
       "isopen": false,
       "userId": "9",
-      "otherdate": "",
+      "otherdate": [],
       "pos1": "請填寫",
       "pos2": "請填寫",
       "pos3": "請填寫",
@@ -638,23 +662,23 @@
     {
       "isopen": true,
       "userId": "10",
-      "otherdate": "",
+      "otherdate": ["12月9號"],
       "pos1": "台北火車站",
       "pos2": "西門町",
       "pos3": "合歡山",
       "pos4": "六腳學院",
       "okday": [
-        "12/13",
         "12/15",
-        "12/17"
+        "12/1",
+        "12/29"
       ],
-      "oktime": "17:30~19:00",
+      "oktime": "18:00~19:30",
       "id": 11
     },
     {
       "isopen": true,
       "userId": 11,
-      "otherdate": "",
+      "otherdate": ["12月9號"],
       "pos1": "北投公園",
       "pos2": "台北地下街",
       "pos3": "五指山",
@@ -695,8 +719,17 @@
   "favorites": [
     {
       "id": 1,
-      "userId": 1,
+      "userId": 11,
       "postId": 1
+    },
+    {
+      "id": 2,
+      "userId": 10,
+      "postId": [
+        10,
+        11,
+        12
+      ]
     }
   ],
   "likes": [

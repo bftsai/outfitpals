@@ -39,8 +39,6 @@ const ans3 = document.querySelector(".ans3")
 
 const oc1 = document.querySelector(".oc1")
 const mu1 = document.querySelector(".mu1")
-const oc2 = document.querySelector(".oc2")
-const mu2 = document.querySelector(".mu2")
 
 
 const d1 = document.querySelector(".d1")                                         
@@ -221,15 +219,25 @@ axios.get(`http://localhost:3000/posts?userId=${id}`)
                                     postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
                                     const container = document.querySelector(containerClass);
                                     const imgUrl = postdata[i].imgUrl;
-                                    // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
+                                    const poid = postdata[i].id
                                     container.innerHTML += `<div class="col-4">
-                                                            <div class="card" style="width: 350px; height: 450px;">
+                                                            <div class="card card1" style="width: 350px; height: 450px;" id="${poid}">
                                                                 <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
                                                             </div>
                                                             </div>`;
                                 }
                             });
                         }
+                        const card1List = document.querySelectorAll(".card1");
+
+                        card1List.forEach(function(card, index) {
+                            let id = card.getAttribute("id").trim();
+                            card.addEventListener("click", function(e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                            });
+                        });
                     // }
         const one = document.querySelector(".page"); 
         let maxPages = 100; 
@@ -279,9 +287,9 @@ if (storedToken != null) {   //判斷登陸
                 })
             } 
             const isopen =res.data[0].isopen;
-            const otherdate = res.data[0].otherdate.split(",");
+            const otherdate = res.data[0].otherdate;
             const okday = res.data[0].okday;
-            const dataid = res.data[0].id
+            // const dataid = res.data[0].id
 
             if (isopen === true) {  //判斷是否開預約
                 usetime.textContent = `${res.data[0].oktime}`
@@ -298,9 +306,14 @@ if (storedToken != null) {   //判斷登陸
                 if (index >= 0 && index < days.length) {
                     days[index].innerHTML = i;
                     otherdate.forEach(function(a) {  //被預約
-                        let useday = a.split("/")[1];
-                        let useMonth = a.split("/")[0];
-                        if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                        let useday = a.split("月")[1];
+                        let usedays = useday.split("號")[0];
+                        
+                        let useMonth = a.split("號")[0];
+                        let useMonths = useMonth.split("月")[0];
+                        
+                        if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                             days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                         }
                     });
@@ -359,9 +372,14 @@ if (storedToken != null) {   //判斷登陸
                             if(seeMonth == useMonth){
                                 days[index].innerHTML = i;
                                 otherdate.forEach(function(a) {  //被預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                    let useday = a.split("月")[1];
+                                    let usedays = useday.split("號")[0];
+                                    
+                                    let useMonth = a.split("號")[0];
+                                    let useMonths = useMonth.split("月")[0];
+                                    
+                                    if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                     }
                                 });
@@ -376,12 +394,17 @@ if (storedToken != null) {   //判斷登陸
                                days[index].innerHTML = i;
                                originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                otherdate.forEach(function(a) {  //被預約
-                                let useday = a.split("/")[1];
-                                let useMonth = a.split("/")[0];
-                                if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                let useday = a.split("月")[1];
+                                let usedays = useday.split("號")[0];
+                                
+                                let useMonth = a.split("號")[0];
+                                let useMonths = useMonth.split("月")[0];
+                                
+                                if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                     days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                 }
-                                });
+                                 });
                                 okday.forEach(function(a) {  //可預約
                                     let useday = a.split("/")[1];
                                     let useMonth = a.split("/")[0];
@@ -436,9 +459,14 @@ if (storedToken != null) {   //判斷登陸
                         if(seeMonth == useMonth){
                             days[index].innerHTML = i;
                             otherdate.forEach(function(a) {  //被預約
-                                let useday = a.split("/")[1];
-                                let useMonth = a.split("/")[0];
-                                if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                let useday = a.split("月")[1];
+                                let usedays = useday.split("號")[0];
+                                
+                                let useMonth = a.split("號")[0];
+                                let useMonths = useMonth.split("月")[0];
+                                
+                                if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                     days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                 }
                             });
@@ -453,9 +481,14 @@ if (storedToken != null) {   //判斷登陸
                            days[index].innerHTML = i;
                            originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                            otherdate.forEach(function(a) {  //被預約
-                            let useday = a.split("/")[1];
-                            let useMonth = a.split("/")[0];
-                            if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                            let useday = a.split("月")[1];
+                            let usedays = useday.split("號")[0];
+                            
+                            let useMonth = a.split("號")[0];
+                            let useMonths = useMonth.split("月")[0];
+                            
+                            if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                             }
                              });
@@ -492,7 +525,8 @@ if (storedToken != null) {   //判斷登陸
                             td.innerHTML = originalContents[index];
                             dates.pop();
                         } else {
-                            dates.push(`${seeMonth}/${e.target.textContent}`)
+                            dates.push(`${seeMonth}月${e.target.textContent}號`)
+                            console.log(dates)
                             td.classList.add("go");
                             td.innerHTML='<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>' ;
                         }
@@ -504,7 +538,8 @@ if (storedToken != null) {   //判斷登陸
                             
 
                         } else {
-                            dates.push(`${seeMonth}/${e.target.textContent}`)
+                            dates.push(`${seeMonth}月${e.target.textContent}號`)
+                            console.log(dates)
                             td.classList.add("go");
                             td.innerHTML='<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>' ;
                         }
@@ -530,8 +565,8 @@ if (storedToken != null) {   //判斷登陸
                     pos.innerHTML = '';
                     ans3.innerHTML = '';
                     text.value = '';
-                    tim.innerHTML = `<li>${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}</li>`;
-                    tim2.innerHTML = `<li>${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}</li>`;
+                    tim.innerHTML = `<li>${oc1.value}:${mu1.value}</li>`;
+                    tim2.innerHTML = `<li>${oc1.value}:${mu1.value}</li>`;
                     checkboxElements.forEach(function (checkbox, index) {
                         if (checkbox.checked) {
                             var labelElement = document.querySelector('.d' + (index + 1));
@@ -576,7 +611,7 @@ if (storedToken != null) {   //判斷登陸
                 let want = text.value
                 let postTime= new Date().toUTCString()
 
-                let reservationTime =`${thisYear}年 ${dates} ${oc1.value}:${mu1.value}~${oc2.value}:${mu2.value}`
+                let reservationTime =`${thisYear}年${dates} ${oc1.value}:${mu1.value}`
                 checkboxElements.forEach(function (checkbox, index) {
                     if (checkbox.checked) {
                         var labelElement = document.querySelector('.d' + (index + 1));

@@ -20,7 +20,6 @@ const collect = document.querySelector("#collect")
 const noopen = document.querySelector("#noopen")
 
 //按鈕
-const goback = document.querySelector("#goback")
 const setting = document.querySelector(".setting")
 
 //日期
@@ -49,7 +48,7 @@ const m2 = document.querySelector(".m2")
 //個人資料渲染
 const personal = document.querySelector(".personal")              
 const otherspost = document.querySelector(".otherspost")    
-
+const collectpost = document.querySelector(".collectpost")
 
 
 
@@ -89,7 +88,6 @@ const userId = getCookie("outfitpalsId");
 
 axios.get(`http://localhost:3000/users?id=${userId}`)
 .then(function(res){
-    
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
@@ -153,6 +151,51 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                 personalMain.classList.add('d-none')
                 collect.classList.remove('d-none')
 
+                collect.innerHTML = `
+                <div class="container ">
+                    <div class="row my-6 align-items-center" >
+                            <div class="col-6 d-flex justify-content-center">
+                                <div class="d-flex align-items-center ">
+                                    <div class="circle-box" style="width: 100px; height: 100px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div>
+                                    <strong class="display-6 ms-3 text-nowrap">${res.data[0].name}</strong>
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary ps-5 ms-5" id="goback">返回我的主頁</button> 
+                            </div>
+                    </div>                        
+                </div>
+                 <hr class="m-1">
+                 <br>`
+
+                //收藏
+                collect.innerHTML += `<div class="container mb-5 ">
+                    <div class="row justify-content-between mt-4 ms-5 coll">
+
+                    </div>
+                </div> `
+                 const goback = document.querySelector("#goback")
+                 goback.addEventListener("click",function(){
+                    collect.classList.add('d-none')
+                    personalnav.classList.remove("d-none")
+                    personalselect.classList.remove("d-none")
+                    personalMain.classList.remove('d-none')
+                })
+                //收藏渲染
+                const coll = document.querySelector(".coll")
+                axios.get(`http://localhost:3000/favorites?_expand=post`)
+                .then(function(res){
+                    console.log(res.data[0].post)
+                    coll.innerHTML += `<div class="col-4">
+                    <div class="card" style="width: 350px; height: 450px;">
+                        <img src="${res.data[0].post.imgUrl}" style="width: 350px; height: 400px;" class="object-fit-cover bg-cover" >
+                        <div class="card-body dontmove">                                                                                                 
+                                        <strong>eric</strong>
+                            </div>
+                        </div>
+                        `
+                })
+
             })
 
 })
@@ -207,15 +250,26 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
                                     postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
                                     const container = document.querySelector(containerClass);
                                     const imgUrl = postdata[i].imgUrl;
-                                    // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
+                                    const poid = postdata[i].id
                                     container.innerHTML += `<div class="col-4">
-                                        <div class="card" style="width: 350px; height: 450px;">
-                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                                        </div>
-                                    </div>`;
+                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${poid}">
+                                                                    <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                                                </div>
+                                                            </div>`;
                                 }
                             });
                         }
+
+                        const card1List = document.querySelectorAll(".card1");
+
+                        card1List.forEach(function(card, index) {
+                            let id = card.getAttribute("id").trim();
+                            card.addEventListener("click", function(e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                            });
+                        });
                     // }
         const one = document.querySelector(".page"); 
         let maxPages = 100; 
@@ -250,6 +304,9 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
 
         });
 
+
+
+
 })
 
 
@@ -261,25 +318,14 @@ if (storedToken != null) {     //判斷登入
             axios.get(`http://localhost:3000/personal?userId=${userId}`)
             .then(function(res){
                 
-                if(res.data.length == 0){     //判斷是否第一次登陸
-                    axios.post(`http://localhost:3000/personal`,{
-                        "isopen": false,
-                        "userId": Number(userId),
-                        "otherdate": "",
-                        "pos1": "請填寫",
-                        "pos2": "請填寫",
-                        "pos3": "請填寫",
-                        "pos4": "請填寫",
-                        "okday":[],
-                        "oktime":"12:00~12:00" ,
-                    })
-                }else{
+
                     const isopen =res.data[0].isopen;
                     const [startHour, startMinute, endHour, endMinute] = res.data[0].oktime.split(/[~:]/);
-                    const otherdate = res.data[0].otherdate.split(",");
+                    const otherdate = res.data[0].otherdate;
                     const okday = res.data[0].okday;
                     const dataid = res.data[0].id
                     
+                
                     
                     if (isopen === true) {
                         //渲染
@@ -297,12 +343,17 @@ if (storedToken != null) {     //判斷登入
                             if (index >= 0 && index < days.length) {
                                 days[index].innerHTML = i;
                                 otherdate.forEach(function(a) {  //被預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                    let useday = a.split("月")[1];
+                                    let usedays = useday.split("號")[0];
+                                    
+                                    let useMonth = a.split("號")[0];
+                                    let useMonths = useMonth.split("月")[0];
+                                    
+                                    if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                     }
-                                });
+                                     });
                                 okday.forEach(function(a) {  //可預約
                                     let useday = a.split("/")[1];
                                     let useMonth = a.split("/")[0];
@@ -358,12 +409,17 @@ if (storedToken != null) {     //判斷登入
                                         if(seeMonth == useMonth){
                                             days[index].innerHTML = i;
                                             otherdate.forEach(function(a) {  //被預約
-                                                let useday = a.split("/")[1];
-                                                let useMonth = a.split("/")[0];
-                                                if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                                let useday = a.split("月")[1];
+                                                let usedays = useday.split("號")[0];
+                                                
+                                                let useMonth = a.split("號")[0];
+                                                let useMonths = useMonth.split("月")[0];
+                                                
+                                                if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                     days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                                 }
-                                            });
+                                                 });
                                             okday.forEach(function(a) {  //可預約
                                                 let useday = a.split("/")[1];
                                                 let useMonth = a.split("/")[0];
@@ -375,12 +431,17 @@ if (storedToken != null) {     //判斷登入
                                            days[index].innerHTML = i;
                                            originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                            otherdate.forEach(function(a) {  //被預約
-                                            let useday = a.split("/")[1];
-                                            let useMonth = a.split("/")[0];
-                                            if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                            let useday = a.split("月")[1];
+                                            let usedays = useday.split("號")[0];
+                                            
+                                            let useMonth = a.split("號")[0];
+                                            let useMonths = useMonth.split("月")[0];
+                                            
+                                            if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                             }
-                                            });
+                                             });
                                             okday.forEach(function(a) {  //可預約
                                                 let useday = a.split("/")[1];
                                                 let useMonth = a.split("/")[0];
@@ -435,12 +496,17 @@ if (storedToken != null) {     //判斷登入
                                     if(seeMonth == useMonth){
                                         days[index].innerHTML = i;
                                         otherdate.forEach(function(a) {  //被預約
-                                            let useday = a.split("/")[1];
-                                            let useMonth = a.split("/")[0];
-                                            if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                            let useday = a.split("月")[1];
+                                            let usedays = useday.split("號")[0];
+                                            
+                                            let useMonth = a.split("號")[0];
+                                            let useMonths = useMonth.split("月")[0];
+                                            
+                                            if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                             }
-                                        });
+                                             });
                                         okday.forEach(function(a) {  //可預約
                                             let useday = a.split("/")[1];
                                             let useMonth = a.split("/")[0];
@@ -452,9 +518,14 @@ if (storedToken != null) {     //判斷登入
                                        days[index].innerHTML = i;
                                        originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                        otherdate.forEach(function(a) {  //被預約
-                                        let useday = a.split("/")[1];
-                                        let useMonth = a.split("/")[0];
-                                        if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                        let useday = a.split("月")[1];
+                                        let usedays = useday.split("號")[0];
+                                        
+                                        let useMonth = a.split("號")[0];
+                                        let useMonths = useMonth.split("月")[0];
+                                        
+                                        if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                             days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                         }
                                          });
@@ -612,7 +683,7 @@ if (storedToken != null) {     //判斷登入
                             })
                         });
                     }
-                }
+                
 
             })
             
@@ -629,12 +700,7 @@ if (storedToken != null) {     //判斷登入
     
     
     
-    goback.addEventListener("click",function(){
-        collect.classList.add('d-none')
-        personalnav.classList.remove("d-none")
-        personalselect.classList.remove("d-none")
-        personalMain.classList.remove('d-none')
-    })
+
 }
 
 

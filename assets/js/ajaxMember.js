@@ -1,5 +1,5 @@
 //axios
-import axios from "axios"
+import axios from "axios";
 //Data API
 //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
  const apiUrl='http://localhost:3000/';
@@ -306,7 +306,7 @@ export const ajaxMember={
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
             <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</button>
+                <a href='personal.html' class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</a>
             </div>
         </div>
         <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
@@ -677,7 +677,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            console.log(result);
+            //console.log(result);
             return result;
         } catch (err) {
             console.log(err);
@@ -708,9 +708,9 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async getAllPostComment(id){
+    async getAllUserComment(id){ //取得我的預約
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}`,{
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -721,9 +721,9 @@ export const ajaxMember={
             console.log(err);
         }
     },
-    async getAllUserComment(id){
+    async getAllPostComment(id){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -741,13 +741,13 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            
-            return result
+
+            return result;
         } catch (err) {
             console.log(err);
         }
     },
-    async getUserComment(id,page){
+    async getUserComment(id,page){ //取得我的預約
         try {
             const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=1`,{
                 headers: {
@@ -755,7 +755,7 @@ export const ajaxMember={
                 }
             })).data;
             
-            return result
+            return result;
         } catch (err) {
             console.log(err);
         }

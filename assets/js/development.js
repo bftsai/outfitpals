@@ -52,6 +52,21 @@ import axios from "axios";
     //}
 
 
+    function getCookie(name) {  
+        const cookies = document.cookie.split(';').map(cookie => cookie.trim());
+        for (const cookie of cookies) {
+            const [cookieName, cookieValue] = cookie.split('=');
+            if (cookieName === name) {
+                return decodeURIComponent(cookieValue);
+            }
+        }
+    
+        return null;
+    }
+    
+    const storedToken = getCookie("outfitpalsToken");
+    const userId = getCookie("outfitpalsId");
+
         axios.get("http://localhost:3000/posts?_expand=user")
         .then(function(res){
             let postdata =res.data
@@ -257,6 +272,16 @@ import axios from "axios";
                                 const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
                                     "favoriteCounts": CC,
                                 });
+                                axios.get(`http://localhost:3000/favorites?userId=${userId}`)
+                                .then(function(res){
+                                     let favorite = res.data[0].postId
+                                     let usid = res.data[0].userId
+                                     favorite.push(Number(poid))
+                                     
+                                     axios.patch(`http://localhost:3000/favorites?userId=${usid}`, {
+                                         "postId": favorite
+                                      })
+                                })
                             } else {
                                 const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
                                     "favoriteCounts": CC - 1,
