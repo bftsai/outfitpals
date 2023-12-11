@@ -20,6 +20,7 @@ const postrId = location.href.split("=")[1];
 
         axios.get(`http://localhost:3000/posts/${postrId}?_expand=user`)
         .then(res => {
+            let userid =res.data.user.id
             posterNickName.textContent = res.data.user.name;
             posterIntroduce.textContent = res.data.user.introduce;
             posterInfo.innerHTML = `<p class="posts__user__height ps-3 fs-9 fs-lg-7">${res.data.user.height}cm ${res.data.user.weight}kg</p>`;
@@ -52,11 +53,51 @@ const postrId = location.href.split("=")[1];
                reserve.addEventListener("click",function(){
                     window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + user + "&page=1";
                })
+               posterMore.addEventListener("click",function(){
+                window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + user + "&page=1";
+             }) 
+               const more = document.querySelector(".more")
+               more.innerHTML = `
+                                    <div class="container d-flex justify-content-center  ">
+                                        <div class=" post row justify-content-around ">
 
-               function showMore() {
-                const longText = document.getElementById('longText');
-                longText.style.maxHeight = 'none';
-              }
+                                        </div>
+                                    </div>
+                                
+                                `
+                axios.get(`http://localhost:3000/posts?userId=${userid}`)   
+                .then(res =>{
+
+                    const post = document.querySelector(".post")
+                    for (let i = 0; i < 3; i++) {
+                        post.innerHTML += `<div class="col-4 my-4">
+                                                        <a  >
+                                                            <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                                <img src="${res.data[i].imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover img">
+                                                            </div>
+                                                        </a>
+                                                    </div>`
+                        
+                    }
+                    
+                    const card1List = document.querySelectorAll(".card1");
+
+                    card1List.forEach(function(card, index) {
+                        let id = card.getAttribute("id").trim();
+                        card.addEventListener("click", function(e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                        });
+                    });
+
+
+                            
+                })
+                
+               
+            
+
 
         })
         

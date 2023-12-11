@@ -250,15 +250,26 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
                                     postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
                                     const container = document.querySelector(containerClass);
                                     const imgUrl = postdata[i].imgUrl;
-                                    // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
+                                    const poid = postdata[i].id
                                     container.innerHTML += `<div class="col-4">
-                                        <div class="card" style="width: 350px; height: 450px;">
-                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                                        </div>
-                                    </div>`;
+                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${poid}">
+                                                                    <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                                                </div>
+                                                            </div>`;
                                 }
                             });
                         }
+
+                        const card1List = document.querySelectorAll(".card1");
+
+                        card1List.forEach(function(card, index) {
+                            let id = card.getAttribute("id").trim();
+                            card.addEventListener("click", function(e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                            });
+                        });
                     // }
         const one = document.querySelector(".page"); 
         let maxPages = 100; 
@@ -307,25 +318,14 @@ if (storedToken != null) {     //判斷登入
             axios.get(`http://localhost:3000/personal?userId=${userId}`)
             .then(function(res){
                 
-                if(res.data.length == 0){     //判斷是否第一次登陸
-                    axios.post(`http://localhost:3000/personal`,{
-                        "isopen": false,
-                        "userId": Number(userId),
-                        "otherdate": "",
-                        "pos1": "請填寫",
-                        "pos2": "請填寫",
-                        "pos3": "請填寫",
-                        "pos4": "請填寫",
-                        "okday":[],
-                        "oktime":"12:00~12:00" ,
-                    })
-                }else{
+
                     const isopen =res.data[0].isopen;
                     const [startHour, startMinute, endHour, endMinute] = res.data[0].oktime.split(/[~:]/);
-                    const otherdate = res.data[0].otherdate.split(",");
+                    const otherdate = res.data[0].otherdate;
                     const okday = res.data[0].okday;
                     const dataid = res.data[0].id
                     
+                
                     
                     if (isopen === true) {
                         //渲染
@@ -343,12 +343,17 @@ if (storedToken != null) {     //判斷登入
                             if (index >= 0 && index < days.length) {
                                 days[index].innerHTML = i;
                                 otherdate.forEach(function(a) {  //被預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                    let useday = a.split("月")[1];
+                                    let usedays = useday.split("號")[0];
+                                    
+                                    let useMonth = a.split("號")[0];
+                                    let useMonths = useMonth.split("月")[0];
+                                    
+                                    if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                     }
-                                });
+                                     });
                                 okday.forEach(function(a) {  //可預約
                                     let useday = a.split("/")[1];
                                     let useMonth = a.split("/")[0];
@@ -404,12 +409,17 @@ if (storedToken != null) {     //判斷登入
                                         if(seeMonth == useMonth){
                                             days[index].innerHTML = i;
                                             otherdate.forEach(function(a) {  //被預約
-                                                let useday = a.split("/")[1];
-                                                let useMonth = a.split("/")[0];
-                                                if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                                let useday = a.split("月")[1];
+                                                let usedays = useday.split("號")[0];
+                                                
+                                                let useMonth = a.split("號")[0];
+                                                let useMonths = useMonth.split("月")[0];
+                                                
+                                                if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                     days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                                 }
-                                            });
+                                                 });
                                             okday.forEach(function(a) {  //可預約
                                                 let useday = a.split("/")[1];
                                                 let useMonth = a.split("/")[0];
@@ -421,12 +431,17 @@ if (storedToken != null) {     //判斷登入
                                            days[index].innerHTML = i;
                                            originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                            otherdate.forEach(function(a) {  //被預約
-                                            let useday = a.split("/")[1];
-                                            let useMonth = a.split("/")[0];
-                                            if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                            let useday = a.split("月")[1];
+                                            let usedays = useday.split("號")[0];
+                                            
+                                            let useMonth = a.split("號")[0];
+                                            let useMonths = useMonth.split("月")[0];
+                                            
+                                            if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                             }
-                                            });
+                                             });
                                             okday.forEach(function(a) {  //可預約
                                                 let useday = a.split("/")[1];
                                                 let useMonth = a.split("/")[0];
@@ -481,12 +496,17 @@ if (storedToken != null) {     //判斷登入
                                     if(seeMonth == useMonth){
                                         days[index].innerHTML = i;
                                         otherdate.forEach(function(a) {  //被預約
-                                            let useday = a.split("/")[1];
-                                            let useMonth = a.split("/")[0];
-                                            if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                            let useday = a.split("月")[1];
+                                            let usedays = useday.split("號")[0];
+                                            
+                                            let useMonth = a.split("號")[0];
+                                            let useMonths = useMonth.split("月")[0];
+                                            
+                                            if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                             }
-                                        });
+                                             });
                                         okday.forEach(function(a) {  //可預約
                                             let useday = a.split("/")[1];
                                             let useMonth = a.split("/")[0];
@@ -498,9 +518,14 @@ if (storedToken != null) {     //判斷登入
                                        days[index].innerHTML = i;
                                        originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                        otherdate.forEach(function(a) {  //被預約
-                                        let useday = a.split("/")[1];
-                                        let useMonth = a.split("/")[0];
-                                        if (parseInt(useday) === i && seeMonth===parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                    
+                                        let useday = a.split("月")[1];
+                                        let usedays = useday.split("號")[0];
+                                        
+                                        let useMonth = a.split("號")[0];
+                                        let useMonths = useMonth.split("月")[0];
+                                        
+                                        if (parseInt(usedays) === i && seeMonth===parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                             days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                         }
                                          });
@@ -658,7 +683,7 @@ if (storedToken != null) {     //判斷登入
                             })
                         });
                     }
-                }
+                
 
             })
             
