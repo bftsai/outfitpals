@@ -21,8 +21,8 @@ $(document).ready(function () {
     });
 });
 //JS 
-const locationUrl='https://bftsai.github.io/outfitpals/reserve.html';
-// const locationUrl='http://localhost:5173/outfitpals/pages/reserve.html';
+// const locationUrl='https://bftsai.github.io/outfitpals/reserve.html';
+const locationUrl='http://localhost:5173/outfitpals/pages/reserve.html';
 
 const unLogin=document.querySelector('.unLogin');
 const reserve=document.querySelector('.reserve');
