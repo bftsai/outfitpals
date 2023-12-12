@@ -6,7 +6,7 @@ import axios from "axios"
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 
 let outfitpalsToken = getCookie('outfitpalsToken')
 let outfitpalsId = getCookie('outfitpalsId')

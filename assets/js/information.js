@@ -6,7 +6,7 @@ import axios from 'axios';
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 
 
 const posterNickName = document.querySelector(".posterNickName");
@@ -19,14 +19,29 @@ const postContent = document.querySelector(".postContent");
 const posterInfo = document.querySelector(".posterInfo");
 const posterMore = document.querySelector(".posterMore");
 const posterOther = document.querySelector(".posterOther");
-
+const myModa2 = new bootstrap.Modal(document.getElementById('myModa2'));
 const like = document.querySelector(".like");
 const favorite = document.querySelector(".favorite");
 
 
+
+function getCookie(name) {  
+    const cookies = document.cookie.split(';').map(cookie => cookie.trim());
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+
+    return null;
+}
+
+
+const storedToken = getCookie("outfitpalsToken");
 const postrId = location.href.split("=")[1];
 
-        axios.get(`${apiUrl}444/posts/${postrId}?_expand=user`)
+        axios.get(`${apiUrl}/posts/${postrId}?_expand=user`)
         .then(res => {
             let userid =res.data.user.id
             posterNickName.textContent = res.data.user.name;
@@ -44,23 +59,31 @@ const postrId = location.href.split("=")[1];
                if(stys.length <2){
                    sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
                    <div class="d-flex justify-content-center">
-                       <button type="button" class="btn btn-primary btn-pill  ms-3">${stys[0]}</button>
+                       <button type="button" class="btn btn-primary btn-pill  ms-3">${stys}</button>
                    </div>`
                    
                }else{
                    
                    sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
                    <div class="d-flex justify-content-center">
-                       <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
+                       <button type="button" class="btn btn-primary btn-pill ms-3">${stys}</button>
                    </div>        
-                   <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>`
+                   <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
    
                }
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
-               reserve.addEventListener("click",function(){
-                    window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
-               })
+               if(storedToken != null){
+                reserve.addEventListener("click",function(){
+                        window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                })
+               }else{
+                reserve.addEventListener("click",function(){
+                    myModa2.show();
+                })
+                
+               }
+
                posterMore.addEventListener("click",function(){
                 window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
              }) 
