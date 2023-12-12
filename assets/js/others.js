@@ -7,6 +7,8 @@
 
 // 在頁面加載時執行處理 URL 中的 userId 參數
 // window.onload = handleUserIdParameter;
+const apiUrl='http://localhost:3000/';
+const localUrl='http://localhost:5173/outfitpals';
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
@@ -93,7 +95,7 @@ const userId = getCookie("outfitpalsId");
 const id = parseInt(location.href.split("=")[1], 10);
 
 
-axios.get(`http://localhost:3000/660/users?id=${id}`,{
+axios.get(`${apiUrl}660/users?id=${id}`,{
     headers: {  
         "authorization": `Bearer ${storedToken}`
     }
@@ -176,7 +178,7 @@ axios.get(`http://localhost:3000/660/users?id=${id}`,{
 })
 
 
-axios.get(`http://localhost:3000/660/posts?userId=${id}`,{
+axios.get(`${apiUrl}660/posts?userId=${id}`,{
     headers: {  
         "authorization": `Bearer ${storedToken}`
     }
@@ -243,7 +245,7 @@ axios.get(`http://localhost:3000/660/posts?userId=${id}`,{
                             card.addEventListener("click", function(e) {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                                window.location.href = `${localUrl}/pages/information.html?postId=` + id;
                             });
                         });
                     // }
@@ -284,7 +286,7 @@ axios.get(`http://localhost:3000/660/posts?userId=${id}`,{
 
 
 if (storedToken != null) {   //判斷登陸
-        axios.get(`http://localhost:3000/660/personal?userId=${id}`,{
+        axios.get(`${apiUrl}660/personal?userId=${id}`,{
             headers: {  
                 "authorization": `Bearer ${storedToken}`
             }
@@ -630,7 +632,7 @@ if (storedToken != null) {   //判斷登陸
                         location.push(labelElement.innerText.trim()) 
                     }
                 });
-                axios.post("http://localhost:3000/comments" ,{           
+                axios.post("${apiUrl}comments" ,{           
                     "posterId": Number(id),  
                     "userId": Number(userId),  
                     "body": want, 
@@ -675,7 +677,7 @@ if (storedToken != null) {   //判斷登陸
                 }
 
                 bkdep.addEventListener("click",function(){
-                    window.location.href = "http://localhost:5173/outfitpals/pages/development.html";
+                    window.location.href = `${localUrl}/pages/development.html`;
                 })
 
             }
@@ -690,7 +692,7 @@ if (storedToken != null) {   //判斷登陸
     })
     
     gologin.addEventListener("click",function(){
-        window.location.href = "http://localhost:5173/outfitpals/pages/member.html";
+        window.location.href = `${localUrl}/pages/member.html`;
     })
 
 }

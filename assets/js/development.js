@@ -7,7 +7,8 @@
 // const row = document.querySelector(".rows")
 
 import axios from "axios";
-
+const apiUrl='http://localhost:3000/';
+const localUrl='http://localhost:5173/outfitpals';
 // // 當 search 元素被點擊時，防止事件冒泡
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
@@ -67,7 +68,7 @@ import axios from "axios";
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get("http://localhost:3000/664/posts?_expand=user",{
+        axios.get(`${apiUrl}664/posts?_expand=user`,{
             headers: {  
                 "authorization": `Bearer ${storedToken}`
             }
@@ -237,12 +238,12 @@ import axios from "axios";
                         let like = parseInt(originalLikeCounts) + 1;
                 
                         if (loveElement.classList.contains("ilove")) {
-                            const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                 "likeCounts": like,
                             });
 
                         } else {
-                            const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                 "likeCounts": like - 1,
                             });
 
@@ -273,10 +274,10 @@ import axios from "axios";
                             await new Promise(resolve => setTimeout(resolve, 3000));  // 等待3秒钟
                             let CC = parseInt(originalCollectCounts) + 1;
                             if (collect.classList.contains("icollect")) {
-                                const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                     "favoriteCounts": CC,
                                 });
-                                axios.post(`http://localhost:3000/favorites`,{
+                                axios.post(`${apiUrl}favorites`,{
                                             "userId":Number(userId),
                                             "postId":Number(poid)
                                         })
@@ -286,7 +287,7 @@ import axios from "axios";
                                     console.error("GET 请求失败:", err);
                                 });
                             } else {
-                                const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                     "favoriteCounts": CC - 1,
                                 });
                             }
@@ -303,11 +304,11 @@ import axios from "axios";
                 //頭像跳轉
                 others.addEventListener("click", function() {
                     // 使用 window.location.href 将页面导航到另一个 URL，这里的 URL 中包含 userId 参数
-                    window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + id + "&page=1";
+                    window.location.href = `${localUrl}/pages/others.html?userId=` + id + "&page=1";
                 });
                 //照片跳轉
                 img.addEventListener("click",function(){
-                    window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + poid;
+                    window.location.href = `${localUrl}/pages/information.html?postId=` + poid;
                 })
             });
 

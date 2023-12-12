@@ -7,6 +7,9 @@
 // // 在頁面加載時執行處理 URL 中的 userId 參數
 // window.onload = handleUserIdParameter;
 
+const apiUrl='http://localhost:3000/';
+const localUrl='http://localhost:5173/outfitpals';
+
 //兩頁換頁
 const thumbLinks = document.querySelectorAll(".thumb-link");  
 const thumb= document.querySelectorAll(".thumb");
@@ -86,7 +89,7 @@ const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
 
 
-axios.get(`http://localhost:3000/640/users?id=${userId}`,{
+axios.get(`${apiUrl}640/users?id=${userId}`,{
     headers: {  
         "authorization": `Bearer ${storedToken}`
     }
@@ -187,7 +190,7 @@ axios.get(`http://localhost:3000/640/users?id=${userId}`,{
                 })
                 //收藏渲染
                 const coll = document.querySelector(".coll")
-                axios.get(`http://localhost:3000/660/favorites?_expand=post&userId=${userId}`,{
+                axios.get(`${apiUrl}660/favorites?_expand=post&userId=${userId}`,{
                     headers: {  
                         "authorization": `Bearer ${storedToken}`
                     }
@@ -215,7 +218,7 @@ axios.get(`http://localhost:3000/640/users?id=${userId}`,{
                         card.addEventListener("click", function(e) {
                             e.stopPropagation();
                             e.preventDefault();
-                            window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                            window.location.href = `${localUrl}/pages/information.html?postId=` + id;
                         });
                     });
 
@@ -231,7 +234,7 @@ axios.get(`http://localhost:3000/640/users?id=${userId}`,{
 
 
 
-axios.get(`http://localhost:3000/600/posts?userId=${userId}`,{
+axios.get(`${apiUrl}600/posts?userId=${userId}`,{
     headers: {  
         "authorization": `Bearer ${storedToken}`
     }
@@ -300,7 +303,7 @@ axios.get(`http://localhost:3000/600/posts?userId=${userId}`,{
                             card.addEventListener("click", function(e) {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                                window.location.href = `${localUrl}/pages/information.html?postId=` + id;
                             });
                         });
                     // }
@@ -348,7 +351,7 @@ axios.get(`http://localhost:3000/600/posts?userId=${userId}`,{
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
-            axios.get(`http://localhost:3000/600/personal?userId=${userId}`,{
+            axios.get(`${apiUrl}600/personal?userId=${userId}`,{
                 headers: {  
                     "authorization": `Bearer ${storedToken}`
                 }
@@ -659,7 +662,7 @@ if (storedToken != null) {     //判斷登入
                                 let pos3 = p3.value|| p3.placeholder
                                 let pos4 = p4.value|| p4.placeholder
                                 let oktim = `${t1Value}:${m1Value}~${t2Value}:${m2Value}`
-                                axios.patch(`http://localhost:3000/personal/${dataid}`,{
+                                axios.patch(`${apiUrl}personal/${dataid}`,{
                                     "pos1": pos1,
                                     "pos2": pos2,
                                     "pos3":pos3,
@@ -671,7 +674,7 @@ if (storedToken != null) {     //判斷登入
                            });
                             //關閉預約功能
                            close.addEventListener("click",function(){
-                            axios.patch(`http://localhost:3000/personal/${dataid}`, {
+                            axios.patch(`${apiUrl}personal/${dataid}`, {
                                 "isopen": false,
                             })
                                 .then(function (response) {
@@ -709,7 +712,7 @@ if (storedToken != null) {     //判斷登入
                         }
                         //為使用者開啟 預約功能
                         open.addEventListener("click", function () {
-                            axios.patch(`http://localhost:3000/personal/${dataid}`,{
+                            axios.patch(`${apiUrl}personal/${dataid}`,{
                                     "isopen": true,
                             })
                             .then(function () {

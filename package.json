@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "start json-server-auth db.json & vite ",
+    "dev": "vite & json-server-auth db.json  ",
     "json": "json-server-auth db.json",
     "build": "vite build",
     "preview": "vite preview",

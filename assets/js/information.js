@@ -1,5 +1,8 @@
 //axios
 import axios from 'axios';
+const apiUrl='http://localhost:3000/';
+const localUrl='http://localhost:5173/outfitpals';
+
 
 const posterNickName = document.querySelector(".posterNickName");
 const posterIntroduce = document.querySelector(".posterIntroduce");
@@ -18,7 +21,7 @@ const favorite = document.querySelector(".favorite");
 
 const postrId = location.href.split("=")[1];
 
-        axios.get(`http://localhost:3000/444/posts/${postrId}?_expand=user`)
+        axios.get(`${apiUrl}444/posts/${postrId}?_expand=user`)
         .then(res => {
             let userid =res.data.user.id
             posterNickName.textContent = res.data.user.name;
@@ -51,10 +54,10 @@ const postrId = location.href.split("=")[1];
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
                reserve.addEventListener("click",function(){
-                    window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + user + "&page=1";
+                    window.location.href = `${localUrl}/pages/others.html?userId=` + user + "&page=1";
                })
                posterMore.addEventListener("click",function(){
-                window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + user + "&page=1";
+                window.location.href = `${localUrl}/pages/others.html?userId=` + user + "&page=1";
              }) 
                const more = document.querySelector(".more")
                more.innerHTML = `
@@ -65,7 +68,7 @@ const postrId = location.href.split("=")[1];
                                     </div>
                                 
                                 `
-                axios.get(`http://localhost:3000/posts?userId=${userid}`)   
+                axios.get(`${apiUrl}posts?userId=${userid}`)   
                 .then(res =>{
 
                     const post = document.querySelector(".post")
@@ -87,7 +90,7 @@ const postrId = location.href.split("=")[1];
                         card.addEventListener("click", function(e) {
                             e.stopPropagation();
                             e.preventDefault();
-                            window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                            window.location.href = `${localUrl}/pages/information.html?postId=` + id;
                         });
                     });
 
@@ -107,7 +110,7 @@ const postrId = location.href.split("=")[1];
 // 測試收藏功能
 // function favoriteData() {
 
-//     axios.get('http://localhost:3000/favorites/2?_expand=user&_expand=post')
+//     axios.get('`${apiUrl}favorites/2?_expand=user&_expand=post')
 //         .then(res => {
 //             let data = res.data;
 //             console.log(data);
