@@ -1,7 +1,12 @@
 //axios
 import axios from 'axios';
-const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals';
+
+// https://outfitpals-web-server.onrender.com/
+// https://bftsai.github.io/outfitpals
+const apiUrl='https://outfitpals-web-server.onrender.com/';
+const localUrl='https://bftsai.github.io/outfitpals';
+// const apiUrl='http://localhost:3000/';
+// const localUrl='http://localhost:5173/outfitpals';
 
 
 const posterNickName = document.querySelector(".posterNickName");
