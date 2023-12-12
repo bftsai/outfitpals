@@ -2,7 +2,11 @@
 import axios from "axios"
 
 //const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-const apiUrl='http://localhost:3000/';
+// const apiUrl='http://localhost:3000/';
+const apiUrl='https://outfitpals-web-server.onrender.com/';
+const localUrl='https://bftsai.github.io/outfitpals';
+// const apiUrl='http://localhost:3000/';
+// const localUrl='http://localhost:5173/outfitpals';
 
 let outfitpalsToken = getCookie('outfitpalsToken')
 let outfitpalsId = getCookie('outfitpalsId')
@@ -72,7 +76,7 @@ if(outfitpalsToken.length > 2) {
 
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname === '/outfitpals/pages/development.html') {
+    if (window.location.pathname === '/pages/development.html') {
         search.classList.remove('d-none');
         switchBar.classList.remove('d-none');
         switchBarHr.classList.remove('d-none');
@@ -125,7 +129,7 @@ for (let i = 0; i < thumbLinks.length; i++) {
     })
 
     document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.pathname === '/outfitpals/pages/development.html') {
+        if (window.location.pathname === '/pages/development.html') {
             document.addEventListener("click",function(event){
                 const clickedElement = event.target;
                 if (!searchList.contains(clickedElement)) {
@@ -145,12 +149,12 @@ for (let i = 0; i < thumbLinks.length; i++) {
     gopersonal.addEventListener("click",function(f){
         f.stopPropagation();
         f.preventDefault(); 
-        window.location.href = "http://localhost:5173/outfitpals/pages/personal.html?page=1"
+        window.location.href = `${localUrl}/pages/personal.html?page=1`
     })
 
     const gopost = document.querySelector(".gopost")
     gopost.addEventListener("click",function(f){
         f.stopPropagation();
         f.preventDefault(); 
-        window.location.href = "http://localhost:5173/outfitpals/pages/development.html?page=1"
+        window.location.href = `${localUrl}/pages/development.html?page=1`
     })
