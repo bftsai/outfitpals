@@ -392,21 +392,23 @@ const reserveComponent={
     }
 };
 
-if(cookieValue('outfitpalsId')!=="''"&&cookieValue('outfitpalsToken')!=="''"&&cookieValue('outfitpalsThirdParty')!=="''"){
-    unLogin.classList.add('d-none');
-    reserve.classList.add('pb-9');
-    reserve.classList.add('pb-lg-13');
-    reserveBtnGroup.classList.remove('d-none');
-    reserveContent.classList.remove('d-none');
-    reserveComponent.render(1);
-    reserveComponent.renderPagination();
-}else{
-    unLogin.classList.remove('d-none');
-    reserve.classList.remove('pb-9');
-    reserve.classList.remove('pb-lg-13');
-    reserveBtnGroup.classList.add('d-none');
-    reserveContent.classList.add('d-none');
-    paginationArea.classList.add('d-none');
+if(cookieValue('outfitpalsId')!==undefined){
+    if(cookieValue('outfitpalsId')!=="''"&&cookieValue('outfitpalsToken')!=="''"&&cookieValue('outfitpalsThirdParty')!=="''"){
+        unLogin.classList.add('d-none');
+        reserve.classList.add('pb-9');
+        reserve.classList.add('pb-lg-13');
+        reserveBtnGroup.classList.remove('d-none');
+        reserveContent.classList.remove('d-none');
+        reserveComponent.render(1);
+        reserveComponent.renderPagination();
+    }else{
+        unLogin.classList.remove('d-none');
+        reserve.classList.remove('pb-9');
+        reserve.classList.remove('pb-lg-13');
+        reserveBtnGroup.classList.add('d-none');
+        reserveContent.classList.add('d-none');
+        paginationArea.classList.add('d-none');
+    }
 }
 
 
