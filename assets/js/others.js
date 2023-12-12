@@ -7,8 +7,11 @@
 
 // 在頁面加載時執行處理 URL 中的 userId 參數
 // window.onload = handleUserIdParameter;
-const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals';
+
+// const apiUrl='http://localhost:3000/';
+// const localUrl='http://localhost:5173/outfitpals';
+const apiUrl='https://outfitpals-web-server.onrender.com/';
+const localUrl='https://bftsai.github.io/outfitpals';
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
