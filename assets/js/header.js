@@ -52,23 +52,23 @@ if(outfitpalsToken.length > 2) {
 
 // 會導致註冊後需填寫資料時發生重整，無法正確填寫
 // 登入後發生變化
-let currentToken = getCookie('outfitpalsToken');
+// let currentToken = getCookie('outfitpalsToken');
 
-function checkTokenChange() {
-  const newToken = getCookie('outfitpalsToken');
+// function checkTokenChange() {
+//   const newToken = getCookie('outfitpalsToken');
 
-  if (newToken !== currentToken) {
-    console.log('Token has changed. Reloading...');
-    currentToken = newToken;
-    location.reload();
-  }
-}
+//   if (newToken !== currentToken) {
+//     console.log('Token has changed. Reloading...');
+//     currentToken = newToken;
+//     location.reload();
+//   }
+// }
 
 // 初始執行一次检查
-checkTokenChange();
+// checkTokenChange();
 
 // 每秒檢查一次
-setInterval(checkTokenChange, 1000);
+// setInterval(checkTokenChange, 1000);
 
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
