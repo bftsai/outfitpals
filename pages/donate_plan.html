@@ -13,7 +13,8 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-
+    <!-- Validate.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <title>Donate_plan</title>
   </head>
   <body>
@@ -58,25 +59,33 @@
             </div>
             <div class="clearfix">&nbsp;</div>
             <div class="clearfix">&nbsp;</div>
-            <form>
+            <form id="donationForm" class="needs-validation" novalidate>
               <!-- STEP1 -->
               <div class="res-step-form col-md-6 offset-md-3 res-form-one">
                 <h3 class="text-center">填寫捐款資料</h3>
                 <div class="form-horizontal p-4">
                   <div class="row mb-3">
                     <label
-                      for="choose-title"
+                      for="donate_money"
                       class="col-sm-4 col-md-4 col-xl-2 control-label"
                       >捐款金額</label
                     >
                     <div class="col-sm-4 col-md-4 col-xl-4">
+                      <!-- 添加 'is-invalid' 類別 -->
                       <input
-                        type="money"
-                        class="form-control"
-                        id="choose-title"
+                        type="number"
+                        class="form-control is-invalid"
+                        id="donate_money"
+                        name="donate_money"
+                        required
+                        pattern="[1-9]+"
                       />
+                      <!-- 添加 'invalid-feedback' 類別 -->
+                      <div class="invalid-feedback">
+                        請輸入介於 1 到 1000000 。
+                      </div>
                     </div>
-                    <div class="col-sm-1 col-md-1 col-xl-1">
+                    <div class="col-sm-1">
                       <p>元</p>
                     </div>
                   </div>
@@ -152,20 +161,24 @@
               <!-- STEP2 -->
               <div class="res-step-form col-md-6 offset-md-3 res-form-two">
                 <h3 class="text-center">填寫信用卡資料</h3>
-                <div class="form-horizontal p-4">
-                  <div class="row mb-3">
+                <div class="form-horizontal p-4 needs-validation">
+                  <div class="row mb-3 position-relative">
                     <label
                       for="donate_name"
                       class="col-sm-2 control-label required"
                       >姓名</label
                     >
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 has-validation">
                       <input
                         type="text"
                         class="form-control"
                         id="donate_name"
+                        name="donate_name"
                         required
                       />
+                      <div class="invalid-tooltip">
+                        Please choose a unique and valid username.
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -178,30 +191,49 @@
                       <input
                         type="number"
                         class="form-control"
-                        id="donate_number"
+                        id="donate_number_1"
+                        name="donate_number_1"
                         required
+                        pattern="[0-9]{4}"
+                        oninput="validateInput(this, 4)"
                       />
+                      <div class="invalid-feedback">請輸入4位數字。</div>
                     </div>
                     <div class="col-sm-2">
                       <input
                         type="number"
                         class="form-control"
-                        id="donate_number"
+                        id="donate_number_2"
+                        name="donate_number_2"
+                        required
+                        pattern="[0-9]{4}"
+                        oninput="validateInput(this, 4)"
                       />
+                      <div class="invalid-feedback">請輸入4位數字。</div>
                     </div>
                     <div class="col-sm-2">
                       <input
                         type="number"
                         class="form-control"
-                        id="donate_number"
+                        id="donate_number_3"
+                        name="donate_number_3"
+                        required
+                        pattern="[0-9]{4}"
+                        oninput="validateInput(this, 4)"
                       />
+                      <div class="invalid-feedback">請輸入4位數字。</div>
                     </div>
                     <div class="col-sm-2">
                       <input
                         type="number"
                         class="form-control"
-                        id="donate_number"
+                        id="donate_number_4"
+                        name="donate_number_4"
+                        required
+                        pattern="[0-9]{4}"
+                        oninput="validateInput(this, 4)"
                       />
+                      <div class="invalid-feedback">請輸入4位數字。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -214,19 +246,25 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="donate_time"
+                        id="donate_time_month"
+                        name="donate_time_month"
                         required
                         placeholder="MM"
+                        oninput="validateInput(this, 2)"
                       />
+                      <div class="invalid-feedback">請輸入2位數字。</div>
                     </div>
                     <div class="col-sm-2">
                       <input
                         type="text"
                         class="form-control"
-                        id="donate_time"
+                        id="donate_time_date"
+                        name="donate_time_date"
                         required
                         placeholder="YY"
+                        oninput="validateInput(this, 2)"
                       />
+                      <div class="invalid-feedback">請輸入2位數字。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -240,9 +278,12 @@
                         type="text"
                         class="form-control"
                         id="donate_checkcode"
+                        name="donate_checkcode"
                         required
                         placeholder="卡片背面三碼"
+                        oninput="validateInput(this, 3)"
                       />
+                      <div class="invalid-feedback">請輸入3位數字。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -256,24 +297,14 @@
                         type="text"
                         class="form-control"
                         id="donate_phonenumber"
+                        name="donate_phonenumber"
                         required
-                        maxlength="11"
-                        pattern="09\d{2}-\d{6}"
+                        maxlength="12"
+                        oninput="validatePhoneNumber(this)"
                       />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="donate_mail" class="col-sm-2 col-form-label"
-                      >電子郵件</label
-                    >
-                    <div class="col-sm-8">
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="donate_mail"
-                        placeholder="輸入xxx@xxx.xxx"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                      />
+                      <div class="invalid-feedback">
+                        請輸入正確的手機號碼格式 (09-XX-XXXXXX)。
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -447,8 +478,13 @@
                         type="text"
                         class="form-control"
                         id="receipt_idcard"
+                        name="receipt_idcard"
                         required
+                        oninput="validateIdCard(this)"
                       />
+                      <div class="invalid-feedback">
+                        請輸入正確的身分證字號格式。
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -462,10 +498,14 @@
                         type="text"
                         class="form-control"
                         id="receipt_phone"
+                        name="receipt_phone"
                         required
-                        maxlength="11"
-                        pattern="09\d{2}-\d{6}"
+                        maxlength="12"
+                        oninput="validatePhoneNumber(this)"
                       />
+                      <div class="invalid-feedback">
+                        請輸入正確的手機號碼格式 (09-XX-XXXXXX)。
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -690,6 +730,8 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
+    <!-- Bootstrap JS (optional, for certain components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       $(document).ready(function () {
         var steps = [
@@ -838,6 +880,84 @@
           }
         });
       });
+    </script>
+    <!--贊助金額驗證-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 取得捐款金額的輸入框
+        var donateMoneyInput = document.getElementById("donate_money");
+
+        // 監聽輸入框的輸入事件
+        donateMoneyInput.addEventListener("input", function () {
+          // 取得輸入的數值
+          var inputValue = parseInt(donateMoneyInput.value, 10);
+
+          // 檢查是否介於 1 到 1000000 之間
+          if (inputValue >= 1 && inputValue <= 1000000) {
+            // 移除 'is-invalid' 類別
+            donateMoneyInput.classList.remove("is-invalid");
+          } else {
+            // 添加 'is-invalid' 類別
+            donateMoneyInput.classList.add("is-invalid");
+          }
+        });
+      });
+    </script>
+    <!--卡號期限檢查碼驗證-->
+    <script>
+      function validateInput(input, length) {
+        const isValid = input.value.length === length;
+        if (isValid) {
+          input.classList.remove("is-invalid");
+        } else {
+          input.classList.add("is-invalid");
+        }
+      }
+    </script>
+    <!--信用卡和收據手機號碼驗證-->
+    <script>
+      function validatePhoneNumber(input) {
+        const phoneNumber = input.value.replace(/-/g, ""); // 移除可能存在的連字符
+        const isValid = /^\d{10}$/.test(phoneNumber); // 驗證是否為 10 位數字
+        const errorMessage = "請輸入正確的手機號碼格式 (09-XX-XXXXXX)。";
+
+        // 清除之前的 'is-invalid' 類別
+        input.classList.remove("is-invalid");
+
+        // 如果驗證不通過，則添加 'is-invalid' 類別
+        if (!isValid) {
+          input.classList.add("is-invalid");
+          // 同時設定自訂的錯誤訊息
+          input.setCustomValidity(errorMessage);
+        } else {
+          // 驗證通過，清空自訂的錯誤訊息
+          input.setCustomValidity("格式錯誤");
+        }
+      }
+    </script>
+    <!--身分證驗證-->
+    <script>
+      function validateIdCard(input) {
+        // 使用 Validate.js 驗證
+        const constraints = {
+          idCard: {
+            format: {
+              pattern: /^[A-Z]\d{9}$/,
+              message: "請輸入正確的身分證字號格式。",
+            },
+          },
+        };
+
+        const validationResult = validate({ idCard: input.value }, constraints);
+
+        // 清除之前的 'is-invalid' 類別
+        input.classList.remove("is-invalid");
+
+        // 如果驗證不通過，則添加 'is-invalid' 類別
+        if (validationResult && validationResult.idCard) {
+          input.classList.add("is-invalid");
+        }
+      }
     </script>
   </body>
 </html>
