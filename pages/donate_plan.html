@@ -51,7 +51,7 @@
             <div class="clearfix">&nbsp;</div>
             <form id="donationForm" class="needs-validation" novalidate>
               <!-- STEP1 -->
-              <div class="resStepOne res-step-form col-md-8 offset-md-2 res-form-one m-0">
+              <div class="res-step-form col-md-6 offset-md-3 res-form-one">
                 <h3 class="text-center">填寫捐款資料</h3>
                 <div class="form-horizontal p-4">
                   <div class="row mb-3">
@@ -134,7 +134,9 @@
                   </div>
                   <div class="row mb-3">
                     <div class="text-center">
-                      <a href="./donate.html" class="btnPreOne btn btn-secondary"
+                      <a
+                        href="./donate.html"
+                        class="btnPreOne btn btn-secondary"
                         >上一步</a
                       >
                       <button
@@ -721,15 +723,15 @@
     <!-- Bootstrap JS (optional, for certain components) -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script>
-      const resStepOne=document.querySelector('.resStepOne');
-      const btnPreOne=document.querySelector('.btnPreOne');
-      const btnNextOne=document.querySelector('.btnNextOne');
-      
-      btnPreOne.addEventListener('click',e=>{
-          resStepOne.className.remove('m-0');
+      const resStepOne = document.querySelector(".resStepOne");
+      const btnPreOne = document.querySelector(".btnPreOne");
+      const btnNextOne = document.querySelector(".btnNextOne");
+
+      btnPreOne.addEventListener("click", (e) => {
+        resStepOne.className.remove("m-0");
       });
-      btnNextOne.addEventListener('click',e=>{
-          resStepOne.classList.remove('m-0');
+      btnNextOne.addEventListener("click", (e) => {
+        resStepOne.classList.remove("m-0");
       });
       $(document).ready(function () {
         var steps = [
