@@ -72,7 +72,7 @@ const localUrl='https://bftsai.github.io/outfitpals';
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get(`${apiUrl}/posts?_expand=user`)
+        axios.get(`${apiUrl}posts?_expand=user`)
         .then(function(res){
             let postdata =res.data
             let userImage;
