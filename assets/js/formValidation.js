@@ -1,7 +1,7 @@
 import { ajaxMember, cookieValue } from "./ajaxMember";
 //location url
-const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-//const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+// const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //check validation tool
 export const checkSign={
     regexp:new RegExp(''),

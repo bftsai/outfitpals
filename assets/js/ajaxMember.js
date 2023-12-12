@@ -2,10 +2,10 @@
 import axios from "axios";
 //Data API
 const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-//  const apiUrl='http://localhost:3000/';
+//   const apiUrl='http://localhost:3000/';
 //location url
-const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-// const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+// const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //cookie
 export function cookieValue(str) {  
     const cookieArr=document.cookie.split(';').find(item=>{
@@ -116,6 +116,7 @@ export const ajaxMember={
                 }
             });
             spinner.classList.add('d-none');
+            location.href=locationUrl;
         } catch (err) {
             spinner.classList.add('d-none');
             this.signOut();
@@ -143,7 +144,8 @@ export const ajaxMember={
                         memberSignInProfile.classList.remove('opacity-0');
                     }, 0);
                 }, 400);
-                this.renderMemberSignInProfileForm();
+                //this.renderMemberSignInProfileForm();
+                location.href=locationUrl;
             }
         } catch (err) {
             console.log(err.response.data);
