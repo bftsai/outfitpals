@@ -122,7 +122,6 @@ const localUrl='https://bftsai.github.io/outfitpals';
                         postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
                         const container = document.querySelector(containerClass);
                         const imgUrl = postdata[i].imgUrl;
-                        
 
                         if (postdata[i].hasOwnProperty('user') && postdata[i].user.hasOwnProperty('image')) {
                             userImage = postdata[i].user.image;

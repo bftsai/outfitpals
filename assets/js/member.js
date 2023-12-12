@@ -277,3 +277,4 @@ let commentObj={
 // ajaxMember.postComment(commentObj)
 // ajaxMember.deleteComment(4)
 
+console.log(new Date('Tue, 12 Dec 2023 08:45:43 GMT'));

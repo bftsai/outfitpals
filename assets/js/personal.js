@@ -97,6 +97,7 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
     }
 })
 .then(function(res){
+    console.log(res.data);
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
