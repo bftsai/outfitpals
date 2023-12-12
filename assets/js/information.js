@@ -18,7 +18,7 @@ const favorite = document.querySelector(".favorite");
 
 const postrId = location.href.split("=")[1];
 
-        axios.get(`http://localhost:3000/posts/${postrId}?_expand=user`)
+        axios.get(`http://localhost:3000/444/posts/${postrId}?_expand=user`)
         .then(res => {
             let userid =res.data.user.id
             posterNickName.textContent = res.data.user.name;

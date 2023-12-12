@@ -67,7 +67,11 @@ import axios from "axios";
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get("http://localhost:3000/posts?_expand=user")
+        axios.get("http://localhost:3000/664/posts?_expand=user",{
+            headers: {  
+                "authorization": `Bearer ${storedToken}`
+            }
+        })
         .then(function(res){
             let postdata =res.data
             let userImage;
@@ -77,11 +81,11 @@ import axios from "axios";
             let uid;
             let postid;
             const page = location.href.split("=")[1];
-            document.querySelector(".post").innerHTML=`<div class="row justify-content-between post1">
+            document.querySelector(".post").innerHTML=`<div class="row justify-content-center post1">
                                                         </div>
-                                                        <div class="row justify-content-between mt-5 post2">
+                                                        <div class="row justify-content-center mt-5 post2">
                                                         </div>
-                                                        <div class="row justify-content-between mt-5 post3">
+                                                        <div class="row justify-content-center mt-5 post3">
                                                         </div>
                                                         <div class="pe-5 me-5 mt-5">
                                                         <nav aria-label="Page navigation example">
@@ -272,16 +276,15 @@ import axios from "axios";
                                 const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
                                     "favoriteCounts": CC,
                                 });
-                                axios.get(`http://localhost:3000/favorites?userId=${userId}`)
-                                .then(function(res){
-                                     let favorite = res.data[0].postId
-                                     let usid = res.data[0].userId
-                                     favorite.push(Number(poid))
-                                     
-                                     axios.patch(`http://localhost:3000/favorites?userId=${usid}`, {
-                                         "postId": favorite
-                                      })
+                                axios.post(`http://localhost:3000/favorites`,{
+                                            "userId":Number(userId),
+                                            "postId":Number(poid)
+                                        })
+                                .then(function(res) {
                                 })
+                                .catch(function(err) {
+                                    console.error("GET 请求失败:", err);
+                                });
                             } else {
                                 const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
                                     "favoriteCounts": CC - 1,

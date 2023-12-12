@@ -93,7 +93,11 @@ const userId = getCookie("outfitpalsId");
 const id = parseInt(location.href.split("=")[1], 10);
 
 
-axios.get(`http://localhost:3000/users?id=${id}`)
+axios.get(`http://localhost:3000/660/users?id=${id}`,{
+    headers: {  
+        "authorization": `Bearer ${storedToken}`
+    }
+})
 .then(function(res){
     other.innerHTML=`                       
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
@@ -172,16 +176,20 @@ axios.get(`http://localhost:3000/users?id=${id}`)
 })
 
 
-axios.get(`http://localhost:3000/posts?userId=${id}`)
+axios.get(`http://localhost:3000/660/posts?userId=${id}`,{
+    headers: {  
+        "authorization": `Bearer ${storedToken}`
+    }
+})
 .then(function(res){
     let postdata =res.data
     const page = location.href.split("=")[2];
-    otherspost.innerHTML =`<div class="row justify-content-between post1">
+    otherspost.innerHTML =`<div class="row justify-content-center post1">
                         </div>
-                        <div class="row justify-content-between mt-5 post2">
+                        <div class="row justify-content-center mt-5 post2">
 
                         </div>
-                        <div class="row justify-content-between mt-5 post3">
+                        <div class="row justify-content-center mt-5 post3">
 
                         </div>
                         <div class="pe-5 me-5 mt-5">
@@ -276,7 +284,11 @@ axios.get(`http://localhost:3000/posts?userId=${id}`)
 
 
 if (storedToken != null) {   //判斷登陸
-        axios.get(`http://localhost:3000/personal?userId=${id}`)
+        axios.get(`http://localhost:3000/660/personal?userId=${id}`,{
+            headers: {  
+                "authorization": `Bearer ${storedToken}`
+            }
+        })
 
         
         .then(function(res){

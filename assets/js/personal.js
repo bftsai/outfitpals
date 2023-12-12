@@ -86,7 +86,11 @@ const storedToken = getCookie("outfitpalsToken");
 const userId = getCookie("outfitpalsId");
 
 
-axios.get(`http://localhost:3000/users?id=${userId}`)
+axios.get(`http://localhost:3000/640/users?id=${userId}`,{
+    headers: {  
+        "authorization": `Bearer ${storedToken}`
+    }
+})
 .then(function(res){
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
@@ -183,17 +187,42 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
                 })
                 //收藏渲染
                 const coll = document.querySelector(".coll")
-                axios.get(`http://localhost:3000/favorites?_expand=post`)
+                axios.get(`http://localhost:3000/660/favorites?_expand=post&userId=${userId}`,{
+                    headers: {  
+                        "authorization": `Bearer ${storedToken}`
+                    }
+                })
                 .then(function(res){
-                    console.log(res.data[0].post)
-                    coll.innerHTML += `<div class="col-4">
-                    <div class="card" style="width: 350px; height: 450px;">
-                        <img src="${res.data[0].post.imgUrl}" style="width: 350px; height: 400px;" class="object-fit-cover bg-cover" >
-                        <div class="card-body dontmove">                                                                                                 
-                                        <strong>eric</strong>
-                            </div>
-                        </div>
-                        `
+                    console.log(res.data)
+                    coll.innerHTML += `<div class="container mb-5 ">
+                    <div class="row justify-content-center mt-4  coll" id="cardRow"></div>
+                    </div>` ;
+                    const cardRow = document.getElementById('cardRow');
+                    for(let i = 0;i<res.data.length;i++){
+                        cardRow.innerHTML += `<div class="col-lg-4 col-md-6">
+                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                    <img src="${res.data[i].post.imgUrl}" style="width: 350px; height: 400px;" class="object-fit-cover bg-cover" >
+                                                    <div class="card-body dontmove">                                                                                                 
+                                                        <strong>eric</strong>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+                    }
+                    const card1List = document.querySelectorAll(".card1");
+
+                    card1List.forEach(function(card, index) {
+                        let id = card.getAttribute("id").trim();
+                        card.addEventListener("click", function(e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + id;
+                        });
+                    });
+
+
+                    
+
+
                 })
 
             })
@@ -202,17 +231,21 @@ axios.get(`http://localhost:3000/users?id=${userId}`)
 
 
 
-axios.get(`http://localhost:3000/posts?userId=${userId}`)
+axios.get(`http://localhost:3000/600/posts?userId=${userId}`,{
+    headers: {  
+        "authorization": `Bearer ${storedToken}`
+    }
+})
 .then(function(res){
 
     let postdata =res.data
     const page = location.href.split("=")[1];
-    otherspost.innerHTML =`<div class="row justify-content-between post1">
+    otherspost.innerHTML =`<div class="row justify-content-center post1">
                             </div>
-                            <div class="row justify-content-between mt-5 post2">
+                            <div class="row justify-content-center mt-5 post2">
 
                             </div>
-                            <div class="row justify-content-between mt-5 post3">
+                            <div class="row justify-content-center mt-5 post3">
 
                             </div>
                             <div class="pe-5 me-5 mt-5">
@@ -315,7 +348,11 @@ axios.get(`http://localhost:3000/posts?userId=${userId}`)
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
-            axios.get(`http://localhost:3000/personal?userId=${userId}`)
+            axios.get(`http://localhost:3000/600/personal?userId=${userId}`,{
+                headers: {  
+                    "authorization": `Bearer ${storedToken}`
+                }
+            })
             .then(function(res){
                 
 
@@ -622,7 +659,7 @@ if (storedToken != null) {     //判斷登入
                                 let pos3 = p3.value|| p3.placeholder
                                 let pos4 = p4.value|| p4.placeholder
                                 let oktim = `${t1Value}:${m1Value}~${t2Value}:${m2Value}`
-                                axios.patch(`http://localhost:3000/personal/${dataid}`, {
+                                axios.patch(`http://localhost:3000/personal/${dataid}`,{
                                     "pos1": pos1,
                                     "pos2": pos2,
                                     "pos3":pos3,
