@@ -76,7 +76,7 @@ if(outfitpalsToken.length > 2) {
 
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname === '/pages/development.html') {
+    if (window.location.pathname === '/development.html') {
         search.classList.remove('d-none');
         switchBar.classList.remove('d-none');
         switchBarHr.classList.remove('d-none');
@@ -129,7 +129,7 @@ for (let i = 0; i < thumbLinks.length; i++) {
     })
 
     document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.pathname === '/pages/development.html') {
+        if (window.location.pathname === '/development.html') {
             document.addEventListener("click",function(event){
                 const clickedElement = event.target;
                 if (!searchList.contains(clickedElement)) {
@@ -149,12 +149,12 @@ for (let i = 0; i < thumbLinks.length; i++) {
     gopersonal.addEventListener("click",function(f){
         f.stopPropagation();
         f.preventDefault(); 
-        window.location.href = `${localUrl}/pages/personal.html?page=1`
+        window.location.href = `${localUrl}/personal.html?page=1`
     })
 
     const gopost = document.querySelector(".gopost")
     gopost.addEventListener("click",function(f){
         f.stopPropagation();
         f.preventDefault(); 
-        window.location.href = `${localUrl}/pages/development.html?page=1`
+        window.location.href = `${localUrl}/development.html?page=1`
     })

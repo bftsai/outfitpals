@@ -59,10 +59,10 @@ const postrId = location.href.split("=")[1];
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
                reserve.addEventListener("click",function(){
-                    window.location.href = `${localUrl}/pages/others.html?userId=` + user + "&page=1";
+                    window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
                })
                posterMore.addEventListener("click",function(){
-                window.location.href = `${localUrl}/pages/others.html?userId=` + user + "&page=1";
+                window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
              }) 
                const more = document.querySelector(".more")
                more.innerHTML = `
@@ -95,7 +95,7 @@ const postrId = location.href.split("=")[1];
                         card.addEventListener("click", function(e) {
                             e.stopPropagation();
                             e.preventDefault();
-                            window.location.href = `${localUrl}/pages/information.html?postId=` + id;
+                            window.location.href = `${localUrl}/information.html?postId=` + id;
                         });
                     });
 
