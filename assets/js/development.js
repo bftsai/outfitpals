@@ -7,7 +7,8 @@
 // const row = document.querySelector(".rows")
 
 import axios from "axios";
-
+const apiUrl='http://localhost:3000/';
+const localUrl='http://localhost:5173/outfitpals';
 // // 當 search 元素被點擊時，防止事件冒泡
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
@@ -67,7 +68,11 @@ import axios from "axios";
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get("http://localhost:3000/posts?_expand=user")
+        axios.get(`${apiUrl}664/posts?_expand=user`,{
+            headers: {  
+                "authorization": `Bearer ${storedToken}`
+            }
+        })
         .then(function(res){
             let postdata =res.data
             let userImage;
@@ -77,11 +82,11 @@ import axios from "axios";
             let uid;
             let postid;
             const page = location.href.split("=")[1];
-            document.querySelector(".post").innerHTML=`<div class="row justify-content-between post1">
+            document.querySelector(".post").innerHTML=`<div class="row justify-content-center post1">
                                                         </div>
-                                                        <div class="row justify-content-between mt-5 post2">
+                                                        <div class="row justify-content-center mt-5 post2">
                                                         </div>
-                                                        <div class="row justify-content-between mt-5 post3">
+                                                        <div class="row justify-content-center mt-5 post3">
                                                         </div>
                                                         <div class="pe-5 me-5 mt-5">
                                                         <nav aria-label="Page navigation example">
@@ -233,12 +238,12 @@ import axios from "axios";
                         let like = parseInt(originalLikeCounts) + 1;
                 
                         if (loveElement.classList.contains("ilove")) {
-                            const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                 "likeCounts": like,
                             });
 
                         } else {
-                            const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                 "likeCounts": like - 1,
                             });
 
@@ -269,21 +274,20 @@ import axios from "axios";
                             await new Promise(resolve => setTimeout(resolve, 3000));  // 等待3秒钟
                             let CC = parseInt(originalCollectCounts) + 1;
                             if (collect.classList.contains("icollect")) {
-                                const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                     "favoriteCounts": CC,
                                 });
-                                axios.get(`http://localhost:3000/favorites?userId=${userId}`)
-                                .then(function(res){
-                                     let favorite = res.data[0].postId
-                                     let usid = res.data[0].userId
-                                     favorite.push(Number(poid))
-                                     
-                                     axios.patch(`http://localhost:3000/favorites?userId=${usid}`, {
-                                         "postId": favorite
-                                      })
+                                axios.post(`${apiUrl}favorites`,{
+                                            "userId":Number(userId),
+                                            "postId":Number(poid)
+                                        })
+                                .then(function(res) {
                                 })
+                                .catch(function(err) {
+                                    console.error("GET 请求失败:", err);
+                                });
                             } else {
-                                const response = await axios.patch(`http://localhost:3000/posts/${poid}`, {
+                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
                                     "favoriteCounts": CC - 1,
                                 });
                             }
@@ -300,11 +304,11 @@ import axios from "axios";
                 //頭像跳轉
                 others.addEventListener("click", function() {
                     // 使用 window.location.href 将页面导航到另一个 URL，这里的 URL 中包含 userId 参数
-                    window.location.href = "http://localhost:5173/outfitpals/pages/others.html?userId=" + id + "&page=1";
+                    window.location.href = `${localUrl}/pages/others.html?userId=` + id + "&page=1";
                 });
                 //照片跳轉
                 img.addEventListener("click",function(){
-                    window.location.href = "http://localhost:5173/outfitpals/pages/information.html?postId=" + poid;
+                    window.location.href = `${localUrl}/pages/information.html?postId=` + poid;
                 })
             });
 
