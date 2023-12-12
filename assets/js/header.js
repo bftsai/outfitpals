@@ -39,19 +39,21 @@ function renderAvatar(userAvatarUrl) {
     avatar.innerHTML = `<img src="${userAvatarUrl}" alt="userAvatar">`
 }
 
-getAvatar()
+if(outfitpalsToken!==undefined){
+    getAvatar();
 
-//   判斷是否有token，切換header樣式
-if(outfitpalsToken.length > 2) {
-    signupBtn.classList.add('d-none')
-    loginShow.forEach(item => {
-        item.classList.remove('d-none')
+    //   判斷是否有token，切換header樣式
+    if(outfitpalsToken.length > 2) {
+        signupBtn.classList.add('d-none')
+        loginShow.forEach(item => {
+            item.classList.remove('d-none')
+        })
+    } else {
+        signupBtn.classList.remove('d-none')
+        loginShow.forEach(item => {
+            item.classList.add('d-none')
     })
-} else {
-    signupBtn.classList.remove('d-none')
-    loginShow.forEach(item => {
-        item.classList.add('d-none')
-})
+    }
 }
 
 // 會導致註冊後需填寫資料時發生重整，無法正確填寫
