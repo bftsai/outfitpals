@@ -39,7 +39,7 @@ function renderAvatar(userAvatarUrl) {
     avatar.innerHTML = `<img src="${userAvatarUrl}" alt="userAvatar">`
 }
 
-getAvatar()
+// getAvatar()
 
 //   判斷是否有token，切換header樣式
 if(outfitpalsToken.length > 2) {

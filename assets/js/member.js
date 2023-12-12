@@ -1,6 +1,6 @@
 //location url
-// const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
+// const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
@@ -277,3 +277,4 @@ let commentObj={
 // ajaxMember.postComment(commentObj)
 // ajaxMember.deleteComment(4)
 
+console.log(new Date('Tue, 12 Dec 2023 08:45:43 GMT'));
