@@ -1,11 +1,14 @@
 .FAQ {
-    background-image: url(/assets/images/index/bg_faq.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto !important; //cover在大於2000px才不會空白，auto接近設計稿
-    background-color: rgba(255, 255, 255, 0.2);
-    background-blend-mode: color-burn;
-    padding: 64px 12px;
+    .container{
+
+        background-image: url(/assets/images/index/bg_faq.jpg);
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: auto; 
+        background-color: rgba(255, 255, 255, 0.2);
+        background-blend-mode: color-burn;
+        padding: 64px 12px;
+    }
 
     h2,
     h3 {
