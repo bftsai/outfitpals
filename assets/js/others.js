@@ -248,7 +248,7 @@ axios.get(`${apiUrl}660/posts?userId=${id}`,{
                             card.addEventListener("click", function(e) {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                window.location.href = `${localUrl}/pages/information.html?postId=` + id;
+                                window.location.href = `${localUrl}/information.html?postId=` + id;
                             });
                         });
                     // }
@@ -680,7 +680,7 @@ if (storedToken != null) {   //判斷登陸
                 }
 
                 bkdep.addEventListener("click",function(){
-                    window.location.href = `${localUrl}/pages/development.html`;
+                    window.location.href = `${localUrl}/development.html`;
                 })
 
             }
@@ -695,7 +695,7 @@ if (storedToken != null) {   //判斷登陸
     })
     
     gologin.addEventListener("click",function(){
-        window.location.href = `${localUrl}/pages/member.html`;
+        window.location.href = `${localUrl}/member.html`;
     })
 
 }

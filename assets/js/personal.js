@@ -220,7 +220,7 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
                         card.addEventListener("click", function(e) {
                             e.stopPropagation();
                             e.preventDefault();
-                            window.location.href = `${localUrl}/pages/information.html?postId=` + id;
+                            window.location.href = `${localUrl}/information.html?postId=` + id;
                         });
                     });
 
@@ -305,7 +305,7 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
                             card.addEventListener("click", function(e) {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                window.location.href = `${localUrl}/pages/information.html?postId=` + id;
+                                window.location.href = `${localUrl}/information.html?postId=` + id;
                             });
                         });
                     // }

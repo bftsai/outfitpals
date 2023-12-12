@@ -72,11 +72,7 @@ const localUrl='https://bftsai.github.io/outfitpals';
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get(`${apiUrl}664/posts?_expand=user`,{
-            headers: {  
-                "authorization": `Bearer ${storedToken}`
-            }
-        })
+        axios.get(`${apiUrl}/posts?_expand=user`)
         .then(function(res){
             let postdata =res.data
             let userImage;
@@ -308,11 +304,11 @@ const localUrl='https://bftsai.github.io/outfitpals';
                 //頭像跳轉
                 others.addEventListener("click", function() {
                     // 使用 window.location.href 将页面导航到另一个 URL，这里的 URL 中包含 userId 参数
-                    window.location.href = `${localUrl}/pages/others.html?userId=` + id + "&page=1";
+                    window.location.href = `${localUrl}/others.html?userId=` + id + "&page=1";
                 });
                 //照片跳轉
                 img.addEventListener("click",function(){
-                    window.location.href = `${localUrl}/pages/information.html?postId=` + poid;
+                    window.location.href = `${localUrl}/information.html?postId=` + poid;
                 })
             });
 
@@ -326,8 +322,3 @@ const localUrl='https://bftsai.github.io/outfitpals';
         })
 
 
-
-    // axios.get(`http://localhost:3000/posts`)
-    // .then(function(res){
-
-    // })
