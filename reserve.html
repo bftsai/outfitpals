@@ -5,43 +5,229 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OutfitPals-Reserve</title>
-    <script type="module" crossorigin src="/outfitpals/assets/reserve-fc04995a.js"></script>
-    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-56f4b848.js">
-    <link rel="modulepreload" crossorigin href="/outfitpals/assets/ajaxMember-e4a1da22.js">
-    <link rel="stylesheet" href="/outfitpals/assets/main-124fc71d.css">
+    <!-- customer -->
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAFCAYAAAAkG+5xAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAAFARIAAwAAAAEAAQAAARoABQAAAAEAAABKARsABQAAAAEAAABSASgAAwAAAAEAAgAAh2kABAAAAAEAAABaAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAABQAAAABWna+EAAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgoZXuEHAAABnElEQVQoFS2RTSjDcRzGn/0Ze5Fpy3tewklRS4jDclBeclGuCoVywmEHBzWuDk7GhZIdUC7iIMqJ4ijH5aI2Q7Ot2PIyn5/86+l5vt/f9/1vq5KW89KMJa3ZpNsftKQbUIed4S2IXoXt2FPoaTCJPsM3iu5Cz8NjoBWcxqQl6q58SxufUtYpneSkoULJSZ8DYkroM5yQniyK+HGE4EWcNegmCtaC+gIpjO3mLYxt4q7i0iUcwCZfxyBDwyNiusnfgSdoXo5/jvyOYukTn7+aQWgeQLeTuw5cxAifOsEduMfpgNMEZcHHI8Wxk0/SO/wMRiqkZjhBM1P4jZwktvmyaHO9LTYvo7CP9162x1SKab0Mf0jMBfYgNR9gWUxZCzeAaxJKYQdBDC5Xo8Sz3ACX6K1tCkX/tc3EkUMPCfZAQZqESBowm/HezwY+pB07Uym14Tsnto+LjOOXxSb78CZ4Yf0I7CFgFt5NS0UkcAjl8b2iU2jzxcnL4TOXMb/CNKP335XMMD1f/BbsH7vUAscYIEKMl7cFkOAsUQba+wWiAX1xQ+o8EwAAAABJRU5ErkJggg==" type="image/x-icon">
+    <meta name="description" content="outfitpals wear design fashion popular">
+
+    <script type="module" crossorigin src="/outfitpals/assets/reserve-268daef8.js"></script>
+    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-df41c1a0.js">
+    <link rel="modulepreload" crossorigin href="/outfitpals/assets/ajaxMember-00b3b2f2.js">
+    <link rel="stylesheet" href="/outfitpals/assets/main-07a915e3.css">
   </head>
   <body>
-    <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top">
+    <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top z-2">
     <nav class="container d-flex justify-content-between align-items-center">
         <a href="index.html" class="header__logo">
             <img src="/outfitpals/assets/logo_white-f9b1d4ee.svg" alt="OutfitPals">
         </a>
-
+        <!-- 搜尋Btn，僅貼文牆出現 -->
+        <div class="d-flex search d-none" id="toggle">
+            <span class="input-group-text border-0 header pe-3">
+                <span class="material-symbols-outlined">
+                    search
+                    </span>
+            </span>
+            <p class="mt-1">search</p>
+        </div>
+        <!-- 搜尋Btn結束 -->
         <div class="header__links d-none d-lg-block">
-            <a href="#">貼文牆</a>
-            <a href="#">常見問題</a>
-            <a href="#">贊助我們</a>
-            <a href="#">我的預約</a>
-            <a href="./member.html" class="header__links__button btn btn-outline-black18 m-0 ps-4">註冊登入 <span class="material-symbols-outlined">
-                chevron_right
+            <a href="" class="gopost">貼文牆</a>
+            <a href="./create.html" class="d-none loginShow">建立貼文</a>
+            <a href="./index.html#FAQ">常見問題</a>
+            <a href="./donate.html">贊助我們</a>
+            <!-- 登入前 -->
+            <a href="./member.html" class="header__links__button btn btn-outline-black18 m-0 ps-4 signupBtn">註冊登入 <span
+                    class="material-symbols-outlined">
+                    chevron_right
                 </span> </a>
+            <!-- 登入後新增 -->
+            <a href="./reserve.html" class="d-none loginShow">我的預約</a>
+            <a href="./member.html" class="m-0 d-none loginShow">會員中心</a>
+            <a href="" class="m-0 d-none loginShow avatar gopersonal"><img src="" alt=""></a>
+
         </div>
         <button type="button" class="header__menu-btn border-0 p-2 d-lg-none">
             <span class="material-symbols-outlined">menu</span>
-        </div>
+            </div>
     </nav>
+    <!-- 搜尋列表，以下僅在貼文牆顯示 -->
+    <div class="sidebar d-none">
+        <div class="row me-4 rows searchList d-none">
+            <div class="col-6 mt-6">
+                <div class="d-flex justify-content-center my-5">
+                    <div class="d-flex me-5">
+                        <span class="input-group-text border-0 header pe-3 w-50">
+                            <span class="material-symbols-outlined">
+                                search
+                                </span>
+                            <p class="ms-2 ">關鍵字搜尋</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center my-5">
+                    <input type="search" class="form-control header border-0 shadow-none" placeholder="請輸入您喜愛的風格"
+                        style="width: 200px;">
+                </div>
+                <br>
+                <div class="d-flex justify-content-center my-5">
+                    <button type="button" class="btn arrowBtn2sm btn-primary fs-lg-4 me-3">送出</button>
+                </div>
+            </div>
+            <div class="col-2 mt-6">
+                <div class="d-flex justify-content-center my-5">
+                    <strong>
+                        風格篩選
+                    </strong>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="style-japanese">
+                    <label class="form-check-label  text-nowrap" for="style-japanese">
+                        日系風格
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="style-street">
+                    <label class="form-check-label  text-nowrap" for="style-street">
+                        街頭風格
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="style-western">
+                    <label class="form-check-label  text-nowrap" for="style-western">
+                        歐美風格
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="style-korean">
+                    <label class="form-check-label  text-nowrap" for="style-korean">
+                        韓國風格
+                    </label>
+                </div>
+            </div>
+            <div class="col-2 mt-6">
+                <div class="d-flex justify-content-center my-5">
+                    <strong>
+                        身高篩選
+                    </strong>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="height-149">
+                    <label class="form-check-label  text-nowrap" for="height-149">
+                        149cm以下
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="height-150-159">
+                    <label class="form-check-label  text-nowrap" for="height-150-159">
+                        150-159cm
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="height-160-169">
+                    <label class="form-check-label  text-nowrap" for="height-160-169">
+                        160-169cm
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="height-170-179">
+                    <label class="form-check-label  text-nowrap" for="height-170-179">
+                        170-179cm
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="height-180">
+                    <label class="form-check-label  text-nowrap" for="height-180">
+                        180cm以上
+                    </label>
+                </div>
+            </div>
+            <div class="col-2 mt-6">
+                <div class="d-flex justify-content-center my-5">
+                    <strong>預約篩選</strong>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="reservation-open">
+                    <label class="form-check-label  text-nowrap" for="reservation-open">
+                        開放預約
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center my-3">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="reservation-closed">
+                    <label class="form-check-label  text-nowrap" for="reservation-closed">
+                        未開放
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
+<!-- 貼文牆的gender switchBar -->
+<div class="switchBar container d-flex display-6 justify-content-center mt-3 d-none">         
+    <a href="#" class="thumb-link "><p class="pe-4 thumb">MEN</p></a>
+    <a href="#" class="thumb-link "><p class="ps-4 thumb">WOMEN</p></a>       
+</div>
+<hr class="switchBarHr d-none">
+
+<!-- 以上僅貼文牆顯示 -->
+
 <!-- 待桌機版完成後補行動版sidebar
 <div  class="header-sidebar">
     <span class="material-symbols-outlined d-none"> close</span> 
-</div> -->    <div class="spinner-border text-black18 d-none position-absolute memberSpinner" role="status">
+</div> -->
+
+    <div class="spinner-border text-black18 d-none position-absolute memberSpinner" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
     <div class="reserve h-radialGradienStyle-1 pb-9 pb-lg-13">
+      <div class="unLogin h-radialGradienStyle-1 p-0 container">
+        <div class="phoneSize d-lg-none">
+          <h1 class="fw-medium fs-2 fs-lg-1 ms-3 mb-3">你還在為穿搭煩惱嗎？</h1>
+          <p class="fw-medium ms-3 mb-7">立即預約時尚穿搭教主，引領你走進潮流世界</p>
+          <div class="row justify-content-start z-2 c-confirm-btn-group">
+            <div class="col-6 col-sm-5 d-flex">
+                <a href="member.html" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">立即登入/註冊</a>
+            </div>
+          </div>
+        </div>
+        <div id="reserveCarouselFade" class="carousel slide carousel-fade d-none d-lg-block" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="banner1">
+                <h1 class="fw-medium fs-lg-1 ms-lg-17 mb-2 mb-lg-3">你還在為穿搭煩惱嗎？</h1>
+                <p class="fw-medium fs-lg-2 ms-lg-17 mb-9 mb-lg-17">立即預約時尚穿搭教主，引領你走進潮流世界</p>
+                <div class="row justify-content-start z-2 c-confirm-btn-group">
+                  <div class="col-6 col-sm-3 d-flex">
+                      <a href="member.html" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">立即登入/註冊</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="banner2">
+                <h1 class="fw-medium fs-lg-1 ms-lg-17 mb-2 mb-lg-3">Wear Design Fashion Popular</h1>
+                <p class="fw-medium fs-lg-2 ms-lg-17 mb-9 mb-lg-17">開始分享你的時尚穿搭</p>
+                <div class="row justify-content-start z-2 c-confirm-btn-group">
+                  <div class="col-6 col-sm-3 d-flex">
+                      <a href="member.html" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="submit">立即登入/註冊</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#reserveCarouselFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#reserveCarouselFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
       <div class="container c-switch-btn-group">
         <div class="row justify-content-center py-9 py-lg-13">
           <div class="col col-lg-4">
-            <div class="btn-group w-100" role="group" aria-label="Basic example">
+            <div class="reserveBtnSwitch btn-group w-100" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 active">我的預約</button>
               <button type="button" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7">預約管理</button>
             </div>
@@ -188,7 +374,7 @@
             <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">地點：<a target="_blank" href="#" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-8 col-lg-9">
             <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
@@ -203,21 +389,13 @@
           </div>
         </div>
         <div class="row flex-column">
-          <div class="col-8 d-flex">
-            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 mb-7 mb-lg-9">
-              哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
-            </p>
-          </div>
           <div class="col-8 d-flex align-self-end">
-            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9 commentBody">
+            <p class="bg-black text-primary fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9 commentBody">
               好啊，那我們就當天見！
             </p>
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-10">
-            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="" placeholder="請輸入文字..."></textarea>
-          </div>
           <div class="col-6">
             <div class="c-confirm-btn-group reserveMyDiscussConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveMyDiscussConfirmSubmit" disabled>送出</button>
@@ -250,7 +428,10 @@
             <p class="fs-lg-4 fw-bold">預約時間：<span class="reservationTime">112年10月5號 15:00</span></p>
           </div>
           <div class="col-12">
-            <p class="fs-lg-4 fw-bold">地點：<a href="#" class="location">忠孝復興站1號出口</a></p>
+            <p class="fs-lg-4 fw-bold">手機號碼：<a target="_blank" href="tel" class="tel">0912123456</a></p>
+          </div>
+          <div class="col-12">
+            <p class="fs-lg-4 fw-bold">地點：<a target="_blank" href="https://www.google.com.tw/maps?q=" class="location">忠孝復興站1號出口</a></p>
           </div>
           <div class="col-5 col-lg-6">
             <p class="fs-lg-4 fw-bold">狀態：<span class="state">預約中</span></p>
@@ -265,7 +446,7 @@
             <div class="form-check">
               <input class="form-check-input fs-lg-4" type="radio" name="reserve-manageAppointments" id="reserve-manageAppointmentsCancel">
               <label class="form-check-label fw-bold fs-lg-4" for="reserve-manageAppointmentsCancel">
-                取消預約
+                拒絕預約
               </label>
             </div>
           </div>
@@ -276,16 +457,8 @@
               哈摟，我很喜歡你的穿搭，希望能有機會跟您約時間碰面，想請您幫忙研究如何穿搭比較好，如有興趣，再麻煩撥空回覆，萬分感謝！
             </p>
           </div>
-          <div class="col-8 d-flex align-self-end">
-            <p class="bg-primary text-white fs-lg-4 p-3 p-lg-7 rounded-4 ms-auto text-end mb-7 mb-lg-9">
-              好啊，那我們就當天見！
-            </p>
-          </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-10">
-            <textarea class="w-100 p-3 p-lg-7 fs-lg-4 mb-7 mb-lg-9" name="" id="reserveManageAppointmentsArea" placeholder="請輸入文字..."></textarea>
-          </div>
           <div class="col-6">
             <div class="c-confirm-btn-group reserveManageAppointmentsConfirmGroup btn-group w-100 mb-7 mb-lg-9" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-black18 text-primary active py-lg-3 px-lg-7 reserveManageAppointmentsConfirmSubmit" disabled>送出</button>
@@ -294,19 +467,17 @@
           </div>
         </div>
       </div>
-      <div class="container pagination justify-content-center">
+      <div class="container paginationArea">
         <nav aria-label="Page navigation">
-          <ul class="pagination m-0">
-            <li class="page-item">
+          <ul class="pagination m-0 justify-content-center">
+            <li class="page-item prev">
               <a class="page-link page-prev border-black18 bg-black" href="#" aria-label="Previous">
                 <img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg" alt="pagination arrow">
                 <img src="/outfitpals/assets/Btn-Arrow-black-4f4da4c3.svg" alt="pagination arrow">
               </a>
             </li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">2</a></li>
-            <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5" href="#">3</a></li>
-            <li class="page-item">
+            <!-- <li class="page-item"><a class="page-link page-num py-lg-3 px-lg-7 border-black18 bg-black fs-6 fs-lg-5 active" href="#">1</a></li> -->
+            <li class="page-item next">
               <a class="page-link page-next border-black18 bg-black" href="#" aria-label="Next">
                 <img src="/outfitpals/assets/Btn-Arrow-primary-f99b41da.svg" alt="pagination arrow">
                 <img src="/outfitpals/assets/Btn-Arrow-black-4f4da4c3.svg" alt="pagination arrow">
@@ -358,15 +529,16 @@
         </div>
         <div class="footer__links d-flex flex-column align-items-center align-items-lg-end">
             <div class="footer__links__items mb-7 mb-lg-8 fs-8 align-items-center pt-2 mt-lg-2">
-                <a href="#" class="me-7">貼文牆總覽</a>
-                <a href="#" class="me-7">贊助我們</a>
-                <a href="#" class="me-7">常見問題</a>
-                <a href="#" class="me-7 me-lg-0">預約查詢</a>
+                <a href="./development.html" class="me-7">貼文牆總覽</a>
+                <a href="./donate.html" class="me-7">贊助我們</a>
+                <a href="./index.html#FAQ" class="me-7">常見問題</a>
+                <a href="./reserve.html" class="me-7 me-lg-0">預約查詢</a>
             </div>
             <div class="footer__copyright fs-9 pb-2 ">Copyright © 2024 OutfitPals. All rights reserved.</div>
         </div>
     </div>
 </footer>    <!-- own JS -->
+    
     
     
   </body>
