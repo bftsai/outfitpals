@@ -53,6 +53,7 @@ const d4 = document.querySelector(".d4")
 const usetime = document.querySelector(".usetime")                                              
                                         
 const bkdep = document.querySelector(".bkdep")     //查看其他人
+const unopenname = document.querySelector(".unopenname")     
 
 const nologin = document.querySelector('#nologin');
 const gologin = document.querySelector('#gologin');
@@ -287,7 +288,7 @@ axios.get(`${apiUrl}660/posts?userId=${id}`,{
 
 
 if (storedToken != null) {   //判斷登陸
-        axios.get(`${apiUrl}personal?_expand=user`) 
+        axios.get(`${apiUrl}personal?userId=${id}&_expand=user`) 
         .then(function(res){
             console.log(res.data)
             if(res.data.length == 0){     //判斷是否第一次登陸
@@ -298,8 +299,8 @@ if (storedToken != null) {   //判斷登陸
             const isopen =res.data[0].isopen;
             const otherdate = res.data[0].otherdate;
             const okday = res.data[0].okday;
-            const userimg = res.data[1].user.image
-            const username = res.data[1].user.name
+            const userimg = res.data[0].user.image
+            const username = res.data[0].user.name
 
 
             if (isopen === true) {  //判斷是否開預約
@@ -674,6 +675,8 @@ if (storedToken != null) {   //判斷登陸
                         }
                     });
                 }
+
+                unopenname.textContent=`很可惜，${username}尚未成為逛街小精靈 想預約陪逛服務嗎？`
 
                 bkdep.addEventListener("click",function(){
                     window.location.href = `${localUrl}/development.html`;

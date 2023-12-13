@@ -9,6 +9,7 @@
 // https://outfitpals-web-server.onrender.com/
 // https://bftsai.github.io/outfitpals
 import axios from "axios";
+import { data } from "jquery";
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 // const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
@@ -17,6 +18,7 @@ const localUrl='http://localhost:5173/outfitpals/pages';
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
 // });
+
 
 
 // for (let i = 0; i < thumbLinks.length; i++) {
@@ -72,6 +74,10 @@ const localUrl='http://localhost:5173/outfitpals/pages';
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
+
+
+
+//貼文牆
         axios.get(`${apiUrl}posts?_expand=user`)
         .then(function(res){
             let postdata =res.data
@@ -138,27 +144,31 @@ const localUrl='http://localhost:5173/outfitpals/pages';
                                                             <img src="${imgUrl}" style="width: 350px; height: 350px;" class="object-fit-cover img">
                                                                 <div class="card-body dontmove" id="${postid}">
                                                                     <div class="row">
-                                                                        <div class="col mt-2 d-flex ">
+                                                                        <div class="col-8 mt-2 d-flex ">
                                                                             <div class="circle-box others" id=" ${uid}" style="width: 50px; height: 50px;background: url('${userImage}') center center / cover no-repeat;"></div>
                                                                             <div class="ms-2">
                                                                                 <strong>${username}</strong>
                                                                                 <p class="fs-6  text-nowrap" style="opacity: 0.4;">${height}cm ${weight}kg</p>
                                                                             </div>
                                                                         </div>
-                                                                    <div class="col-2 d-flex flex-row-reverse">
-                                                                        <p class="bi bi-bookmark display-6 mt-2 collect" ></p>
-                                                                        <p class="bi bi-heart display-6 mt-2 me-3 love" style="position: relative; top: 2px;" ></p>
+                                                                        <div class="col-1  icon2">
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-1 ms-3 icon">
+                                                                            
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    
-                                                </div>`;}
+                                                                </div>
+                                                        </div>                                                   
+                                                    </div>`;}
+     
                 });
 
-
-
             }
+
+
             //頁數渲染
             const one = document.querySelector(".page"); 
             let maxPages = 100; 
@@ -198,108 +208,168 @@ const localUrl='http://localhost:5173/outfitpals/pages';
             
             //cardboy 不跳轉 
             const card = document.querySelectorAll(".card1"); 
-            
-            card.forEach(function(c) {
+          
+            card.forEach(function(c,index) {
                 c.addEventListener("click", function(e) {
                     e.stopPropagation();
                     e.preventDefault();
                 })
+
+                
                 const dontmove = c.querySelector(".dontmove"); 
                 const others = c.querySelector(".others"); 
                 const img = c.querySelector(".img"); 
-                let id = others.getAttribute("id").trim();  //使用者id                      使用 trim() 移除空格 
+                // let id = others.getAttribute("id").trim();  //使用者id                      使用 trim() 移除空格 
                 let poid = dontmove.getAttribute("id").trim();  //post 的 id
-                const loveElement = c.querySelector('.love');
-                const collect = c.querySelector('.collect');
+                
+
+                const icon = c.querySelector('.icon');
+                const icon2 = c.querySelector('.icon2');
 
                 let isProcessing = false;
                 let originalLikeCounts;  // 将 originalLikeCounts 移到全局作用域
                 let originalCollectCounts;
 
-                //喜歡與收藏
-                loveElement.addEventListener('click', async function(e) {
-                    if (isProcessing) {
-                        return;  // 如果正在处理点击事件，则直接返回，防止重复点击
-                    }
-                
-                    isProcessing = true;  // 设置标志位，表示开始处理点击事件
-                
-                    try {
-                        // 切换样式
-                        loveElement.classList.toggle("bi-heart");
-                        loveElement.classList.toggle("bi-heart-fill"); 
-                        loveElement.classList.toggle("ilove");
-                        
-                        const currentPost = postdata.find(post => post.id == poid);
-                        originalLikeCounts = currentPost.likeCounts;  // 更新 originalLikeCounts 的值
-                
-                        await new Promise(resolve => setTimeout(resolve, 3000));  // 等待3秒钟
-                        let like = parseInt(originalLikeCounts) + 1;
-                
-                        if (loveElement.classList.contains("ilove")) {
-                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                "likeCounts": like,
-                            });
+                let thisid
 
-                        } else {
-                            const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                "likeCounts": like - 1,
-                            });
-
-                        }
-                    } catch (error) {
-                        console.error("Error:", error);
-                    } finally {
-                        isProcessing = false;  // 点击事件处理完成，重置标志位
-                    }
-
-                });
+                // 收藏選染
+                axios.get(`${apiUrl}favorites?userId=${userId}`)
+                .then(function(res){
                     
-                collect.addEventListener('click', async function(e) {
+                    let collectposts = []
+                    res.data.forEach(async function(collect) {
+                        collectposts.push(collect.postId)
+                    })
+                    collectposts.forEach(function(l,index){                          
+                        if(icon.children.length === 0){     
+                            if(collectposts[index] ==poid){
+                                icon.innerHTML +=`<p class="bi display-6 mt-2 collect bi-bookmark-fill icollect"></p>` 
+                            }
+                        }   
+                    })
+                    if(icon.children.length === 0){
+                        if(collectposts[index] !=poid){
+                            icon.innerHTML +=`<p class="bi bi-bookmark display-6 mt-2 collect" ></p>`
+                        }
+                    }    
+                    const collect = c.querySelector('.collect');     
+                    collect.addEventListener('click', async function(e) {
+                            if (isProcessing) {
+                                return;  // 如果正在处理点击事件，则直接返回，防止重复点击
+                            }
+                        
+                            isProcessing = true;  // 设置标志位，表示开始处理点击事件
+    
+                            try {
+                                collect.classList.toggle("bi-bookmark");
+                                collect.classList.toggle("bi-bookmark-fill");
+                                collect.classList.toggle("icollect");
+    
+                                const currentPost = postdata.find(post => post.id == poid);
+                                originalCollectCounts = currentPost.favoriteCounts;  
+    
+                                // await new Promise(resolve => setTimeout(resolve, 500));  // 等待3秒钟
+                                let CC = parseInt(originalCollectCounts) + 1;
+                                if (collect.classList.contains("icollect")) {
+                                    const response = await axios.patch(`${apiUrl}posts/${poid}`, {
+                                        "favoriteCounts": CC,
+                                    });
+                                    axios.post(`${apiUrl}favorites`,{
+                                                "userId":Number(userId),
+                                                "postId":Number(poid)
+                                            })
+                                } else {
+                                    const response = await axios.patch(`${apiUrl}posts/${poid}`, {
+                                        "favoriteCounts": CC - 1,
+                                    });
+                                    
+                                    axios.get(`${apiUrl}favorites?postId=${poid}`)
+                                    .then(r=>{
+                                        let d = (r.data[0].id)
+                                        axios.delete(`${apiUrl}favorites/${d}`)
+                                    })
+                                }
+    
+                            }catch (error) {
+                                console.error("Error:", error);
+                            } finally {
+                                isProcessing = false;  // 点击事件处理完成，重置标志位
+                            }
+    
+                        
+                    });
+
+                })
+
+                //喜歡選染
+                axios.get(`${apiUrl}likes?userId=${userId}`)
+                .then(function(res){
+                    
+                    let liketposts = []
+                    res.data.forEach(async function(like) {
+                        liketposts.push(like.postId)
+                    })
+                    
+                    liketposts.forEach(function(l,index){                          
+                        if(icon2.children.length === 0){     
+                            if(liketposts[index] ==poid){
+                                    icon2.innerHTML +=`<p class="bi display-6 mt-2 me-3 love bi-heart-fill ilove" style="position: relative; top: 2px;"></p>`
+                            }
+                        }   
+                    })
+                    if(icon2.children.length === 0){
+                        if(liketposts[index] !=poid){
+                        icon2.innerHTML +=`<p class="bi bi-heart display-6 mt-2 me-3 love" style="position: relative; top: 2px;" ></p>`
+                        }
+                    }
+                    const loveElement = c.querySelector('.love');
+                    //喜歡與收藏
+                    loveElement.addEventListener('click', async function(e) {
                         if (isProcessing) {
                             return;  // 如果正在处理点击事件，则直接返回，防止重复点击
                         }
                     
                         isProcessing = true;  // 设置标志位，表示开始处理点击事件
-
+                    
                         try {
-                            collect.classList.toggle("bi-bookmark");
-                            collect.classList.toggle("bi-bookmark-fill");
-                            collect.classList.toggle("icollect");
-
+                            // 切换样式
+                            loveElement.classList.toggle("bi-heart");
+                            loveElement.classList.toggle("bi-heart-fill"); 
+                            loveElement.classList.toggle("ilove");
+                            
                             const currentPost = postdata.find(post => post.id == poid);
-                            originalCollectCounts = currentPost.favoriteCounts;  
 
-                            await new Promise(resolve => setTimeout(resolve, 3000));  // 等待3秒钟
-                            let CC = parseInt(originalCollectCounts) + 1;
-                            if (collect.classList.contains("icollect")) {
+                            originalLikeCounts = currentPost.likeCounts;  // 更新 originalLikeCounts 的值
+                            // await new Promise(resolve => setTimeout(resolve, 500));  // 等待3秒钟
+                            let like = parseInt(originalLikeCounts) + 1;
+                    
+                            if (loveElement.classList.contains("ilove")) {
                                 const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                    "favoriteCounts": CC,
+                                    "likeCounts": like,
                                 });
-                                axios.post(`${apiUrl}favorites`,{
-                                            "userId":Number(userId),
-                                            "postId":Number(poid)
-                                        })
-                                .then(function(res) {
+                                axios.post(`${apiUrl}likes`,{
+                                    "userId":Number(userId),
+                                    "postId":Number(poid)
                                 })
-                                .catch(function(err) {
-                                    console.error("GET 请求失败:", err);
-                                });
                             } else {
                                 const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                    "favoriteCounts": CC - 1,
+                                    "likeCounts": like - 1,
                                 });
+                                axios.get(`${apiUrl}likes/${poid}`)
+                                .then(r=>{
+                                    let d = (r.data.id)
+                                    axios.delete(`${apiUrl}likes/${d}`)
+                                })
                             }
-
-                        }catch (error) {
+                        } catch (error) {
                             console.error("Error:", error);
                         } finally {
                             isProcessing = false;  // 点击事件处理完成，重置标志位
                         }
+    
+                    });
 
-                    
-                });
-                
+                })
                 //頭像跳轉
                 others.addEventListener("click", function() {
                     // 使用 window.location.href 将页面导航到另一个 URL，这里的 URL 中包含 userId 参数
@@ -313,11 +383,22 @@ const localUrl='http://localhost:5173/outfitpals/pages';
 
 
 
-            
 
-            
+
 
         
         })
 
 
+
+
+
+//         axios.post(`${apiUrl}favorites`,{
+//             "userId":Number(4),
+//             "postId":Number(4)
+//         })
+// .then(function(res) {
+// })
+// .catch(function(err) {
+//     console.error("GET 请求失败:", err);
+// });
