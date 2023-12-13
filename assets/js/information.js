@@ -4,9 +4,9 @@ import axios from 'axios';
 // https://outfitpals-web-server.onrender.com/
 // https://bftsai.github.io/outfitpals
 const apiUrl='https://outfitpals-web-server.onrender.com/';
-const localUrl='https://bftsai.github.io/outfitpals';
+// const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals/pages';
+const localUrl='http://localhost:5173/outfitpals/pages';
 
 
 const posterNickName = document.querySelector(".posterNickName");
@@ -20,6 +20,8 @@ const posterInfo = document.querySelector(".posterInfo");
 const posterMore = document.querySelector(".posterMore");
 const posterOther = document.querySelector(".posterOther");
 const myModa2 = new bootstrap.Modal(document.getElementById('myModa2'));
+const likecount = document.querySelector(".likecount")
+const collectcount = document.querySelector(".collectcount")
 const like = document.querySelector(".like");
 const favorite = document.querySelector(".favorite");
 
@@ -40,8 +42,8 @@ function getCookie(name) {
 
 const storedToken = getCookie("outfitpalsToken");
 const postrId = location.href.split("=")[1];
-
-        axios.get(`${apiUrl}/posts/${postrId}?_expand=user`)
+console.log(storedToken)
+        axios.get(`${apiUrl}posts/${postrId}?_expand=user`)
         .then(res => {
             let userid =res.data.user.id
             posterNickName.textContent = res.data.user.name;
@@ -54,6 +56,8 @@ const postrId = location.href.split("=")[1];
             postContent.textContent = res.data.body;
             posterMore.innerHTML = `<button type="button" class=" btn btn-primary fs-3 arrowBtn2">看更多${res.data.user.name}的穿搭</button>`
             posterOther.innerHTML = `<h2 class="text-center ">查看${res.data.user.name}的其他搭配</h2>`
+            likecount.innerHTML = `${res.data.likeCounts}`
+            collectcount.innerHTML = `${res.data.favoriteCounts}`
             const sty = document.querySelector(".sty")
             const stys = res.data.brands;
                if(stys.length <2){
@@ -73,9 +77,10 @@ const postrId = location.href.split("=")[1];
                }
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
-               if(storedToken != null){
+               if(storedToken == ""){
                 reserve.addEventListener("click",function(){
-                        window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                    window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                    
                 })
                }else{
                 reserve.addEventListener("click",function(){

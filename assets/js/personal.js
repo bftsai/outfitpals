@@ -8,9 +8,9 @@
 // window.onload = handleUserIdParameter;
 
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals/pages';
+const localUrl='http://localhost:5173/outfitpals/pages';
 const apiUrl='https://outfitpals-web-server.onrender.com/';
-const localUrl='https://bftsai.github.io/outfitpals';
+// const localUrl='https://bftsai.github.io/outfitpals';
 
 //兩頁換頁
 const thumbLinks = document.querySelectorAll(".thumb-link");  
@@ -97,7 +97,7 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
     }
 })
 .then(function(res){
-    console.log(res.data);
+    
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
@@ -349,7 +349,7 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
-            axios.get(`${apiUrl}600/personal?userId=${userId}`)
+            axios.get(`${apiUrl}personal?userId=${userId}`)
             .then(function(res){
                 
 
