@@ -1,6 +1,3 @@
-//location url
-const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-// const locationUrl='https://bftsai.github.io/outfitpals/member.html';
 //member pages
 const memberIndex=document.querySelector('.member-index');
 const memberIndexForm=document.querySelector('.memberIndexForm');
@@ -44,8 +41,23 @@ const memberSignUpSubmit=document.querySelector('.memberSignUpSubmit');
 
 import { checkSign, signUpValidation } from './formValidation.js';
 import { ajaxMember, cookieValue } from './ajaxMember.js';
+import { locationUrl, apiUrl } from "./config.js";
+import axios from 'axios';
 //init
-if(cookieValue('outfitpalsThirdParty')==='false'||cookieValue('outfitpalsThirdParty')==='google'){
+// if(cookieValue('outfitpalsThirdParty')!==undefined){
+//     if(cookieValue('outfitpalsThirdParty')==='false'||cookieValue('outfitpalsThirdParty')==='google'){
+//         if(cookieValue('outfitpalsToken')&&cookieValue('outfitpalsId')){
+//             memberIndex.classList.add('opacity-0');
+//             account.value='';
+//             pwd.value='';
+//             ajaxMember.renderMemberSignInProfileForm();
+//             memberIndex.classList.add('d-none');
+//             memberSignInProfile.classList.remove('d-none');
+//             memberSignInProfile.classList.remove('opacity-0');
+//         }
+//     }
+// }
+if(cookieValue('outfitpalsThirdParty')==='false'||cookieValue('outfitpalsThirdParty')==='google'||cookieValue('outfitpalsThirdParty')===undefined){
     if(cookieValue('outfitpalsToken')&&cookieValue('outfitpalsId')){
         memberIndex.classList.add('opacity-0');
         account.value='';
@@ -227,20 +239,12 @@ memberSignInForm.addEventListener('click',e=>{
 
         signUpValidation(signInPhoto,signInName,signInPwd,signInNickName,signInBirth,signInMail,signInTel,signInMale,signInFemale,signInHeight,signInWeight,signInPopArea,signInStyle,signInOutfitPrice,signInLoveStore,signInIntroduce,memberSignInForm);
     }else if(e.target.className.includes('memberSignInReviseCancel')){
-        location.href=locationUrl;
+        location.href=`${locationUrl}member.html`;
     }
 },false);
 
 // ajaxMember.deleteUser(5)
-// ajaxMember.signOut()
-// axios.post(`${apiUrl}/register`,{
-//     email: 'test@gamil.com',
-//     "password": '123456789'
-// })
-//     .then(res=>{
-//         console.log(res);
-//     })
-// const apiUrl='https://outfitpals-web-server.onrender.com/';
+
 // axios.get(`${apiUrl}users`)
 //     .then(res=>{
 //         console.log(res);
@@ -277,6 +281,6 @@ let commentObj={
 // ajaxMember.postComment(commentObj)
 // ajaxMember.deleteComment(4)
 
-console.log(new Date('Tue, 12 Dec 2023 08:45:43 GMT'));
+
 
 

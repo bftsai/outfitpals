@@ -3,8 +3,8 @@
         .phoneSize{
             background: url(../images/reserve/banner-375.png) 30% center no-repeat;
             background-size: cover;
-            padding-top: 429px;
-            padding-bottom: 64px;
+            padding-top: 450px;
+            padding-bottom: 100px;
         }
         .c-confirm-btn-group{
             margin: 0px;
@@ -43,6 +43,12 @@
 }
 @include md{
     .reserve{
+        .unLogin{
+            .phoneSize{
+                padding-top: 550px;
+                padding-bottom: 200px;
+            }
+        }
         .reserve-content{
             img{
                 width: 80px;
@@ -67,7 +73,7 @@
                 padding-bottom: 50px;
             }
             .c-confirm-btn-group{
-                margin-left: 150px;
+                margin-left: 130px;
             }
         }
         .reserve-content{
