@@ -85,7 +85,7 @@ function createPosts(obj){
         console.log(res.data);
         let newPost = res.data
         let postId = newPost.id;
-        location.href=`https://bftsai.github.io/outfitpals/information.html?postId=${postId}`;
+        location.href=`${locationUrl}information.html?postId=${postId}`;
     })
     .catch(error => {
         console.log(error.response);
