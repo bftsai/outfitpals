@@ -10,9 +10,9 @@
 // https://bftsai.github.io/outfitpals
 import axios from "axios";
 const apiUrl='https://outfitpals-web-server.onrender.com/';
-const localUrl='https://bftsai.github.io/outfitpals';
+// const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals/pages';
+const localUrl='http://localhost:5173/outfitpals/pages';
 // // 當 search 元素被點擊時，防止事件冒泡
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
