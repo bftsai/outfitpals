@@ -263,7 +263,6 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
                     `
                     const postsPerPage = 9;
                     const postContainers = [".post1", ".post2", ".post3"];
-                   
                     
                     // 換頁
                     // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
