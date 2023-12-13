@@ -345,13 +345,14 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
 
 
 
+
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
             axios.get(`${apiUrl}personal?userId=${userId}`)
             .then(function(res){
                 
-
+                    
                     const isopen =res.data[0].isopen;
                     const [startHour, startMinute, endHour, endMinute] = res.data[0].oktime.split(/[~:]/);
                     const otherdate = res.data[0].otherdate;
