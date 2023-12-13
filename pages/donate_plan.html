@@ -51,7 +51,9 @@
             <div class="clearfix">&nbsp;</div>
             <form id="donationForm" class="needs-validation" novalidate>
               <!-- STEP1 -->
-              <div class="res-step-form col-md-6 offset-md-3 res-form-one">
+              <div
+                class="resStepOne res-step-form col-md-8 offset-md-2 res-form-one m-0"
+              >
                 <h3 class="text-center">填寫捐款資料</h3>
                 <div class="form-horizontal p-4">
                   <div class="row mb-3">
@@ -167,8 +169,9 @@
                         id="donate_name"
                         name="donate_name"
                         required
+                        oninput="validateInput(this, 2)"
                       />
-                      <div class="invalid-tooltip">請輸入姓名。</div>
+                      <div class="invalid-feedback">請輸入姓名。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -422,8 +425,11 @@
                         type="name"
                         class="form-control"
                         id="receipt_name"
+                        name="receipt_name"
                         required
+                        oninput="validateInput(this, 2)"
                       />
+                      <div class="invalid-feedback">請輸入姓名。</div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-check form-check-inline">
@@ -881,6 +887,7 @@
         });
       });
     </script>
+
     <!--贊助金額驗證-->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
