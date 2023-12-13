@@ -9,6 +9,9 @@ const localUrl='https://bftsai.github.io/outfitpals';
 // const localUrl='http://localhost:5173/outfitpals';
 
 let outfitpalsToken = getCookie('outfitpalsToken')
+// let outfitpals = getCookie('outfisToken')
+// console.log(outfitpals);
+
 let outfitpalsId = getCookie('outfitpalsId')
 const signupBtn = document.querySelector('.signupBtn')
 const loginShow = document.querySelectorAll('.loginShow')
@@ -39,7 +42,7 @@ function renderAvatar(userAvatarUrl) {
     avatar.innerHTML = `<img src="${userAvatarUrl}" alt="userAvatar">`
 }
 
-getAvatar()
+// getAvatar()
 
 //   判斷是否有token，切換header樣式
 if(outfitpalsToken.length > 2) {
