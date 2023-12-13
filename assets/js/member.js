@@ -231,7 +231,7 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-// ajaxMember.deleteUser(12)
+// ajaxMember.deleteUser(5)
 // ajaxMember.signOut()
 // axios.post(`${apiUrl}/register`,{
 //     email: 'test@gamil.com',
@@ -276,4 +276,7 @@ let commentObj={
 // }
 // ajaxMember.postComment(commentObj)
 // ajaxMember.deleteComment(4)
+
+console.log(new Date('Tue, 12 Dec 2023 08:45:43 GMT'));
+
 

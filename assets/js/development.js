@@ -12,7 +12,7 @@ import axios from "axios";
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 // // 當 search 元素被點擊時，防止事件冒泡
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
@@ -72,7 +72,7 @@ const localUrl='https://bftsai.github.io/outfitpals';
     const storedToken = getCookie("outfitpalsToken");
     const userId = getCookie("outfitpalsId");
 
-        axios.get(`${apiUrl}/posts?_expand=user`)
+        axios.get(`${apiUrl}posts?_expand=user`)
         .then(function(res){
             let postdata =res.data
             let userImage;
@@ -122,7 +122,6 @@ const localUrl='https://bftsai.github.io/outfitpals';
                         postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
                         const container = document.querySelector(containerClass);
                         const imgUrl = postdata[i].imgUrl;
-                        
 
                         if (postdata[i].hasOwnProperty('user') && postdata[i].user.hasOwnProperty('image')) {
                             userImage = postdata[i].user.image;
@@ -134,7 +133,7 @@ const localUrl='https://bftsai.github.io/outfitpals';
                           }
                         // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
                         container.innerHTML += `<div class="col-4">
-                                                    <a href="" >
+                                                    
                                                         <div class="card card1" style="width: 350px; height: 450px;">
                                                             <img src="${imgUrl}" style="width: 350px; height: 350px;" class="object-fit-cover img">
                                                                 <div class="card-body dontmove" id="${postid}">
@@ -153,7 +152,7 @@ const localUrl='https://bftsai.github.io/outfitpals';
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    
                                                 </div>`;}
                 });
 

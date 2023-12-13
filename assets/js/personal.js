@@ -8,7 +8,7 @@
 // window.onload = handleUserIdParameter;
 
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 const localUrl='https://bftsai.github.io/outfitpals';
 
@@ -97,6 +97,7 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
     }
 })
 .then(function(res){
+    console.log(res.data);
     personal.innerHTML=`
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
                         <div class="col-6  d-flex">
@@ -192,11 +193,7 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
                 })
                 //收藏渲染
                 const coll = document.querySelector(".coll")
-                axios.get(`${apiUrl}660/favorites?_expand=post&userId=${userId}`,{
-                    headers: {  
-                        "authorization": `Bearer ${storedToken}`
-                    }
-                })
+                axios.get(`${apiUrl}favorites?_expand=post&userId=${userId}`)
                 .then(function(res){
                     console.log(res.data)
                     coll.innerHTML += `<div class="container mb-5 ">
@@ -205,10 +202,9 @@ axios.get(`${apiUrl}640/users?id=${userId}`,{
                     const cardRow = document.getElementById('cardRow');
                     for(let i = 0;i<res.data.length;i++){
                         cardRow.innerHTML += `<div class="col-lg-4 col-md-6">
-                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].post.id}">
                                                     <img src="${res.data[i].post.imgUrl}" style="width: 350px; height: 400px;" class="object-fit-cover bg-cover" >
                                                     <div class="card-body dontmove">                                                                                                 
-                                                        <strong>eric</strong>
                                                     </div>
                                                 </div>
                                             </div>`;
@@ -267,7 +263,6 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
                     `
                     const postsPerPage = 9;
                     const postContainers = [".post1", ".post2", ".post3"];
-                   
                     
                     // 換頁
                     // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
@@ -353,11 +348,7 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`,{
 if (storedToken != null) {     //判斷登入
     function fetchData() {
         try {
-            axios.get(`${apiUrl}600/personal?userId=${userId}`,{
-                headers: {  
-                    "authorization": `Bearer ${storedToken}`
-                }
-            })
+            axios.get(`${apiUrl}600/personal?userId=${userId}`)
             .then(function(res){
                 
 

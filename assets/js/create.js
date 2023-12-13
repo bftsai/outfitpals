@@ -1,8 +1,8 @@
 //axios
 import axios from 'axios';
 
-//const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-const apiUrl='http://localhost:3000/';
+const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
+// const apiUrl='http://localhost:3000/';
 
 //location url
 const locationUrl='http://localhost:5173/outfitpals/pages/';
@@ -84,7 +84,8 @@ function createPosts(obj){
         console.log(`建立貼文成功`);
         console.log(res.data);
         let newPost = res.data
-        let postId = newPost.id
+        let postId = newPost.id;
+        location.href=`https://bftsai.github.io/outfitpals/information.html?postId=${postId}`;
     })
     .catch(error => {
         console.log(error.response);

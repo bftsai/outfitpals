@@ -6,7 +6,7 @@ import axios from "axios"
 const apiUrl='https://outfitpals-web-server.onrender.com/';
 const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 
 let outfitpalsToken = getCookie('outfitpalsToken')
 // let outfitpals = getCookie('outfisToken')
@@ -42,19 +42,21 @@ function renderAvatar(userAvatarUrl) {
     avatar.innerHTML = `<img src="${userAvatarUrl}" alt="userAvatar">`
 }
 
-// getAvatar()
+if(outfitpalsToken!==undefined){
+    getAvatar();
 
-//   判斷是否有token，切換header樣式
-if(outfitpalsToken.length > 2) {
-    signupBtn.classList.add('d-none')
-    loginShow.forEach(item => {
-        item.classList.remove('d-none')
+    //   判斷是否有token，切換header樣式
+    if(outfitpalsToken.length > 2) {
+        signupBtn.classList.add('d-none')
+        loginShow.forEach(item => {
+            item.classList.remove('d-none')
+        })
+    } else {
+        signupBtn.classList.remove('d-none')
+        loginShow.forEach(item => {
+            item.classList.add('d-none')
     })
-} else {
-    signupBtn.classList.remove('d-none')
-    loginShow.forEach(item => {
-        item.classList.add('d-none')
-})
+    }
 }
 
 // 會導致註冊後需填寫資料時發生重整，無法正確填寫
