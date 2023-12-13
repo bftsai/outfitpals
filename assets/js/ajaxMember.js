@@ -1,11 +1,7 @@
 //axios
 import axios from "axios";
-//Data API
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-//   const apiUrl='http://localhost:3000/';
-//location url
-const locationUrl='http://localhost:5173/outfitpals/pages/member.html';
-// const locationUrl='https://bftsai.github.io/outfitpals/member.html';
+import { locationUrl, apiUrl } from "./config.js";
+
 //cookie
 export function cookieValue(str) {  
     const cookieArr=document.cookie.split(';').find(item=>{
@@ -70,6 +66,7 @@ export const ajaxMember={
             account.classList.add('is-invalid-customer');
             account.nextElementSibling.textContent=err.response.data;
             spinner.classList.add('d-none');
+            this.signOut();
         }
     },
     async postPersonal(){
@@ -99,7 +96,7 @@ export const ajaxMember={
                 }
             });
             spinner.classList.add('d-none');
-            location.href=locationUrl;
+            location.href=`${locationUrl}member.html`;
             document.cookie=`outfitpalsToken= ''`;
             document.cookie=`outfitpalsId= ''`;
             document.cookie=`outfitpalsThirdParty= ''`;
@@ -116,7 +113,7 @@ export const ajaxMember={
                 }
             });
             spinner.classList.add('d-none');
-            location.href=locationUrl;
+            location.href=`${locationUrl}member.html`;
         } catch (err) {
             spinner.classList.add('d-none');
             this.signOut();
@@ -144,8 +141,7 @@ export const ajaxMember={
                         memberSignInProfile.classList.remove('opacity-0');
                     }, 0);
                 }, 400);
-                //this.renderMemberSignInProfileForm();
-                location.href=locationUrl;
+                location.href=`${locationUrl}member.html`;
             }
         } catch (err) {
             console.log(err.response.data);
@@ -168,179 +164,184 @@ export const ajaxMember={
         document.cookie=`outfitpalsToken= ''`;
         document.cookie=`outfitpalsId= ''`;
         document.cookie=`outfitpalsThirdParty= ''`;
-        location.href=locationUrl;
         spinner.classList.add('d-none');
+        location.href=`${locationUrl}member.html`;
     },
     async renderMemberSignInProfileForm(){
-        const outfitpalsId=Number(cookieValue('outfitpalsId'));
-        const outfitpalsToken=cookieValue('outfitpalsToken');
-        spinner.classList.remove('d-none');
-        this.data=(await axios.get(`${apiUrl}600/users/${outfitpalsId}`,{
-            headers:{
-                "authorization": `Bearer ${outfitpalsToken}`
-            }
-        })).data;
-        spinner.classList.add('d-none');
-        let str=`
-        <div class="row mb-3 fs-lg-5">
-            <div class="col">
-                <div class="mb-3 d-flex flex-column align-items-center">
-                    <img class="mb-3" src="${this.data.image}" alt="profile pic" style="width: 80px;height: 80px;border-radius: 50%;">
+        try {
+            const outfitpalsId=Number(cookieValue('outfitpalsId'));
+            const outfitpalsToken=cookieValue('outfitpalsToken');
+            spinner.classList.remove('d-none');
+            this.data=(await axios.get(`${apiUrl}600/users/${outfitpalsId}`,{
+                headers:{
+                    "authorization": `Bearer ${outfitpalsToken}`
+                }
+            })).data;
+            spinner.classList.add('d-none');
+            let str=`
+            <div class="row mb-3 fs-lg-5">
+                <div class="col">
+                    <div class="mb-3 d-flex flex-column align-items-center">
+                        <img class="mb-3" src="${this.data.image}" alt="profile pic" style="width: 80px;height: 80px;border-radius: 50%;">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
-            <div class="col-4 col-lg-2">
-                <p>姓名</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5 fs-lg=5">
+                <div class="col-4 col-lg-2">
+                    <p>姓名</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.name}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.name}</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>密碼</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">********</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>密碼</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>暱稱</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data['nick name']}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">********</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>生日</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.birthday}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>暱稱</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>電子信箱</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.email}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data['nick name']}</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>手機號碼</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.tel}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>生日</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>性別</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.sex}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.birthday}</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>身高</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.height}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>電子信箱</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>體重</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.weight}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.email}</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>活動範圍</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.PopArea}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>手機號碼</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>打扮風格</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.style}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.tel}</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>穿搭價位</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data['outfit price']}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>性別</p>
+            <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>逛街愛店</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data['love store']}</p>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.sex}</p>
+            <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
+                <div class="col-4 col-lg-2">
+                    <p>自我介紹</p>
+                </div>
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <p class="fs-lg-5">${this.data.introduce}</p>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>身高</p>
+            <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                <div class="col-6 col-sm-3 d-flex">
+                    <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="button">修改</button>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.height}</p>
+            <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                <div class="col-6 col-sm-3 d-flex">
+                    <a href='personal.html?page=1' class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</a>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>體重</p>
+            <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                <div class="col-6 col-sm-3 d-flex">
+                    <a href="personal.html?page=1" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="button">我的收藏</a>
+                </div>
             </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.weight}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>活動範圍</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.PopArea}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>打扮風格</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.style}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>穿搭價位</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data['outfit price']}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>逛街愛店</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data['love store']}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-start mb-3 fs-lg-5">
-            <div class="col-4 col-lg-2">
-                <p>自我介紹</p>
-            </div>
-            <div class="col-6 col-lg-4 col-xl-3">
-                <p class="fs-lg-5">${this.data.introduce}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignInProfileRevise" type="button">修改</button>
-            </div>
-        </div>
-        <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-6 col-sm-3 d-flex">
-                <a href='personal.html?page=1' class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</a>
-            </div>
-        </div>
-        <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-6 col-sm-3 d-flex">
-                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="button">我的收藏</button>
-            </div>
-        </div>
-        <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-            <div class="col-6 col-sm-3 d-flex">
-            <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignOut" type="button">登出</button>
-            </div>
-        </div>`;
-        memberSignInProfileForm.innerHTML=str;
-        memberSignInProfileForm.addEventListener('click',e=>{
-            //revise profile
-            if(e.target.className.includes('memberSignInProfileRevise')){
-                this.renderMemberSignInForm();
-                memberSignInProfile.classList.add('opacity-0');
-                setTimeout(() => {
-                    memberSignInProfile.classList.add('d-none');
-                    memberSignInData.classList.remove('d-none');
+            <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
+                <div class="col-6 col-sm-3 d-flex">
+                <button class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberSignOut" type="button">登出</button>
+                </div>
+            </div>`;
+            memberSignInProfileForm.innerHTML=str;
+            memberSignInProfileForm.addEventListener('click',e=>{
+                //revise profile
+                if(e.target.className.includes('memberSignInProfileRevise')){
+                    this.renderMemberSignInForm();
+                    memberSignInProfile.classList.add('opacity-0');
                     setTimeout(() => {
-                        memberSignInData.classList.remove('opacity-0');
-                    }, 0);
-                }, 400);
-            }
-        });
-        const memberSignOut=document.querySelector('.memberSignOut');
-        memberSignOut.addEventListener('click',e=>{
-            e.preventDefault();
+                        memberSignInProfile.classList.add('d-none');
+                        memberSignInData.classList.remove('d-none');
+                        setTimeout(() => {
+                            memberSignInData.classList.remove('opacity-0');
+                        }, 0);
+                    }, 400);
+                }
+            });
+            const memberSignOut=document.querySelector('.memberSignOut');
+            memberSignOut.addEventListener('click',e=>{
+                e.preventDefault();
+                this.signOut();
+            });
+        } catch (err) {
+            console.log(err);
             this.signOut();
-        });
+        }
     },
     renderMemberSignInForm(){
         let str=`
@@ -619,6 +620,7 @@ export const ajaxMember={
             console.log(result)
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getPosts(){
@@ -632,6 +634,7 @@ export const ajaxMember={
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getPostsById(id){
@@ -645,6 +648,7 @@ export const ajaxMember={
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async deletePosts(id){
@@ -670,6 +674,7 @@ export const ajaxMember={
             console.log(result)
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getComment(id){
@@ -683,6 +688,7 @@ export const ajaxMember={
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async deleteComment(id){
@@ -708,6 +714,7 @@ export const ajaxMember={
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getAllUserComment(id){ //取得我的預約
@@ -721,6 +728,7 @@ export const ajaxMember={
             return result
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getAllPostComment(id){
@@ -734,11 +742,12 @@ export const ajaxMember={
             return result
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getPostComment(id,page){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=1`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=2&_sort=id&order=desc`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
@@ -747,19 +756,21 @@ export const ajaxMember={
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getUserComment(id,page){ //取得我的預約
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=1`,{
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=2&_sort=id&order=desc`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            
+            //console.log(result);
             return result;
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async postProfile(obj){
@@ -768,6 +779,7 @@ export const ajaxMember={
             
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async getProfile(){
@@ -776,6 +788,7 @@ export const ajaxMember={
             
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     },
     async deleteProfile(id){
@@ -799,6 +812,7 @@ export const ajaxMember={
             console.log(patchPersonal);
         } catch (err) {
             console.log(err);
+            this.signOut();
         }
     }
 };
