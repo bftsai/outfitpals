@@ -27,7 +27,7 @@ export const ajaxMember={
             return this.data;
         } catch (err) {
             this.signOut();
-            console.log(err);
+            console.log(err.response);
         }
     },
     async register(obj){
@@ -84,7 +84,7 @@ export const ajaxMember={
             });
             
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     },
     async deleteUser(id){
@@ -101,7 +101,7 @@ export const ajaxMember={
             document.cookie=`outfitpalsId= ''`;
             document.cookie=`outfitpalsThirdParty= ''`;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     },
     async patchUsers(id,token,obj){
@@ -117,7 +117,7 @@ export const ajaxMember={
         } catch (err) {
             spinner.classList.add('d-none');
             this.signOut();
-            console.log(err);
+            console.log(err.response);
         };
     },
     async signIn(obj){
@@ -339,7 +339,7 @@ export const ajaxMember={
                 this.signOut();
             });
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -619,7 +619,7 @@ export const ajaxMember={
             });
             console.log(result)
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -633,7 +633,7 @@ export const ajaxMember={
             //console.log(result);
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -647,7 +647,7 @@ export const ajaxMember={
             //console.log(result);
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -660,7 +660,7 @@ export const ajaxMember={
             });
             console.log(result);
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     },
     async postComment(obj){
@@ -673,7 +673,7 @@ export const ajaxMember={
             });
             console.log(result)
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -687,7 +687,7 @@ export const ajaxMember={
             //console.log(result);
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -700,7 +700,7 @@ export const ajaxMember={
             });
             console.log(result);
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     },
     async patchComment(id,obj){
@@ -713,7 +713,7 @@ export const ajaxMember={
             console.log(result);
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -727,7 +727,7 @@ export const ajaxMember={
             
             return result
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -741,7 +741,7 @@ export const ajaxMember={
             
             return result
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -755,7 +755,7 @@ export const ajaxMember={
 
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -769,7 +769,7 @@ export const ajaxMember={
             //console.log(result);
             return result;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -778,7 +778,7 @@ export const ajaxMember={
             const result=await axios.post(`${apiUrl}profile`,obj);
             
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -787,7 +787,7 @@ export const ajaxMember={
             const result=(await axios.get(`${apiUrl}profile`)).data;
             
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     },
@@ -800,7 +800,7 @@ export const ajaxMember={
             });
             
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     },
     async patchPersonalOtherday(id,str){
@@ -811,7 +811,7 @@ export const ajaxMember={
             const patchPersonal=(await axios.patch(`${apiUrl}personal/${id}`,personalObj)).data;
             console.log(patchPersonal);
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             this.signOut();
         }
     }

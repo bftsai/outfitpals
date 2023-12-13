@@ -613,16 +613,24 @@ function patchComment(id,obj) {
 
 // ajaxMember.patchPersonalOtherday(12,'12/1')
 async function editPersonalOthers(id){
-    const result=await axios.patch(`${apiUrl}personal/${id}`,{
-        otherdate:[]
-    });
-    console.log(result);
+    try {
+        const result=await axios.patch(`${apiUrl}personal/${id}`,{
+            otherdate:[]
+        });
+        console.log(result);
+    } catch (err) {
+        console.log(err.response);
+    }
 }
 // editPersonalOthers(11)
 
 async function deletePost(id) {  
-    const result=axios.delete(`${apiUrl}posts/${id}`);
-    console.log(result);
+    try {
+        const result=axios.delete(`${apiUrl}posts/${id}`);
+        console.log(result);
+    } catch (err) {
+        console.log(err.response);
+    }
 }
 // deletePost(17)
 
@@ -632,7 +640,7 @@ function getFav() {
             console.log(res.data);
         })
         .catch(err=>{
-            console.log(err);
+            console.log(err.response);
         })
 }
 // getFav();
