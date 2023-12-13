@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>information</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <style>
             
     </style>
@@ -67,7 +69,9 @@
                                     <p class="posts__user__height ps-3 fs-9 fs-lg-7"></p>
                                 </div>
                                 <div class="posts__slide__caption__text__info__btn d-flex">
+                                    <p class="likecount"></p>
                                     <div class="me-7"><span class="like material-symbols-outlined">favorite</span></div>
+                                    <p  class="collectcount"></p>
                                     <div><span class="favorite material-symbols-outlined">bookmark</span></div>
                                 </div>
                             </div>
@@ -89,6 +93,22 @@
         </div>
 
 
+        <div class="modal fade" id="myModa2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+    
+                </div>
+                <div class="modal-body">
+                <!-- Modal 內容 -->
+                <p class="fs-4">請登先登入</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">好吧</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
 
         <div class="container  mb-5">
@@ -98,6 +118,7 @@
         </div>
 
         <%- include('./layout/footer'); -%>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script type="module" src="../main.js"></script>
         <script type="module" src="../assets/js/information.js"></script>
 </body>

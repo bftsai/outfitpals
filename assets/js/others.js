@@ -9,9 +9,9 @@
 // window.onload = handleUserIdParameter;
 
 // const apiUrl='http://localhost:3000/';
-// const localUrl='http://localhost:5173/outfitpals/pages';
+const localUrl='http://localhost:5173/outfitpals/pages';
 const apiUrl='https://outfitpals-web-server.onrender.com/';
-const localUrl='https://bftsai.github.io/outfitpals';
+// const localUrl='https://bftsai.github.io/outfitpals';
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
 const thumb= document.querySelectorAll(".thumb");
@@ -61,7 +61,9 @@ const myModa2 = new bootstrap.Modal(document.getElementById('myModa2'));
 
 //個人資料渲染
 const other = document.querySelector(".other")    
-const otherspost = document.querySelector(".otherspost")    
+const otherspost = document.querySelector(".otherspost")
+
+const userinfomation = document.querySelector(".userinfomation")    
 
 
 //日期
@@ -98,11 +100,7 @@ const userId = getCookie("outfitpalsId");
 const id = parseInt(location.href.split("=")[1], 10);
 
 
-axios.get(`${apiUrl}660/users?id=${id}`,{
-    headers: {  
-        "authorization": `Bearer ${storedToken}`
-    }
-})
+axios.get(`${apiUrl}users?id=${id}`)
 .then(function(res){
     other.innerHTML=`                       
                         <div class="col-2  d-flex"> <div class="circle-box" style="width: 150px; height: 150px;background: url('${res.data[0].image}') center center / cover no-repeat;"></div></div>
@@ -289,15 +287,9 @@ axios.get(`${apiUrl}660/posts?userId=${id}`,{
 
 
 if (storedToken != null) {   //判斷登陸
-        axios.get(`${apiUrl}660/personal?userId=${id}`,{
-            headers: {  
-                "authorization": `Bearer ${storedToken}`
-            }
-        })
-
-        
+        axios.get(`${apiUrl}personal?_expand=user`) 
         .then(function(res){
-
+            console.log(res.data)
             if(res.data.length == 0){     //判斷是否第一次登陸
                 nologin.addEventListener("click",function(){
                     myModa2.show();   
@@ -306,7 +298,9 @@ if (storedToken != null) {   //判斷登陸
             const isopen =res.data[0].isopen;
             const otherdate = res.data[0].otherdate;
             const okday = res.data[0].okday;
-            // const dataid = res.data[0].id
+            const userimg = res.data[1].user.image
+            const username = res.data[1].user.name
+
 
             if (isopen === true) {  //判斷是否開預約
                 usetime.textContent = `${res.data[0].oktime}`
@@ -590,6 +584,8 @@ if (storedToken != null) {   //判斷登陸
                             var labelText = labelElement.innerText.trim();
                             pos.innerHTML += `<li>${labelText}</li>`;
                             ans3.innerHTML += `<li>${labelText}</li>`;
+                            userinfomation.innerHTML += `<div class="circle-box   ms-3" style="width: 50px; height: 50px;background: url('${userimg}') center center / cover no-repeat;"></div>
+                                                        <strong class="me-5 mt-2 ms-1">${username}</strong>  `
                         }
                     });
         
@@ -635,7 +631,7 @@ if (storedToken != null) {   //判斷登陸
                         location.push(labelElement.innerText.trim()) 
                     }
                 });
-                axios.post("${apiUrl}comments" ,{           
+                axios.post(`${apiUrl}comments` ,{           
                     "posterId": Number(id),  
                     "userId": Number(userId),  
                     "body": want, 
