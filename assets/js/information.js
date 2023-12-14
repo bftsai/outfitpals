@@ -76,7 +76,6 @@ console.log(storedToken)
                    <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
    
                }
-               
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
                if(storedToken != null){
