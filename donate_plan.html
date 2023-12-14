@@ -6,8 +6,8 @@
     <!-- Validate.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <title>Donate_plan</title>
-    <script type="module" crossorigin src="/outfitpals/assets/main-e6a9fc99.js"></script>
-    <link rel="stylesheet" href="/outfitpals/assets/main-f5216f52.css">
+    <script type="module" crossorigin src="/outfitpals/assets/main-4f4ff050.js"></script>
+    <link rel="stylesheet" href="/outfitpals/assets/main-0d366bc4.css">
   </head>
   <body>
     <header class="header p-3 py-lg-7 px-lg-18 fs-7 sticky-top z-2">
@@ -212,28 +212,31 @@
             <div class="clearfix">&nbsp;</div>
             <form id="donationForm" class="needs-validation" novalidate>
               <!-- STEP1 -->
-              <div class="resStepOne res-step-form col-md-8 offset-md-2 res-form-one m-0">
+              <div
+                class="resStepOne res-step-form col-md-8 offset-md-2 res-form-one m-0"
+              >
                 <h3 class="text-center">填寫捐款資料</h3>
                 <div class="form-horizontal p-4">
                   <div class="row mb-3">
                     <label
                       for="donate_money"
-                      class="col-sm-4 col-md-4 col-xl-2 control-label"
+                      class="col-sm-4 col-md-4 col-xl-2 control-label required"
                       >捐款金額</label
                     >
                     <div class="col-sm-4 col-md-4 col-xl-4">
-                      <!-- 添加 'is-invalid' 類別 -->
                       <input
                         type="number"
-                        class="form-control is-invalid"
+                        class="form-control"
                         id="donate_money"
                         name="donate_money"
                         required
-                        pattern="[1-9]+"
+                        max="1000000"
+                        min="100"
+                        oninput="validateDonateMoney(this)"
                       />
                       <!-- 添加 'invalid-feedback' 類別 -->
                       <div class="invalid-feedback">
-                        請輸入介於 1 到 1000000 。
+                        請輸入介於 100 到 1000000 。
                       </div>
                     </div>
                     <div class="col-sm-1">
@@ -295,12 +298,14 @@
                   </div>
                   <div class="row mb-3">
                     <div class="text-center">
-                      <a href="./donate.html" class="btnPreOne btn btn-secondary"
+                      <a
+                        href="./donate.html"
+                        class="btnPreOne btn btn-secondary"
                         >上一步</a
                       >
                       <button
                         type="button"
-                        class="btnNextOne btn btn-primary col-xs-offset-1"
+                        class="btnNextOne btn btn-primary btnNextOne col-xs-offset-1"
                         data-class=".res-form-one"
                       >
                         下一步
@@ -326,63 +331,28 @@
                         id="donate_name"
                         name="donate_name"
                         required
+                        maxlength="20"
+                        minlength="2"
                       />
-                      <div class="invalid-tooltip">請輸入姓名。</div>
+                      <div class="invalid-feedback">請輸入姓名。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label
-                      for="donate_number"
+                      for="card_number"
                       class="col-sm-2 col-form-label required"
                       >卡號</label
                     >
-                    <div class="col-sm-2">
+                    <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        id="donate_number_1"
-                        name="donate_number_1"
+                        id="card_number"
+                        name="card_number"
                         required
-                        pattern="[0-9]{4}"
-                        oninput="validateInput(this, 4)"
+                        oninput="validateCardNumber(this)"
                       />
-                      <div class="invalid-feedback">請輸入4位數字。</div>
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="donate_number_2"
-                        name="donate_number_2"
-                        required
-                        pattern="[0-9]{4}"
-                        oninput="validateInput(this, 4)"
-                      />
-                      <div class="invalid-feedback">請輸入4位數字。</div>
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="donate_number_3"
-                        name="donate_number_3"
-                        required
-                        pattern="[0-9]{4}"
-                        oninput="validateInput(this, 4)"
-                      />
-                      <div class="invalid-feedback">請輸入4位數字。</div>
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="donate_number_4"
-                        name="donate_number_4"
-                        required
-                        pattern="[0-9]{4}"
-                        oninput="validateInput(this, 4)"
-                      />
-                      <div class="invalid-feedback">請輸入4位數字。</div>
+                      <div class="invalid-feedback">請輸入正確卡號。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -391,29 +361,17 @@
                       class="col-sm-2 col-form-label required"
                       >有效期限</label
                     >
-                    <div class="col-sm-2">
+                    <div class="col-sm-8">
                       <input
                         type="text"
                         class="form-control"
-                        id="donate_time_month"
-                        name="donate_time_month"
+                        id="card_expiration"
+                        name="card_expiration"
                         required
-                        placeholder="MM"
-                        oninput="validateInput(this, 2)"
+                        placeholder="MM/YY"
+                        oninput="validateCardExpiration(this)"
                       />
-                      <div class="invalid-feedback">請輸入2位數字。</div>
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="donate_time_date"
-                        name="donate_time_date"
-                        required
-                        placeholder="YY"
-                        oninput="validateInput(this, 2)"
-                      />
-                      <div class="invalid-feedback">請輸入2位數字。</div>
+                      <div class="invalid-feedback">請輸入正確日期。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -431,8 +389,10 @@
                         required
                         placeholder="卡片背面三碼"
                         oninput="validateInput(this, 3)"
+                        maxlength="3"
+                        minlength="3"
                       />
-                      <div class="invalid-feedback">請輸入3位數字。</div>
+                      <div class="invalid-feedback">請輸入正確的驗證碼。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -451,23 +411,21 @@
                         maxlength="12"
                         oninput="validatePhoneNumber(this)"
                       />
-                      <div class="invalid-feedback">
-                        請輸入正確的手機號碼格式 (09-XX-XXXXXX)。
-                      </div>
+                      <div class="invalid-feedback">請輸入正確的手機號碼。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="text-center">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary btnPreOne"
                         data-class=".res-form-two"
                       >
                         上一步
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary col-xs-offset-1"
+                        class="btn btn-primary btnNextOne col-xs-offset-1"
                         data-class=".res-form-two"
                       >
                         下一步
@@ -483,8 +441,8 @@
                   <div class="row mb-3">
                     <label
                       for="no-choose-receipt"
-                      class="col-sm-3 control-label required"
-                      >是否需要紙本收據</label
+                      class="col-sm-4 col-md-4 col-xl-2"
+                      >收據領取</label
                     >
                     <div class="col-sm-8">
                       <div class="form-check form-check-inline">
@@ -493,12 +451,9 @@
                           type="radio"
                           name="choose-receipt"
                           id="no-choose-receipt"
-                          checked
-                          required
+                          value="null"
                         />
-                        <label
-                          class="form-check-label"
-                          for="no-choose-receipt required"
+                        <label class="form-check-label" for="no-choose-receipt"
                           >不索取</label
                         >
                       </div>
@@ -508,11 +463,12 @@
                           type="radio"
                           name="choose-receipt"
                           id="choose-receipt-mail"
-                          required
+                          value="mail"
+                          checked
                         />
                         <label
                           class="form-check-label"
-                          for="choose-receipt-mail required"
+                          for="choose-receipt-mail"
                           >電子收據</label
                         >
                       </div>
@@ -522,233 +478,242 @@
                           type="radio"
                           name="choose-receipt"
                           id="choose-receipt-paper"
-                          required
+                          value="papper"
                         />
                         <label
                           class="form-check-label"
-                          for="choose-receipt-paper required"
-                          >紙本收據(需要提供完整地址)</label
+                          for="choose-receipt-paper"
+                          >紙本收據 (需要提供完整地址)</label
                         >
                       </div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label
-                      for="choose-receipttype-personal"
-                      class="col-sm-3 control-label required"
-                      >收據類型</label
-                    >
-                    <div class="col-sm-8">
-                      <div class="form-check form-check-inline">
+
+                  <div class="receipt_detail">
+                    <div class="row mb-3">
+                      <label
+                        for="choose-receipttype-personal"
+                        class="col-sm-4 col-md-4 col-xl-2 control-label"
+                        >收據類型</label
+                      >
+                      <div class="col-sm-8">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="receipt-type"
+                            id="choose-receipttype-personal"
+                            checked
+                          />
+                          <label
+                            class="form-check-label"
+                            for="choose-receipttype-personal required"
+                            >個人</label
+                          >
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="receipt-type"
+                            id="choose-receipttype-group"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="choose-receipttype-group required"
+                            >公司/團體</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label
+                        for="receipt_name"
+                        class="col-sm-4 col-md-4 col-xl-2 control-label required"
+                        >收據抬頭</label
+                      >
+                      <div class="col-sm-4">
                         <input
-                          class="form-check-input"
-                          type="radio"
-                          name="receipt-type"
-                          id="choose-receipttype-personal"
-                          checked
+                          type="name"
+                          class="form-control"
+                          id="receipt_name"
+                          name="receipt_name"
                           required
+                          maxlength="20"
+                          minlength="2"
                         />
-                        <label
-                          class="form-check-label"
-                          for="choose-receipttype-personal required"
-                          >個人</label
-                        >
+                        <div class="invalid-feedback">請輸入收據抬頭。</div>
                       </div>
-                      <div class="form-check form-check-inline">
+                      <div class="col-sm-4">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="receipt-header"
+                            id="receipt-header-mr"
+                            checked
+                            required
+                          />
+                          <label
+                            class="form-check-label"
+                            for="receipt-header-mr required"
+                            >先生</label
+                          >
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="receipt-header"
+                            id="receipt-header-miss"
+                            required
+                          />
+                          <label
+                            class="form-check-label"
+                            for="receipt-header-miss required"
+                            >小姐</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label
+                        for="receipt_idcard"
+                        class="col-sm-2 col-form-label required"
+                        >身分證字號</label
+                      >
+                      <div class="col-sm-8">
                         <input
-                          class="form-check-input"
-                          type="radio"
-                          name="receipt-type"
-                          id="choose-receipttype-group"
+                          type="text"
+                          class="form-control"
+                          id="receipt_idcard"
+                          name="receipt_idcard"
+                          maxlength="10"
                           required
+                          oninput="validateIdCard(this)"
                         />
-                        <label
-                          class="form-check-label"
-                          for="choose-receipttype-group required"
-                          >公司/團體</label
-                        >
+                        <div class="invalid-feedback">
+                          請輸入正確的身分證字號。
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label
-                      for="receipt_name"
-                      class="col-sm-3 control-label required"
-                      >收據抬頭</label
-                    >
-                    <div class="col-sm-4">
-                      <input
-                        type="name"
-                        class="form-control"
-                        id="receipt_name"
-                        required
-                      />
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="form-check form-check-inline">
+                    <div class="row mb-3">
+                      <label
+                        for="receipt_phone"
+                        class="col-sm-2 col-form-label required"
+                        >手機號碼</label
+                      >
+                      <div class="col-sm-8">
                         <input
-                          class="form-check-input"
-                          type="radio"
-                          name="receipt-header"
-                          id="receipt-header-mr"
-                          checked
+                          type="text"
+                          class="form-control"
+                          id="receipt_phone"
+                          name="receipt_phone"
                           required
+                          maxlength="12"
+                          oninput="validatePhoneNumber(this)"
                         />
-                        <label
-                          class="form-check-label"
-                          for="receipt-header-mr required"
-                          >先生</label
-                        >
+                        <div class="invalid-feedback">
+                          請輸入正確的手機號碼。
+                        </div>
                       </div>
-                      <div class="form-check form-check-inline">
+                    </div>
+                    <div class="row mb-3">
+                      <label
+                        for="receipt_birthday"
+                        class="col-sm-2 col-form-label required"
+                        >生日</label
+                      >
+                      <div class="col-sm-8">
                         <input
-                          class="form-check-input"
-                          type="radio"
-                          name="receipt-header"
-                          id="receipt-header-miss"
+                          type="date"
+                          class="form-control"
+                          id="receipt_birthday"
                           required
                         />
-                        <label
-                          class="form-check-label"
-                          for="receipt-header-miss required"
-                          >小姐</label
-                        >
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="receipt_mail" class="col-sm-2 col-form-label"
+                        >電子郵件</label
+                      >
+                      <div class="col-sm-8">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="receipt_mail"
+                          placeholder="輸入xxx@xxx.xxx"
+                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label
+                        for="receipt_address"
+                        class="col-sm-2 col-form-label"
+                        >地址</label
+                      >
+                      <div class="col-sm-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="donate_number"
+                          required
+                          placeholder="郵遞區號"
+                        />
+                      </div>
+                      <div class="col-sm-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="receipt_address"
+                          placeholder="縣市"
+                        />
+                      </div>
+                      <div class="col-sm-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="receipt_address"
+                          placeholder="鄉"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-sm-8 mt-3 offset-md-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="receipt_address"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="remark" class="col-sm-2 control-label"
+                        >備註</label
+                      >
+                      <div class="col-sm-8 mt-2">
+                        <textarea
+                          class="form-control"
+                          rows="3"
+                          placeholder="填寫備註事項"
+                        ></textarea>
                       </div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label
-                      for="receipt_idcard"
-                      class="col-sm-2 col-form-label required"
-                      >身分證字號</label
-                    >
-                    <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="receipt_idcard"
-                        name="receipt_idcard"
-                        required
-                        oninput="validateIdCard(this)"
-                      />
-                      <div class="invalid-feedback">
-                        請輸入正確的身分證字號格式。
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label
-                      for="receipt_phone"
-                      class="col-sm-2 col-form-label required"
-                      >手機號碼</label
-                    >
-                    <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="receipt_phone"
-                        name="receipt_phone"
-                        required
-                        maxlength="12"
-                        oninput="validatePhoneNumber(this)"
-                      />
-                      <div class="invalid-feedback">
-                        請輸入正確的手機號碼格式 (09-XX-XXXXXX)。
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label
-                      for="receipt_birthday"
-                      class="col-sm-2 col-form-label required"
-                      >生日</label
-                    >
-                    <div class="col-sm-8">
-                      <input
-                        type="date"
-                        class="form-control"
-                        id="receipt_birthday"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="receipt_mail" class="col-sm-2 col-form-label"
-                      >電子郵件</label
-                    >
-                    <div class="col-sm-8">
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="receipt_mail"
-                        placeholder="輸入xxx@xxx.xxx"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="receipt_address" class="col-sm-2 col-form-label"
-                      >地址</label
-                    >
-                    <div class="col-sm-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="donate_number"
-                        required
-                        placeholder="郵遞區號"
-                      />
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="receipt_address"
-                        placeholder="縣市"
-                      />
-                    </div>
-                    <div class="col-sm-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="receipt_address"
-                        placeholder="鄉"
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-8 mt-3 offset-md-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="receipt_address"
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="remark" class="col-sm-2 control-label"
-                      >備註</label
-                    >
-                    <div class="col-sm-8 mt-2">
-                      <textarea
-                        class="form-control"
-                        rows="3"
-                        placeholder="填寫備註事項"
-                      ></textarea>
-                    </div>
-                  </div>
+
                   <div class="row mb-3">
                     <div class="text-center">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary btnPreOne"
                         data-class=".res-form-three"
                       >
                         上一步
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary col-xs-offset-1"
+                        class="btn btn-primary btnNextOne col-xs-offset-1"
                         data-class=".res-form-three"
                       >
                         下一步
@@ -759,45 +724,55 @@
               </div>
               <!-- STEP4 -->
               <div class="res-step-form col-md-8 offset-md-2 res-form-four">
-                <h3 class="text-center">個資法聲明</h3>
+                <h3 class="text-center">個資聲明</h3>
                 <div class="p-4">
-                  <p>
-                    感謝您的愛心捐款，OutfitPals平台向您取得之個人資料，包含個人姓名、身分證字號、電話、信用<br />
-                    卡及電子郵件地址等，將僅限使用於本會捐款服務與管理、募款徵信、會務活動等使用，本會遵守個<br />
-                    人資料保護法妥善保護您的個人資訊。
+                  <p class="lh-lg">
+                    感謝您的愛心捐款，OutfitPals平台向您取得之個人資料，包含個人姓名、身分證字號、電話、信用卡及電子郵件地址等，
+                    將僅限使用於本會捐款服務與管理、募款徵信、會務活動等使用，本會遵守個人資料保護法妥善保護您的個人資訊。
                   </p>
                   <br />
-                  <p>
-                    <i
-                      class="fa-solid fa-triangle-exclamation fa-sm text-danger"
-                    ></i>
-                    注意
-                  </p>
-                  <br />
-                  <p>
-                    近日接到民眾來電，表示接到與捐款相關詐騙電話，要求更改或解除分期設定。<br />
+
+                  <div class="alert alert-warning lh-lg" role="alert">
+                    近日接到民眾來電，表示接到與捐款相關詐騙電話，要求更改或解除分期設定。
                     OutfitPals平台提醒您，本會不會致電要求變更捐款方式，若接獲可疑來電要求您前往ATM進行任何操作
                     設定或匯款，切勿回覆訊息或依對方指示動作，以保護自身財務安全。請撥打165反詐騙諮詢專線或與本網站聯絡。
-                  </p>
-                  <br />
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      我已詳閱並同意
-                    </label>
                   </div>
+
+                  <br />
+                  <div class="row text-center fs-4 text-dark">
+                    <div>
+                      <p>我已仔細閱讀並接受上述個資使用聲明內容</p>
+                      <label class="site-label-radio">
+                        <input
+                          class="form-check-input"
+                          id="isAgree"
+                          name="isAgree"
+                          type="radio"
+                          value="Y"
+                        />
+                        <label>我同意</label>
+                      </label>
+                      <label class="site-label-radio">
+                        <input
+                          class="form-check-input"
+                          id="isAgree"
+                          name="isAgree"
+                          type="radio"
+                          value="N"
+                          checked="checked"
+                        />
+                        <label>不同意</label>
+                      </label>
+                    </div>
+                  </div>
+
                   <br />
                   <!-- Button trigger modal -->
                   <div class="row mb-3">
                     <div class="text-center">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary btnPreOne"
                         data-class=".res-form-four"
                       >
                         上一步
@@ -805,10 +780,9 @@
                       <button
                         type="button"
                         class="btn btn-success"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
+                        id="submitBtn"
                       >
-                        確認付款
+                        確認捐款
                       </button>
                     </div>
                   </div>
@@ -826,7 +800,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                          付款成功
+                          捐款成功
                         </h5>
                         <button
                           type="button"
@@ -836,7 +810,7 @@
                         ></button>
                       </div>
                       <div class="modal-body">
-                        <p>您已完成付款，謝謝您的支持</p>
+                        <p>您已完成捐款，謝謝您的支持</p>
                         <img
                           src="/outfitpals/assets/logo_black-1cf4f495.svg"
                           alt="Logo"
@@ -926,17 +900,17 @@
     <!-- Bootstrap JS (optional, for certain components) -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script>
-      const resStepOne=document.querySelector('.resStepOne');
-      const btnPreOne=document.querySelector('.btnPreOne');
-      const btnNextOne=document.querySelector('.btnNextOne');
-      
-      btnPreOne.addEventListener('click',e=>{
-          resStepOne.className.remove('m-0');
-      });
-      btnNextOne.addEventListener('click',e=>{
-          resStepOne.classList.remove('m-0');
-      });
+      const resStepOne = document.querySelector(".resStepOne");
+      const btnPreOne = document.querySelector(".btnPreOne");
+      const btnNextOne = document.querySelector(".btnNextOne");
+
       $(document).ready(function () {
+        var forms = [
+          ".res-form-one",
+          ".res-form-two",
+          ".res-form-three",
+          ".res-form-four",
+        ];
         var steps = [
           ".res-step-one",
           ".res-step-two",
@@ -944,57 +918,89 @@
           ".res-step-four",
         ];
         var i = 1;
-        $(".res-step-form .btn-primary").click(function () {
+
+        // 按下一步前先驗證必填欄位
+        $(".btnNextOne").click(function () {
           var getClass = $(this).attr("data-class");
-          $(".res-steps").removeClass("active");
-          $(steps[i]).addClass("active");
-          i++;
-          if (getClass != ".res-form-four") {
-            $(getClass).animate(
-              {
-                left: "-150%",
-              },
-              500,
-              function () {
-                $(getClass).css("left", "150%");
-              }
-            );
-            $(getClass)
-              .next()
-              .animate(
+          var isValidStepForm = false;
+          switch (getClass) {
+            case ".res-form-one":
+              isValidStepForm = validateStepOneForm();
+              break;
+            case ".res-form-two":
+              isValidStepForm = validateStepTwoForm();
+              break;
+            case ".res-form-three":
+              isValidStepForm = validateStepThreeForm();
+              break;
+            case ".res-form-four":
+              isValidStepForm = validateStepFourForm();
+              break;
+            default:
+              console.log("Unknown step.");
+              break;
+          }
+
+          if (isValidStepForm == false) {
+            alert("請完成必填欄位");
+          } else {
+            //切換表單
+            resStepOne.classList.remove("m-0");
+            $(".res-steps").removeClass("active");
+            $(steps[i]).addClass("active");
+            i++;
+            if (getClass != ".res-form-four") {
+              $(getClass).animate(
                 {
-                  left: "0%",
+                  left: "-150%",
                 },
                 500,
                 function () {
-                  $(this).css("display", "block");
+                  $(getClass).css("left", "150%");
                 }
               );
+              $(getClass)
+                .next()
+                .animate(
+                  {
+                    left: "0%",
+                  },
+                  500,
+                  function () {
+                    $(this).css("display", "block");
+                  }
+                );
+            }
           }
         });
 
-        /* step back */
-        $(".res-step-form .btn-secondary").click(function () {
+        // 按上一步
+        $(".btnPreOne").click(function () {
           var getClass = $(this).attr("data-class");
+          resStepOne.classList.add("m-0");
           $(".res-steps").removeClass("active");
-          i--;
+          i = forms.indexOf(getClass);
           $(steps[i - 1]).addClass("active");
-          $(getClass).prev().css("left", "-150%");
+          i--;
           $(getClass).animate(
             {
               left: "150%",
             },
             500
           );
-          $(getClass).prev().animate(
-            {
-              left: "0%",
-            },
-            500
-          );
+          if (getClass != ".res-form-two") {
+            $(getClass).prev().animate(
+              {
+                left: "0%",
+              },
+              500
+            );
+          } else {
+            $(getClass).prev().css("left", "15%");
+          }
         });
 
-        /* click from top bar steps */
+        // 按上方步驟按鈕
         $(".res-step-one").click(function () {
           if (!$(this).hasClass("active")) {
             $(".res-steps").removeClass("active");
@@ -1010,7 +1016,7 @@
             );
             $(".res-form-one").animate(
               {
-                left: "0%",
+                left: "15%",
               },
               500
             );
@@ -1082,32 +1088,165 @@
             );
           }
         });
-      });
-    </script>
-    <!--贊助金額驗證-->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // 取得捐款金額的輸入框
-        var donateMoneyInput = document.getElementById("donate_money");
 
-        // 監聽輸入框的輸入事件
-        donateMoneyInput.addEventListener("input", function () {
-          // 取得輸入的數值
-          var inputValue = parseInt(donateMoneyInput.value, 10);
+        // 監聽"choose-receipt"的變化事件
+        $('input[name="choose-receipt"]').change(function () {
+          var chooseReceiptValue = $(this).val();
 
-          // 檢查是否介於 1 到 1000000 之間
-          if (inputValue >= 1 && inputValue <= 1000000) {
-            // 移除 'is-invalid' 類別
-            donateMoneyInput.classList.remove("is-invalid");
+          // 隱藏或顯示捐款細節
+          if (chooseReceiptValue === "null") {
+            $(".receipt_detail").hide();
           } else {
-            // 添加 'is-invalid' 類別
-            donateMoneyInput.classList.add("is-invalid");
+            $(".receipt_detail").show();
           }
+        });
+
+        // 提交表單
+        $("#submitBtn").click(function () {
+          var donationForm = document.getElementById("donationForm");
+
+          var isAgreeRadio = document.getElementsByName("isAgree");
+
+          var isAgree = Array.from(isAgreeRadio).some(function (radio) {
+            return radio.checked && radio.value === "Y";
+          });
+
+          // 如果用户同意，可以执行提交操作
+          if (isAgree) {
+            //donationForm.submit(); // 提交表单
+            $("#exampleModal").modal("show");
+          } else {
+            alert("請勾選同意後再完成捐款。");
+          }
+        });
+
+        // 防止表單默許提交
+        donationForm.addEventListener("submit", function (event) {
+          event.preventDefault();
         });
       });
     </script>
-    <!--卡號期限檢查碼驗證-->
+
+    <!--驗證欄位填寫有效性-->
     <script>
+      // 顯示驗證結果的函式
+      function displayValidationResult(input, isValid, errorMessage) {
+        if (isValid) {
+          input.classList.remove("is-invalid");
+        } else {
+          input.classList.add("is-invalid");
+          input.setCustomValidity(errorMessage);
+        }
+      }
+
+      // 驗證贊助金額
+      function validateDonateMoney(input) {
+        // 驗證預設值
+        let isValid = true;
+        // 取得輸入欄位
+        var userInput = input.value;
+
+        //驗證數值範圍
+        if (userInput < 100 || userInput > 1000000) {
+          isValid = false;
+        }
+
+        // 顯示驗證結果
+        displayValidationResult(input, isValid, "請輸入正確的捐款金額。");
+
+        return isValid;
+      }
+
+      // 驗證信用卡號格式
+      function validateCardNumber(input) {
+        // 驗證預設值
+        let isValid = true;
+        // 取得輸入欄位的值
+        var userInput = input.value;
+
+        // 移除非數字字元符號
+        var formattedValue = userInput.replace(/\D/g, "");
+
+        // 移除可能的空格
+        var cardNumber = formattedValue.replace(/\s/g, "");
+
+        // 檢查是否為數字
+        if (!/^\d+$/.test(cardNumber)) {
+          isValid = false;
+        }
+
+        // 檢查卡號的長度
+        if (cardNumber.length < 13 || cardNumber.length > 19) {
+          isValid = false;
+        }
+
+        // 檢查卡號的起始數字
+        var firstDigit = cardNumber.charAt(0);
+        if (!(firstDigit === "4" || firstDigit === "5")) {
+          isValid = false;
+        }
+
+        // 格式化 - 每四個字加上一個 "-"
+        formattedValue = cardNumber.replace(/(\d{4})/g, "$1-").trim();
+
+        // 含"-"總長度不能超過19個字，擷取長度後更新欄位的值
+        input.value = formattedValue.slice(0, 19);
+
+        // 顯示驗證結果
+        displayValidationResult(input, isValid, "請輸入正確的信用卡號。");
+
+        return isValid;
+      }
+
+      // 驗證信用卡有效日期
+      function validateCardExpiration(input) {
+        // 驗證預設值
+        let isValid = true;
+        // 取得輸入欄位
+        var userInput = input.value;
+
+        // 移除非數字字元符號
+        var formattedValue = userInput.replace(/\D/g, "");
+
+        // 格式化成MM/YY
+        if (formattedValue.length > 2) {
+          formattedValue =
+            formattedValue.substring(0, 2) + "/" + formattedValue.substring(2);
+        }
+
+        // 更新欄位的值
+        input.value = formattedValue;
+
+        // 驗證有效日期
+        if (formattedValue.length === 5) {
+          // 取得目前日期
+          var currentDate = new Date();
+          var currentYear = currentDate.getFullYear() % 100; //西元年後兩位數字，例如:2023，結尾23
+
+          // 分割 MM/YY
+          var parts = formattedValue.split("/");
+          var enteredMonth = parseInt(parts[0], 10);
+          var enteredYear = parseInt(parts[1], 10);
+
+          // 驗證月份1~12月，年份不得小於這個月
+          if (
+            enteredMonth < 1 ||
+            enteredMonth > 12 ||
+            enteredYear < currentYear ||
+            (enteredYear === currentYear &&
+              enteredMonth < currentDate.getMonth() + 1)
+          ) {
+            isValid = false;
+          }
+
+          // 顯示驗證結果
+          displayValidationResult(input, isValid, "請輸入正確的有效日期。");
+        }
+
+        return isValid;
+      }
+
+      //驗證輸入欄位填寫長度
       function validateInput(input, length) {
         const isValid = input.value.length === length;
         if (isValid) {
@@ -1115,51 +1254,181 @@
         } else {
           input.classList.add("is-invalid");
         }
+
+        return isValid;
       }
-    </script>
-    <!--信用卡和收據手機號碼驗證-->
-    <script>
+
+      //驗證手機格式
       function validatePhoneNumber(input) {
-        const phoneNumber = input.value.replace(/-/g, ""); // 移除可能存在的連字符
-        const isValid = /^\d{10}$/.test(phoneNumber); // 驗證是否為 10 位數字
-        const errorMessage = "請輸入正確的手機號碼格式 (09-XX-XXXXXX)。";
+        // 驗證預設值
+        let isValid = true;
+        // 取得輸入欄位
+        var userInput = input.value;
 
-        // 清除之前的 'is-invalid' 類別
-        input.classList.remove("is-invalid");
+        // 移除其他符號
+        userInput = input.value.replace(/-/g, "");
 
-        // 如果驗證不通過，則添加 'is-invalid' 類別
-        if (!isValid) {
-          input.classList.add("is-invalid");
-          // 同時設定自訂的錯誤訊息
-          input.setCustomValidity(errorMessage);
-        } else {
-          // 驗證通過，清空自訂的錯誤訊息
-          input.setCustomValidity("格式錯誤");
-        }
+        //驗證是否為 10 位數字
+        isValid = /^\d{10}$/.test(userInput);
+
+        // 顯示驗證結果
+        displayValidationResult(input, isValid, "請輸入正確的手機號碼。");
+
+        return isValid;
       }
-    </script>
-    <!--身分證驗證-->
-    <script>
+
+      //驗證身分證
       function validateIdCard(input) {
         // 使用 Validate.js 驗證
         const constraints = {
           idCard: {
             format: {
-              pattern: /^[A-Z]\d{9}$/,
-              message: "請輸入正確的身分證字號格式。",
+              pattern: /^[A-Z]\d{10}$/,
+              message: "請輸入正確的身分證字號。",
             },
           },
         };
 
-        const validationResult = validate({ idCard: input.value }, constraints);
+        const isValid = validate({ idCard: input.value }, constraints);
 
-        // 清除之前的 'is-invalid' 類別
-        input.classList.remove("is-invalid");
+        // 顯示驗證結果
+        displayValidationResult(input, isValid, "請輸入正確的身分證字號。");
 
-        // 如果驗證不通過，則添加 'is-invalid' 類別
-        if (validationResult && validationResult.idCard) {
-          input.classList.add("is-invalid");
+        return isValid;
+      }
+    </script>
+
+    <!--驗證表單是否填寫完成-->
+    <script>
+      function validateStepOneForm() {
+        let isValid = true;
+
+        // 取得欄位的值
+        var donateMoney = document.getElementById("donate_money");
+
+        // 檢查必填欄位是否填寫完成
+        if (
+          donateMoney.value === null ||
+          donateMoney.value === undefined ||
+          donateMoney.value.trim() === ""
+        ) {
+          return false;
         }
+
+        // 驗證贊助金額
+        isValid = validateDonateMoney(donateMoney);
+
+        return isValid;
+      }
+
+      function validateStepTwoForm() {
+        // 取得欄位的值
+        var donateName = document.getElementById("donate_name");
+        var cardNumber = document.getElementById("card_number");
+        var cardExpiration = document.getElementById("card_expiration");
+        var donateCheckcode = document.getElementById("donate_checkcode");
+        var donate_phonenumber = document.getElementById("donate_phonenumber");
+
+        // 檢查必填欄位是否填寫完成
+        if (
+          !donateName.value ||
+          !cardNumber.value ||
+          !cardExpiration.value ||
+          !donateCheckcode.value ||
+          !donate_phonenumber.value
+        ) {
+          return false;
+        }
+
+        // 驗證信用卡號格式
+        isValid = validateCardNumber(cardNumber);
+
+        // 驗證信用卡有效日期
+        if (isValid) {
+          isValid = validateCardExpiration(cardExpiration);
+        }
+
+        // 驗證檢查碼
+        if (isValid) {
+          isValid = validateInput(donateCheckcode, 3);
+        }
+
+        // 驗證手機格式
+        if (isValid) {
+          isValid = validatePhoneNumber(donate_phonenumber);
+        }
+
+        return isValid;
+      }
+
+      function validateStepThreeForm() {
+        let isValid = true;
+        // 取得"choose-receipt"的值
+        var chooseReceiptValue = $(
+          'input[name="choose-receipt"]:checked'
+        ).val();
+
+        // 不領取收據則不用驗證
+        if (chooseReceiptValue === "null") {
+          return true;
+        }
+
+        // 取得欄位的值
+        var receiptName = document.getElementById("receipt_name");
+        var receiptIdcard = document.getElementById("receipt_idcard").value;
+        var receiptPhone = document.getElementById("receipt_phone").value;
+        var receiptBirthday = document.getElementById("receipt_birthday").value;
+
+        // 檢查必填欄位是否填寫完成
+        if (
+          !receiptName.value ||
+          !receiptIdcard.value ||
+          !receiptPhone.value ||
+          !receiptBirthday.value
+        ) {
+          return false;
+        }
+
+        // 驗證身分證字號
+        isValid = validateIdCard(receiptIdcard);
+
+        // 驗證手機格式
+        if (isValid) {
+          isValid = validatePhoneNumber(donate_phonenumber);
+        }
+
+        return isValid;
+      }
+
+      function validateStepFourForm() {
+        var isAgreeRadio = document.getElementsByName("isAgree");
+
+        var confirmButton = document.querySelector(".btn-success");
+
+        var donationForm = document.getElementById("donationForm");
+
+        confirmButton.addEventListener("click", function () {
+          // 使用 Array.some 检查是否有选中的同意选项
+          var isAgree = Array.from(isAgreeRadio).some(function (radio) {
+            return radio.checked && radio.value === "Y";
+          });
+
+          // 如果用户同意，可以执行提交操作
+          if (isAgree) {
+            donationForm.submit(); // 提交表单
+            alert("提交成功！");
+          } else {
+            // 如果用户不同意，可以给出提示或阻止提交
+            alert("请阅读并同意个资使用声明。");
+          }
+        });
+
+        // 阻止表单默认提交行为
+        donationForm.addEventListener("submit", function (event) {
+          event.preventDefault(); // 阻止表单默认提交行为
+        });
+
+        return true;
       }
     </script>
   </body>

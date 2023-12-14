@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script type="module" crossorigin src="/outfitpals/assets/others-25c9f2e1.js"></script>
-    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-e6a9fc99.js">
-    <link rel="stylesheet" href="/outfitpals/assets/main-f5216f52.css">
+    <script type="module" crossorigin src="/outfitpals/assets/others-d24fabd4.js"></script>
+    <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-4f4ff050.js">
+    <link rel="stylesheet" href="/outfitpals/assets/main-0d366bc4.css">
   </head>
   <style>
     .btn-pill {
@@ -375,11 +375,12 @@
     </div>
     
     <div class="container  d-none" id="unopen">
+        <br><br><br><br>
         <div class="custom-container d-flex justify-content-center align-items-center ">
             <div>
                 <h1 class="display-3 mb-5" style="opacity: 0.4;">未開放預約申請</h1>
                 <br>
-                <p class="d-flex justify-content-center mt-5">很可惜，Selen尚未成為逛街小精靈想預約陪逛服務嗎？</p>
+                <p class="d-flex justify-content-center mt-5 unopenname"></p>
                 <div class="d-flex justify-content-center">
                     <button type="button" class="btn btn-primary  my-6 bkdep">繼續瀏覽其他人的穿搭</button>
                 </div>
@@ -444,11 +445,10 @@
                           <p class="fs-6 my-6 d-flex justify-content-center" style="opacity: 0.4;">請留意逛街精靈向您提供的會面時間與地點，並準時前往，謝謝。</p>
             
                           <div class="d-flex justify-content-center align-items-center my-3">
-                            <p>以下為您向</p>
-                            <div class="d-flex ">
-                              <div class="circle-box   ms-3" style="width: 30px;height:30px ;"></div>
-                              <strong class="me-5 mt-1 ms-1">eric</strong>  
-                            </div>
+                            <p>以下為您向</p>          
+                            <div class="d-flex userinfomation">
+
+                            </div>                         
                             <p>送出的預約資訊</p>
                           </div>
             
@@ -467,7 +467,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">知道了</button>
+            <a href="reserve.html" type="button" class="btn btn-primary">知道了</a>
             </div>
         </div>
         </div>
