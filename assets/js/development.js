@@ -219,7 +219,7 @@ const localUrl='http://localhost:5173/outfitpals/pages';
                 const dontmove = c.querySelector(".dontmove"); 
                 const others = c.querySelector(".others"); 
                 const img = c.querySelector(".img"); 
-                // let id = others.getAttribute("id").trim();  //使用者id                      使用 trim() 移除空格 
+                let id = others.getAttribute("id").trim();  //使用者id                      使用 trim() 移除空格 
                 let poid = dontmove.getAttribute("id").trim();  //post 的 id
                 
 
