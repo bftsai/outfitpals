@@ -59,24 +59,41 @@ console.log(storedToken)
             posterOther.innerHTML = `<h2 class="text-center ">查看${res.data.user.name}的其他搭配</h2>`
             likecount.innerHTML = `${res.data.likeCounts}`
             collectcount.innerHTML = `${res.data.favoriteCounts}`
+            // const sty = document.querySelector(".sty")
+            // const stys = res.data.brands;
+            //    if(stys.length <2){
+                
+            //        sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
+            //        <div class="d-flex justify-content-center">
+            //            <button type="button" class="btn btn-primary btn-pill  ms-3">${stys}</button>
+            //        </div>`
+                   
+            //    }else{
+            //        console.log(123)
+            //        sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
+            //        <div class="d-flex justify-content-center">
+            //            <button type="button" class="btn btn-primary btn-pill ms-3">${stys}</button>
+            //        </div>        
+            //        <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
+   
+            //    }
             const sty = document.querySelector(".sty")
-            const stys = res.data.brands;
+            const stys = res.data.brands.split(new RegExp('[\x20\b]'));
                if(stys.length <2){
                    sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
                    <div class="d-flex justify-content-center">
-                       <button type="button" class="btn btn-primary btn-pill  ms-3">${stys}</button>
+                       <button type="button" class="btn btn-primary btn-pill  ms-3">${stys[0]}</button>
                    </div>`
                    
                }else{
                    
                    sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
                    <div class="d-flex justify-content-center">
-                       <button type="button" class="btn btn-primary btn-pill ms-3">${stys}</button>
+                       <button type="button" class="btn btn-primary btn-pill ms-3">${stys[0]}</button>
                    </div>        
-                   <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
+                   <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys[1]}</button>`
    
                }
-               
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
                if(storedToken != null){
