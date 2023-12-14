@@ -243,7 +243,7 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-// ajaxMember.deleteUser(1)
+// ajaxMember.deleteUser(3)
 
 // axios.get(`${apiUrl}users`)
 //     .then(res=>{

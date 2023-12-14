@@ -494,6 +494,7 @@
                         await this.patchUsers(outfitpalsId,outfitpalsToken,{
                           "sign time": new Date().toUTCString(),
                         });
+                        await this.postPersonal();
                         signUpMail.value=obj.email;
                         signUpPwd.value=obj.password;
                         signUpPhoto.setAttribute('src',obj.image);
@@ -515,6 +516,24 @@
                   spinner.classList.add('d-none');
                     console.log(err);
                     alert('google 帳號已被使用');
+                }
+            },
+            async postPersonal(){
+                try {
+                    const result=await axios.post(`${apiUrl}personal`,{
+                        "isopen": false,
+                        "userId": Number(cookieValue('outfitpalsId')),
+                        "otherdate": [],
+                        "pos1": "請填寫",
+                        "pos2": "請填寫",
+                        "pos3": "請填寫",
+                        "pos4": "請填寫",
+                        "okday":[],
+                        "oktime":"12:00~12:00" ,
+                    });
+                    
+                } catch (err) {
+                    console.log(err.response);
                 }
             },
             async patchUsers(id,token,obj){
@@ -554,8 +573,8 @@
                                 memberSignInProfile.classList.remove('opacity-0')
                             }, 0);
                         }, 400);
-                        this.renderMemberSignInProfileForm();
-                    }
+                        location.href=`https://bftsai.github.io/outfitpals/member.html`;
+                  }
                 } catch (err) {
                     spinner.classList.add('d-none');
                     alert(err.response.data);
@@ -642,22 +661,6 @@
                       </div>
                       <div class="col-6 col-lg-4 col-xl-3">
                           <p class="fs-lg-5">${this.data.sex}</p>
-                      </div>
-                  </div>
-                  <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                      <div class="col-4 col-lg-2">
-                          <p>開放預約時間</p>
-                      </div>
-                      <div class="col-6 col-lg-4 col-xl-3">
-                          <p class="fs-lg-5">${this.data['reservation time']}</p>
-                      </div>
-                  </div>
-                  <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
-                      <div class="col-4 col-lg-2">
-                          <p>開放預約地點</p>
-                      </div>
-                      <div class="col-6 col-lg-4 col-xl-3">
-                          <p class="fs-lg-5">${this.data['reservation location']}</p>
                       </div>
                   </div>
                   <div class="row justify-content-center align-items-center mb-3 fs-lg-5">
