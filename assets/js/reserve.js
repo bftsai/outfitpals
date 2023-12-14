@@ -128,7 +128,7 @@ const reserveComponent={
             });
             
             reserveContent.classList.add('opacity-0');
-            setTimeout(() => {
+            setTimeout(async() => {
                 reserveContent.classList.remove('opacity-0');
 
                 if(stateDom.textContent==='我的預約'){
@@ -182,8 +182,9 @@ const reserveComponent={
                             paginationArea.classList.remove('d-none');
 
                             spinner.classList.add('d-none');
-                            
+                            console.log(commentArr);
                             const reserveContentAllLi=[...document.querySelectorAll('.reserve-content li')];
+                            console.log(reserveContentAllLi[index]);
                             reserveContentAllLi[index].addEventListener('click',async e=>{
                                 spinner.classList.remove('d-none');
                                 reserveBtnGroup.classList.add('opacity-0');
