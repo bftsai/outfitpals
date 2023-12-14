@@ -1,3 +1,4 @@
+import { localUrl, apiUrl } from './config.js';
 // function handleUserIdParameter() {                               //提前選染url
 //     const urlParams = new URLSearchParams(window.location.search);
 //     const userId = urlParams.get('userId');
@@ -9,8 +10,8 @@
 // window.onload = handleUserIdParameter;
 
 // const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals/pages';
-const apiUrl='https://outfitpals-web-server.onrender.com/';
+// const localUrl='http://localhost:5173/outfitpals/pages';
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 // const localUrl='https://bftsai.github.io/outfitpals';
 
 const thumbLinks = document.querySelectorAll(".thumb-link");
