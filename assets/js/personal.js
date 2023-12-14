@@ -19,10 +19,11 @@ const thumb = document.querySelectorAll(".thumb");
 const personalMain = document.querySelector("#personalmain");
 const reserve = document.querySelector("#reserve");
 
-const personalnav = document.querySelector("#personalnav");
-const personalselect = document.querySelector("#personalselect");
-const collect = document.querySelector("#collect");
-const noopen = document.querySelector("#noopen");
+const personalnav = document.querySelector("#personalnav")
+const personalselect = document.querySelector("#personalselect")
+const collect = document.querySelector("#collect")
+const noopen = document.querySelector("#noopen")
+const nopost = document.querySelector("#nopost")
 
 //按鈕
 const setting = document.querySelector(".setting");
@@ -153,13 +154,14 @@ axios.get(`${apiUrl}640/users?id=${userId}`, {
         }
 
 
-        const reservebtn = document.querySelector("#reservebtn");
-        reservebtn.addEventListener("click", function () {
-            personalnav.classList.add("d-none");
-            personalselect.classList.add("d-none");
-            reserve.classList.add('d-none');
-            personalMain.classList.add('d-none');
-            collect.classList.remove('d-none');
+            const reservebtn = document.querySelector("#reservebtn")
+            reservebtn.addEventListener("click",function(){
+                personalnav.classList.add("d-none")
+                personalselect.classList.add("d-none")
+                reserve.classList.add('d-none')
+                personalMain.classList.add('d-none')
+                nopost.classList.add('d-none')
+                collect.classList.remove('d-none')
 
             collect.innerHTML = `
                 <div class="container ">
@@ -183,19 +185,20 @@ axios.get(`${apiUrl}640/users?id=${userId}`, {
                     <div class="row justify-content-between mt-4 ms-5 coll">
 
                     </div>
-                </div> `;
-            const goback = document.querySelector("#goback");
-            goback.addEventListener("click", function () {
-                collect.classList.add('d-none');
-                personalnav.classList.remove("d-none");
-                personalselect.classList.remove("d-none");
-                personalMain.classList.remove('d-none');
-            });
-            //收藏渲染
-            const coll = document.querySelector(".coll");
-            axios.get(`${apiUrl}favorites?_expand=post&userId=${userId}`)
-                .then(function (res) {
-                    console.log(res.data);
+                </div> `
+                 const goback = document.querySelector("#goback")
+                 goback.addEventListener("click",function(){
+                    collect.classList.add('d-none')
+                    nopost.classList.add('d-none')
+                    personalnav.classList.remove("d-none")
+                    personalselect.classList.remove("d-none")
+                    personalMain.classList.remove('d-none')
+                })
+                //收藏渲染
+                const coll = document.querySelector(".coll")
+                axios.get(`${apiUrl}favorites?_expand=post&userId=${userId}`)
+                .then(function(res){
+                    console.log(res.data)
                     coll.innerHTML += `<div class="container mb-5 ">
                     <div class="row justify-content-center mt-4  coll" id="cardRow"></div>
                     </div>` ;
@@ -239,103 +242,111 @@ axios.get(`${apiUrl}600/posts?userId=${userId}`, {
 })
     .then(function (res) {
 
-        let postdata = res.data;
-        const page = location.href.split("=")[1];
-        otherspost.innerHTML = `<div class="row justify-content-center post1">
-                            </div>
-                            <div class="row justify-content-center mt-5 post2">
+    let postdata =res.data
+    const page = location.href.split("=")[1];
+    if(postdata.length != 0){
+                        otherspost.innerHTML =`<div class="row justify-content-center post1">
+                                    </div>
+                                    <div class="row justify-content-center mt-5 post2">
 
-                            </div>
-                            <div class="row justify-content-center mt-5 post3">
+                                    </div>
+                                    <div class="row justify-content-center mt-5 post3">
 
-                            </div>
-                            <div class="pe-5 me-5 mt-5">
-                            <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-lg-center my-3">
-                                <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
-                                <div class = "page d-flex">
+                                    </div>
+                                    <div class="pe-5 me-5 mt-5">
+                                    <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-lg-center my-3">
+                                        <li class="page-item"><a href="" class="page-link border-0 l"><i class="bi bi-chevron-left "></i></a></li>
+                                        <div class = "page d-flex">
 
-                                </div>
-                                <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
-                            </ul>
-                            </nav>
-                            </div>
-                    `;
-        const postsPerPage = 9;
-        const postContainers = [".post1", ".post2", ".post3"];
+                                        </div>
+                                        <li class="page-item"><a href="" class="page-link border-0 r"><i class="bi bi-chevron-right"></i></a></li>
+                                    </ul>
+                                    </nav>
+                                    </div>
+                            `
+                            const postsPerPage = 9;
+                            const postContainers = [".post1", ".post2", ".post3"];
 
-        // 換頁
-        // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
-        const startIndex = (page - 1) * postsPerPage;
+                            // 換頁
+                            // for (let pageNum = page; pageNum <= Math.ceil(postdata.length / postsPerPage); pageNum++) {
+                                const startIndex = (page - 1) * postsPerPage;
+                                
+                                // // 清空所有容器，只需要在分页循环外清空一次
+                                // postContainers.forEach(containerClass => {
+                                //     const container = document.querySelector(containerClass);
+                                //     container.innerHTML = '';
+                                // });
+                                const endIndex = startIndex + postsPerPage;
+                                for (let i = startIndex; i < endIndex && i < postdata.length; i++) {
+                                    const postIndex = i % postsPerPage;
+                                
+                                    // 通过嵌套循环，将每个容器的生成逻辑移到循环内部
+                                    postContainers.forEach((containerClass, index) => {                                
+                                        if (postIndex >= index * (postsPerPage / postContainers.length) &&
+                                            postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
+                                            const container = document.querySelector(containerClass);
+                                            const imgUrl = postdata[i].imgUrl;
+                                            const poid = postdata[i].id
+                                            container.innerHTML += `<div class="col-4">
+                                                                        <div class="card card1" style="width: 350px; height: 450px;" id="${poid}">
+                                                                            <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
+                                                                        </div>
+                                                                    </div>`;
+                                        }
+                                    });
+                                }
 
-        // // 清空所有容器，只需要在分页循环外清空一次
-        // postContainers.forEach(containerClass => {
-        //     const container = document.querySelector(containerClass);
-        //     container.innerHTML = '';
-        // });
-        const endIndex = startIndex + postsPerPage;
-        for (let i = startIndex; i < endIndex && i < postdata.length; i++) {
-            const postIndex = i % postsPerPage;
+                                const card1List = document.querySelectorAll(".card1");
 
-            // 通过嵌套循环，将每个容器的生成逻辑移到循环内部
-            postContainers.forEach((containerClass, index) => {
-                if (postIndex >= index * (postsPerPage / postContainers.length) &&
-                    postIndex < (index + 1) * (postsPerPage / postContainers.length)) {
-                    const container = document.querySelector(containerClass);
-                    const imgUrl = postdata[i].imgUrl;
-                    const poid = postdata[i].id;
-                    container.innerHTML += `<div class="col-4">
-                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${poid}">
-                                                                    <img src="${imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover bg-cover" >
-                                                                </div>
-                                                            </div>`;
-                }
-            });
-        }
+                                card1List.forEach(function(card, index) {
+                                    let id = card.getAttribute("id").trim();
+                                    card.addEventListener("click", function(e) {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        window.location.href = `${localUrl}/information.html?postId=` + id;
+                                    });
+                                });
+                            // }
+                            const one = document.querySelector(".page"); 
+                            let maxPages = 100; 
+                            if (postdata.length > 0) {
+                            for (let i = 1; i <= Math.min(maxPages, Math.ceil(postdata.length / 8)); i++) {
+                            one.innerHTML += `<li class="page-item"><a href="#" class="page-link border-0">${i}</a></li>`;
+                            }
+                            }
+                            const l = document.querySelector(".l"); 
+                            const r = document.querySelector(".r"); 
+                            r.addEventListener("click", function(event) {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            var currentPage = parseInt(urlParams.get('page')) || 1;
+                            var newPage = currentPage + 1;
+                            urlParams.set('page', newPage);
+                            // 构建新的URL
+                            var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+                            // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+                            window.history.replaceState({}, document.title, newUrl);
+                            });
+                            l.addEventListener("click", function(event) {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            var currentPage = parseInt(urlParams.get('page')) || 1;
+                            if(currentPage > 1 ){
+                            var newPage = currentPage - 1;
+                            urlParams.set('page', newPage);
+                            // 构建新的URL
+                            var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();      
+                            // 通过替换当前页面历史记录来更新地址栏而不刷新页面
+                            window.history.replaceState({}, document.title, newUrl);
+                            }
 
-        const card1List = document.querySelectorAll(".card1");
-
-        card1List.forEach(function (card, index) {
-            let id = card.getAttribute("id").trim();
-            card.addEventListener("click", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                window.location.href = `${localUrl}/information.html?postId=` + id;
-            });
-        });
-        // }
-        const one = document.querySelector(".page");
-        let maxPages = 100;
-        if (postdata.length > 0) {
-            for (let i = 1; i <= Math.min(maxPages, Math.ceil(postdata.length / 8)); i++) {
-                one.innerHTML += `<li class="page-item"><a href="#" class="page-link border-0">${i}</a></li>`;
-            }
-        }
-        const l = document.querySelector(".l");
-        const r = document.querySelector(".r");
-        r.addEventListener("click", function (event) {
-            const urlParams = new URLSearchParams(window.location.search);
-            var currentPage = parseInt(urlParams.get('page')) || 1;
-            var newPage = currentPage + 1;
-            urlParams.set('page', newPage);
-            // 构建新的URL
-            var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();
-            // 通过替换当前页面历史记录来更新地址栏而不刷新页面
-            window.history.replaceState({}, document.title, newUrl);
-        });
-        l.addEventListener("click", function (event) {
-            const urlParams = new URLSearchParams(window.location.search);
-            var currentPage = parseInt(urlParams.get('page')) || 1;
-            if (currentPage > 1) {
-                var newPage = currentPage - 1;
-                urlParams.set('page', newPage);
-                // 构建新的URL
-                var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();
-                // 通过替换当前页面历史记录来更新地址栏而不刷新页面
-                window.history.replaceState({}, document.title, newUrl);
-            }
-
-        });
+                });
+    }else{
+        nopost.classList.remove('d-none')
+        personalnav.classList.add('d-none')
+        collect.classList.add('d-none')
+        noopen.classList.add('d-none')
+        nopost.classList.add('d-none')
+    }
 
 
 
@@ -617,13 +628,15 @@ if (storedToken != null) {     //判斷登入
                                 this.querySelector('.thumb').classList.add("active");
 
                                 if (this.querySelector('.thumb').textContent === "貼文總覽") {
-                                    personalMain.classList.remove('d-none');
-                                    reserve.classList.add('d-none');
-                                    noopen.classList.add('d-none');
+                                    personalMain.classList.remove('d-none')
+                                    reserve.classList.add('d-none')
+                                    noopen.classList.add('d-none')
+                                    nopost.classList.add('d-none')
                                 } else {
-                                    noopen.classList.add('d-none');
-                                    reserve.classList.remove('d-none');
-                                    personalMain.classList.add('d-none');
+                                    noopen.classList.add('d-none')
+                                    reserve.classList.remove('d-none')
+                                    personalMain.classList.add('d-none')
+                                    nopost.classList.add('d-none')
                                 }
                             });
                         }
@@ -658,6 +671,7 @@ if (storedToken != null) {     //判斷登入
                                 .then(function (response) {
                                     noopen.classList.remove('d-none');
                                     reserve.classList.add('d-none');
+                                    nopost.classList.add('d-none')
                                     location.reload();
                                 });
                         });
@@ -680,18 +694,27 @@ if (storedToken != null) {     //判斷登入
                                 this.querySelector('.thumb').classList.add("active");
 
                                 if (this.querySelector('.thumb').textContent === "貼文總覽") {
-                                    personalMain.classList.remove('d-none');
-                                    noopen.classList.add('d-none');
+                                    personalMain.classList.remove('d-none')
+                                    noopen.classList.add('d-none')
+                                    nopost.classList.add('d-none')
                                 } else {
-                                    noopen.classList.remove('d-none');
-                                    personalMain.classList.add('d-none');
+                                    noopen.classList.remove('d-none')
+                                    personalMain.classList.add('d-none')
+                                    nopost.classList.add('d-none')
                                 }
                             });
                         }
                         //為使用者開啟 預約功能
                         open.addEventListener("click", function () {
-                            axios.patch(`${apiUrl}personal/${dataid}`, {
-                                "isopen": true,
+                            axios.patch(`${apiUrl}personal/${dataid}`,{
+                                    "isopen": true,
+                            })
+                            .then(function () {
+                                // 这里添加你的其他逻辑，包括 noopen.classList.add('d-none')
+                                noopen.classList.add('d-none');
+                                reserve.classList.remove('d-none')
+                                nopost.classList.add('d-none')
+                                location.reload();
                             })
                                 .then(function () {
                                     // 这里添加你的其他逻辑，包括 noopen.classList.add('d-none')
