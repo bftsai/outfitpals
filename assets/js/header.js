@@ -10,6 +10,9 @@ import axios from "axios"
 // const localUrl='http://localhost:5173/outfitpals/pages';
 
 let outfitpalsToken = getCookie('outfitpalsToken')
+// let outfitpals = getCookie('outfisToken')
+// console.log(outfitpals);
+
 let outfitpalsId = getCookie('outfitpalsId')
 const signupBtn = document.querySelector('.signupBtn')
 const loginShow = document.querySelectorAll('.loginShow')
@@ -30,10 +33,13 @@ function getAvatar(){
         let userAvatarUrl = res.data[0].image
         renderAvatar(userAvatarUrl)
     })
-    .catch(err =>(
-        console.log(err.response)
+    .catch(err =>{
+        document.cookie=`outfitpalsToken= ''`;
+        document.cookie=`outfitpalsId= ''`;
+        document.cookie=`outfitpalsThirdParty= ''`;
+        console.log(err.response);
         
-    ))
+    })
 }
 // 根據user頭像渲染header avatar
 function renderAvatar(userAvatarUrl) {
@@ -41,10 +47,10 @@ function renderAvatar(userAvatarUrl) {
 }
 
 if(outfitpalsToken!==undefined){
-    getAvatar();
-
+    
     //   判斷是否有token，切換header樣式
     if(outfitpalsToken.length > 2) {
+        getAvatar();
         signupBtn.classList.add('d-none')
         loginShow.forEach(item => {
             item.classList.remove('d-none')
@@ -57,29 +63,10 @@ if(outfitpalsToken!==undefined){
     }
 }
 
-// 會導致註冊後需填寫資料時發生重整，無法正確填寫
-// 登入後發生變化
-// let currentToken = getCookie('outfitpalsToken');
-
-// function checkTokenChange() {
-//   const newToken = getCookie('outfitpalsToken');
-
-//   if (newToken !== currentToken) {
-//     console.log('Token has changed. Reloading...');
-//     currentToken = newToken;
-//     location.reload();
-//   }
-// }
-
-// 初始執行一次检查
-// checkTokenChange();
-
-// 每秒檢查一次
-// setInterval(checkTokenChange, 1000);
-
 //   判斷是否在貼文牆，切換header樣式
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname === '/development.html') {
+
+    if (window.location.pathname.split('/').includes('development.html')) {
         search.classList.remove('d-none');
         switchBar.classList.remove('d-none');
         switchBarHr.classList.remove('d-none');
@@ -132,7 +119,7 @@ for (let i = 0; i < thumbLinks.length; i++) {
     })
 
     document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.pathname === '/development.html') {
+        if (window.location.pathname.split('/').includes('development.html')) {
             document.addEventListener("click",function(event){
                 const clickedElement = event.target;
                 if (!searchList.contains(clickedElement)) {
