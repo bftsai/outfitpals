@@ -135,7 +135,6 @@ const reserveComponent={
                     reserveContent.innerHTML='';
                     if(commentArr.length!==0){
                         //render comment
-                        console.log(commentArr);
                         commentArr.forEach(async (item,index)=>{
                             const posterData=await this.getUserData(item.posterId);
                             const time=new Date(item.postTime).toLocaleString('chinese',{hour12:false}).split(' ')[0];
@@ -482,7 +481,7 @@ reserveMyDiscussConfirmSubmit.addEventListener('click',async e=>{
             await ajaxMember.patchComment(id,obj);
 
             spinner.classList.add('d-none');
-            location.href=`${locationUrl}member.html`;
+            location.href=`${locationUrl}reserve.html`;
         }
     } catch (err) {
         console.log(err);
@@ -556,7 +555,7 @@ reserveManageAppointmentsConfirmSubmit.addEventListener('click',async e=>{
             await ajaxMember.patchComment(id,obj);
             spinner.classList.add('d-none');
         }
-        location.href=`${locationUrl}member.html`;
+        location.href=`${locationUrl}reserve.html`;
     } catch (err) {
         console.log(err);
         spinner.classList.add('d-none');

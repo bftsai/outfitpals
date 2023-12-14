@@ -2,12 +2,6 @@ import { locationUrl, apiUrl } from './config.js';
 //axios
 import axios from 'axios';
 
-const apiUrl='https://outfitpals-web-server.onrender.com/'; //render server
-// const apiUrl='http://localhost:3000/';
-
-//location url
-const locationUrl='http://localhost:5173/outfitpals/pages/';
-//const locationUrl='https://bftsai.github.io/outfitpals/';
 const addTitle = document.querySelector('.addTitle')
 const addBody = document.querySelector('.addBody')
 const addOutfitStyle = document.querySelector('.addOutfitStyle')
@@ -86,7 +80,7 @@ function createPosts(obj){
         console.log(res.data);
         let newPost = res.data
         let postId = newPost.id;
-        location.href=`https://bftsai.github.io/outfitpals/information.html?postId=${postId}`;
+        location.href=`${locationUrl}information.html?postId=${postId}`;
     })
     .catch(error => {
         console.log(error.response);

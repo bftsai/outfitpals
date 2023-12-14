@@ -11,10 +11,10 @@ import { localUrl, apiUrl } from './config.js';
 // https://bftsai.github.io/outfitpals
 import axios from "axios";
 import { data } from "jquery";
-const apiUrl='https://outfitpals-web-server.onrender.com/';
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 // const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals/pages';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 // // 當 search 元素被點擊時，防止事件冒泡
 // search.addEventListener("click", function (event) {
 //     event.stopPropagation();
@@ -270,9 +270,10 @@ const localUrl='http://localhost:5173/outfitpals/pages';
                                 originalCollectCounts = currentPost.favoriteCounts;  
     
                                 // await new Promise(resolve => setTimeout(resolve, 500));  // 等待3秒钟
-                                let CC = parseInt(originalCollectCounts) + 1;
+                                let CC = parseInt(originalCollectCounts);
                                 if (collect.classList.contains("icollect")) {
-                                    const response = await axios.patch(`${apiUrl}posts/${poid}`, {
+                                    CC ++
+                                    axios.patch(`${apiUrl}posts/${poid}`, {
                                         "favoriteCounts": CC,
                                     });
                                     axios.post(`${apiUrl}favorites`,{
@@ -280,8 +281,9 @@ const localUrl='http://localhost:5173/outfitpals/pages';
                                                 "postId":Number(poid)
                                             })
                                 } else {
-                                    const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                        "favoriteCounts": CC - 1,
+                                    CC --
+                                     axios.patch(`${apiUrl}posts/${poid}`, {
+                                        "favoriteCounts":CC,
                                     });
                                     
                                     axios.get(`${apiUrl}favorites?postId=${poid}`)
@@ -342,20 +344,24 @@ const localUrl='http://localhost:5173/outfitpals/pages';
 
                             originalLikeCounts = currentPost.likeCounts;  // 更新 originalLikeCounts 的值
                             // await new Promise(resolve => setTimeout(resolve, 500));  // 等待3秒钟
-                            let like = parseInt(originalLikeCounts) + 1;
+                            let like = parseInt(originalLikeCounts);
                     
                             if (loveElement.classList.contains("ilove")) {
-                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
+                                like ++ 
+                                axios.patch(`${apiUrl}posts/${poid}`, {
                                     "likeCounts": like,
                                 });
+
                                 axios.post(`${apiUrl}likes`,{
                                     "userId":Number(userId),
                                     "postId":Number(poid)
                                 })
                             } else {
-                                const response = await axios.patch(`${apiUrl}posts/${poid}`, {
-                                    "likeCounts": like - 1,
+                                like --
+                                 axios.patch(`${apiUrl}posts/${poid}`, {
+                                    "likeCounts": like,
                                 });
+
                                 axios.get(`${apiUrl}likes/${poid}`)
                                 .then(r=>{
                                     let d = (r.data.id)

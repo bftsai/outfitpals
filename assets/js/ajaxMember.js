@@ -114,7 +114,6 @@ export const ajaxMember={
                 }
             });
             spinner.classList.add('d-none');
-            location.href=`${locationUrl}member.html`;
         } catch (err) {
             spinner.classList.add('d-none');
             this.signOut();
@@ -743,12 +742,12 @@ export const ajaxMember={
     },
     async getPostComment(id,page){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=2&_sort=id&order=desc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-
+console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);
@@ -757,12 +756,12 @@ export const ajaxMember={
     },
     async getUserComment(id,page){ //取得我的預約
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=2&_sort=id&order=desc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            //console.log(result);
+            console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);
