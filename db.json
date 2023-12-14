@@ -1,17 +1,9 @@
 {
-  "users": [
-  ],
-  "posts": [
-    
-  ],
-  "comments": [
-  ],
+  "users": [],
+  "posts": [],
+  "comments": [],
   "profile": {},
-  "personal": [
-  ],
-  "favorites": [
-  ],
-  "likes": [
-    
-  ]
+  "personal": [],
+  "favorites": [],
+  "likes": []
 }
