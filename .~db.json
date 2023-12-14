@@ -153,7 +153,9 @@
     {
       "isopen": true,
       "userId": 1,
-      "otherdate": [],
+      "otherdate": [
+        "1/9"
+      ],
       "pos1": "高雄巨蛋",
       "pos2": "高雄新崛江",
       "pos3": "請填寫",
