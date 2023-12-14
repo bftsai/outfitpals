@@ -4,9 +4,9 @@
 * [gh-pages](https://bftsai.github.io/outfitpals/)  
 
 ## 🕺💃&ensp;作者
-  - [Oria Lin](https://github.com/OriaLin) - index、header、footer、貼文牆  
+  - [Oria Lin](https://github.com/OriaLin) - index、header、footer、建立貼文  
   - [Eric](https://github.com/ERIC955) - 貼文牆  
-  - [BF Tsai](https://github.com/bftsai) - 我的預約、登入、註冊、會員中心  
+  - [BF Tsai](https://github.com/bftsai) - 預約、登入、註冊、會員中心  
   - [Jennifer Jhuang](https://github.com/JHUANG-YU-JHEN) - 贊助我們  
 
 ## 🖥&ensp;下載專案
