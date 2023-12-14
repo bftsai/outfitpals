@@ -1,3 +1,4 @@
+import { localUrl, apiUrl } from './config.js';
 // const thumb = document.querySelectorAll(".thumb")
 // const thumbLinks = document.querySelectorAll(".thumb-link");
 // const search = document.querySelector(".search")

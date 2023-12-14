@@ -1,12 +1,13 @@
+import { localUrl, apiUrl } from './config.js';
 //axios
 import axios from 'axios';
 
 // https://outfitpals-web-server.onrender.com/
-// https://bftsai.github.io/outfitpals
-const apiUrl='https://outfitpals-web-server.onrender.com/';
+// // https://bftsai.github.io/outfitpals
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 // const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals/pages';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 
 
 const posterNickName = document.querySelector(".posterNickName");
