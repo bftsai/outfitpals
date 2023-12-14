@@ -1,12 +1,13 @@
+import { localUrl, apiUrl } from './config.js';
 //axios
 import axios from 'axios';
 
 // https://outfitpals-web-server.onrender.com/
-// https://bftsai.github.io/outfitpals
-const apiUrl='https://outfitpals-web-server.onrender.com/';
+// // https://bftsai.github.io/outfitpals
+// const apiUrl='https://outfitpals-web-server.onrender.com/';
 // const localUrl='https://bftsai.github.io/outfitpals';
 // const apiUrl='http://localhost:3000/';
-const localUrl='http://localhost:5173/outfitpals/pages';
+// const localUrl='http://localhost:5173/outfitpals/pages';
 
 
 const posterNickName = document.querySelector(".posterNickName");
@@ -75,9 +76,10 @@ console.log(storedToken)
                    <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
    
                }
+               
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
-               if(storedToken == ""){
+               if(storedToken != null){
                 reserve.addEventListener("click",function(){
                     window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
                     

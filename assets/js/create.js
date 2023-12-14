@@ -1,3 +1,4 @@
+import { locationUrl, apiUrl } from './config.js';
 //axios
 import axios from 'axios';
 
