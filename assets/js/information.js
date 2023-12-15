@@ -41,9 +41,10 @@ function getCookie(name) {
 }
 
 
-const storedToken = getCookie("outfitpalsToken");
-const postrId = location.href.split("=")[1];
-console.log(storedToken)
+
+
+    const storedToken = getCookie("outfitpalsToken");
+    const postrId = location.href.split("=")[1];
         axios.get(`${apiUrl}posts/${postrId}?_expand=user`)
         .then(res => {
             let userid =res.data.user.id
@@ -59,24 +60,6 @@ console.log(storedToken)
             posterOther.innerHTML = `<h2 class="text-center ">查看${res.data.user.name}的其他搭配</h2>`
             likecount.innerHTML = `${res.data.likeCounts}`
             collectcount.innerHTML = `${res.data.favoriteCounts}`
-            // const sty = document.querySelector(".sty")
-            // const stys = res.data.brands;
-            //    if(stys.length <2){
-                
-            //        sty.innerHTML =` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
-            //        <div class="d-flex justify-content-center">
-            //            <button type="button" class="btn btn-primary btn-pill  ms-3">${stys}</button>
-            //        </div>`
-                   
-            //    }else{
-            //        console.log(123)
-            //        sty.innerHTML = ` <p class="fs-3 d-flex justify-content-center ms-3">服飾品牌</p>
-            //        <div class="d-flex justify-content-center">
-            //            <button type="button" class="btn btn-primary btn-pill ms-3">${stys}</button>
-            //        </div>        
-            //        <button type="button" class="btn btn-primary btn-pill mt-3 ms-3">${stys}</button>`
-   
-            //    }
             const sty = document.querySelector(".sty")
             const stys = res.data.brands.split(new RegExp('[\x20\b]'));
                if(stys.length <2){
@@ -96,21 +79,33 @@ console.log(storedToken)
                }
                let user = res.data.userId
                const reserve = document.querySelector(".reserve")
-               if(storedToken != null){
-                reserve.addEventListener("click",function(){
-                    window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
-                    
-                })
-               }else{
-                reserve.addEventListener("click",function(){
-                    myModa2.show();
-                })
-                
-               }
+              
+                if (storedToken !== "" || storedToken !==  null) {
+                    reserve.addEventListener("click",function(){
+                        window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                        
+                    })
+                }else{
 
-               posterMore.addEventListener("click",function(){
-                window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
-             }) 
+                    reserve.addEventListener("click",function(){
+                        myModa2.show();
+                    })
+                }
+                if(storedToken !== "" || storedToken !==  null){
+                    posterMore.addEventListener("click",function(){
+                        window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                    }) 
+                }else{
+                    posterMore.addEventListener("click",function(){
+                        window.location.href = `${localUrl}/member.html`;
+                    })
+
+                }
+
+
+
+
+ 
                const more = document.querySelector(".more")
                more.innerHTML = `
                                     <div class="container d-flex justify-content-center  ">
@@ -122,18 +117,43 @@ console.log(storedToken)
                                 `
                 axios.get(`${apiUrl}posts?userId=${userid}`)   
                 .then(res =>{
-
+                    
                     const post = document.querySelector(".post")
-                    for (let i = 0; i < 3; i++) {
-                        post.innerHTML += `<div class="col-4 my-4">
-                                                        <a  >
-                                                            <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
-                                                                <img src="${res.data[i].imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover img">
-                                                            </div>
-                                                        </a>
-                                                    </div>`
-                        
+                    if(res.data.length==1){
+                        for (let i = 0; i < 1; i++) {
+                            post.innerHTML += `<div class="col-4 my-4">
+                                                            <a  >
+                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                                    <img src="${res.data[i].imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover img">
+                                                                </div>
+                                                            </a>
+                                                        </div>`
+                            
+                        }
+                    }else if(res.data.length==2){
+                        for (let i = 0; i < 2; i++) {
+                            post.innerHTML += `<div class="col-4 my-4">
+                                                            <a  >
+                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                                    <img src="${res.data[i].imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover img">
+                                                                </div>
+                                                            </a>
+                                                        </div>`
+                            
+                        }
+                    }else{
+                        for (let i = 0; i < 3; i++) {
+                            post.innerHTML += `<div class="col-4 my-4">
+                                                            <a  >
+                                                                <div class="card card1" style="width: 350px; height: 450px;" id="${res.data[i].id}">
+                                                                    <img src="${res.data[i].imgUrl}" style="width: 350px; height: 450px;" class="object-fit-cover img">
+                                                                </div>
+                                                            </a>
+                                                        </div>`
+                            
+                        }
                     }
+
                     
                     const card1List = document.querySelectorAll(".card1");
 
@@ -154,22 +174,10 @@ console.log(storedToken)
             
 
 
-        })
+        })  
+
+
         
 
 
 
-// 測試收藏功能
-// function favoriteData() {
-
-//     axios.get('`${apiUrl}favorites/2?_expand=user&_expand=post')
-//         .then(res => {
-//             let data = res.data;
-//             console.log(data);
-//         })
-
-//         .catch(error => {
-//             console.log(error.response);
-//         });
-// }
-// favoriteData()
