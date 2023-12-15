@@ -319,6 +319,14 @@ if (storedToken != null) {   //判斷登陸
                     if (index >= 0 && index < days.length) {
                         days[index].innerHTML = i;
                         days[index].setAttribute('data-day', i);
+
+                        okday.forEach(function (a) {  //可預約
+                            let useday = a.split("/")[1];
+                            let useMonth = a.split("/")[0];
+                            if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                                days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
+                            }
+                        });
                         otherdate.forEach(function (a) {  //被預約
 
                             let usedays = a.split("/")[1];
@@ -326,13 +334,6 @@ if (storedToken != null) {   //判斷登陸
 
                             if (parseInt(usedays) === i && seeMonth === parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                 days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
-                            }
-                        });
-                        okday.forEach(function (a) {  //可預約
-                            let useday = a.split("/")[1];
-                            let useMonth = a.split("/")[0];
-                            if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
-                                days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
                             }
                         });
                     }
@@ -383,6 +384,14 @@ if (storedToken != null) {   //判斷登陸
                             if (seeMonth == useMonth) {
                                 days[index].innerHTML = i;
                                 days[index].setAttribute('data-day', i);
+
+                                okday.forEach(function (a) {  //可預約
+                                    let useday = a.split("/")[1];
+                                    let useMonth = a.split("/")[0];
+                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
+                                    }
+                                });
                                 otherdate.forEach(function (a) {  //被預約
 
                                     let usedays = a.split("/")[1];
@@ -390,32 +399,26 @@ if (storedToken != null) {   //判斷登陸
 
                                     if (parseInt(usedays) === i && seeMonth === parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
-                                    }
-                                });
-                                okday.forEach(function (a) {  //可預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
-                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
                                     }
                                 });
                             } else {
                                 days[index].innerHTML = i;
                                 days[index].setAttribute('data-day', i);
                                 originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
+
+                                okday.forEach(function (a) {  //可預約
+                                    let useday = a.split("/")[1];
+                                    let useMonth = a.split("/")[0];
+                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
+                                    }
+                                });
                                 otherdate.forEach(function (a) {  //被預約
 
                                     let usedays = a.split("/")[1];
                                     let useMonths = a.split("/")[0];
                                     if (parseInt(usedays) === i && seeMonth === parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
-                                    }
-                                });
-                                okday.forEach(function (a) {  //可預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
-                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
                                     }
                                 });
                             }
@@ -465,6 +468,14 @@ if (storedToken != null) {   //判斷登陸
                             if (seeMonth == useMonth) {
                                 days[index].innerHTML = i;
                                 days[index].setAttribute('data-day', i);
+
+                                okday.forEach(function (a) {  //可預約
+                                    let useday = a.split("/")[1];
+                                    let useMonth = a.split("/")[0];
+                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
+                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
+                                    }
+                                });
                                 otherdate.forEach(function (a) {  //被預約
 
                                     let usedays = a.split("/")[1];
@@ -474,6 +485,11 @@ if (storedToken != null) {   //判斷登陸
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
                                     }
                                 });
+                            } else {
+                                days[index].innerHTML = i;
+                                days[index].setAttribute('data-day', i);
+                                originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
+
                                 okday.forEach(function (a) {  //可預約
                                     let useday = a.split("/")[1];
                                     let useMonth = a.split("/")[0];
@@ -481,10 +497,6 @@ if (storedToken != null) {   //判斷登陸
                                         days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
                                     }
                                 });
-                            } else {
-                                days[index].innerHTML = i;
-                                days[index].setAttribute('data-day', i);
-                                originalContents2[index] = i; //保存原有html 確保切換icon不會跑掉
                                 otherdate.forEach(function (a) {  //被預約
                                     
                                     let usedays = a.split("/")[1];
@@ -492,13 +504,6 @@ if (storedToken != null) {   //判斷登陸
 
                                     if (parseInt(usedays) === i && seeMonth === parseInt(useMonths)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
                                         days[index].innerHTML = '<i class="bi bi-calendar-x-fill d-flex justify-content-center text-danger"></i>';
-                                    }
-                                });
-                                okday.forEach(function (a) {  //可預約
-                                    let useday = a.split("/")[1];
-                                    let useMonth = a.split("/")[0];
-                                    if (parseInt(useday) === i && seeMonth === parseInt(useMonth)) { // 注意這裡使用 parseInt 將 useday 轉換為數字
-                                        days[index].innerHTML = '<i class="bi bi-calendar2-check-fill d-flex justify-content-center text-info">';
                                     }
                                 });
                             }
