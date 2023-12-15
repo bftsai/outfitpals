@@ -243,7 +243,7 @@ memberSignInForm.addEventListener('click',e=>{
     }
 },false);
 
-// ajaxMember.deleteUser(1)
+// ajaxMember.deleteUser(6)
 
 // axios.get(`${apiUrl}users`)
 //     .then(res=>{
@@ -279,8 +279,7 @@ let commentObj={
 //     "checked": false //accept、reject、wait
 // }
 // ajaxMember.postComment(commentObj)
-// ajaxMember.deleteComment(4)
-
+// ajaxMember.deleteComment(11)
 
 
 

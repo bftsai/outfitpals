@@ -35,11 +35,12 @@ export const ajaxMember={
             spinner.classList.remove('d-none');
             const register=await axios.post(`${apiUrl}register`,obj);
             if(register.status===201){
+                console.log(register);
                 document.cookie=`outfitpalsToken=${register.data.accessToken}`;
                 document.cookie=`outfitpalsId=${register.data.user.id}`;
                 document.cookie=`outfitpalsThirdParty=${register.data.user['third party']}`;
                 const outfitpalsId=Number(cookieValue('outfitpalsId'));
-                const outfitpalsToken=cookieValue('outfitpalsToken')
+                const outfitpalsToken=cookieValue('outfitpalsToken');
 
                 await this.patchUsers(outfitpalsId,outfitpalsToken,{
                     "sign time": new Date().toUTCString(),
@@ -60,7 +61,7 @@ export const ajaxMember={
                 }, 400);
             }
         } catch (err) {
-            console.log(err.response);
+            console.log(err);
             memberIndexForm.classList.add('was-validated');
             account.classList.add('is-invalid');
             account.classList.add('is-invalid-customer');
@@ -123,6 +124,7 @@ export const ajaxMember={
         try {
             spinner.classList.remove('d-none');
             const signIn=await axios.post(`${apiUrl}signin`,obj);
+            //console.log(signIn);
             if(signIn.status===200){
                 document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
                 document.cookie=`outfitpalsId=${signIn.data.user.id}`;
@@ -305,11 +307,6 @@ export const ajaxMember={
             <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
                 <div class="col-6 col-sm-3 d-flex">
                     <a href='personal.html?page=1' class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberMainPage" type="button">我的主頁</a>
-                </div>
-            </div>
-            <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
-                <div class="col-6 col-sm-3 d-flex">
-                    <a href="personal.html?page=1" class="btn btn-black18 fs-lg-5 text-primary py-lg-3 px-lg-7 flex-grow-1 memberCollect" type="button">我的收藏</a>
                 </div>
             </div>
             <div class="row justify-content-center py-9 py-lg-13 c-confirm-btn-group">
@@ -737,7 +734,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            
+            //console.log(result);
             return result
         } catch (err) {
             console.log(err.response);
@@ -746,12 +743,12 @@ export const ajaxMember={
     },
     async getPostComment(id,page){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_sort=id&_order=desc&_limit=2&_page=${page}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-console.log(result);
+        //console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);
@@ -760,12 +757,12 @@ console.log(result);
     },
     async getUserComment(id,page){ //取得我的預約
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_sort=id&_order=desc&_limit=2&_page=${page}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            console.log(result);
+            //console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);
