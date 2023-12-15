@@ -124,6 +124,7 @@ export const ajaxMember={
         try {
             spinner.classList.remove('d-none');
             const signIn=await axios.post(`${apiUrl}signin`,obj);
+            //console.log(signIn);
             if(signIn.status===200){
                 document.cookie=`outfitpalsToken=${signIn.data.accessToken}`;
                 document.cookie=`outfitpalsId=${signIn.data.user.id}`;
@@ -733,7 +734,7 @@ export const ajaxMember={
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            
+            //console.log(result);
             return result
         } catch (err) {
             console.log(err.response);
@@ -742,12 +743,12 @@ export const ajaxMember={
     },
     async getPostComment(id,page){
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?posterId=${id}&_sort=id&_order=desc&_limit=2&_page=${page}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-console.log(result);
+        //console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);
@@ -756,12 +757,12 @@ console.log(result);
     },
     async getUserComment(id,page){ //取得我的預約
         try {
-            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_page=${page}&_limit=2&_sort=${id}&_order=asc`,{
+            const result=(await axios.get(`${apiUrl}440/comments?userId=${id}&_sort=id&_order=desc&_limit=2&_page=${page}`,{
                 headers: {
                     "authorization": `Bearer ${cookieValue('outfitpalsToken')}`
                 }
             })).data;
-            console.log(result);
+            //console.log(result);
             return result;
         } catch (err) {
             console.log(err.response);

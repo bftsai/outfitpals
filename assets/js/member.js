@@ -279,7 +279,7 @@ let commentObj={
 //     "checked": false //accept、reject、wait
 // }
 // ajaxMember.postComment(commentObj)
-// ajaxMember.deleteComment(4)
+// ajaxMember.deleteComment(11)
 
 
 
