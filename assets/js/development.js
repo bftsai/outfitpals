@@ -137,6 +137,7 @@ import { data } from "jquery";
                             weight = postdata[i].user.weight
                             uid = postdata[i].userId
                             postid = postdata[i].id
+                            
                           }
                         // console.log(`postIndex: ${postIndex}, index * (postsPerPage / postContainers.length): ${index * (postsPerPage / postContainers.length)}, (index + 1) * (postsPerPage / postContainers.length): ${(index + 1) * (postsPerPage / postContainers.length)}`);
                         container.innerHTML += `<div class="col-4">
@@ -222,7 +223,6 @@ import { data } from "jquery";
                 const img = c.querySelector(".img"); 
                 let id = others.getAttribute("id").trim();  //使用者id                      使用 trim() 移除空格 
                 let poid = dontmove.getAttribute("id").trim();  //post 的 id
-                
 
                 const icon = c.querySelector('.icon');
                 const icon2 = c.querySelector('.icon2');
@@ -286,10 +286,19 @@ import { data } from "jquery";
                                         "favoriteCounts":CC,
                                     });
                                     
-                                    axios.get(`${apiUrl}favorites?postId=${poid}`)
+                                    axios.get(`${apiUrl}favorites?postId=${poid}&userId=${userId}`)
                                     .then(r=>{
                                         let d = (r.data[0].id)
                                         axios.delete(`${apiUrl}favorites/${d}`)
+                                        .then(response => {
+                                            // 处理响应
+                                          })
+                                          .catch(error => {
+                                            console.error('Delete request error:', error);
+                                            if (error.response) {
+                                              console.error('Server responded with:', error.response.data);
+                                            }
+                                          });
                                     })
                                 }
     
@@ -307,7 +316,6 @@ import { data } from "jquery";
                 //喜歡選染
                 axios.get(`${apiUrl}likes?userId=${userId}`)
                 .then(function(res){
-                    
                     let liketposts = []
                     res.data.forEach(async function(like) {
                         liketposts.push(like.postId)
@@ -362,17 +370,16 @@ import { data } from "jquery";
                                     "likeCounts": like,
                                 });
 
-                                axios.get(`${apiUrl}likes/${poid}`)
+                                axios.get(`${apiUrl}likes?postId=${poid}&userId=${userId}`)
                                 .then(r=>{
-                                    let d = (r.data.id)
+                                    let d = (r.data[0].id)
+                                    console.log(r.data)
                                     axios.delete(`${apiUrl}likes/${d}`)
                                 })
                             }
                         } catch (error) {
                             console.error("Error:", error);
-                        } finally {
-                            isProcessing = false;  // 点击事件处理完成，重置标志位
-                        }
+                        } 
     
                     });
 
