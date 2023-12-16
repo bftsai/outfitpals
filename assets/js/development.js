@@ -386,8 +386,12 @@ import { data } from "jquery";
                 })
                 //頭像跳轉
                 others.addEventListener("click", function() {
-                    // 使用 window.location.href 将页面导航到另一个 URL，这里的 URL 中包含 userId 参数
-                    window.location.href = `${localUrl}/others.html?userId=` + id + "&page=1";
+                    if(id != userId){
+                        window.location.href = `${localUrl}/others.html?userId=` + id + "&page=1";
+                    }else{
+                        window.location.href = `${localUrl}/personal.html?page=1`
+                    }
+                    
                 });
                 //照片跳轉
                 img.addEventListener("click",function(){
