@@ -281,27 +281,40 @@ let commentObj={
 // ajaxMember.postComment(commentObj)
 // ajaxMember.deleteComment(11)
 
-
-
-async function getFaver() {  
+async function deleteFavorToZero(id) {  
     try {
-        const result=(await axios.get(`${apiUrl}posts`)).data;
-        console.log(result);
+        const resultLength=(await axios.get(`${apiUrl}likes`)).data.length;
+        const result=(await axios.delete(`${apiUrl}favorites/${id}`));
+            console.log(result);
     } catch (err) {
         console.log(err);
     }
 }
-// getFaver()
-async function patchFaver(id) {  
+// deleteFavorToZero(7)
+async function deleteLikesToZero(id) {  
     try {
-        const obj={
-            favoriteCounts:0,
-            likeCounts:0
+        const resultLength=(await axios.get(`${apiUrl}likes`)).data.length;
+        const result=(await axios.delete(`${apiUrl}likes/${id}`));
+            console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+// deleteLikesToZero(21)
+
+async function patchFaverToZero() {  
+    try {
+        const resultLength=(await axios.get(`${apiUrl}posts`)).data.length;
+        for(let i=1;i<=resultLength;i++){
+            const obj={
+                favoriteCounts:0,
+                likeCounts:0
+            }
+            const result=await axios.patch(`${apiUrl}posts/${i}`,obj);
+            console.log(result);
         }
-        const result=await axios.patch(`${apiUrl}posts/${id}`,obj);
-        console.log(result);
     } catch (err) {
         console.log(err);
     }
 }
-// patchFaver(13)
+// patchFaverToZero()
