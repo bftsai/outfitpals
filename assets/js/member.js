@@ -283,3 +283,25 @@ let commentObj={
 
 
 
+async function getFaver() {  
+    try {
+        const result=(await axios.get(`${apiUrl}posts`)).data;
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+// getFaver()
+async function patchFaver(id) {  
+    try {
+        const obj={
+            favoriteCounts:0,
+            likeCounts:0
+        }
+        const result=await axios.patch(`${apiUrl}posts/${id}`,obj);
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+// patchFaver(13)
