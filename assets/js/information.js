@@ -42,7 +42,7 @@ function getCookie(name) {
 
 
 
-
+const userId = getCookie("outfitpalsId");
     const storedToken = getCookie("outfitpalsToken");
     const postrId = location.href.split("=")[1];
         axios.get(`${apiUrl}posts/${postrId}?_expand=user`)
@@ -82,7 +82,11 @@ function getCookie(name) {
               
                 if (storedToken !== "" || storedToken !==  null) {
                     reserve.addEventListener("click",function(){
-                        window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                        if(userId != user){
+                            window.location.href = `${localUrl}/others.html?userId=` + user + "&page=1";
+                        }else{
+                            window.location.href = `${localUrl}/personal.html?page=1`
+                        }
                         
                     })
                 }else{

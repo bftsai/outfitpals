@@ -291,7 +291,7 @@ axios.get(`${apiUrl}660/posts?userId=${id}`, {
 if (storedToken != null) {   //判斷登陸
     axios.get(`${apiUrl}personal?userId=${id}&_expand=user`)
         .then(function (res) {
-            console.log(res.data);
+           
             if (res.data.length == 0) {     //判斷是否第一次登陸
                 nologin.addEventListener("click", function () {
                     myModa2.show();
@@ -524,31 +524,25 @@ if (storedToken != null) {   //判斷登陸
                 //icon切換
                 td.forEach(function (td, index) {
                     originalContents[index] = td.innerHTML;
-
+                    console.log(td)
                     td.addEventListener("click", function (e) {
                         if (useMonth == seeMonth) {
                             if (td.classList.contains("go")) {
                                 td.classList.remove("go");
                                 td.innerHTML = originalContents[index];
                                 dates.pop();
-                            } else {
-                                console.log(e.target.textContent);
-                                console.log(e.target);
+                            } else {                                
                                 dates.push(`${seeMonth}月${e.target.closest('td').getAttribute('data-day')}號`);
-                                console.log(dates);
                                 td.classList.add("go");
                                 td.innerHTML = '<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>';
                             }
                         } else {
                             if (td.classList.contains("go")) {
                                 td.classList.remove("go");
-                                td.innerHTML = originalContents2[index];
+                                td.innerHTML = originalContents2[index];                             
                                 dates.pop();
-
-
                             } else {
                                 dates.push(`${seeMonth}月${e.target.closest('td').getAttribute('data-day')}號`);
-                                console.log(dates);
                                 td.classList.add("go");
                                 td.innerHTML = '<i class="bi bi-calendar-plus-fill text-warning d-flex justify-content-center"</i>';
                             }
