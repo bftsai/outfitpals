@@ -457,12 +457,15 @@ reserveComponent.init();
 
 //pagination
 pagination.addEventListener('click',e=>{
+    if((e.target.nodeName!=='LI')&&(e.target.nodeName!=='A')&&(e.target.nodeName!=='IMG')){
+        return
+    }
     if((e.target.nodeName==='LI'||e.target.nodeName==='A')&&e.target.closest('a').className.includes('page-num')){
         reserveComponent.render(Number(e.target.textContent));
     }else{
         [...pagination.children].forEach(item=>{
             if(item.children[0].className.includes('active')){
-                reserveComponent.render(Number(item.children[0].textContent)+1);
+                reserveComponent.render(Number(item.children[0].textContent));
             }
         })
     }
