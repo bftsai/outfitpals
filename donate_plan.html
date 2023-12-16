@@ -352,7 +352,7 @@
                         required
                         oninput="validateCardNumber(this)"
                       />
-                      <div class="invalid-feedback">請輸入正確卡號。</div>
+                      <div class="invalid-feedback">請輸入正確的卡號。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -371,7 +371,7 @@
                         placeholder="MM/YY"
                         oninput="validateCardExpiration(this)"
                       />
-                      <div class="invalid-feedback">請輸入正確日期。</div>
+                      <div class="invalid-feedback">請輸入正確的有效期限。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -392,7 +392,7 @@
                         maxlength="3"
                         minlength="3"
                       />
-                      <div class="invalid-feedback">請輸入正確的驗證碼。</div>
+                      <div class="invalid-feedback">請輸入正確的檢查碼。</div>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -802,12 +802,6 @@
                         <h5 class="modal-title" id="exampleModalLabel">
                           捐款成功
                         </h5>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
                       </div>
                       <div class="modal-body">
                         <p>您已完成捐款，謝謝您的支持</p>
@@ -1111,9 +1105,9 @@
             return radio.checked && radio.value === "Y";
           });
 
-          // 如果用户同意，可以执行提交操作
+          // 如果用戶同意，可以執行提交操作
           if (isAgree) {
-            //donationForm.submit(); // 提交表单
+            //donationForm.submit(); // 提交表單
             $("#exampleModal").modal("show");
           } else {
             alert("請勾選同意後再完成捐款。");
@@ -1279,17 +1273,16 @@
 
       //驗證身分證
       function validateIdCard(input) {
-        // 使用 Validate.js 驗證
-        const constraints = {
-          idCard: {
-            format: {
-              pattern: /^[A-Z]\d{10}$/,
-              message: "請輸入正確的身分證字號。",
-            },
-          },
-        };
+        // 驗證預設值
+        let isValid = true;
+        // 取得輸入欄位
+        var userInput = input.value;
 
-        const isValid = validate({ idCard: input.value }, constraints);
+        // 移除其他符號
+        userInput = input.value.replace(/-/g, "");
+
+        //驗證是否為 10 位數字
+        isValid = /^[A-Za-z][12]\d{8}$/.test(userInput);
 
         // 顯示驗證結果
         displayValidationResult(input, isValid, "請輸入正確的身分證字號。");
@@ -1408,24 +1401,24 @@
         var donationForm = document.getElementById("donationForm");
 
         confirmButton.addEventListener("click", function () {
-          // 使用 Array.some 检查是否有选中的同意选项
+          // 使用 Array.some 檢查是否有選中的同意選項
           var isAgree = Array.from(isAgreeRadio).some(function (radio) {
             return radio.checked && radio.value === "Y";
           });
 
-          // 如果用户同意，可以执行提交操作
+          // 如果用户同意，可以執行提交操作
           if (isAgree) {
             donationForm.submit(); // 提交表单
             alert("提交成功！");
           } else {
-            // 如果用户不同意，可以给出提示或阻止提交
+            // 如果用户不同意，可以給出提示或阻止提交
             alert("请阅读并同意个资使用声明。");
           }
         });
 
-        // 阻止表单默认提交行为
+        // 阻止表單默認提交行為
         donationForm.addEventListener("submit", function (event) {
-          event.preventDefault(); // 阻止表单默认提交行为
+          event.preventDefault(); // 阻止表單默認提交行為
         });
 
         return true;
