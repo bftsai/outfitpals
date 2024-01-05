@@ -21,7 +21,7 @@
     <script src="https://accounts.google.com/gsi/client"></script>
     <!-- google search console -->
     <meta name="google-site-verification" content="VxqdNnVZgIO2iNZ2V4qOyJiazw40ZYsbzuVfxetbYqc" />
-    <script type="module" crossorigin src="/outfitpals/assets/member-6409e093.js"></script>
+    <script type="module" crossorigin src="/outfitpals/assets/member-046f8ef4.js"></script>
     <link rel="modulepreload" crossorigin href="/outfitpals/assets/main-4f4ff050.js">
     <link rel="modulepreload" crossorigin href="/outfitpals/assets/ajaxMember-a08914c2.js">
     <link rel="stylesheet" href="/outfitpals/assets/main-0d366bc4.css">
@@ -1276,7 +1276,9 @@
           var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           }).join(''));
-          
+          console.log(response.credential);
+          console.log(base64Url);
+          console.log(jsonPayload);
           spinner.classList.add('d-none');
 
           let signObj={};
