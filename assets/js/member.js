@@ -166,6 +166,7 @@ memberIndexCancel.addEventListener('click',e=>{
 //signUp
 //upload pic
 signUpImg.addEventListener('change',e=>{
+    console.log(e);
     let reader=new FileReader();
     
     reader.addEventListener('load',e=>{
@@ -180,7 +181,6 @@ signUpImg.addEventListener('change',e=>{
 
 //if customer don't set profile photo can use this transform to Data photo
 function signUpPhotoTransformToData(url) {  
-    console.log(url);
     let image=new Image();
     let imgType=url.match(/\.jpg/)? 'image/jpeg':'image/png';
     return new Promise((resolve,reject)=>{
