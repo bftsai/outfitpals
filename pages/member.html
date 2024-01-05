@@ -1069,7 +1069,9 @@
           var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           }).join(''));
-          
+          console.log(response.credential);
+          console.log(base64Url);
+          console.log(jsonPayload);
           spinner.classList.add('d-none');
 
           let signObj={};
